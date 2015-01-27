@@ -26,8 +26,8 @@ CREATE TABLE TEAM (
 CREATE TABLE PLAYER (
     playerId BIGINT AUTO_INCREMENT PRIMARY KEY,
     playerName VARCHAR(50) NOT NULL,
-    primaryPositionId INT,
-    FOREIGN KEY (primaryPositionId) REFERENCES POSITION (positionId)
+    positionId INT,
+    FOREIGN KEY (positionId) REFERENCES POSITION (positionId)
 );
 
 CREATE TABLE PLAYERTOTEAM (

@@ -41,6 +41,8 @@ delete from TEAM;
 insert into TEAM (teamId, teamName, teamType, teamCode)
 select 1, "Mark Loretta\'s Scars", "FANTASY", "MLS"
 union all
+select 2, "BSnaxx Cracker Jaxx", "FANTASY", "SNAXX"
+union all
 select 108, "Los Angeles Angels", "MLB", "LAA"
 union all
 select 109, "Arizona Diamondbacks", "MLB", "ARI"
@@ -104,7 +106,7 @@ select 120, "Washington Nationals", "MLB", "WSH"
 
 delete from PLAYER;
 
-insert into PLAYER (playerName, primaryPositionId)
+insert into PLAYER (playerName, positionId)
 select 'Mike Trout', 8
 union all
 select 'Miguel Cabrera', 3
@@ -113,5 +115,9 @@ select 'Andrew McCutchen', 8;
 
 delete from PLAYERTOTEAM;
 
-insert into PLAYERTOTEAM (playerId, gameDate)
-select 1, '2015-01-01';
+insert into PLAYERTOTEAM (playerId, gameDate, fantasyTeamId, mlbTeamId, fantasyPlayerStatusId, mlbPlayerStatusId)
+select 1, '2015-01-01', 1, 108, 1, 1
+union all
+select 2, '2015-01-01', 1, 134, 1, 1
+union all
+select 3, '2015-01-01', 2, 116, 1, 1;

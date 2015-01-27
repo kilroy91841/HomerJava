@@ -1,20 +1,25 @@
 package com.homer.baseball;
 
+import com.homer.Parsable;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  * Created by MLB on 1/25/15.
  */
-public class Player {
+public class Player implements Parsable{
 
-    private long id;
+    private long playerId;
     private String playerName;
-    private Position primaryPosition;
+    private Position position;
 
-    public long getId() {
-        return id;
+    public long getPlayerId() {
+        return playerId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setPlayerId(long playerId) {
+        this.playerId = playerId;
     }
 
     public String getPlayerName() {
@@ -25,20 +30,31 @@ public class Player {
         this.playerName = playerName;
     }
 
-    public Position getPrimaryPosition() {
-        return primaryPosition;
+    public Position getPosition() {
+        return position;
     }
 
-    public void setPrimaryPosition(Position primaryPosition) {
-        this.primaryPosition = primaryPosition;
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     @Override
     public String toString() {
         return "Player{" +
-                "id=" + id +
+                "id=" + playerId +
                 ", playerName='" + playerName + '\'' +
-                ", primaryPosition=" + primaryPosition +
+                ", position=" + position +
                 '}';
+    }
+
+    @Override
+    public void parse(ResultSet rs) {
+        try {
+            setPlayerId(rs.getLong("player.playerId"));
+            setPlayerName(rs.getString("player.playerName"));
+            setPosition(Position.get(rs.getInt("player.positionId")));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
