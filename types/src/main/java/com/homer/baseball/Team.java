@@ -11,6 +11,8 @@ import java.sql.SQLException;
  */
 public class Team implements Parsable{
 
+    private static final String DEFAULT_TABLE_NAME = "team";
+
     private Integer teamId;
     private String teamName;
     private SportType teamType;
@@ -22,9 +24,8 @@ public class Team implements Parsable{
         parse(rs);
     }
 
-    public Team(ResultSet rs, SportType teamType) {
-        setTeamType(teamType);
-        parse(rs);
+    public Team(ResultSet rs, String tableName) {
+        parse(rs, tableName);
     }
 
     public Integer getTeamId() {
@@ -61,13 +62,16 @@ public class Team implements Parsable{
 
     @Override
     public void parse(ResultSet rs) {
-        String suffix = "team";
-        String teamTypePrefix = teamType != null ? teamType.getName() + suffix : suffix;
+        parse(rs, DEFAULT_TABLE_NAME);
+    }
+
+    @Override
+    public void parse(ResultSet rs, String tableName) {
         try {
-            setTeamId(rs.getInt(teamTypePrefix + ".teamId"));
-            setTeamName(rs.getString(teamTypePrefix + ".teamName"));
-            setTeamType(SportType.getSportType(rs.getString(teamTypePrefix + ".teamType")));
-            setTeamCode(rs.getString(teamTypePrefix + ".teamCode"));
+            setTeamId(rs.getInt(tableName + ".teamId"));
+            setTeamName(rs.getString(tableName + ".teamName"));
+            setTeamType(SportType.getSportType(rs.getString(tableName + ".teamType")));
+            setTeamCode(rs.getString(tableName + ".teamCode"));
         } catch (SQLException e) {
             e.printStackTrace();
         }

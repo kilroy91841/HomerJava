@@ -8,4 +8,6 @@ import java.sql.ResultSet;
 public interface Parsable {
 
     public void parse(ResultSet rs);
+
+    public void parse(ResultSet rs, String tableName);
 }

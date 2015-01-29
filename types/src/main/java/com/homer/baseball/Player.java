@@ -63,4 +63,7 @@ public class Player implements Parsable{
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void parse(ResultSet rs, String tableName) { }
 }

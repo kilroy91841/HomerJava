@@ -2,6 +2,7 @@ package com.homer.dao;
 
 import com.homer.SportType;
 import com.homer.baseball.DailyPlayer;
+import com.homer.baseball.DailyTeam;
 import com.homer.baseball.Player; 
 import com.homer.baseball.Team;
 
@@ -148,6 +149,41 @@ public class BaseballDAO extends MySQLDAO {
         }
 
         return dailies;
+    }
+
+    public DailyTeam getTeamDaily(int teamId, SportType teamType, Date date) {
+        DailyTeam team = null;
+        Connection connection = getConnection();
+        try {
+            String sql = "select * from PLAYER player, PLAYERTOTEAM playertoteam, TEAM team " +
+                    "where player.playerId = playertoteam.playerid " +
+                    "and ";
+            if(SportType.FANTASY == teamType) {
+                sql += "team.teamId = playertoteam.fantasyTeamId " +
+                        "and playertoteam.fantasyTeamId = ? ";
+            } else {
+                sql += "team.teamId = playertoteam.mlbTeamId " +
+                        "and playertoteam.mlbTeamId = ? ";
+            }
+            sql += "and PLAYERTOTEAM.gameDate = ? ";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, teamId);
+            statement.setDate(2, new java.sql.Date(date.getTime()));
+            System.out.println(statement.toString());
+            ResultSet rs = statement.executeQuery();
+
+            team = new DailyTeam(rs);
+
+            rs.close();
+            statement.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            System.out.println("Connection Failed! Check output console");
+            e.printStackTrace();
+        }
+
+        return team;
     }
 
 }

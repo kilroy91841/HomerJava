@@ -66,10 +66,13 @@ public class DailyPlayer implements Parsable {
 
 	@Override
     public void parse(ResultSet rs) {
-    	setMlbTeam(new Team(rs, SportType.MLB));
-    	setFantasyTeam(new Team(rs, SportType.FANTASY));
+    	setMlbTeam(new Team(rs, "mlbTeam"));
+    	setFantasyTeam(new Team(rs, "fantasyTeam"));
     	setPlayer(new Player(rs));
     }
+
+    @Override
+    public void parse(ResultSet rs, String tableName) { }
 
 }
 
