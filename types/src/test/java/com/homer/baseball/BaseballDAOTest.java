@@ -7,6 +7,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import java.sql.Connection;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -34,19 +35,33 @@ public class BaseballDAOTest {
 
     @Test
     public void testGetPlayersOnFantasyTeam() {
-        List<Player> players = dao.getPlayersByTeam(1, SportType.FANTASY, null);
-        Assert.assertEquals(players.size(), 2);
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        cal.set(Calendar.MONTH, 0);
+        cal.set(Calendar.YEAR, 2015);
+        List<Player> players = dao.getPlayersByTeam(1, SportType.FANTASY, cal.getTime());
+        Assert.assertEquals(2, players.size());
 
-        players = dao.getPlayersByTeam(100, SportType.FANTASY, null);
-        Assert.assertEquals(players.size(), 0);
+        players = dao.getPlayersByTeam(100, SportType.FANTASY, cal.getTime());
+        Assert.assertEquals(0, players.size());
     }
 
     @Test
     public void testGetPlayersOnMLBTeam() {
-        List<Player> players = dao.getPlayersByTeam(134, SportType.MLB, null);
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        cal.set(Calendar.MONTH, 0);
+        cal.set(Calendar.YEAR, 2015);
+        List<Player> players = dao.getPlayersByTeam(134, SportType.MLB, cal.getTime());
         Assert.assertEquals(players.size(), 1);
 
-        players = dao.getPlayersByTeam(1, SportType.MLB, null);
+        players = dao.getPlayersByTeam(1, SportType.MLB, cal.getTime());
         Assert.assertEquals(players.size(), 0);
+    }
+
+    @Test
+    public void testGetDailies() {
+        List<DailyPlayer> dailies = dao.getPlayerDailies(1);
+        Assert.assertEquals(2, dailies.size());
     }
 }

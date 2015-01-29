@@ -18,6 +18,15 @@ public class Team implements Parsable{
 
     public Team() { }
 
+    public Team(ResultSet rs) {
+        parse(rs);
+    }
+
+    public Team(ResultSet rs, SportType teamType) {
+        setTeamType(teamType);
+        parse(rs);
+    }
+
     public Integer getTeamId() {
         return teamId;
     }
@@ -52,11 +61,13 @@ public class Team implements Parsable{
 
     @Override
     public void parse(ResultSet rs) {
+        String suffix = "team";
+        String teamTypePrefix = teamType != null ? teamType.getName() + suffix : suffix;
         try {
-            setTeamId(rs.getInt("team.teamId"));
-            setTeamName(rs.getString("team.teamName"));
-            setTeamType(SportType.getSportType(rs.getString("team.teamType")));
-            setTeamCode(rs.getString("team.teamCode"));
+            setTeamId(rs.getInt(teamTypePrefix + ".teamId"));
+            setTeamName(rs.getString(teamTypePrefix + ".teamName"));
+            setTeamType(SportType.getSportType(rs.getString(teamTypePrefix + ".teamType")));
+            setTeamCode(rs.getString(teamTypePrefix + ".teamCode"));
         } catch (SQLException e) {
             e.printStackTrace();
         }

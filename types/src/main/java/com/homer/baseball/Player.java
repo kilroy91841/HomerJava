@@ -14,6 +14,12 @@ public class Player implements Parsable{
     private String playerName;
     private Position position;
 
+    public Player() { }
+
+    public Player(ResultSet rs) {
+        parse(rs);
+    }
+
     public long getPlayerId() {
         return playerId;
     }
