@@ -31,8 +31,11 @@ public class BaseballDAO extends MySQLDAO {
             ResultSet rs = statement.executeQuery();
 
             while(rs.next()) {
-                player = new Player(rs);
-                System.out.println(player);
+                player = new Player(
+                    rs.getLong("player.playerId"),
+                    rs.getString("player.playerName"),
+                    Position.get(rs.getInt("player.primaryPositionId"))
+                );
             }
 
             rs.close();
@@ -57,9 +60,12 @@ public class BaseballDAO extends MySQLDAO {
             ResultSet rs = statement.executeQuery();
 
             while(rs.next()) {
-                Team t = new Team();
-                t.parse(rs);
-                System.out.println(t);
+                Team t =  new Team(
+                    rs.getInt("team.teamId"), 
+                    rs.getString("team.teamName"),
+                    SportType.getSportType(rs.getString("team.teamType")),
+                    rs.getString("team.teamCode")
+                );
                 teams.add(t);
             }
 
@@ -100,8 +106,11 @@ public class BaseballDAO extends MySQLDAO {
             ResultSet rs = statement.executeQuery();
 
             while(rs.next()) {
-                Player player = new Player(rs);
-                System.out.println(player);
+                Player player = new Player(
+                    rs.getLong("player.playerId"),
+                    rs.getString("player.playerName"),
+                    Position.get(rs.getInt("player.primaryPositionId"))
+                );
                 players.add(player);
             }
 
@@ -133,7 +142,28 @@ public class BaseballDAO extends MySQLDAO {
             ResultSet rs = statement.executeQuery();
 
             while(rs.next()) {
-                DailyPlayer daily = new DailyPlayer(rs);
+                Team fantasyTeam = new Team(
+                    rs.getInt("fantasyTeam.teamId"),
+                    rs.getString("fantasyTeam.teamName"),
+                    SportType.FANTASY,
+                    rs.getString("fantasyTeam.teamCode")
+                );
+                Team mlbTeam = new Team(
+                    rs.getInt("mlbTeam.teamId"),
+                    rs.getString("mlbTeam.teamName"),
+                    SportType.MLB,
+                    rs.getString("mlbTeam.teamCode")
+                );
+                DailyPlayer daily = new DailyPlayer(
+                    rs.getLong("player.playerId"),
+                    rs.getString("player.playerName"),
+                    Position.get(rs.getInt("player.primaryPositionId")),
+                    fantasyTeam,
+                    mlbTeam,
+                    rs.getDate("playerToTeam.gameDate"),
+                    Position.get(rs.getInt("playerToTeam.fantasyPositionId")),
+                    null
+                );
                 dailies.add(daily);
             }
 
@@ -174,14 +204,40 @@ public class BaseballDAO extends MySQLDAO {
 
             try {
                 if(rs.first()) {
-                    Team dbTeam = new Team(rs, teamTableName);
+                    Team primaryTeam = new Team(
+                        rs.getInt(teamTableName + ".teamId"),
+                        rs.getString(teamTableName + ".teamName"),
+                        SportType.getSportType(rs.getString(teamTableName + ".teamType")),
+                        rs.getString(teamTableName + ".teamCode")
+                    );
                     List<DailyPlayer> players = new ArrayList<DailyPlayer>();
                     rs.beforeFirst();
                     while(rs.next()) {
-                        DailyPlayer p = new DailyPlayer(rs);
+                        Team fantasyTeam = new Team(
+                            rs.getInt("fantasyTeam.teamId"),
+                            rs.getString("fantasyTeam.teamName"),
+                            SportType.FANTASY,
+                            rs.getString("fantasyTeam.teamCode")
+                        );
+                        Team mlbTeam = new Team(
+                            rs.getInt("mlbTeam.teamId"),
+                            rs.getString("mlbTeam.teamName"),
+                            SportType.MLB,
+                            rs.getString("mlbTeam.teamCode")
+                        );
+                        DailyPlayer p = new DailyPlayer(
+                            rs.getLong("player.playerId"),
+                            rs.getString("player.playerName"),
+                            Position.get(rs.getInt("player.primaryPositionId")),
+                            fantasyTeam,
+                            mlbTeam,
+                            rs.getDate("playerToTeam.gameDate"),
+                            Position.get(rs.getInt("playerToTeam.fantasyPositionId")),
+                            null
+                        );
                         players.add(p);
                     }
-                    team = new DailyTeam(dbTeam, players);
+                    team = new DailyTeam(primaryTeam, players);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -208,9 +264,8 @@ public class BaseballDAO extends MySQLDAO {
                     "where player.playerId = playertoteam.playerid " +
                     "and fantasyTeam.teamId = playertoteam.fantasyTeamId " +
                     "and mlbTeam.teamId = playertoteam.mlbTeamId " +
-                    "and playertoteam.fantasyTeamId = ? ";
-
-            sql += "and playerToTeam.gameDate = ? ";
+                    "and playertoteam.fantasyTeamId = ? " + 
+                    "and playerToTeam.gameDate = ? ";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, teamId);
             statement.setDate(2, new java.sql.Date(date.getTime()));
@@ -219,14 +274,34 @@ public class BaseballDAO extends MySQLDAO {
 
             try {
                 if(rs.first()) {
-                    Team dbTeam = new Team(rs, "fantasyTeam");
+                    Team fantasyTeam = new Team(
+                        rs.getInt("fantasyTeam.teamId"),
+                        rs.getString("fantasyTeam.teamName"),
+                        SportType.FANTASY,
+                        rs.getString("fantasyTeam.teamCode")
+                    );
                     List<DailyPlayer> players = new ArrayList<DailyPlayer>();
                     rs.beforeFirst();
                     while(rs.next()) {
-                        DailyPlayer p = new DailyPlayer(rs);
+                        Team mlbTeam = new Team(
+                            rs.getInt("mlbTeam.teamId"),
+                            rs.getString("mlbTeam.teamName"),
+                            SportType.MLB,
+                            rs.getString("mlbTeam.teamCode")
+                        );
+                        DailyPlayer p = new DailyPlayer(
+                            rs.getLong("player.playerId"),
+                            rs.getString("player.playerName"),
+                            Position.get(rs.getInt("player.primaryPositionId")),
+                            fantasyTeam,
+                            mlbTeam,
+                            rs.getDate("playerToTeam.gameDate"),
+                            Position.get(rs.getInt("playerToTeam.fantasyPositionId")),
+                            null
+                        );
                         players.add(p);
                     }
-                    roster = new FantasyRoster(dbTeam, players);
+                    roster = new FantasyRoster(fantasyTeam, players);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

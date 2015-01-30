@@ -75,7 +75,28 @@ public class DailyPlayerTest {
                 ResultSet rs = statement.executeQuery();
 
                 while(rs.next()) {
-                    player = new DailyPlayer(rs);
+                    Team fantasyTeam = new Team(
+                        rs.getInt("fantasyTeam.teamId"),
+                        rs.getString("fantasyTeam.teamName"),
+                        SportType.FANTASY,
+                        rs.getString("fantasyTeam.teamCode")
+                    );
+                    Team mlbTeam = new Team(
+                        rs.getInt("mlbTeam.teamId"),
+                        rs.getString("mlbTeam.teamName"),
+                        SportType.MLB,
+                        rs.getString("mlbTeam.teamCode")
+                    );
+                    player = new DailyPlayer(
+                        rs.getLong("player.playerId"),
+                        rs.getString("player.playerName"),
+                        Position.get(rs.getInt("player.primaryPositionId")),
+                        fantasyTeam,
+                        mlbTeam,
+                        rs.getDate("playerToTeam.gameDate"),
+                        Position.get(rs.getInt("playerToTeam.fantasyPositionId")),
+                        null
+                    );
                 }
 
                 rs.close();

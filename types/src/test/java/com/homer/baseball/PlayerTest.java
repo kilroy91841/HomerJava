@@ -40,7 +40,11 @@ public class PlayerTest {
                 ResultSet rs = statement.executeQuery();
 
                 while(rs.next()) {
-                    player = new Player(rs);
+                    player = new Player(
+                        rs.getLong("player.playerId"),
+                        rs.getString("player.playerName"),
+                        Position.get(rs.getInt("player.primaryPositionId"))
+                    );
                 }
 
                 rs.close();

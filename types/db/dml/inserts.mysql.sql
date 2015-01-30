@@ -233,3 +233,14 @@ union all
 select 25, '2015-01-03', 1, 147, 1, 1, 101
 union all
 select 26, '2015-01-03', 1, 147, 1, 1, 101;
+
+delete from PLAYERHISTORY;
+
+insert into PLAYERHISTORY (playerId, season, salary, keeperSeason, minorLeaguer, draftTeamId, keeperTeamId)
+select 1, 2012, 0, 0, 0, 1, null
+union all
+select 1, 2013, 3, 1, 0, null, 1
+union all
+select 1, 2014, 6, 2, 0, null, 1
+union all
+select 1, 2015, 9, 3, 0, null, 1;

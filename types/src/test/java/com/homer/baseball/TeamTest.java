@@ -43,7 +43,12 @@ public class TeamTest {
                 ResultSet rs = statement.executeQuery();
 
                 while(rs.next()) {
-                    team = new Team(rs);
+                    team = new Team(
+                        rs.getInt("team.teamId"),
+                        rs.getString("team.teamName"),
+                        SportType.getSportType(rs.getString("team.teamType")),
+                        rs.getString("team.teamCode")
+                    );
                 }
 
                 rs.close();

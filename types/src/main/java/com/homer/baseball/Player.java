@@ -8,7 +8,7 @@ import java.sql.SQLException;
 /**
  * Created by MLB on 1/25/15.
  */
-public class Player implements Parsable{
+public class Player {
 
     private long playerId;
     private String playerName;
@@ -16,8 +16,10 @@ public class Player implements Parsable{
 
     public Player() { }
 
-    public Player(ResultSet rs) throws SQLException {
-        parse(rs);
+    public Player(long playerId, String playerName, Position primaryPosition) {
+        setPlayerId(playerId);
+        setPlayerName(playerName);
+        setPrimaryPosition(primaryPosition);
     }
 
     public long getPlayerId() {
@@ -43,20 +45,6 @@ public class Player implements Parsable{
     public void setPrimaryPosition(Position primaryPosition) {
         this.primaryPosition = primaryPosition;
     }
-
-    @Override
-    public void parse(ResultSet rs) throws SQLException {
-        try {
-            setPlayerId(rs.getLong("player.playerId"));
-            setPlayerName(rs.getString("player.playerName"));
-            setPrimaryPosition(Position.get(rs.getInt("player.primaryPositionId")));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void parse(ResultSet rs, String tableName) { }
 
     @Override
     public boolean equals(Object o) {

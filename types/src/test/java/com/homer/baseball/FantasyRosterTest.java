@@ -91,7 +91,7 @@ public class FantasyRosterTest {
     }
 
     private DailyPlayer generatePlayer(Position position) {
-        DailyPlayer player = new DailyPlayer(fantasyTeam, mlbTeam, cal.getTime(), position, null);
+        DailyPlayer player = new DailyPlayer(1L, "Ari Golub", Position.STARTINGPITCHER, fantasyTeam, mlbTeam, cal.getTime(), position, null);
         return player;
     }
 }

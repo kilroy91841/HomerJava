@@ -46,3 +46,17 @@ CREATE TABLE PLAYERTOTEAM (
     FOREIGN KEY (mlbPlayerStatusId) REFERENCES PLAYERSTATUS (playerStatusId),
     FOREIGN KEY (fantasyPositionId) REFERENCES POSITION (positionId)
 );
+
+CREATE TABLE PLAYERHISTORY (
+    playerId BIGINT NOT NULL,
+    season INT NOT NULL,
+    salary INT NOT NULL,
+    keeperSeason INT DEFAULT 0,
+    minorLeaguer BOOLEAN,
+    draftTeamId INT,
+    keeperTeamId INT,
+    PRIMARY KEY (playerId, season),
+    FOREIGN KEY (playerId) REFERENCES PLAYER (playerId),
+    FOREIGN KEY (draftTeamId) REFERENCES TEAM (teamId),
+    FOREIGN KEY (keeperTeamId) REFERENCES TEAM (teamId)
+);

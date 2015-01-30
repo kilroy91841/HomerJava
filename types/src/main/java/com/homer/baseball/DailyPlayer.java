@@ -11,7 +11,7 @@ import com.homer.SportType;
 /**
  * Created by arigolub on 1/29/15.
  */
-public class DailyPlayer extends Player implements Parsable {
+public class DailyPlayer extends Player {
 
 	private Team fantasyTeam;
 	private Team mlbTeam;
@@ -21,11 +21,9 @@ public class DailyPlayer extends Player implements Parsable {
 
 	public DailyPlayer() { }
 
-	public DailyPlayer(ResultSet rs) throws SQLException {
-		parse(rs);
-	}
-
-	public DailyPlayer(Team fantasyTeam, Team mlbTeam, Date date, Position fantasyPosition, List<Game> games) {
+	public DailyPlayer(long playerId, String playerName, Position primaryPosition, 
+			Team fantasyTeam, Team mlbTeam, Date date, Position fantasyPosition, List<Game> games) {
+		super(playerId, playerName, primaryPosition);
 		setFantasyTeam(fantasyTeam);
 		setMlbTeam(mlbTeam);
 		setDate(date);
@@ -66,19 +64,6 @@ public class DailyPlayer extends Player implements Parsable {
 	public List<Game> getGames() {
 		return games;
 	}
-
-	@Override
-    public void parse(ResultSet rs) throws SQLException {
-		super.parse(rs);
-    	setMlbTeam(new Team(rs, "mlbTeam"));
-    	setFantasyTeam(new Team(rs, "fantasyTeam"));
-		Date date = rs.getDate("playerToTeam.gameDate");
-		setDate(date);
-		setFantasyPosition(Position.get(rs.getInt("playerToTeam.fantasyPositionId")));
-    }
-
-    @Override
-    public void parse(ResultSet rs, String tableName) { }
 
 	@Override
 	public String toString() {
