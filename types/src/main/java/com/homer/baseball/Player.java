@@ -12,11 +12,11 @@ public class Player implements Parsable{
 
     private long playerId;
     private String playerName;
-    private Position position;
+    private Position primaryPosition;
 
     public Player() { }
 
-    public Player(ResultSet rs) {
+    public Player(ResultSet rs) throws SQLException {
         parse(rs);
     }
 
@@ -36,29 +36,20 @@ public class Player implements Parsable{
         this.playerName = playerName;
     }
 
-    public Position getPosition() {
-        return position;
+    public Position getPrimaryPosition() {
+        return primaryPosition;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
-    @Override
-    public String toString() {
-        return "Player{" +
-                "id=" + playerId +
-                ", playerName='" + playerName + '\'' +
-                ", position=" + position +
-                '}';
+    public void setPrimaryPosition(Position primaryPosition) {
+        this.primaryPosition = primaryPosition;
     }
 
     @Override
-    public void parse(ResultSet rs) {
+    public void parse(ResultSet rs) throws SQLException {
         try {
             setPlayerId(rs.getLong("player.playerId"));
             setPlayerName(rs.getString("player.playerName"));
-            setPosition(Position.get(rs.getInt("player.positionId")));
+            setPrimaryPosition(Position.get(rs.getInt("player.primaryPositionId")));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -66,4 +57,19 @@ public class Player implements Parsable{
 
     @Override
     public void parse(ResultSet rs, String tableName) { }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Player player = (Player) o;
+
+        if (playerId != player.playerId) return false;
+        if (playerName != null ? !playerName.equals(player.playerName) : player.playerName != null) return false;
+        if (primaryPosition != null ? !primaryPosition.equals(player.primaryPosition) : player.primaryPosition != null)
+            return false;
+
+        return true;
+    }
 }

@@ -12,7 +12,7 @@ select 3,'BENCH','B';
 delete from POSITION;
 
 insert into POSITION (positionId, positionName, positionType, positionCode)
-select 1, "PITCHER", "MLB", "P"
+select 1, "STARTINGPITCHER", "MLB", "P"
 union all
 select 2, "CATCHER", "MLB", "C"
 union all
@@ -32,9 +32,27 @@ select 9, "RIGHTFIELD", "MLB", "RF"
 union all
 select 10, "DESIGNATEDHITTER", "MLB", "DH"
 union all
-select 11, "STARTINGPITCHER", "FANTASY", "SP"
+select 11, "RELIEFPITCHER", "MLB", "RP"
 union all
-select 12, "RELIEFPITCHER", "FANTASY", "RP";
+select 101, "PITCHER", "FANTASY", "P"
+union all
+select 102, "CATCHER", "FANTASY", "C"
+union all
+select 103, "FIRSTBASE", "FANTASY", "1B"
+union all
+select 104, "SECONDBASE", "FANTASY", "2B"
+union all
+select 105, "THIRDBASE", "FANTASY", "3B"
+union all
+select 106, "SHORTSTOP", "FANTASY", "SS"
+union all
+select 107, "OUTFIELD", "FANTASY", "OF"
+union all
+select 108, "MIDDLEINFIELD", "FANTASY", "MI"
+union all
+select 109, "CORNERINFIELD", "FANTASY", "CI"
+union all
+select 110, "UTILITY", "FANTASY", "U";
 
 delete from TEAM;
 
@@ -106,20 +124,112 @@ select 120, "Washington Nationals", "MLB", "WSH"
 
 delete from PLAYER;
 
-insert into PLAYER (playerName, positionId)
+insert into PLAYER (playerName, primaryPositionId)
 select 'Mike Trout', 8
 union all
 select 'Miguel Cabrera', 3
 union all
-select 'Andrew McCutchen', 8;
+select 'Andrew McCutchen', 8
+union all
+select 'Brian McCann', 2
+union all
+select 'Wilin Rosario', 2
+union all
+select 'Chris Carter', 3
+union all
+select 'Neil Walker', 4
+union all
+select 'Aramis Ramirez', 5
+union all
+select 'Erick Aybar', 6
+union all
+select 'Wilmer Flores', 6
+union all
+select 'Adrian Gonzalez', 3
+union all
+select 'Charlie Blackmon', 8
+union all
+select 'Lorenzo Cain', 8
+union all
+select 'Brett Gardner', 7
+union all
+select 'Carlos Gomez', 8
+union all
+select 'Gregory Polanco', 9
+union all
+select 'David Ortiz', 10
+union all
+select 'Josh Collmenter', 1
+union all
+select 'Miguel Gonzalez', 1
+union all
+select 'Felix Hernandez', 1
+union all
+select 'Craig Kimbrel', 11
+union all
+select 'Collin McHugh', 1
+union all
+select 'Chris Sale', 1
+union all
+select 'Marcus Stroman', 1
+union all
+select 'Jacob deGrom', 1
+union all
+select 'Garrett Richards', 1;
 
 delete from PLAYERTOTEAM;
 
-insert into PLAYERTOTEAM (playerId, gameDate, fantasyTeamId, mlbTeamId, fantasyPlayerStatusId, mlbPlayerStatusId)
-select 1, '2015-01-01', 1, 108, 1, 1
+insert into PLAYERTOTEAM (playerId, gameDate, fantasyTeamId, mlbTeamId, fantasyPlayerStatusId, mlbPlayerStatusId, fantasyPositionId)
+select 1, '2015-01-01', 1, 108, 1, 1, 107
 union all
-select 2, '2015-01-01', 1, 134, 1, 1
+select 2, '2015-01-01', 1, 134, 1, 1, 103
 union all
-select 3, '2015-01-01', 2, 116, 1, 1
+select 3, '2015-01-01', 2, 116, 1, 1, 107
 union all
-select 1, '2015-01-02', 1, 108, 1, 1;
+select 1, '2015-01-02', 1, 108, 1, 1, 107
+union all
+select 4, '2015-01-03', 1, 147, 1, 1, 102
+union all
+select 5, '2015-01-03', 1, 147, 1, 1, 102
+union all
+select 6, '2015-01-03', 1, 147, 1, 1, 103
+union all
+select 7, '2015-01-03', 1, 147, 1, 1, 104
+union all
+select 8, '2015-01-03', 1, 147, 1, 1, 105
+union all
+select 9, '2015-01-03', 1, 147, 1, 1, 106
+union all
+select 10, '2015-01-03', 1, 147, 1, 1, 108
+union all
+select 11, '2015-01-03', 1, 147, 1, 1, 109
+union all
+select 12, '2015-01-03', 1, 147, 1, 1, 107
+union all
+select 13, '2015-01-03', 1, 147, 1, 1, 107
+union all
+select 14, '2015-01-03', 1, 147, 1, 1, 107
+union all
+select 15, '2015-01-03', 1, 147, 1, 1, 107
+union all
+select 16, '2015-01-03', 1, 147, 1, 1, 107
+union all
+select 17, '2015-01-03', 1, 147, 1, 1, 110
+union all
+select 18, '2015-01-03', 1, 147, 1, 1, 101
+union all
+select 19, '2015-01-03', 1, 147, 1, 1, 101
+union all
+select 20, '2015-01-03', 1, 147, 1, 1, 101
+union all
+select 21, '2015-01-03', 1, 147, 1, 1, 101
+union all
+select 22, '2015-01-03', 1, 147, 1, 1, 101
+union all
+select 23, '2015-01-03', 1, 147, 1, 1, 101
+union all
+select 24, '2015-01-03', 1, 147, 1, 1, 101
+union all
+select 25, '2015-01-03', 1, 147, 1, 1, 101
+union all
+select 26, '2015-01-03', 1, 147, 1, 1, 101;

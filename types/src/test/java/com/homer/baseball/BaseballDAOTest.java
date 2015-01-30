@@ -7,6 +7,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 
@@ -63,15 +64,19 @@ public class BaseballDAOTest {
     public void testGetDailies() {
         List<DailyPlayer> dailies = dao.getPlayerDailies(1);
         Assert.assertEquals(2, dailies.size());
+        for(DailyPlayer dp : dailies) {
+            Assert.assertNotNull(dp.getPlayerId());
+        }
     }
 
     @Test
-    public void testGetDailyTeam() {
+    public void testGetDailyTeam() throws SQLException {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.DAY_OF_MONTH, 1);
         cal.set(Calendar.MONTH, 0);
         cal.set(Calendar.YEAR, 2015);
         DailyTeam dailyTeam = dao.getTeamDaily(1, SportType.FANTASY, cal.getTime());
         Assert.assertEquals(2, dailyTeam.getPlayers().size());
+        Assert.assertNotNull(dailyTeam.getTeam().getTeamId());
     }
 }

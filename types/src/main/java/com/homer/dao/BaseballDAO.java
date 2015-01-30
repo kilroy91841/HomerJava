@@ -1,10 +1,7 @@
 package com.homer.dao;
 
 import com.homer.SportType;
-import com.homer.baseball.DailyPlayer;
-import com.homer.baseball.DailyTeam;
-import com.homer.baseball.Player; 
-import com.homer.baseball.Team;
+import com.homer.baseball.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -27,7 +24,7 @@ public class BaseballDAO extends MySQLDAO {
 
             String sql = "select * from PLAYER player " +
                     "inner join POSITION position " +
-                    "on position.positionId = player.positionId " +
+                    "on position.positionId = player.primaryPositionId " +
                     "where player.playerName = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, name);
@@ -124,11 +121,12 @@ public class BaseballDAO extends MySQLDAO {
         List<DailyPlayer> dailies = new ArrayList<DailyPlayer>();
         Connection connection = getConnection();
         try {
-            String sql = "select * from PLAYER player, PLAYERTOTEAM playerToTeam, TEAM fantasyTeam, TEAM mlbTeam " +
+            String sql = "select * from PLAYER player, PLAYERTOTEAM playerToTeam, TEAM fantasyTeam, TEAM mlbTeam, POSITION position " +
                 "where player.playerId = ? " +
                 "and playerToTeam.playerId = player.playerId " +
                 "and fantasyTeam.teamId = playerToTeam.fantasyTeamId " +
-                "and mlbTeam.teamId = playerToTeam.mlbTeamId";
+                "and mlbTeam.teamId = playerToTeam.mlbTeamId " +
+                "and position.positionId = playerToTeam.fantasyPositionId";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, playerId);
             System.out.println(statement.toString());
@@ -155,24 +153,39 @@ public class BaseballDAO extends MySQLDAO {
         DailyTeam team = null;
         Connection connection = getConnection();
         try {
-            String sql = "select * from PLAYER player, PLAYERTOTEAM playertoteam, TEAM team " +
+            String teamTableName;
+            String sql = "select * from PLAYER player, PLAYERTOTEAM playertoteam, TEAM mlbTeam, TEAM fantasyTeam " +
                     "where player.playerId = playertoteam.playerid " +
-                    "and ";
+                    "and fantasyTeam.teamId = playertoteam.fantasyTeamId " +
+                    "and mlbTeam.teamId = playertoteam.mlbTeamId ";
             if(SportType.FANTASY == teamType) {
-                sql += "team.teamId = playertoteam.fantasyTeamId " +
-                        "and playertoteam.fantasyTeamId = ? ";
+                teamTableName = "fantasyTeam";
+                sql += "and playertoteam.fantasyTeamId = ? ";
             } else {
-                sql += "team.teamId = playertoteam.mlbTeamId " +
-                        "and playertoteam.mlbTeamId = ? ";
+                teamTableName = "mlbTeam";
+                sql += "and playertoteam.mlbTeamId = ? ";
             }
-            sql += "and PLAYERTOTEAM.gameDate = ? ";
+            sql += "and playerToTeam.gameDate = ? ";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, teamId);
             statement.setDate(2, new java.sql.Date(date.getTime()));
             System.out.println(statement.toString());
             ResultSet rs = statement.executeQuery();
 
-            team = new DailyTeam(rs);
+            try {
+                if(rs.first()) {
+                    Team dbTeam = new Team(rs, teamTableName);
+                    List<DailyPlayer> players = new ArrayList<DailyPlayer>();
+                    rs.beforeFirst();
+                    while(rs.next()) {
+                        DailyPlayer p = new DailyPlayer(rs);
+                        players.add(p);
+                    }
+                    team = new DailyTeam(dbTeam, players);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             rs.close();
             statement.close();
@@ -184,6 +197,51 @@ public class BaseballDAO extends MySQLDAO {
         }
 
         return team;
+    }
+
+    public FantasyRoster getFantasyRoster(int teamId, Date date) {
+        Connection connection = getConnection();
+        FantasyRoster roster = null;
+        try {
+            String teamTableName;
+            String sql = "select * from PLAYER player, PLAYERTOTEAM playertoteam, TEAM mlbTeam, TEAM fantasyTeam " +
+                    "where player.playerId = playertoteam.playerid " +
+                    "and fantasyTeam.teamId = playertoteam.fantasyTeamId " +
+                    "and mlbTeam.teamId = playertoteam.mlbTeamId " +
+                    "and playertoteam.fantasyTeamId = ? ";
+
+            sql += "and playerToTeam.gameDate = ? ";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, teamId);
+            statement.setDate(2, new java.sql.Date(date.getTime()));
+            System.out.println(statement.toString());
+            ResultSet rs = statement.executeQuery();
+
+            try {
+                if(rs.first()) {
+                    Team dbTeam = new Team(rs, "fantasyTeam");
+                    List<DailyPlayer> players = new ArrayList<DailyPlayer>();
+                    rs.beforeFirst();
+                    while(rs.next()) {
+                        DailyPlayer p = new DailyPlayer(rs);
+                        players.add(p);
+                    }
+                    roster = new FantasyRoster(dbTeam, players);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            rs.close();
+            statement.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            System.out.println("Connection Failed! Check output console");
+            e.printStackTrace();
+        }
+
+        return roster;
     }
 
 }

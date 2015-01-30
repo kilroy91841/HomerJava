@@ -11,25 +11,26 @@ import com.homer.SportType;
 /**
  * Created by arigolub on 1/29/15.
  */
-public class DailyTeam implements Parsable {
+public class DailyTeam {
 
-	private List<Player> players;
+	private List<DailyPlayer> players;
 	private Team team;
 	private Date date;
 
 	public DailyTeam() { }
 
-	public DailyTeam(ResultSet rs) {
-		parse(rs);
+	public DailyTeam(Team team, List<DailyPlayer> players) {
+		setTeam(team);
+		setPlayers(players);
 	}
 
-	public void setPlayers(List<Player> players) {
+	public void setPlayers(List<DailyPlayer> players) {
 		this.players = players;
 	}
 
-	public List<Player> getPlayers() {
+	public List<DailyPlayer> getPlayers() {
 		if(players == null) {
-			players = new ArrayList<Player>();
+			players = new ArrayList<DailyPlayer>();
 		}
 		return players;
 	}
@@ -49,25 +50,6 @@ public class DailyTeam implements Parsable {
 	public Date getDate() {
 		return date;
 	}
-
-	@Override
-    public void parse(ResultSet rs) {
-    	try {
-    		if(rs.first()) {
-    			team = new Team(rs);
-    			rs.beforeFirst();
-		    	while(rs.next()) {
-		    		Player p = new Player(rs);
-		    		getPlayers().add(p);
-		    	}
-    		}
-    	} catch (Exception e) {
-    		e.printStackTrace();
-    	}
-    }
-
-    @Override
-    public void parse(ResultSet rs, String tableName) { }
 
 }
 

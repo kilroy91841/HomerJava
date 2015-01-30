@@ -26,8 +26,8 @@ CREATE TABLE TEAM (
 CREATE TABLE PLAYER (
     playerId BIGINT AUTO_INCREMENT PRIMARY KEY,
     playerName VARCHAR(50) NOT NULL,
-    positionId INT,
-    FOREIGN KEY (positionId) REFERENCES POSITION (positionId)
+    primaryPositionId INT,
+    FOREIGN KEY (primaryPositionId) REFERENCES POSITION (positionId)
 );
 
 CREATE TABLE PLAYERTOTEAM (
@@ -37,10 +37,12 @@ CREATE TABLE PLAYERTOTEAM (
     mlbTeamId INT,
     fantasyPlayerStatusId INT,
     mlbPlayerStatusId INT,
+    fantasyPositionId INT,
     PRIMARY KEY (playerId, gameDate),
     FOREIGN KEY (playerId) REFERENCES PLAYER (playerId),
     FOREIGN KEY (fantasyTeamId) REFERENCES TEAM (teamId),
     FOREIGN KEY (mlbTeamId) REFERENCES TEAM (teamId),
     FOREIGN KEY (fantasyPlayerStatusId) REFERENCES PLAYERSTATUS (playerStatusId),
-    FOREIGN KEY (mlbPlayerStatusId) REFERENCES PLAYERSTATUS (playerStatusId)
+    FOREIGN KEY (mlbPlayerStatusId) REFERENCES PLAYERSTATUS (playerStatusId),
+    FOREIGN KEY (fantasyPositionId) REFERENCES POSITION (positionId)
 );

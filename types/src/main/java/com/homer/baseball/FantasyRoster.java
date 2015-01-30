@@ -5,57 +5,139 @@ import java.util.List;
 import java.sql.ResultSet;
 
 /**
- * Created by arigolub on 1/29/15.
- */
+* Created by arigolub on 1/29/15.
+*/
 public class FantasyRoster extends DailyTeam {
 
-	private List<Player> catchers;
-	private Player firstBase;
-	private Player secondBase;
-	private Player thirdBase;
-	private Player shortstop;
-	private Player middleInfield;
-	private Player cornerInfield;
-	private List<Player> outfielders;
-	private List<Player> pitchers;
-	private Player utility;
+	private List<DailyPlayer> catchers;
+	private DailyPlayer firstBase;
+	private DailyPlayer secondBase;
+	private DailyPlayer thirdBase;
+	private DailyPlayer shortstop;
+	private DailyPlayer middleInfield;
+	private DailyPlayer cornerInfield;
+	private List<DailyPlayer> outfielders;
+	private List<DailyPlayer> pitchers;
+	private DailyPlayer utility;
 
-	public FantasyRoster(ResultSet rs) {
-		super(rs);
+    public FantasyRoster(Team team, List<DailyPlayer> dailyPlayers) {
+        setTeam(team);
+        setPlayers(dailyPlayers);
+        init();
+    }
+
+	public FantasyRoster() {
 		init();
 	}
 
 	private void init() {
-		catchers = new ArrayList<Player>();
-		catchers = new ArrayList<Player>();
-		catchers = new ArrayList<Player>();
-		for(Player p : getPlayers()) {
-			if(Position.CATCHER.equals(p.getPosition())) {
+		catchers = new ArrayList<DailyPlayer>();
+        outfielders = new ArrayList<DailyPlayer>();
+        pitchers = new ArrayList<DailyPlayer>();
+		for(DailyPlayer p : getPlayers()) {
+			if(Position.FANTASYCATCHER.equals(p.getFantasyPosition())) {
 				catchers.add(p);
-			} else if(Position.LEFTFIELD.equals(p.getPosition()) ||
-				Position.RIGHTFIELD.equals(p.getPosition()) ||
-				Position.CENTERFIELD.equals(p.getPosition())) {
+			} else if(Position.FANTASYOUTFIELD.equals(p.getFantasyPosition())) {
 				outfielders.add(p);
-			} else if(Position.STARTINGPITCHER.equals(p.getPosition()) ||
-				Position.RELIEFPITCHER.equals(p.getPosition())) {
+			} else if(Position.FANTASYPITCHER.equals(p.getFantasyPosition()) ||
+				Position.FANTASYPITCHER.equals(p.getFantasyPosition())) {
 				pitchers.add(p);
-			} else if(Position.FIRSTBASE.equals(p.getPosition())) {
+			} else if(Position.FANTASYFIRSTBASE.equals(p.getFantasyPosition())) {
 				firstBase = p;
-			} else if(Position.SECONDBASE.equals(p.getPosition())) {
+			} else if(Position.FANTASYSECONDBASE.equals(p.getFantasyPosition())) {
 				secondBase = p;
-			} else if(Position.THIRDBASE.equals(p.getPosition())) {
+			} else if(Position.FANTASYTHIRDBASE.equals(p.getFantasyPosition())) {
 				thirdBase = p;
-			} else if(Position.SHORTSTOP.equals(p.getPosition())) {
+			} else if(Position.FANTASYSHORTSTOP.equals(p.getFantasyPosition())) {
 				shortstop = p;
-			//} else if(Position.MIDDLEINFIELD.equals(p.getPosition())) {
-			//	middleInfield = p;
-			//} else if(Position.CORNERINFIELD.equals(p.getPosition())) {
-			//	cornerInfield = p;
-			//} else if(Position.UTILITY.equals(p.getPosition())) {
-			//	utility = p;
+			} else if(Position.FANTASYMIDDLEINFIELD.equals(p.getFantasyPosition())) {
+				middleInfield = p;
+			} else if(Position.FANTASYCORNERINFIELD.equals(p.getFantasyPosition())) {
+				cornerInfield = p;
+			} else if(Position.FANTASYUTILITY.equals(p.getFantasyPosition())) {
+				utility = p;
 			}
 		}
 	}
 
+    public List<DailyPlayer> getCatchers() {
+        return catchers;
+    }
+
+    public void setCatchers(List<DailyPlayer> catchers) {
+        this.catchers = catchers;
+    }
+
+    public DailyPlayer getFirstBase() {
+        return firstBase;
+    }
+
+    public void setFirstBase(DailyPlayer firstBase) {
+        this.firstBase = firstBase;
+    }
+
+    public DailyPlayer getSecondBase() {
+        return secondBase;
+    }
+
+    public void setSecondBase(DailyPlayer secondBase) {
+        this.secondBase = secondBase;
+    }
+
+    public DailyPlayer getThirdBase() {
+        return thirdBase;
+    }
+
+    public void setThirdBase(DailyPlayer thirdBase) {
+        this.thirdBase = thirdBase;
+    }
+
+    public DailyPlayer getShortstop() {
+        return shortstop;
+    }
+
+    public void setShortstop(DailyPlayer shortstop) {
+        this.shortstop = shortstop;
+    }
+
+    public DailyPlayer getMiddleInfield() {
+        return middleInfield;
+    }
+
+    public void setMiddleInfield(DailyPlayer middleInfield) {
+        this.middleInfield = middleInfield;
+    }
+
+    public DailyPlayer getCornerInfield() {
+        return cornerInfield;
+    }
+
+    public void setCornerInfield(DailyPlayer cornerInfield) {
+        this.cornerInfield = cornerInfield;
+    }
+
+    public List<DailyPlayer> getOutfielders() {
+        return outfielders;
+    }
+
+    public void setOutfielders(List<DailyPlayer> outfielders) {
+        this.outfielders = outfielders;
+    }
+
+    public List<DailyPlayer> getPitchers() {
+        return pitchers;
+    }
+
+    public void setPitchers(List<DailyPlayer> pitchers) {
+        this.pitchers = pitchers;
+    }
+
+    public DailyPlayer getUtility() {
+        return utility;
+    }
+
+    public void setUtility(DailyPlayer utility) {
+        this.utility = utility;
+    }
 }
 
