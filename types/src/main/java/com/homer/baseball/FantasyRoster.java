@@ -139,5 +139,21 @@ public class FantasyRoster extends DailyTeam {
     public void setUtility(DailyPlayer utility) {
         this.utility = utility;
     }
+
+    @Override
+    public String toString() {
+        return "FantasyRoster{" +
+                "catchers=" + catchers +
+                ", firstBase=" + firstBase +
+                ", secondBase=" + secondBase +
+                ", thirdBase=" + thirdBase +
+                ", shortstop=" + shortstop +
+                ", middleInfield=" + middleInfield +
+                ", cornerInfield=" + cornerInfield +
+                ", outfielders=" + outfielders +
+                ", pitchers=" + pitchers +
+                ", utility=" + utility +
+                '}';
+    }
 }
 

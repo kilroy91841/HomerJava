@@ -40,6 +40,12 @@ public class MySQLDAO {
         return connection;
     }
 
+    public void closeAll(ResultSet rs, Statement statement, Connection connection) throws SQLException {
+        rs.close();
+        statement.close();
+        connection.close();
+    }
+
     public static class FACTORY {
 
         private static MySQLDAO instance;

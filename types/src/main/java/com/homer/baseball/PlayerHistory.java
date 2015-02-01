@@ -8,13 +8,13 @@ public class PlayerHistory {
 	private int season;
 	private int salary;
 	private int keeperSeason;
-	private boolean minorLeaguer;
+	private Boolean minorLeaguer;
 	private Team draftTeam;
 	private Team keeperTeam;
 
 	public PlayerHistory() { }
 
-	public PlayerHistory(int season, int salary, int keeperSeason, boolean isMinorLeaguer, Team draftTeam, Team keeperTeam) {
+	public PlayerHistory(int season, int salary, int keeperSeason, Boolean isMinorLeaguer, Team draftTeam, Team keeperTeam) {
 		setSeason(season);
 		setSalary(salary);
 		setKeeperSeason(keeperSeason);
@@ -47,11 +47,11 @@ public class PlayerHistory {
 		return keeperSeason;
 	}
 
-	public void setMinorLeaguer(boolean minorLeaguer) {
+	public void setMinorLeaguer(Boolean minorLeaguer) {
 		this.minorLeaguer = minorLeaguer;
 	}
 
-	public boolean isMinorLeaguer() {
+	public Boolean isMinorLeaguer() {
 		return minorLeaguer;
 	}
 

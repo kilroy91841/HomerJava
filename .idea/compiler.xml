@@ -27,6 +27,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="HomerAtTheBat" target="1.7" />
+      <module name="parent" target="1.7" />
       <module name="types" target="1.7" />
     </bytecodeTargetLevel>
   </component>

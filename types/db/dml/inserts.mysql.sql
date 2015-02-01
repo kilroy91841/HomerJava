@@ -124,58 +124,58 @@ select 120, "Washington Nationals", "MLB", "WSH"
 
 delete from PLAYER;
 
-insert into PLAYER (playerName, primaryPositionId)
-select 'Mike Trout', 8
+insert into PLAYER (playerName, primaryPositionId, mlbPlayerId)
+select 'Mike Trout', 8, 545361
 union all
-select 'Miguel Cabrera', 3
+select 'Miguel Cabrera', 3, null
 union all
-select 'Andrew McCutchen', 8
+select 'Andrew McCutchen', 8, null
 union all
-select 'Brian McCann', 2
+select 'Brian McCann', 2, null
 union all
-select 'Wilin Rosario', 2
+select 'Wilin Rosario', 2, null
 union all
-select 'Chris Carter', 3
+select 'Chris Carter', 3, null
 union all
-select 'Neil Walker', 4
+select 'Neil Walker', 4, null
 union all
-select 'Aramis Ramirez', 5
+select 'Aramis Ramirez', 5, null
 union all
-select 'Erick Aybar', 6
+select 'Erick Aybar', 6, null
 union all
-select 'Wilmer Flores', 6
+select 'Wilmer Flores', 6, null
 union all
-select 'Adrian Gonzalez', 3
+select 'Adrian Gonzalez', 3, null
 union all
-select 'Charlie Blackmon', 8
+select 'Charlie Blackmon', 8, null
 union all
-select 'Lorenzo Cain', 8
+select 'Lorenzo Cain', 8, null
 union all
-select 'Brett Gardner', 7
+select 'Brett Gardner', 7, null
 union all
-select 'Carlos Gomez', 8
+select 'Carlos Gomez', 8, null
 union all
-select 'Gregory Polanco', 9
+select 'Gregory Polanco', 9, null
 union all
-select 'David Ortiz', 10
+select 'David Ortiz', 10, null
 union all
-select 'Josh Collmenter', 1
+select 'Josh Collmenter', 1, null
 union all
-select 'Miguel Gonzalez', 1
+select 'Miguel Gonzalez', 1, null
 union all
-select 'Felix Hernandez', 1
+select 'Felix Hernandez', 1, null
 union all
-select 'Craig Kimbrel', 11
+select 'Craig Kimbrel', 11, null
 union all
-select 'Collin McHugh', 1
+select 'Collin McHugh', 1, null
 union all
-select 'Chris Sale', 1
+select 'Chris Sale', 1, null
 union all
-select 'Marcus Stroman', 1
+select 'Marcus Stroman', 1, null
 union all
-select 'Jacob deGrom', 1
+select 'Jacob deGrom', 1, null
 union all
-select 'Garrett Richards', 1;
+select 'Garrett Richards', 1, null;
 
 delete from PLAYERTOTEAM;
 
@@ -244,3 +244,44 @@ union all
 select 1, 2014, 6, 2, 0, null, 1
 union all
 select 1, 2015, 9, 3, 0, null, 1;
+
+delete from MONEY;
+
+insert into MONEY (teamId, season, moneyType, amount)
+select 1, 2015, "MAJORLEAGUEDRAFT", 260
+union all
+select 1, 2016, "MAJORLEAGUEDRAFT", 263
+union all
+select 1, 2015, "FREEAGENTAUCTION", 100;
+
+delete from MINORLEAGUEDRAFTPICK;
+
+insert into MINORLEAGUEDRAFTPICK (originalTeamId, season, round, owningTeamId, overall, playerId, deadline, skipped)
+select 1, 2014, 1, 1, 7, 1, '2014-01-01 12:00:00', false
+union all
+select 1, 2014, 2, 2, 9, 1, '2014-01-02 12:00:00', false
+union all
+select 1, 2015, 1, 1, null, null, null, false
+union all
+select 2, 2015, 1, 2, null, null, null, false
+union all
+select 1, 2015, 2, 1, null, null, null, false;
+
+delete from TRADE;
+
+insert into TRADE (proposingTeamId, proposedToTeamId, createdDate, deadline, tradeStatus)
+select 1, 2, '2015-01-31 13:30:00', '2015-2-6 13:30:00', 'PROPOSED';
+
+delete from TRADEASSET;
+
+insert into TRADEASSET (tradeId, teamId, assetId, assetType)
+select 1, 1, 1, "PLAYER"
+union all
+select 1, 1, 2, "PLAYER"
+union all
+select 1, 2, 4, "MINORLEAGUEDRAFTPICK";
+
+delete from VULTURE;
+
+insert into VULTURE (vulturingTeamId, offendingTeamId, playerId, deadline, vultureStatus)
+select 2, 1, 1, '2015-02-03 16:00:00', "ACTIVE";

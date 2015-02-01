@@ -2,6 +2,7 @@ package com.homer.baseball;
 
 import com.homer.SportType;
 import com.homer.dao.MySQLDAO;
+import com.homer.dao.TypesFactory;
 import junit.framework.Assert;
 import org.junit.Test;
 
@@ -75,18 +76,8 @@ public class DailyPlayerTest {
                 ResultSet rs = statement.executeQuery();
 
                 while(rs.next()) {
-                    Team fantasyTeam = new Team(
-                        rs.getInt("fantasyTeam.teamId"),
-                        rs.getString("fantasyTeam.teamName"),
-                        SportType.FANTASY,
-                        rs.getString("fantasyTeam.teamCode")
-                    );
-                    Team mlbTeam = new Team(
-                        rs.getInt("mlbTeam.teamId"),
-                        rs.getString("mlbTeam.teamName"),
-                        SportType.MLB,
-                        rs.getString("mlbTeam.teamCode")
-                    );
+                    Team fantasyTeam = TypesFactory.createTeam(rs, "fantasyTeam");
+                    Team mlbTeam = TypesFactory.createTeam(rs, "mlbTeam");
                     player = new DailyPlayer(
                         rs.getLong("player.playerId"),
                         rs.getString("player.playerName"),

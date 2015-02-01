@@ -1,18 +1,17 @@
 package com.homer.baseball;
 
-import com.homer.Parsable;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by MLB on 1/25/15.
  */
-public class Player {
+public class Player implements Tradable {
 
     private long playerId;
     private String playerName;
     private Position primaryPosition;
+    private List<ThirdPartyPlayerInfo> thirdPartyPlayerInfoList;
 
     public Player() { }
 
@@ -44,6 +43,27 @@ public class Player {
 
     public void setPrimaryPosition(Position primaryPosition) {
         this.primaryPosition = primaryPosition;
+    }
+
+    public List<ThirdPartyPlayerInfo> getThirdPartyPlayerInfoList() {
+        if(thirdPartyPlayerInfoList == null) {
+            thirdPartyPlayerInfoList = new ArrayList<ThirdPartyPlayerInfo>();
+        }
+        return thirdPartyPlayerInfoList;
+    }
+
+    public void setThirdPartyPlayerInfoList(List<ThirdPartyPlayerInfo> thirdPartyPlayerInfoList) {
+        this.thirdPartyPlayerInfoList = thirdPartyPlayerInfoList;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "playerId=" + playerId +
+                ", playerName='" + playerName + '\'' +
+                ", primaryPosition=" + primaryPosition +
+                ", thirdPartyPlayerInfoList=" + thirdPartyPlayerInfoList +
+                '}';
     }
 
     @Override

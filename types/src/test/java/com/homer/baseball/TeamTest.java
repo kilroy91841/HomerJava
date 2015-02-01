@@ -2,6 +2,7 @@ package com.homer.baseball;
 
 import com.homer.SportType;
 import com.homer.dao.MySQLDAO;
+import com.homer.dao.TypesFactory;
 import junit.framework.Assert;
 import org.junit.Test;
 
@@ -43,12 +44,7 @@ public class TeamTest {
                 ResultSet rs = statement.executeQuery();
 
                 while(rs.next()) {
-                    team = new Team(
-                        rs.getInt("team.teamId"),
-                        rs.getString("team.teamName"),
-                        SportType.getSportType(rs.getString("team.teamType")),
-                        rs.getString("team.teamCode")
-                    );
+                    team = TypesFactory.createTeam(rs, "team");
                 }
 
                 rs.close();

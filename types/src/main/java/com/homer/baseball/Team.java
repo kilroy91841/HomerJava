@@ -1,10 +1,6 @@
 package com.homer.baseball;
 
-import com.homer.Parsable;
 import com.homer.SportType;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * Created by MLB on 1/25/15.

@@ -3,6 +3,7 @@ package com.homer.baseball;
 import com.homer.SportType;
 import com.homer.dao.BaseballDAO;
 import com.homer.dao.MySQLDAO;
+import com.homer.dao.TypesFactory;
 import junit.framework.Assert;
 import org.junit.Test;
 
@@ -57,22 +58,12 @@ public class PlayerHistoryTest {
 
                     Integer draftTeamId = rs.getInt("draftTeam.teamId");
                     if(!rs.wasNull()) {
-                        draftTeam = new Team(
-                            draftTeamId,
-                            rs.getString("draftTeam.teamName"),
-                            SportType.getSportType(rs.getString("draftTeam.teamType")),
-                            rs.getString("draftTeam.teamCode")
-                        );
+                        draftTeam = TypesFactory.createTeam(rs, "draftTeam");
                     }
 
                     Integer keeperTeamId = rs.getInt("keeperTeam.teamId");
                     if(!rs.wasNull()) {
-                        keeperTeam = new Team(
-                            keeperTeamId,
-                            rs.getString("keeperTeam.teamName"),
-                            SportType.getSportType(rs.getString("keeperTeam.teamType")),
-                            rs.getString("keeperTeam.teamCode")
-                        );    
+                        keeperTeam = TypesFactory.createTeam(rs, "keeperTeam");
                     }
 
                     playerHistory = new PlayerHistory(

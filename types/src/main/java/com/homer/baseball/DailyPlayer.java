@@ -1,12 +1,7 @@
 package com.homer.baseball;
 
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
-import java.sql.ResultSet;
-
-import com.homer.Parsable;
-import com.homer.SportType;
 
 /**
  * Created by arigolub on 1/29/15.
