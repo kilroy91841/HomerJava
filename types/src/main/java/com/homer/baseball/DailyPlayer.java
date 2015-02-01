@@ -63,7 +63,8 @@ public class DailyPlayer extends Player {
 	@Override
 	public String toString() {
 		return "DailyPlayer{" +
-				"fantasyTeam=" + fantasyTeam +
+				"player=" + super.toString() +
+				", fantasyTeam=" + fantasyTeam +
 				", mlbTeam=" + mlbTeam +
 				", date=" + date +
 				", fantasyPosition=" + fantasyPosition +

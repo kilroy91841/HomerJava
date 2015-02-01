@@ -1,6 +1,7 @@
 package com.homer.baseball;
 
 import com.homer.SportType;
+import com.homer.baseball.factory.TestObjectFactory;
 import com.homer.dao.BaseballDAO;
 import junit.framework.Assert;
 import org.junit.Test;
@@ -13,7 +14,7 @@ import java.util.*;
 public class FantasyRosterTest {
 
     private static Calendar cal;
-    private static final Team fantasyTeam = new Team(1, "Mark Loretta\'s Scars", SportType.FANTASY, "MLS");
+    private static final Team fantasyTeam = TestObjectFactory.getMarkLorettasScars();
     private static final Team mlbTeam = new Team(108, "Los Angeles Angels", SportType.MLB, "LAA");
 
     static {
@@ -87,7 +88,9 @@ public class FantasyRosterTest {
         Assert.assertEquals(5, roster.getOutfielders().size());
         Assert.assertNotNull(roster.getUtility());
         Assert.assertEquals(9, roster.getPitchers().size());
-        Assert.assertNotNull(fantasyTeam);
+        Assert.assertNotNull(roster.getTeam());
+
+        System.out.println(roster);
     }
 
     private DailyPlayer generatePlayer(Position position) {

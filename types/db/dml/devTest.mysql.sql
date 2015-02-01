@@ -1,5 +1,3 @@
-USE HOMERATTHEBAT;
-
 delete from PLAYERSTATUS;
 
 insert into PLAYERSTATUS (playerStatusId, playerStatusName, playerStatusCode)
