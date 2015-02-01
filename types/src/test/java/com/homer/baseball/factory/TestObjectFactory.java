@@ -4,6 +4,7 @@ import com.homer.SportType;
 import com.homer.baseball.*;
 
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by arigolub on 1/31/15.
@@ -53,5 +54,21 @@ public class TestObjectFactory {
 
     public static Team getBSnaxx() {
         return new Team(2, "BSnaxx Cracker Jaxx", SportType.FANTASY, "SNAXX");
+    }
+
+    public static FreeAgentAuction getFreeAgentAuction() {
+        Team requestingTeam = getMarkLorettasScars();
+        Player player = getMiguelCabrera();
+        Calendar cal = Calendar.getInstance();
+        cal.clear();
+        cal.set(Calendar.YEAR, 2015);
+        cal.set(Calendar.MONTH, 1);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        cal.set(Calendar.HOUR, 0);
+        Date createdDate = cal.getTime();
+        cal.add(Calendar.DATE, 1);
+        Date deadline = cal.getTime();
+        return new FreeAgentAuction(requestingTeam, player, createdDate, null, deadline, FreeAgentAuction.ACTIVE);
+
     }
 }

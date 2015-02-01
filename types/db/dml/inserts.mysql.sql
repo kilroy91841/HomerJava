@@ -285,3 +285,8 @@ delete from VULTURE;
 
 insert into VULTURE (vulturingTeamId, offendingTeamId, playerId, deadline, vultureStatus)
 select 2, 1, 1, '2015-02-03 16:00:00', "ACTIVE";
+
+delete from FREEAGENTAUCTION;
+
+insert into FREEAGENTAUCTION (requestingTeamId, playerId, status, deadline, createdDate)
+select 1, 2, 'ACTIVE', '2015-02-02 00:00:00', '2015-02-01 00:00:00';
