@@ -1,10 +1,7 @@
 package com.homer.dao;
 
 import com.homer.SportType;
-import com.homer.baseball.Player;
-import com.homer.baseball.Position;
-import com.homer.baseball.Team;
-import com.homer.baseball.ThirdPartyPlayerInfo;
+import com.homer.baseball.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,6 +24,31 @@ public class TypesFactory {
                 SportType.getSportType(rs.getString(tableName + ".teamType")),
                 rs.getString(tableName + ".teamCode")
         );
+    }
+
+    public static PlayerHistory createPlayerHistory(ResultSet rs, String tableName) throws SQLException {
+        Team draftTeam = null;
+        Team keeperTeam = null;
+
+        Integer draftTeamId = rs.getInt("draftTeam.teamId");
+        if(!rs.wasNull()) {
+            draftTeam = TypesFactory.createTeam(rs, "draftTeam");
+        }
+
+        Integer keeperTeamId = rs.getInt("keeperTeam.teamId");
+        if(!rs.wasNull()) {
+            keeperTeam = TypesFactory.createTeam(rs, "keeperTeam");
+        }
+
+        return new PlayerHistory(
+                rs.getInt("history.season"),
+                rs.getInt("history.salary"),
+                rs.getInt("history.keeperSeason"),
+                rs.getBoolean("history.minorLeaguer"),
+                draftTeam,
+                keeperTeam
+        );
+
     }
     
     public static Player createPlayer(ResultSet rs, String tableName) throws SQLException {

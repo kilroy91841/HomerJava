@@ -11,6 +11,9 @@ public class Player implements Tradable {
     private long playerId;
     private String playerName;
     private Position primaryPosition;
+    private String firstName;
+    private String lastName;
+    private String nameLastFirst;
     private List<ThirdPartyPlayerInfo> thirdPartyPlayerInfoList;
 
     public Player() { }
@@ -56,6 +59,15 @@ public class Player implements Tradable {
         this.thirdPartyPlayerInfoList = thirdPartyPlayerInfoList;
     }
 
+    public ThirdPartyPlayerInfo getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.ThirdPartyProvider provider) {
+        for(ThirdPartyPlayerInfo info : getThirdPartyPlayerInfoList()) {
+            if(info.getProvider().equals(provider)) {
+                return info;
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return "Player{" +
@@ -77,6 +89,10 @@ public class Player implements Tradable {
         if (playerName != null ? !playerName.equals(player.playerName) : player.playerName != null) return false;
         if (primaryPosition != null ? !primaryPosition.equals(player.primaryPosition) : player.primaryPosition != null)
             return false;
+        if (getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.MLB) != null ?
+                !getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.MLB).equals(player.getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.MLB)) :
+                player.getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.MLB) != null
+                ) return false;
 
         return true;
     }

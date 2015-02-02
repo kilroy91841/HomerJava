@@ -169,6 +169,13 @@ public class Trade {
             }
             throw new Exception("Could not identify trade status with name " + tradeStatusName);
         }
+
+        @Override
+        public String toString() {
+            return "TradeStatus{" +
+                    "name='" + name + '\'' +
+                    '}';
+        }
     }
 
 }

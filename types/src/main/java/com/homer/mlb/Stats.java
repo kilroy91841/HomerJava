@@ -446,4 +446,56 @@ public class Stats {
                 ", team_score=" + team_score +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Stats stats = (Stats) o;
+
+        if (ab != null ? !ab.equals(stats.ab) : stats.ab != null) return false;
+        if (ao != null ? !ao.equals(stats.ao) : stats.ao != null) return false;
+        if (avg != null ? !avg.equals(stats.avg) : stats.avg != null) return false;
+        if (bb != null ? !bb.equals(stats.bb) : stats.bb != null) return false;
+        if (cs != null ? !cs.equals(stats.cs) : stats.cs != null) return false;
+        if (d != null ? !d.equals(stats.d) : stats.d != null) return false;
+        if (date != null ? !date.equals(stats.date) : stats.date != null) return false;
+        if (game_date != null ? !game_date.equals(stats.game_date) : stats.game_date != null) return false;
+        if (game_id != null ? !game_id.equals(stats.game_id) : stats.game_id != null) return false;
+        if (game_pk != null ? !game_pk.equals(stats.game_pk) : stats.game_pk != null) return false;
+        if (game_type != null ? !game_type.equals(stats.game_type) : stats.game_type != null) return false;
+        if (go != null ? !go.equals(stats.go) : stats.go != null) return false;
+        if (go_ao != null ? !go_ao.equals(stats.go_ao) : stats.go_ao != null) return false;
+        if (h != null ? !h.equals(stats.h) : stats.h != null) return false;
+        if (h2b != null ? !h2b.equals(stats.h2b) : stats.h2b != null) return false;
+        if (h3b != null ? !h3b.equals(stats.h3b) : stats.h3b != null) return false;
+        if (hbp != null ? !hbp.equals(stats.hbp) : stats.hbp != null) return false;
+        if (home_away != null ? !home_away.equals(stats.home_away) : stats.home_away != null) return false;
+        if (hr != null ? !hr.equals(stats.hr) : stats.hr != null) return false;
+        if (ibb != null ? !ibb.equals(stats.ibb) : stats.ibb != null) return false;
+        if (lob != null ? !lob.equals(stats.lob) : stats.lob != null) return false;
+        if (obp != null ? !obp.equals(stats.obp) : stats.obp != null) return false;
+        if (opp != null ? !opp.equals(stats.opp) : stats.opp != null) return false;
+        if (opp_score != null ? !opp_score.equals(stats.opp_score) : stats.opp_score != null) return false;
+        if (opp_team_display_full != null ? !opp_team_display_full.equals(stats.opp_team_display_full) : stats.opp_team_display_full != null)
+            return false;
+        if (opp_team_display_short != null ? !opp_team_display_short.equals(stats.opp_team_display_short) : stats.opp_team_display_short != null)
+            return false;
+        if (opp_team_id != null ? !opp_team_id.equals(stats.opp_team_id) : stats.opp_team_id != null) return false;
+        if (ops != null ? !ops.equals(stats.ops) : stats.ops != null) return false;
+        if (r != null ? !r.equals(stats.r) : stats.r != null) return false;
+        if (rbi != null ? !rbi.equals(stats.rbi) : stats.rbi != null) return false;
+        if (sac != null ? !sac.equals(stats.sac) : stats.sac != null) return false;
+        if (sb != null ? !sb.equals(stats.sb) : stats.sb != null) return false;
+        if (sf != null ? !sf.equals(stats.sf) : stats.sf != null) return false;
+        if (slg != null ? !slg.equals(stats.slg) : stats.slg != null) return false;
+        if (so != null ? !so.equals(stats.so) : stats.so != null) return false;
+        if (t != null ? !t.equals(stats.t) : stats.t != null) return false;
+        if (tb != null ? !tb.equals(stats.tb) : stats.tb != null) return false;
+        if (team_result != null ? !team_result.equals(stats.team_result) : stats.team_result != null) return false;
+        if (team_score != null ? !team_score.equals(stats.team_score) : stats.team_score != null) return false;
+
+        return true;
+    }
 }

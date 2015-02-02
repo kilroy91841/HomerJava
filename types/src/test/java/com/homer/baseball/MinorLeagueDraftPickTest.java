@@ -20,7 +20,7 @@ public class MinorLeagueDraftPickTest {
     @Test
     public void testSelectedPick() {
         Team team = new Team(1, "Mark Loretta\'s Scars", SportType.FANTASY, "MLS");
-        Player player = new Player(1, "Mike Trout", Position.CENTERFIELD);
+        Player player = TestObjectFactory.getMikeTrout();
         Calendar cal = Calendar.getInstance();
         cal.clear();
         cal.set(Calendar.YEAR, 2014);

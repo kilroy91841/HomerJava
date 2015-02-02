@@ -1,6 +1,8 @@
 package com.homer.baseball;
 
+import com.homer.baseball.factory.TestObjectFactory;
 import com.homer.dao.MySQLDAO;
+import com.homer.dao.TypesFactory;
 import junit.framework.Assert;
 import org.junit.Test;
 
@@ -16,10 +18,7 @@ public class PlayerTest {
 
     @Test
     public void testDo() {
-        Player player = new Player();
-        player.setPlayerId(1);
-        player.setPlayerName("Mike Trout");
-        player.setPrimaryPosition(Position.CENTERFIELD);
+        Player player = TestObjectFactory.getMikeTrout();
 
         DAO dao = new DAO();
         Player dbPlayer = dao.get();
@@ -40,11 +39,7 @@ public class PlayerTest {
                 ResultSet rs = statement.executeQuery();
 
                 while(rs.next()) {
-                    player = new Player(
-                        rs.getLong("player.playerId"),
-                        rs.getString("player.playerName"),
-                        Position.get(rs.getInt("player.primaryPositionId"))
-                    );
+                    player = TypesFactory.createPlayer(rs, "player");
                 }
 
                 closeAll(rs, statement, connection);

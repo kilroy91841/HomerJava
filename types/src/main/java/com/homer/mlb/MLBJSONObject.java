@@ -9,17 +9,19 @@ import org.json.JSONObject;
  */
 public class MLBJSONObject extends JSONObject {
 
+    private JSONObject parent;
+    
     public MLBJSONObject(JSONObject parent) {
-        super(parent);
+        this.parent = parent;
     }
 
     public Integer getInteger(String key) throws Exception {
-        if(!this.has(key)) return null;
+        if(!parent.has(key)) return null;
         Integer retVal = null;
         try {
-            retVal = this.getInt(key);
+            retVal = parent.getInt(key);
         } catch(JSONException e) {
-            String emptyValue = this.getString(key);
+            String emptyValue = parent.getString(key);
             if(emptyValue == null || !emptyValue.equals("")) {
                 throw new Exception("Something really went wrong finding property [" + key + "]");
             }
@@ -28,12 +30,12 @@ public class MLBJSONObject extends JSONObject {
     }
 
     public DateTime getDateTime(String key) throws Exception {
-        if(!this.has(key)) return null;
+        if(!parent.has(key)) return null;
         DateTime retVal = null;
         try {
-            retVal = new DateTime(this.get(key));
+            retVal = new DateTime(parent.get(key));
         } catch(IllegalArgumentException e) {
-            String emptyValue = this.getString(key);
+            String emptyValue = parent.getString(key);
             if(emptyValue == null || !emptyValue.equals("")) {
                 throw new Exception("Something really went wrong finding property [" + key + "]");
             }
@@ -43,17 +45,17 @@ public class MLBJSONObject extends JSONObject {
 
     @Override
     public String getString(String key) {
-        if(!this.has(key)) return null;
-        return this.getString(key);
+        if(!parent.has(key)) return null;
+        return parent.getString(key);
     }
 
     public Long getLongProtected(String key) {
-        if(!this.has(key)) return null;
-        return this.getLong(key);
+        if(!parent.has(key)) return null;
+        return parent.getLong(key);
     }
 
     public Double getDoubleProtected(String key) {
-        if(!this.has(key)) return null;
-        return this.getDouble(key);
+        if(!parent.has(key)) return null;
+        return parent.getDouble(key);
     }
 }

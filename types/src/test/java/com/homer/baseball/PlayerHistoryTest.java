@@ -53,27 +53,7 @@ public class PlayerHistoryTest {
                 ResultSet rs = statement.executeQuery();
 
                 while(rs.next()) {
-                    Team draftTeam = null;
-                    Team keeperTeam = null;
-
-                    Integer draftTeamId = rs.getInt("draftTeam.teamId");
-                    if(!rs.wasNull()) {
-                        draftTeam = TypesFactory.createTeam(rs, "draftTeam");
-                    }
-
-                    Integer keeperTeamId = rs.getInt("keeperTeam.teamId");
-                    if(!rs.wasNull()) {
-                        keeperTeam = TypesFactory.createTeam(rs, "keeperTeam");
-                    }
-
-                    playerHistory = new PlayerHistory(
-                        rs.getInt("history.season"),
-                        rs.getInt("history.salary"),
-                        rs.getInt("history.keeperSeason"),
-                        rs.getBoolean("history.minorLeaguer"),
-                        draftTeam,
-                        keeperTeam
-                    );
+                    playerHistory = TypesFactory.createPlayerHistory(rs, "history");
                 }
 
                 rs.close();

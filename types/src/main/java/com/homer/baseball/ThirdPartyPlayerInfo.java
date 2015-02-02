@@ -60,7 +60,7 @@ public class ThirdPartyPlayerInfo {
         ThirdPartyPlayerInfo that = (ThirdPartyPlayerInfo) o;
 
         if (thirdPartyPlayerId != that.thirdPartyPlayerId) return false;
-        if (player != null ? !player.equals(that.player) : that.player != null) return false;
+        if (player.getPlayerId() != that.getPlayer().getPlayerId()) return false;
         if (!provider.equals(that.provider)) return false;
 
         return true;

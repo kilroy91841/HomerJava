@@ -1,17 +1,36 @@
 package com.homer.baseball;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by arigolub on 1/29/15.
  */
 public class DailyPlayer extends Player {
 
+	public static final PlayerStatus ACTIVE = new PlayerStatus("ACTIVE", "A");
+	public static final PlayerStatus DISABLEDLIST = new PlayerStatus("DISABLED LIST", "DL");
+	public static final PlayerStatus MINORS = new PlayerStatus("MINORS", "MIN");
+	public static final PlayerStatus FREEAGENT = new PlayerStatus("FREEAGENT", "FA");
+	public static final PlayerStatus RESTRICTED = new PlayerStatus("RESTRICTED", "RST");
+	//public static final PlayerStatus MINORLEAGUER = new PlayerStatus("MINORLEAGUER", "ML");
+
+	static {
+		PlayerStatus.map.put(ACTIVE.getName(), ACTIVE);
+		PlayerStatus.map.put(DISABLEDLIST.getName(), DISABLEDLIST);
+		PlayerStatus.map.put(MINORS.getName(), MINORS);
+		PlayerStatus.map.put(FREEAGENT.getName(), FREEAGENT);
+		PlayerStatus.map.put(RESTRICTED.getName(), RESTRICTED);
+	}
+
 	private Team fantasyTeam;
 	private Team mlbTeam;
 	private Date date;
 	private Position fantasyPosition;
+	private PlayerStatus fantasyStatus;
+	private PlayerStatus mlbStatus;
 	private List<Game> games;
 
 	public DailyPlayer() { }
@@ -42,15 +61,21 @@ public class DailyPlayer extends Player {
 		return mlbTeam;
 	}
 
-	public void setDate(Date date) { this.date = date; }
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
 	public Date getDate() {
 		return date;
 	}
 
-	public void setFantasyPosition(Position fantasyPosition) { this.fantasyPosition = fantasyPosition; }
+	public void setFantasyPosition(Position fantasyPosition) {
+		this.fantasyPosition = fantasyPosition;
+	}
 
-	public Position getFantasyPosition() { return fantasyPosition; }
+	public Position getFantasyPosition() {
+		return fantasyPosition;
+	}
 
 	public void setGames(List<Game> games) {
 		this.games = games;
@@ -58,6 +83,22 @@ public class DailyPlayer extends Player {
 
 	public List<Game> getGames() {
 		return games;
+	}
+
+	public PlayerStatus getFantasyStatus() {
+		return fantasyStatus;
+	}
+
+	public void setFantasyStatus(PlayerStatus fantasyStatus) {
+		this.fantasyStatus = fantasyStatus;
+	}
+
+	public PlayerStatus getMlbStatus() {
+		return mlbStatus;
+	}
+
+	public void setMlbStatus(PlayerStatus mlbStatus) {
+		this.mlbStatus = mlbStatus;
 	}
 
 	@Override
@@ -69,6 +110,8 @@ public class DailyPlayer extends Player {
 				", date=" + date +
 				", fantasyPosition=" + fantasyPosition +
 				", games=" + games +
+				", fantasyStatus=" + fantasyStatus +
+				", mlbStatus=" + mlbStatus +
 				'}';
 	}
 
@@ -98,6 +141,32 @@ public class DailyPlayer extends Player {
 		result = 31 * result + (fantasyPosition != null ? fantasyPosition.hashCode() : 0);
 		result = 31 * result + (games != null ? games.hashCode() : 0);
 		return result;
+	}
+
+	public static class PlayerStatus {
+		private String name;
+		private String code;
+		protected static final Map<String, PlayerStatus> map = new HashMap<String, PlayerStatus>();
+		private PlayerStatus(String name, String code) {
+			this.name = name;
+			this.code = code;
+		}
+		public String getName() { return name; }
+		public String getCode() { return code; }
+		public static PlayerStatus get(String name) throws Exception {
+			PlayerStatus status = map.get(name);
+			if(map == null) {
+				throw new Exception("PlayerStatus not found for name: " + name);
+			}
+			return status;
+		}
+		@Override
+		public String toString() {
+			return "PlayerStatus{" +
+					"name='" + name + '\'' +
+					", code='" + code + '\'' +
+					'}';
+		}
 	}
 }
 

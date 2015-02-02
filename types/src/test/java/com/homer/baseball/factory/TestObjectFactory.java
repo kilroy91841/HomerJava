@@ -12,7 +12,9 @@ import java.util.Date;
 public class TestObjectFactory {
 
     public static Player getMikeTrout() {
-        return new Player(1, "Mike Trout", Position.CENTERFIELD);
+        Player player = new Player(1, "Mike Trout", Position.CENTERFIELD);
+        player.getThirdPartyPlayerInfoList().add(new ThirdPartyPlayerInfo(player, 545361, ThirdPartyPlayerInfo.MLB));
+        return player;
     }
 
     public static Player getMiguelCabrera() {

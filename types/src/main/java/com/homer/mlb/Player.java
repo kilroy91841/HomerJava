@@ -347,4 +347,57 @@ public class Player {
                 ", twitter_id='" + twitter_id + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Player player = (Player) o;
+
+        if (_throws != null ? !_throws.equals(player._throws) : player._throws != null) return false;
+        if (active_sw != null ? !active_sw.equals(player.active_sw) : player.active_sw != null) return false;
+        if (age != null ? !age.equals(player.age) : player.age != null) return false;
+        if (bats != null ? !bats.equals(player.bats) : player.bats != null) return false;
+        if (birth_date != null ? !birth_date.equals(player.birth_date) : player.birth_date != null) return false;
+        if (jersey_number != null ? !jersey_number.equals(player.jersey_number) : player.jersey_number != null)
+            return false;
+        if (name_display_first_last != null ? !name_display_first_last.equals(player.name_display_first_last) : player.name_display_first_last != null)
+            return false;
+        if (name_display_first_last_html != null ? !name_display_first_last_html.equals(player.name_display_first_last_html) : player.name_display_first_last_html != null)
+            return false;
+        if (name_display_last_first != null ? !name_display_last_first.equals(player.name_display_last_first) : player.name_display_last_first != null)
+            return false;
+        if (name_display_last_first_html != null ? !name_display_last_first_html.equals(player.name_display_last_first_html) : player.name_display_last_first_html != null)
+            return false;
+        if (name_display_roster != null ? !name_display_roster.equals(player.name_display_roster) : player.name_display_roster != null)
+            return false;
+        if (name_display_roster_html != null ? !name_display_roster_html.equals(player.name_display_roster_html) : player.name_display_roster_html != null)
+            return false;
+        if (name_first != null ? !name_first.equals(player.name_first) : player.name_first != null) return false;
+        if (name_full != null ? !name_full.equals(player.name_full) : player.name_full != null) return false;
+        if (name_last != null ? !name_last.equals(player.name_last) : player.name_last != null) return false;
+        if (name_use != null ? !name_use.equals(player.name_use) : player.name_use != null) return false;
+        if (player_id != null ? !player_id.equals(player.player_id) : player.player_id != null) return false;
+        if (primary_position != null ? !primary_position.equals(player.primary_position) : player.primary_position != null)
+            return false;
+        if (primary_position_txt != null ? !primary_position_txt.equals(player.primary_position_txt) : player.primary_position_txt != null)
+            return false;
+        if (primary_stat_type != null ? !primary_stat_type.equals(player.primary_stat_type) : player.primary_stat_type != null)
+            return false;
+        if (pro_debut_date != null ? !pro_debut_date.equals(player.pro_debut_date) : player.pro_debut_date != null)
+            return false;
+        if (start_date != null ? !start_date.equals(player.start_date) : player.start_date != null) return false;
+        if (status != null ? !status.equals(player.status) : player.status != null) return false;
+        if (status_code != null ? !status_code.equals(player.status_code) : player.status_code != null) return false;
+        if (status_date != null ? !status_date.equals(player.status_date) : player.status_date != null) return false;
+        if (team_abbrev != null ? !team_abbrev.equals(player.team_abbrev) : player.team_abbrev != null) return false;
+        if (team_code != null ? !team_code.equals(player.team_code) : player.team_code != null) return false;
+        if (team_id != null ? !team_id.equals(player.team_id) : player.team_id != null) return false;
+        if (team_name != null ? !team_name.equals(player.team_name) : player.team_name != null) return false;
+        if (twitter_id != null ? !twitter_id.equals(player.twitter_id) : player.twitter_id != null) return false;
+
+        return true;
+    }
+
 }

@@ -2,14 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e31784a-1b9a-412d-86c9-39d0da2306ad" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/types/src/test/resources/database_devTest.properties" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/types/src/test/resources/database_dev.properties" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/types/db/dml/inserts.mysql.sql" afterPath="$PROJECT_DIR$/types/db/dml/devTest.mysql.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/DailyPlayer.java" afterPath="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/DailyPlayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/FantasyRosterTest.java" afterPath="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/FantasyRosterTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/types/db/ddl/ddl.mysql.sql" afterPath="$PROJECT_DIR$/types/db/ddl/ddl.mysql.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/MLBClientRESTTest.java" afterPath="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/MLBClientRESTTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/types/src/main/java/com/homer/mlb/MLBJSONObject.java" afterPath="$PROJECT_DIR$/types/src/main/java/com/homer/mlb/MLBJSONObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/MinorLeagueDraftPickTest.java" afterPath="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/MinorLeagueDraftPickTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Player.java" afterPath="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/types/src/main/java/com/homer/mlb/Player.java" afterPath="$PROJECT_DIR$/types/src/main/java/com/homer/mlb/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/PlayerHistoryTest.java" afterPath="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/PlayerHistoryTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/PlayerTest.java" afterPath="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/PlayerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/types/src/main/java/com/homer/mlb/Stats.java" afterPath="$PROJECT_DIR$/types/src/main/java/com/homer/mlb/Stats.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/factory/TestObjectFactory.java" afterPath="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/factory/TestObjectFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/ThirdPartyPlayerInfo.java" afterPath="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/ThirdPartyPlayerInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Trade.java" afterPath="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Trade.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/types/src/main/java/com/homer/dao/TypesFactory.java" afterPath="$PROJECT_DIR$/types/src/main/java/com/homer/dao/TypesFactory.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/types/pom.xml" afterPath="$PROJECT_DIR$/types/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="HomerAtTheBat.iws" />
@@ -37,238 +43,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MLBClientRESTTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/types/src/test/java/com/homer/baseball/MLBClientRESTTest.java">
+      <file leaf-file-name="Player.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="735">
-              <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.30612245" vertical-offset="0" max-vertical-offset="1425">
+              <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#670#671#0" expanded="true" />
+                <element signature="e#701#702#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/types/pom.xml">
+      <file leaf-file-name="DailyPlayer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/baseball/DailyPlayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="780">
-              <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MLBClient.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/mlb/MLBClient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="300">
-              <caret line="12" column="51" selection-start-line="12" selection-start-column="51" selection-end-line="12" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Stats.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/mlb/Stats.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2217687" vertical-offset="962" max-vertical-offset="6825">
-              <caret line="75" column="39" selection-start-line="75" selection-start-column="30" selection-end-line="75" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2250">
+              <caret line="106" column="39" selection-start-line="106" selection-start-column="39" selection-end-line="106" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3386#3387#0" expanded="true" />
-                <element signature="e#3411#3412#0" expanded="true" />
-                <element signature="e#3448#3449#0" expanded="true" />
-                <element signature="e#3476#3477#0" expanded="true" />
-                <element signature="e#3506#3507#0" expanded="true" />
-                <element signature="e#3531#3532#0" expanded="true" />
-                <element signature="e#3568#3569#0" expanded="true" />
-                <element signature="e#3596#3597#0" expanded="true" />
-                <element signature="e#3626#3627#0" expanded="true" />
-                <element signature="e#3652#3653#0" expanded="true" />
-                <element signature="e#3690#3691#0" expanded="true" />
-                <element signature="e#3720#3721#0" expanded="true" />
-                <element signature="e#3750#3751#0" expanded="true" />
-                <element signature="e#3775#3776#0" expanded="true" />
-                <element signature="e#3812#3813#0" expanded="true" />
-                <element signature="e#3840#3841#0" expanded="true" />
-                <element signature="e#3870#3871#0" expanded="true" />
-                <element signature="e#3895#3896#0" expanded="true" />
-                <element signature="e#3932#3933#0" expanded="true" />
-                <element signature="e#3960#3961#0" expanded="true" />
-                <element signature="e#3989#3990#0" expanded="true" />
-                <element signature="e#4013#4014#0" expanded="true" />
-                <element signature="e#4048#4049#0" expanded="true" />
-                <element signature="e#4074#4075#0" expanded="true" />
-                <element signature="e#4105#4106#0" expanded="true" />
-                <element signature="e#4132#4133#0" expanded="true" />
-                <element signature="e#4172#4173#0" expanded="true" />
-                <element signature="e#4204#4205#0" expanded="true" />
-                <element signature="e#4242#4243#0" expanded="true" />
-                <element signature="e#4274#4275#0" expanded="true" />
-                <element signature="e#4326#4327#0" expanded="true" />
-                <element signature="e#4368#4369#0" expanded="true" />
-                <element signature="e#4402#4403#0" expanded="true" />
-                <element signature="e#4432#4433#0" expanded="true" />
-                <element signature="e#4478#4479#0" expanded="true" />
-                <element signature="e#4516#4517#0" expanded="true" />
-                <element signature="e#4548#4549#0" expanded="true" />
-                <element signature="e#4578#4579#0" expanded="true" />
-                <element signature="e#4622#4623#0" expanded="true" />
-                <element signature="e#4660#4661#0" expanded="true" />
-                <element signature="e#4696#4697#0" expanded="true" />
-                <element signature="e#4728#4729#0" expanded="true" />
-                <element signature="e#4778#4779#0" expanded="true" />
-                <element signature="e#4820#4821#0" expanded="true" />
-                <element signature="e#4850#4851#0" expanded="true" />
-                <element signature="e#4875#4876#0" expanded="true" />
-                <element signature="e#4912#4913#0" expanded="true" />
-                <element signature="e#4940#4941#0" expanded="true" />
-                <element signature="e#4972#4973#0" expanded="true" />
-                <element signature="e#5000#5001#0" expanded="true" />
-                <element signature="e#5042#5043#0" expanded="true" />
-                <element signature="e#5076#5077#0" expanded="true" />
-                <element signature="e#5105#5106#0" expanded="true" />
-                <element signature="e#5129#5130#0" expanded="true" />
-                <element signature="e#5164#5165#0" expanded="true" />
-                <element signature="e#5190#5191#0" expanded="true" />
-                <element signature="e#5221#5222#0" expanded="true" />
-                <element signature="e#5247#5248#0" expanded="true" />
-                <element signature="e#5286#5287#0" expanded="true" />
-                <element signature="e#5316#5317#0" expanded="true" />
-                <element signature="e#5347#5348#0" expanded="true" />
-                <element signature="e#5373#5374#0" expanded="true" />
-                <element signature="e#5412#5413#0" expanded="true" />
-                <element signature="e#5442#5443#0" expanded="true" />
-                <element signature="e#5473#5474#0" expanded="true" />
-                <element signature="e#5499#5500#0" expanded="true" />
-                <element signature="e#5538#5539#0" expanded="true" />
-                <element signature="e#5568#5569#0" expanded="true" />
-                <element signature="e#5604#5605#0" expanded="true" />
-                <element signature="e#5636#5637#0" expanded="true" />
-                <element signature="e#5686#5687#0" expanded="true" />
-                <element signature="e#5728#5729#0" expanded="true" />
-                <element signature="e#5758#5759#0" expanded="true" />
-                <element signature="e#5783#5784#0" expanded="true" />
-                <element signature="e#5820#5821#0" expanded="true" />
-                <element signature="e#5848#5849#0" expanded="true" />
-                <element signature="e#5879#5880#0" expanded="true" />
-                <element signature="e#5905#5906#0" expanded="true" />
-                <element signature="e#5944#5945#0" expanded="true" />
-                <element signature="e#5974#5975#0" expanded="true" />
-                <element signature="e#6005#6006#0" expanded="true" />
-                <element signature="e#6031#6032#0" expanded="true" />
-                <element signature="e#6070#6071#0" expanded="true" />
-                <element signature="e#6100#6101#0" expanded="true" />
-                <element signature="e#6130#6131#0" expanded="true" />
-                <element signature="e#6156#6157#0" expanded="true" />
-                <element signature="e#6194#6195#0" expanded="true" />
-                <element signature="e#6224#6225#0" expanded="true" />
-                <element signature="e#6254#6255#0" expanded="true" />
-                <element signature="e#6280#6281#0" expanded="true" />
-                <element signature="e#6318#6319#0" expanded="true" />
-                <element signature="e#6348#6349#0" expanded="true" />
-                <element signature="e#6385#6386#0" expanded="true" />
-                <element signature="e#6417#6418#0" expanded="true" />
-                <element signature="e#6468#6469#0" expanded="true" />
-                <element signature="e#6510#6511#0" expanded="true" />
-                <element signature="e#6558#6559#0" expanded="true" />
-                <element signature="e#6602#6603#0" expanded="true" />
-                <element signature="e#6791#6792#0" expanded="true" />
-                <element signature="e#6836#6837#0" expanded="true" />
-                <element signature="e#7019#7020#0" expanded="true" />
-                <element signature="e#7053#7054#0" expanded="true" />
-                <element signature="e#7108#7109#0" expanded="true" />
-                <element signature="e#7154#7155#0" expanded="true" />
-                <element signature="e#7184#7185#0" expanded="true" />
-                <element signature="e#7210#7211#0" expanded="true" />
-                <element signature="e#7248#7249#0" expanded="true" />
-                <element signature="e#7278#7279#0" expanded="true" />
-                <element signature="e#7307#7308#0" expanded="true" />
-                <element signature="e#7331#7332#0" expanded="true" />
-                <element signature="e#7366#7367#0" expanded="true" />
-                <element signature="e#7392#7393#0" expanded="true" />
-                <element signature="e#7423#7424#0" expanded="true" />
-                <element signature="e#7449#7450#0" expanded="true" />
-                <element signature="e#7488#7489#0" expanded="true" />
-                <element signature="e#7518#7519#0" expanded="true" />
-                <element signature="e#7549#7550#0" expanded="true" />
-                <element signature="e#7575#7576#0" expanded="true" />
-                <element signature="e#7614#7615#0" expanded="true" />
-                <element signature="e#7644#7645#0" expanded="true" />
-                <element signature="e#7674#7675#0" expanded="true" />
-                <element signature="e#7699#7700#0" expanded="true" />
-                <element signature="e#7736#7737#0" expanded="true" />
-                <element signature="e#7764#7765#0" expanded="true" />
-                <element signature="e#7794#7795#0" expanded="true" />
-                <element signature="e#7819#7820#0" expanded="true" />
-                <element signature="e#7856#7857#0" expanded="true" />
-                <element signature="e#7884#7885#0" expanded="true" />
-                <element signature="e#7914#7915#0" expanded="true" />
-                <element signature="e#7940#7941#0" expanded="true" />
-                <element signature="e#7978#7979#0" expanded="true" />
-                <element signature="e#8008#8009#0" expanded="true" />
-                <element signature="e#8038#8039#0" expanded="true" />
-                <element signature="e#8063#8064#0" expanded="true" />
-                <element signature="e#8100#8101#0" expanded="true" />
-                <element signature="e#8128#8129#0" expanded="true" />
-                <element signature="e#8157#8158#0" expanded="true" />
-                <element signature="e#8181#8182#0" expanded="true" />
-                <element signature="e#8216#8217#0" expanded="true" />
-                <element signature="e#8242#8243#0" expanded="true" />
-                <element signature="e#8272#8273#0" expanded="true" />
-                <element signature="e#8297#8298#0" expanded="true" />
-                <element signature="e#8334#8335#0" expanded="true" />
-                <element signature="e#8362#8363#0" expanded="true" />
-                <element signature="e#8400#8401#0" expanded="true" />
-                <element signature="e#8434#8435#0" expanded="true" />
-                <element signature="e#8488#8489#0" expanded="true" />
-                <element signature="e#8534#8535#0" expanded="true" />
-                <element signature="e#8572#8573#0" expanded="true" />
-                <element signature="e#8605#8606#0" expanded="true" />
-                <element signature="e#8658#8659#0" expanded="true" />
-                <element signature="e#8702#8703#0" expanded="true" />
+                <element signature="e#4197#4219#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MLBClientREST.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/mlb/MLBClientREST.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="995" max-vertical-offset="2490">
-              <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#755#771#0" expanded="true" />
-                <element signature="e#1864#1880#0" expanded="true" />
-                <element signature="e#3327#3343#0" expanded="true" />
-                <element signature="e#4545#4561#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MLBJSONObject.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/mlb/MLBJSONObject.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="491" max-vertical-offset="975">
-              <caret line="44" column="18" selection-start-line="44" selection-start-column="18" selection-end-line="44" selection-end-column="18" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#250#251#0" expanded="true" />
-                <element signature="e#279#280#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JSONObject.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/json/json/20140107/json-20140107.jar!/org/json/JSONObject.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.8" vertical-offset="970" max-vertical-offset="12645">
-              <caret line="104" column="11" selection-start-line="104" selection-start-column="11" selection-end-line="104" selection-end-column="11" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -276,131 +73,21 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/mlb/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="887" max-vertical-offset="5340">
-              <caret line="70" column="43" selection-start-line="70" selection-start-column="36" selection-end-line="70" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="22" max-vertical-offset="4515">
+              <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3332#3333#0" expanded="true" />
-                <element signature="e#3364#3365#0" expanded="true" />
-                <element signature="e#3414#3415#0" expanded="true" />
-                <element signature="e#3456#3457#0" expanded="true" />
-                <element signature="e#3487#3488#0" expanded="true" />
-                <element signature="e#3513#3514#0" expanded="true" />
-                <element signature="e#3552#3553#0" expanded="true" />
-                <element signature="e#3582#3583#0" expanded="true" />
-                <element signature="e#3613#3614#0" expanded="true" />
-                <element signature="e#3640#3641#0" expanded="true" />
-                <element signature="e#3680#3681#0" expanded="true" />
-                <element signature="e#3712#3713#0" expanded="true" />
-                <element signature="e#3751#3752#0" expanded="true" />
-                <element signature="e#3784#3785#0" expanded="true" />
-                <element signature="e#3838#3839#0" expanded="true" />
-                <element signature="e#3882#3883#0" expanded="true" />
-                <element signature="e#3923#3924#0" expanded="true" />
-                <element signature="e#3959#3960#0" expanded="true" />
-                <element signature="e#4018#4019#0" expanded="true" />
-                <element signature="e#4068#4069#0" expanded="true" />
-                <element signature="e#4118#4119#0" expanded="true" />
-                <element signature="e#4164#4165#0" expanded="true" />
-                <element signature="e#4367#4368#0" expanded="true" />
-                <element signature="e#4418#4419#0" expanded="true" />
-                <element signature="e#4636#4637#0" expanded="true" />
-                <element signature="e#4682#4683#0" expanded="true" />
-                <element signature="e#4885#4886#0" expanded="true" />
-                <element signature="e#4936#4937#0" expanded="true" />
-                <element signature="e#5150#5151#0" expanded="true" />
-                <element signature="e#5192#5193#0" expanded="true" />
-                <element signature="e#5262#5263#0" expanded="true" />
-                <element signature="e#5324#5325#0" expanded="true" />
-                <element signature="e#5375#5376#0" expanded="true" />
-                <element signature="e#5422#5423#0" expanded="true" />
-                <element signature="e#5611#5612#0" expanded="true" />
-                <element signature="e#5644#5645#0" expanded="true" />
-                <element signature="e#5696#5697#0" expanded="true" />
-                <element signature="e#5740#5741#0" expanded="true" />
-                <element signature="e#5776#5777#0" expanded="true" />
-                <element signature="e#5808#5809#0" expanded="true" />
-                <element signature="e#5858#5859#0" expanded="true" />
-                <element signature="e#5900#5901#0" expanded="true" />
-                <element signature="e#5936#5937#0" expanded="true" />
-                <element signature="e#5968#5969#0" expanded="true" />
-                <element signature="e#6018#6019#0" expanded="true" />
-                <element signature="e#6060#6061#0" expanded="true" />
-                <element signature="e#6095#6096#0" expanded="true" />
-                <element signature="e#6126#6127#0" expanded="true" />
-                <element signature="e#6174#6175#0" expanded="true" />
-                <element signature="e#6214#6215#0" expanded="true" />
-                <element signature="e#6248#6249#0" expanded="true" />
-                <element signature="e#6280#6281#0" expanded="true" />
-                <element signature="e#6328#6329#0" expanded="true" />
-                <element signature="e#6370#6371#0" expanded="true" />
-                <element signature="e#6414#6415#0" expanded="true" />
-                <element signature="e#6453#6454#0" expanded="true" />
-                <element signature="e#6518#6519#0" expanded="true" />
-                <element signature="e#6574#6575#0" expanded="true" />
-                <element signature="e#6621#6622#0" expanded="true" />
-                <element signature="e#6664#6665#0" expanded="true" />
-                <element signature="e#6844#6845#0" expanded="true" />
-                <element signature="e#6884#6885#0" expanded="true" />
-                <element signature="e#6950#6951#0" expanded="true" />
-                <element signature="e#7008#7009#0" expanded="true" />
-                <element signature="e#7051#7052#0" expanded="true" />
-                <element signature="e#7088#7089#0" expanded="true" />
-                <element signature="e#7150#7151#0" expanded="true" />
-                <element signature="e#7202#7203#0" expanded="true" />
-                <element signature="e#7241#7242#0" expanded="true" />
-                <element signature="e#7274#7275#0" expanded="true" />
-                <element signature="e#7328#7329#0" expanded="true" />
-                <element signature="e#7372#7373#0" expanded="true" />
-                <element signature="e#7405#7406#0" expanded="true" />
-                <element signature="e#7434#7435#0" expanded="true" />
-                <element signature="e#7478#7479#0" expanded="true" />
-                <element signature="e#7514#7515#0" expanded="true" />
-                <element signature="e#7552#7553#0" expanded="true" />
-                <element signature="e#7586#7587#0" expanded="true" />
-                <element signature="e#7640#7641#0" expanded="true" />
-                <element signature="e#7686#7687#0" expanded="true" />
-                <element signature="e#7726#7727#0" expanded="true" />
-                <element signature="e#7760#7761#0" expanded="true" />
-                <element signature="e#7816#7817#0" expanded="true" />
-                <element signature="e#7862#7863#0" expanded="true" />
-                <element signature="e#7900#7901#0" expanded="true" />
-                <element signature="e#7934#7935#0" expanded="true" />
-                <element signature="e#7988#7989#0" expanded="true" />
-                <element signature="e#8034#8035#0" expanded="true" />
-                <element signature="e#8070#8071#0" expanded="true" />
-                <element signature="e#8102#8103#0" expanded="true" />
-                <element signature="e#8152#8153#0" expanded="true" />
-                <element signature="e#8194#8195#0" expanded="true" />
-                <element signature="e#8229#8230#0" expanded="true" />
-                <element signature="e#8259#8260#0" expanded="true" />
-                <element signature="e#8306#8307#0" expanded="true" />
-                <element signature="e#8344#8345#0" expanded="true" />
-                <element signature="e#8380#8381#0" expanded="true" />
-                <element signature="e#8412#8413#0" expanded="true" />
-                <element signature="e#8462#8463#0" expanded="true" />
-                <element signature="e#8504#8505#0" expanded="true" />
-                <element signature="e#8537#8538#0" expanded="true" />
-                <element signature="e#8567#8568#0" expanded="true" />
-                <element signature="e#8612#8613#0" expanded="true" />
-                <element signature="e#8650#8651#0" expanded="true" />
-                <element signature="e#8687#8688#0" expanded="true" />
-                <element signature="e#8720#8721#0" expanded="true" />
-                <element signature="e#8772#8773#0" expanded="true" />
-                <element signature="e#8816#8817#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Player.java">
+      <file leaf-file-name="player_545361.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/types/src/test/resources/player_545361.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="397" max-vertical-offset="1155">
-              <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="-9.588235" vertical-offset="186" max-vertical-offset="870">
+              <caret line="45" column="4" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="4" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -413,9 +100,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/DAOTest.java" />
-        <option value="$PROJECT_DIR$/types/src/main/java/com/homer/Parsable.java" />
-        <option value="$PROJECT_DIR$/types/src/main/java/com/homer/SportType.java" />
         <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/PositionTest.java" />
         <option value="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Position.java" />
         <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/BaseballDAOTest.java" />
@@ -423,31 +107,22 @@
         <option value="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Team.java" />
         <option value="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/FantasyRoster.java" />
         <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/DailyPlayerTest.java" />
-        <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/PlayerHistoryTest.java" />
         <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/TeamTest.java" />
         <option value="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/PlayerHistory.java" />
         <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/MoneyTest.java" />
         <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/ThirdPartyPlayerInfoTest.java" />
         <option value="$PROJECT_DIR$/types/src/main/java/com/homer/dao/BaseballDAO.java" />
         <option value="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Tradable.java" />
-        <option value="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Player.java" />
         <option value="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Money.java" />
         <option value="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/MinorLeagueDraftPick.java" />
-        <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/MinorLeagueDraftPickTest.java" />
         <option value="$PROJECT_DIR$/types/src/main/java/com/homer/dao/MySQLDAO.java" />
-        <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/PlayerTest.java" />
         <option value="$PROJECT_DIR$/types/db/dml/inserts.mysql.sql" />
-        <option value="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/ThirdPartyPlayerInfo.java" />
         <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/TradeTest.java" />
-        <option value="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Trade.java" />
         <option value="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Vulture.java" />
         <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/VultureTest.java" />
         <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/FreeAgentAuctionTest.java" />
-        <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/factory/TestObjectFactory.java" />
         <option value="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/FreeAgentAuction.java" />
-        <option value="$PROJECT_DIR$/types/src/main/java/com/homer/dao/TypesFactory.java" />
         <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/FantasyRosterTest.java" />
-        <option value="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/DailyPlayer.java" />
         <option value="$PROJECT_DIR$/types/db/ddl/ddl.mysql.sql" />
         <option value="$PROJECT_DIR$/types/db/ddl/devInit.mysql.sql" />
         <option value="$PROJECT_DIR$/types/db/ddl/devTestInit.mysql.sql" />
@@ -455,15 +130,27 @@
         <option value="$PROJECT_DIR$/types/src/test/resources/database_dev.properties" />
         <option value="$PROJECT_DIR$/types/src/main/java/com/homer/MLBClient.java" />
         <option value="$PROJECT_DIR$/types/src/main/java/com/homer/MLBClientREST.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/types/pom.xml" />
         <option value="$PROJECT_DIR$/types/src/main/java/com/homer/mlb/MLBClient.java" />
         <option value="$PROJECT_DIR$/types/src/main/java/com/homer/mlb/MLBJSONUtil.java" />
-        <option value="$PROJECT_DIR$/types/src/main/java/com/homer/mlb/Player.java" />
-        <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/MLBClientRESTTest.java" />
         <option value="$PROJECT_DIR$/types/src/main/java/com/homer/mlb/MLBClientREST.java" />
+        <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/PlayerHistoryTest.java" />
+        <option value="$PROJECT_DIR$/types/src/main/java/com/homer/dao/TypesFactory.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/types/src/main/java/com/homer/mlb/Player.java" />
         <option value="$PROJECT_DIR$/types/src/main/java/com/homer/mlb/MLBJSONObject.java" />
+        <option value="$PROJECT_DIR$/types/src/test/resources/player_545361.json" />
+        <option value="$PROJECT_DIR$/types/src/test/resources/stats_545361.json" />
         <option value="$PROJECT_DIR$/types/src/main/java/com/homer/mlb/Stats.java" />
+        <option value="$PROJECT_DIR$/types/src/test/resources/roster_147.json" />
+        <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/MLBClientRESTTest.java" />
+        <option value="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/ThirdPartyPlayerInfo.java" />
+        <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/factory/TestObjectFactory.java" />
+        <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/PlayerTest.java" />
+        <option value="$PROJECT_DIR$/types/src/test/java/com/homer/baseball/MinorLeagueDraftPickTest.java" />
+        <option value="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Trade.java" />
+        <option value="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/DailyPlayer.java" />
+        <option value="$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Player.java" />
       </list>
     </option>
   </component>
@@ -585,6 +272,10 @@
               <option name="myItemId" value="test" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -642,6 +333,48 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="homer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="baseball" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="factory" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HomerJava" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="types" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -692,7 +425,83 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HomerJava" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="types" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="homer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="mlb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HomerJava" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="types" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="homer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dao" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1126,17 +935,17 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/types/src/main/java/com/homer/mlb/Player.java</url>
-          <line>71</line>
+          <url>file://$PROJECT_DIR$/types/src/test/java/com/homer/baseball/MLBClientRESTTest.java</url>
+          <line>57</line>
           <properties />
-          <option name="timeStamp" value="33" />
+          <option name="timeStamp" value="47" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="34" />
+      <option name="time" value="48" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
-        <watch expression="jsonObject.has(&quot;age&quot;)" language="JAVA" custom="" />
+        <watch expression="this.get(&quot;name_first&quot;)" language="JAVA" custom="" />
       </configuration>
     </watches-manager>
   </component>
@@ -1145,103 +954,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/types/src/test/java/com/homer/baseball/TeamTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="870">
-          <caret line="49" column="18" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home/src.zip!/java/sql/ResultSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="16450" max-vertical-offset="61785">
-          <caret line="1139" column="12" selection-start-line="1139" selection-start-column="12" selection-end-line="1139" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/types/src/test/java/com/homer/baseball/MoneyTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="164" max-vertical-offset="975">
-          <caret line="20" column="49" selection-start-line="20" selection-start-column="49" selection-end-line="20" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/types/src/test/java/com/homer/baseball/MinorLeagueDraftPickTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="925" max-vertical-offset="1710">
-          <caret line="38" column="85" selection-start-line="38" selection-start-column="85" selection-end-line="38" selection-end-column="85" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/baseball/ThirdPartyPlayerInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1485">
-          <caret line="48" column="40" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/baseball/MinorLeagueDraftPick.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1085" max-vertical-offset="1740">
-          <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/types/src/test/java/com/homer/baseball/TradeTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1365" max-vertical-offset="2100">
-          <caret line="105" column="48" selection-start-line="105" selection-start-column="48" selection-end-line="105" selection-end-column="48" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1193#1203#0" expanded="true" />
-            <element signature="e#1392#1402#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Vulture.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1604" max-vertical-offset="2040">
-          <caret line="118" column="36" selection-start-line="118" selection-start-column="36" selection-end-line="118" selection-end-column="36" />
-          <folding>
-            <element signature="e#865#866#0" expanded="true" />
-            <element signature="e#901#902#0" expanded="true" />
-            <element signature="e#957#958#0" expanded="true" />
-            <element signature="e#1007#1008#0" expanded="true" />
-            <element signature="e#1045#1046#0" expanded="true" />
-            <element signature="e#1081#1082#0" expanded="true" />
-            <element signature="e#1137#1138#0" expanded="true" />
-            <element signature="e#1187#1188#0" expanded="true" />
-            <element signature="e#1220#1221#0" expanded="true" />
-            <element signature="e#1249#1250#0" expanded="true" />
-            <element signature="e#1293#1294#0" expanded="true" />
-            <element signature="e#1329#1330#0" expanded="true" />
-            <element signature="e#1362#1363#0" expanded="true" />
-            <element signature="e#1393#1394#0" expanded="true" />
-            <element signature="e#1439#1440#0" expanded="true" />
-            <element signature="e#1479#1480#0" expanded="true" />
-            <element signature="e#1519#1520#0" expanded="true" />
-            <element signature="e#1548#1549#0" expanded="true" />
-            <element signature="e#1599#1600#0" expanded="true" />
-            <element signature="e#1635#1636#0" expanded="true" />
-            <element signature="e#2953#2954#0" expanded="true" />
-            <element signature="e#2993#2994#0" expanded="true" />
-            <element signature="e#3028#3029#0" expanded="true" />
-            <element signature="e#3063#3064#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/types/src/test/java/com/homer/baseball/VultureTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="1020">
@@ -1252,67 +964,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/types/src/test/java/com/homer/baseball/PlayerHistoryTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="214" max-vertical-offset="1290">
-          <caret line="35" column="15" selection-start-line="35" selection-start-column="15" selection-end-line="35" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/types/src/test/java/com/homer/baseball/DailyPlayerTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="750" max-vertical-offset="1485">
           <caret line="77" column="34" selection-start-line="77" selection-start-column="34" selection-end-line="77" selection-end-column="34" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/baseball/FreeAgentAuction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1439" max-vertical-offset="2295">
-          <caret line="104" column="37" selection-start-line="104" selection-start-column="37" selection-end-line="104" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1398#1399#0" expanded="true" />
-            <element signature="e#1435#1436#0" expanded="true" />
-            <element signature="e#1493#1494#0" expanded="true" />
-            <element signature="e#1545#1546#0" expanded="true" />
-            <element signature="e#1578#1579#0" expanded="true" />
-            <element signature="e#1607#1608#0" expanded="true" />
-            <element signature="e#1651#1652#0" expanded="true" />
-            <element signature="e#1687#1688#0" expanded="true" />
-            <element signature="e#1723#1724#0" expanded="true" />
-            <element signature="e#1757#1758#0" expanded="true" />
-            <element signature="e#1809#1810#0" expanded="true" />
-            <element signature="e#1855#1856#0" expanded="true" />
-            <element signature="e#1892#1893#0" expanded="true" />
-            <element signature="e#1927#1928#0" expanded="true" />
-            <element signature="e#1981#1982#0" expanded="true" />
-            <element signature="e#2029#2030#0" expanded="true" />
-            <element signature="e#2062#2063#0" expanded="true" />
-            <element signature="e#2093#2094#0" expanded="true" />
-            <element signature="e#2139#2140#0" expanded="true" />
-            <element signature="e#2179#2180#0" expanded="true" />
-            <element signature="e#2212#2213#0" expanded="true" />
-            <element signature="e#2241#2242#0" expanded="true" />
-            <element signature="e#2285#2286#0" expanded="true" />
-            <element signature="e#2321#2322#0" expanded="true" />
-            <element signature="e#3884#3900#0" expanded="true" />
-            <element signature="e#3969#3970#0" expanded="true" />
-            <element signature="e#4009#4010#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/dao/TypesFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="900">
-          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1335#1357#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1330,16 +986,6 @@
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/baseball/DailyPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1425">
-          <caret line="65" column="44" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1376,26 +1022,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/util/PropertyRetriever.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="990">
-          <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/dao/MySQLDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="915">
           <caret line="26" column="51" selection-start-line="26" selection-start-column="51" selection-end-line="26" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/types/src/test/resources/database_devTest.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
-          <caret line="0" column="62" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -1468,26 +1098,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Trade.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1282" max-vertical-offset="2340">
-          <caret line="115" column="0" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/types/src/test/java/com/homer/baseball/factory/TestObjectFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="649" max-vertical-offset="1080">
-          <caret line="66" column="32" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/mashape/unirest/unirest-java/1.4.2/unirest-java-1.4.2.jar!/com/mashape/unirest/request/BaseRequest.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.84184915" vertical-offset="449" max-vertical-offset="885">
@@ -1512,37 +1122,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="1980">
-          <caret line="33" column="25" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/types/types.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="510">
           <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/types/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="780">
-          <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="397" max-vertical-offset="1155">
-          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1589,172 +1173,96 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/json/json/20140107/json-20140107.jar!/org/json/JSONObject.class">
+    <entry file="file://$PROJECT_DIR$/types/src/test/java/com/homer/baseball/ThirdPartyPlayerInfoTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.8" vertical-offset="970" max-vertical-offset="12645">
-          <caret line="104" column="11" selection-start-line="104" selection-start-column="11" selection-end-line="104" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="4" max-vertical-offset="915">
+          <caret line="21" column="22" selection-start-line="21" selection-start-column="22" selection-end-line="21" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/types/src/test/java/com/homer/baseball/MLBClientRESTTest.java">
+    <entry file="file://$PROJECT_DIR$/types/src/test/java/com/homer/baseball/PlayerHistoryTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="735">
-          <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="79" max-vertical-offset="990">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/util/PropertyRetriever.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26530612" vertical-offset="0" max-vertical-offset="990">
+          <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="780">
+          <caret line="17" column="46" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5714286" vertical-offset="0" max-vertical-offset="2235">
+          <caret line="28" column="25" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/test/resources/database_devTest.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.040816326" vertical-offset="0" max-vertical-offset="735">
+          <caret line="2" column="9" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11.jar!/junit/framework/Assert.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34507042" vertical-offset="400" max-vertical-offset="2835">
+          <caret line="55" column="23" selection-start-line="55" selection-start-column="23" selection-end-line="55" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/json/json/20140107/json-20140107.jar!/org/json/JSONObject.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34507042" vertical-offset="3340" max-vertical-offset="12645">
+          <caret line="262" column="22" selection-start-line="262" selection-start-column="22" selection-end-line="262" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/test/resources/stats_545361.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.625" vertical-offset="0" max-vertical-offset="135">
+          <caret line="1" column="8" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#11#138908#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/mlb/MLBJSONObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="491" max-vertical-offset="975">
-          <caret line="44" column="18" selection-start-line="44" selection-start-column="18" selection-end-line="44" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1005">
+          <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#250#251#0" expanded="true" />
-            <element signature="e#279#280#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/mlb/MLBClientREST.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="995" max-vertical-offset="2490">
-          <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#755#771#0" expanded="true" />
-            <element signature="e#1864#1880#0" expanded="true" />
-            <element signature="e#3327#3343#0" expanded="true" />
-            <element signature="e#4545#4561#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/mlb/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="887" max-vertical-offset="5340">
-          <caret line="70" column="43" selection-start-line="70" selection-start-column="36" selection-end-line="70" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3332#3333#0" expanded="true" />
-            <element signature="e#3364#3365#0" expanded="true" />
-            <element signature="e#3414#3415#0" expanded="true" />
-            <element signature="e#3456#3457#0" expanded="true" />
-            <element signature="e#3487#3488#0" expanded="true" />
-            <element signature="e#3513#3514#0" expanded="true" />
-            <element signature="e#3552#3553#0" expanded="true" />
-            <element signature="e#3582#3583#0" expanded="true" />
-            <element signature="e#3613#3614#0" expanded="true" />
-            <element signature="e#3640#3641#0" expanded="true" />
-            <element signature="e#3680#3681#0" expanded="true" />
-            <element signature="e#3712#3713#0" expanded="true" />
-            <element signature="e#3751#3752#0" expanded="true" />
-            <element signature="e#3784#3785#0" expanded="true" />
-            <element signature="e#3838#3839#0" expanded="true" />
-            <element signature="e#3882#3883#0" expanded="true" />
-            <element signature="e#3923#3924#0" expanded="true" />
-            <element signature="e#3959#3960#0" expanded="true" />
-            <element signature="e#4018#4019#0" expanded="true" />
-            <element signature="e#4068#4069#0" expanded="true" />
-            <element signature="e#4118#4119#0" expanded="true" />
-            <element signature="e#4164#4165#0" expanded="true" />
-            <element signature="e#4367#4368#0" expanded="true" />
-            <element signature="e#4418#4419#0" expanded="true" />
-            <element signature="e#4636#4637#0" expanded="true" />
-            <element signature="e#4682#4683#0" expanded="true" />
-            <element signature="e#4885#4886#0" expanded="true" />
-            <element signature="e#4936#4937#0" expanded="true" />
-            <element signature="e#5150#5151#0" expanded="true" />
-            <element signature="e#5192#5193#0" expanded="true" />
-            <element signature="e#5262#5263#0" expanded="true" />
-            <element signature="e#5324#5325#0" expanded="true" />
-            <element signature="e#5375#5376#0" expanded="true" />
-            <element signature="e#5422#5423#0" expanded="true" />
-            <element signature="e#5611#5612#0" expanded="true" />
-            <element signature="e#5644#5645#0" expanded="true" />
-            <element signature="e#5696#5697#0" expanded="true" />
-            <element signature="e#5740#5741#0" expanded="true" />
-            <element signature="e#5776#5777#0" expanded="true" />
-            <element signature="e#5808#5809#0" expanded="true" />
-            <element signature="e#5858#5859#0" expanded="true" />
-            <element signature="e#5900#5901#0" expanded="true" />
-            <element signature="e#5936#5937#0" expanded="true" />
-            <element signature="e#5968#5969#0" expanded="true" />
-            <element signature="e#6018#6019#0" expanded="true" />
-            <element signature="e#6060#6061#0" expanded="true" />
-            <element signature="e#6095#6096#0" expanded="true" />
-            <element signature="e#6126#6127#0" expanded="true" />
-            <element signature="e#6174#6175#0" expanded="true" />
-            <element signature="e#6214#6215#0" expanded="true" />
-            <element signature="e#6248#6249#0" expanded="true" />
-            <element signature="e#6280#6281#0" expanded="true" />
-            <element signature="e#6328#6329#0" expanded="true" />
-            <element signature="e#6370#6371#0" expanded="true" />
-            <element signature="e#6414#6415#0" expanded="true" />
-            <element signature="e#6453#6454#0" expanded="true" />
-            <element signature="e#6518#6519#0" expanded="true" />
-            <element signature="e#6574#6575#0" expanded="true" />
-            <element signature="e#6621#6622#0" expanded="true" />
-            <element signature="e#6664#6665#0" expanded="true" />
-            <element signature="e#6844#6845#0" expanded="true" />
-            <element signature="e#6884#6885#0" expanded="true" />
-            <element signature="e#6950#6951#0" expanded="true" />
-            <element signature="e#7008#7009#0" expanded="true" />
-            <element signature="e#7051#7052#0" expanded="true" />
-            <element signature="e#7088#7089#0" expanded="true" />
-            <element signature="e#7150#7151#0" expanded="true" />
-            <element signature="e#7202#7203#0" expanded="true" />
-            <element signature="e#7241#7242#0" expanded="true" />
-            <element signature="e#7274#7275#0" expanded="true" />
-            <element signature="e#7328#7329#0" expanded="true" />
-            <element signature="e#7372#7373#0" expanded="true" />
-            <element signature="e#7405#7406#0" expanded="true" />
-            <element signature="e#7434#7435#0" expanded="true" />
-            <element signature="e#7478#7479#0" expanded="true" />
-            <element signature="e#7514#7515#0" expanded="true" />
-            <element signature="e#7552#7553#0" expanded="true" />
-            <element signature="e#7586#7587#0" expanded="true" />
-            <element signature="e#7640#7641#0" expanded="true" />
-            <element signature="e#7686#7687#0" expanded="true" />
-            <element signature="e#7726#7727#0" expanded="true" />
-            <element signature="e#7760#7761#0" expanded="true" />
-            <element signature="e#7816#7817#0" expanded="true" />
-            <element signature="e#7862#7863#0" expanded="true" />
-            <element signature="e#7900#7901#0" expanded="true" />
-            <element signature="e#7934#7935#0" expanded="true" />
-            <element signature="e#7988#7989#0" expanded="true" />
-            <element signature="e#8034#8035#0" expanded="true" />
-            <element signature="e#8070#8071#0" expanded="true" />
-            <element signature="e#8102#8103#0" expanded="true" />
-            <element signature="e#8152#8153#0" expanded="true" />
-            <element signature="e#8194#8195#0" expanded="true" />
-            <element signature="e#8229#8230#0" expanded="true" />
-            <element signature="e#8259#8260#0" expanded="true" />
-            <element signature="e#8306#8307#0" expanded="true" />
-            <element signature="e#8344#8345#0" expanded="true" />
-            <element signature="e#8380#8381#0" expanded="true" />
-            <element signature="e#8412#8413#0" expanded="true" />
-            <element signature="e#8462#8463#0" expanded="true" />
-            <element signature="e#8504#8505#0" expanded="true" />
-            <element signature="e#8537#8538#0" expanded="true" />
-            <element signature="e#8567#8568#0" expanded="true" />
-            <element signature="e#8612#8613#0" expanded="true" />
-            <element signature="e#8650#8651#0" expanded="true" />
-            <element signature="e#8687#8688#0" expanded="true" />
-            <element signature="e#8720#8721#0" expanded="true" />
-            <element signature="e#8772#8773#0" expanded="true" />
-            <element signature="e#8816#8817#0" expanded="true" />
+            <element signature="e#286#287#0" expanded="true" />
+            <element signature="e#322#323#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/mlb/Stats.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2217687" vertical-offset="962" max-vertical-offset="6825">
-          <caret line="75" column="39" selection-start-line="75" selection-start-column="30" selection-end-line="75" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="6870" max-vertical-offset="7605">
+          <caret line="477" column="83" selection-start-line="477" selection-start-column="83" selection-end-line="477" selection-end-column="83" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3386#3387#0" expanded="true" />
@@ -1909,6 +1417,155 @@
             <element signature="e#8605#8606#0" expanded="true" />
             <element signature="e#8658#8659#0" expanded="true" />
             <element signature="e#8702#8703#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/mlb/MLBClientREST.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="975" max-vertical-offset="2490">
+          <caret line="92" column="60" selection-start-line="92" selection-start-column="10" selection-end-line="92" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#755#771#0" expanded="true" />
+            <element signature="e#1864#1880#0" expanded="true" />
+            <element signature="e#3327#3343#0" expanded="true" />
+            <element signature="e#4545#4561#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/test/resources/roster_147.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="16950">
+          <caret line="0" column="1" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/test/java/com/homer/baseball/MLBClientRESTTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="712" max-vertical-offset="1905">
+          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/dao/TypesFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="446" max-vertical-offset="1230">
+          <caret line="43" column="17" selection-start-line="43" selection-start-column="17" selection-end-line="43" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2023#2045#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/baseball/ThirdPartyPlayerInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="65" max-vertical-offset="1485">
+          <caret line="14" column="11" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/test/java/com/homer/baseball/PlayerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="765">
+          <caret line="20" column="57" selection-start-line="20" selection-start-column="57" selection-end-line="20" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/test/java/com/homer/baseball/MinorLeagueDraftPickTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="230" max-vertical-offset="1710">
+          <caret line="22" column="45" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/test/java/com/homer/baseball/factory/TestObjectFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1140">
+          <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Position.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="555" max-vertical-offset="1575">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Trade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1410" max-vertical-offset="2445">
+          <caret line="115" column="0" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/baseball/FreeAgentAuction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1439" max-vertical-offset="2295">
+          <caret line="104" column="37" selection-start-line="104" selection-start-column="37" selection-end-line="104" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3884#3900#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/mlb/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="22" max-vertical-offset="4515">
+          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/baseball/DailyPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2250">
+          <caret line="106" column="39" selection-start-line="106" selection-start-column="39" selection-end-line="106" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4197#4219#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/test/resources/player_545361.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.588235" vertical-offset="186" max-vertical-offset="870">
+          <caret line="45" column="4" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/baseball/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30612245" vertical-offset="0" max-vertical-offset="1425">
+          <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#670#671#0" expanded="true" />
+            <element signature="e#701#702#0" expanded="true" />
           </folding>
         </state>
       </provider>
