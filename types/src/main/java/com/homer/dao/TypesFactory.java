@@ -1,7 +1,7 @@
 package com.homer.dao;
 
 import com.homer.SportType;
-import com.homer.baseball.*;
+import com.homer.fantasy.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -52,7 +52,7 @@ public class TypesFactory {
     }
     
     public static Player createPlayer(ResultSet rs, String tableName) throws SQLException {
-        long playerId = rs.getLong(tableName + ".playerId");
+        Long playerId = rs.getLong(tableName + ".playerId");
         if(rs.wasNull()) {
             return null;
         }
@@ -64,9 +64,7 @@ public class TypesFactory {
 
         List<ThirdPartyPlayerInfo> thirdPartyPlayerInfoList = new ArrayList<ThirdPartyPlayerInfo>();
         Long mlbPlayerId = rs.getLong(tableName + ".mlbPlayerId");
-        if(rs.wasNull()) {
-            mlbPlayerId = null;
-        } else {
+        if(!rs.wasNull()) {
             thirdPartyPlayerInfoList.add(new ThirdPartyPlayerInfo(player, mlbPlayerId, ThirdPartyPlayerInfo.MLB));
         }
         player.setThirdPartyPlayerInfoList(thirdPartyPlayerInfoList);

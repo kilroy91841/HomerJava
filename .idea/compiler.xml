@@ -22,10 +22,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="business" />
         <module name="types" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="business" target="1.7" />
       <module name="HomerAtTheBat" target="1.7" />
       <module name="parent" target="1.7" />
       <module name="types" target="1.7" />

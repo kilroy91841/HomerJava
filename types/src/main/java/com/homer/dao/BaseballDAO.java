@@ -1,13 +1,12 @@
 package com.homer.dao;
 
 import com.homer.SportType;
-import com.homer.baseball.*;
+import com.homer.fantasy.*;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 /**
  * Created by arigolub on 1/26/15.
