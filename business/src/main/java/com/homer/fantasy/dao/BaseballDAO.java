@@ -1,6 +1,7 @@
-package com.homer.dao;
+package com.homer.fantasy.dao;
 
 import com.homer.SportType;
+import com.homer.dao.TypesFactory;
 import com.homer.fantasy.*;
 
 import java.sql.*;
@@ -113,8 +114,8 @@ public class BaseballDAO extends MySQLDAO {
         return players;
     }
 
-    public List<DailyPlayer> getPlayerDailies(int playerId) {
-        List<DailyPlayer> dailies = new ArrayList<DailyPlayer>();
+    public List<DailyPlayerInfo> getPlayerDailies(int playerId) {
+        List<DailyPlayerInfo> dailies = new ArrayList<DailyPlayerInfo>();
         Connection connection = getConnection();
         try {
             String sql = "select * from PLAYER player, PLAYERTOTEAM playerToTeam, TEAM fantasyTeam, TEAM mlbTeam, POSITION position " +
@@ -131,10 +132,7 @@ public class BaseballDAO extends MySQLDAO {
             while(rs.next()) {
                 Team fantasyTeam = TypesFactory.createTeam(rs, "fantasyTeam");
                 Team mlbTeam = TypesFactory.createTeam(rs, "mlbTeam");
-                DailyPlayer daily = new DailyPlayer(
-                    rs.getLong("player.playerId"),
-                    rs.getString("player.playerName"),
-                    Position.get(rs.getInt("player.primaryPositionId")),
+                DailyPlayerInfo daily = new DailyPlayerInfo(
                     fantasyTeam,
                     mlbTeam,
                     rs.getDate("playerToTeam.gameDate"),
@@ -182,15 +180,12 @@ public class BaseballDAO extends MySQLDAO {
             try {
                 if(rs.first()) {
                     Team primaryTeam = TypesFactory.createTeam(rs, teamTableName);
-                    List<DailyPlayer> players = new ArrayList<DailyPlayer>();
+                    List<DailyPlayerInfo> players = new ArrayList<DailyPlayerInfo>();
                     rs.beforeFirst();
                     while(rs.next()) {
                         Team fantasyTeam = TypesFactory.createTeam(rs, "fantasyTeam");
                         Team mlbTeam = TypesFactory.createTeam(rs, "mlbTeam");
-                        DailyPlayer p = new DailyPlayer(
-                            rs.getLong("player.playerId"),
-                            rs.getString("player.playerName"),
-                            Position.get(rs.getInt("player.primaryPositionId")),
+                        DailyPlayerInfo p = new DailyPlayerInfo(
                             fantasyTeam,
                             mlbTeam,
                             rs.getDate("playerToTeam.gameDate"),
@@ -237,14 +232,11 @@ public class BaseballDAO extends MySQLDAO {
             try {
                 if(rs.first()) {
                     Team fantasyTeam = TypesFactory.createTeam(rs, "fantasyTeam");
-                    List<DailyPlayer> players = new ArrayList<DailyPlayer>();
+                    List<DailyPlayerInfo> players = new ArrayList<DailyPlayerInfo>();
                     rs.beforeFirst();
                     while(rs.next()) {
                         Team mlbTeam = TypesFactory.createTeam(rs, "mlbTeam");
-                        DailyPlayer p = new DailyPlayer(
-                            rs.getLong("player.playerId"),
-                            rs.getString("player.playerName"),
-                            Position.get(rs.getInt("player.primaryPositionId")),
+                        DailyPlayerInfo p = new DailyPlayerInfo(
                             fantasyTeam,
                             mlbTeam,
                             rs.getDate("playerToTeam.gameDate"),

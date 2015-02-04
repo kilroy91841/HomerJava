@@ -1,11 +1,15 @@
 delete from PLAYERSTATUS;
 
-insert into PLAYERSTATUS (playerStatusId, playerStatusName, playerStatusCode)
-select 1,'ACTIVE','A'
+insert into PLAYERSTATUS (playerStatusCode, playerStatusName)
+select 'A', 'ACTIVE'
 union all
-select 2,'DL','DL'
+select 'DL', 'DISABLED LIST'
 union all
-select 3,'BENCH','B';
+select 'B', 'BENCH'
+union all
+select 'ML', 'MINOR LEAGUES'
+union all
+select 'SUSP', 'SUSPENDED';
 
 delete from POSITION;
 
@@ -177,60 +181,60 @@ select 'Garrett Richards', 1, null;
 
 delete from PLAYERTOTEAM;
 
-insert into PLAYERTOTEAM (playerId, gameDate, fantasyTeamId, mlbTeamId, fantasyPlayerStatusId, mlbPlayerStatusId, fantasyPositionId)
-select 1, '2015-01-01', 1, 108, 1, 1, 107
+insert into PLAYERTOTEAM (playerId, gameDate, fantasyTeamId, mlbTeamId, fantasyPlayerStatusCode, mlbPlayerStatusCode, fantasyPositionId)
+select 1, '2015-01-01', 1, 108, 'A', 'A', 107
 union all
-select 2, '2015-01-01', 1, 134, 1, 1, 103
+select 2, '2015-01-01', 1, 134, 'A', 'A', 103
 union all
-select 3, '2015-01-01', 2, 116, 1, 1, 107
+select 3, '2015-01-01', 2, 116, 'A', 'A', 107
 union all
-select 1, '2015-01-02', 1, 108, 1, 1, 107
+select 1, '2015-01-02', 1, 108, 'A', 'A', 107
 union all
-select 4, '2015-01-03', 1, 147, 1, 1, 102
+select 4, '2015-01-03', 1, 147, 'A', 'A', 102
 union all
-select 5, '2015-01-03', 1, 147, 1, 1, 102
+select 5, '2015-01-03', 1, 147, 'A', 'A', 102
 union all
-select 6, '2015-01-03', 1, 147, 1, 1, 103
+select 6, '2015-01-03', 1, 147, 'A', 'A', 103
 union all
-select 7, '2015-01-03', 1, 147, 1, 1, 104
+select 7, '2015-01-03', 1, 147, 'A', 'A', 104
 union all
-select 8, '2015-01-03', 1, 147, 1, 1, 105
+select 8, '2015-01-03', 1, 147, 'A', 'A', 105
 union all
-select 9, '2015-01-03', 1, 147, 1, 1, 106
+select 9, '2015-01-03', 1, 147, 'A', 'A', 106
 union all
-select 10, '2015-01-03', 1, 147, 1, 1, 108
+select 10, '2015-01-03', 1, 147, 'A', 'A', 108
 union all
-select 11, '2015-01-03', 1, 147, 1, 1, 109
+select 11, '2015-01-03', 1, 147, 'A', 'A', 109
 union all
-select 12, '2015-01-03', 1, 147, 1, 1, 107
+select 12, '2015-01-03', 1, 147, 'A', 'A', 107
 union all
-select 13, '2015-01-03', 1, 147, 1, 1, 107
+select 13, '2015-01-03', 1, 147, 'A', 'A', 107
 union all
-select 14, '2015-01-03', 1, 147, 1, 1, 107
+select 14, '2015-01-03', 1, 147, 'A', 'A', 107
 union all
-select 15, '2015-01-03', 1, 147, 1, 1, 107
+select 15, '2015-01-03', 1, 147, 'A', 'A', 107
 union all
-select 16, '2015-01-03', 1, 147, 1, 1, 107
+select 16, '2015-01-03', 1, 147, 'A', 'A', 107
 union all
-select 17, '2015-01-03', 1, 147, 1, 1, 110
+select 17, '2015-01-03', 1, 147, 'A', 'A', 110
 union all
-select 18, '2015-01-03', 1, 147, 1, 1, 101
+select 18, '2015-01-03', 1, 147, 'A', 'A', 101
 union all
-select 19, '2015-01-03', 1, 147, 1, 1, 101
+select 19, '2015-01-03', 1, 147, 'A', 'A', 101
 union all
-select 20, '2015-01-03', 1, 147, 1, 1, 101
+select 20, '2015-01-03', 1, 147, 'A', 'A', 101
 union all
-select 21, '2015-01-03', 1, 147, 1, 1, 101
+select 21, '2015-01-03', 1, 147, 'A', 'A', 101
 union all
-select 22, '2015-01-03', 1, 147, 1, 1, 101
+select 22, '2015-01-03', 1, 147, 'A', 'A', 101
 union all
-select 23, '2015-01-03', 1, 147, 1, 1, 101
+select 23, '2015-01-03', 1, 147, 'A', 'A', 101
 union all
-select 24, '2015-01-03', 1, 147, 1, 1, 101
+select 24, '2015-01-03', 1, 147, 'A', 'A', 101
 union all
-select 25, '2015-01-03', 1, 147, 1, 1, 101
+select 25, '2015-01-03', 1, 147, 'A', 'A', 101
 union all
-select 26, '2015-01-03', 1, 147, 1, 1, 101;
+select 26, '2015-01-03', 1, 147, 'A', 'A', 101;
 
 delete from PLAYERHISTORY;
 

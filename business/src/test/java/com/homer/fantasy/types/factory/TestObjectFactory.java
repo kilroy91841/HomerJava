@@ -1,4 +1,4 @@
-package com.homer.fantasy.factory;
+package com.homer.fantasy.types.factory;
 
 import com.homer.SportType;
 import com.homer.fantasy.*;
@@ -13,7 +13,7 @@ public class TestObjectFactory {
 
     public static Player getMikeTrout() {
         Player player = new Player(new Long(1), "Mike Trout", Position.CENTERFIELD);
-        player.getThirdPartyPlayerInfoList().add(new ThirdPartyPlayerInfo(player, 545361, ThirdPartyPlayerInfo.MLB));
+        player.getThirdPartyPlayerInfoSet().add(new ThirdPartyPlayerInfo(545361, ThirdPartyPlayerInfo.MLB));
         return player;
     }
 

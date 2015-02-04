@@ -6,7 +6,9 @@ import com.homer.fantasy.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by arigolub on 1/31/15.
@@ -62,12 +64,12 @@ public class TypesFactory {
             Position.get(rs.getInt(tableName + ".primaryPositionId"))
         );
 
-        List<ThirdPartyPlayerInfo> thirdPartyPlayerInfoList = new ArrayList<ThirdPartyPlayerInfo>();
+        Set<ThirdPartyPlayerInfo> thirdPartyPlayerInfoList = new HashSet<ThirdPartyPlayerInfo>();
         Long mlbPlayerId = rs.getLong(tableName + ".mlbPlayerId");
         if(!rs.wasNull()) {
-            thirdPartyPlayerInfoList.add(new ThirdPartyPlayerInfo(player, mlbPlayerId, ThirdPartyPlayerInfo.MLB));
+            thirdPartyPlayerInfoList.add(new ThirdPartyPlayerInfo(mlbPlayerId, ThirdPartyPlayerInfo.MLB));
         }
-        player.setThirdPartyPlayerInfoList(thirdPartyPlayerInfoList);
+        player.setThirdPartyPlayerInfoSet(thirdPartyPlayerInfoList);
 
         return player;
     }

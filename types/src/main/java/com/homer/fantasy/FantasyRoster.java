@@ -8,20 +8,20 @@ import java.util.List;
 */
 public class FantasyRoster extends DailyTeam {
 
-	private List<DailyPlayer> catchers;
-	private DailyPlayer firstBase;
-	private DailyPlayer secondBase;
-	private DailyPlayer thirdBase;
-	private DailyPlayer shortstop;
-	private DailyPlayer middleInfield;
-	private DailyPlayer cornerInfield;
-	private List<DailyPlayer> outfielders;
-	private List<DailyPlayer> pitchers;
-	private DailyPlayer utility;
+	private List<DailyPlayerInfo> catchers;
+	private DailyPlayerInfo firstBase;
+	private DailyPlayerInfo secondBase;
+	private DailyPlayerInfo thirdBase;
+	private DailyPlayerInfo shortstop;
+	private DailyPlayerInfo middleInfield;
+	private DailyPlayerInfo cornerInfield;
+	private List<DailyPlayerInfo> outfielders;
+	private List<DailyPlayerInfo> pitchers;
+	private DailyPlayerInfo utility;
 
-    public FantasyRoster(Team team, List<DailyPlayer> dailyPlayers) {
+    public FantasyRoster(Team team, List<DailyPlayerInfo> dailyPlayerInfos) {
         setTeam(team);
-        setPlayers(dailyPlayers);
+        setPlayers(dailyPlayerInfos);
         init();
     }
 
@@ -30,10 +30,10 @@ public class FantasyRoster extends DailyTeam {
 	}
 
 	private void init() {
-		catchers = new ArrayList<DailyPlayer>();
-        outfielders = new ArrayList<DailyPlayer>();
-        pitchers = new ArrayList<DailyPlayer>();
-		for(DailyPlayer p : getPlayers()) {
+		catchers = new ArrayList<DailyPlayerInfo>();
+        outfielders = new ArrayList<DailyPlayerInfo>();
+        pitchers = new ArrayList<DailyPlayerInfo>();
+		for(DailyPlayerInfo p : getPlayers()) {
 			if(Position.FANTASYCATCHER.equals(p.getFantasyPosition())) {
 				catchers.add(p);
 			} else if(Position.FANTASYOUTFIELD.equals(p.getFantasyPosition())) {
@@ -59,83 +59,83 @@ public class FantasyRoster extends DailyTeam {
 		}
 	}
 
-    public List<DailyPlayer> getCatchers() {
+    public List<DailyPlayerInfo> getCatchers() {
         return catchers;
     }
 
-    public void setCatchers(List<DailyPlayer> catchers) {
+    public void setCatchers(List<DailyPlayerInfo> catchers) {
         this.catchers = catchers;
     }
 
-    public DailyPlayer getFirstBase() {
+    public DailyPlayerInfo getFirstBase() {
         return firstBase;
     }
 
-    public void setFirstBase(DailyPlayer firstBase) {
+    public void setFirstBase(DailyPlayerInfo firstBase) {
         this.firstBase = firstBase;
     }
 
-    public DailyPlayer getSecondBase() {
+    public DailyPlayerInfo getSecondBase() {
         return secondBase;
     }
 
-    public void setSecondBase(DailyPlayer secondBase) {
+    public void setSecondBase(DailyPlayerInfo secondBase) {
         this.secondBase = secondBase;
     }
 
-    public DailyPlayer getThirdBase() {
+    public DailyPlayerInfo getThirdBase() {
         return thirdBase;
     }
 
-    public void setThirdBase(DailyPlayer thirdBase) {
+    public void setThirdBase(DailyPlayerInfo thirdBase) {
         this.thirdBase = thirdBase;
     }
 
-    public DailyPlayer getShortstop() {
+    public DailyPlayerInfo getShortstop() {
         return shortstop;
     }
 
-    public void setShortstop(DailyPlayer shortstop) {
+    public void setShortstop(DailyPlayerInfo shortstop) {
         this.shortstop = shortstop;
     }
 
-    public DailyPlayer getMiddleInfield() {
+    public DailyPlayerInfo getMiddleInfield() {
         return middleInfield;
     }
 
-    public void setMiddleInfield(DailyPlayer middleInfield) {
+    public void setMiddleInfield(DailyPlayerInfo middleInfield) {
         this.middleInfield = middleInfield;
     }
 
-    public DailyPlayer getCornerInfield() {
+    public DailyPlayerInfo getCornerInfield() {
         return cornerInfield;
     }
 
-    public void setCornerInfield(DailyPlayer cornerInfield) {
+    public void setCornerInfield(DailyPlayerInfo cornerInfield) {
         this.cornerInfield = cornerInfield;
     }
 
-    public List<DailyPlayer> getOutfielders() {
+    public List<DailyPlayerInfo> getOutfielders() {
         return outfielders;
     }
 
-    public void setOutfielders(List<DailyPlayer> outfielders) {
+    public void setOutfielders(List<DailyPlayerInfo> outfielders) {
         this.outfielders = outfielders;
     }
 
-    public List<DailyPlayer> getPitchers() {
+    public List<DailyPlayerInfo> getPitchers() {
         return pitchers;
     }
 
-    public void setPitchers(List<DailyPlayer> pitchers) {
+    public void setPitchers(List<DailyPlayerInfo> pitchers) {
         this.pitchers = pitchers;
     }
 
-    public DailyPlayer getUtility() {
+    public DailyPlayerInfo getUtility() {
         return utility;
     }
 
-    public void setUtility(DailyPlayer utility) {
+    public void setUtility(DailyPlayerInfo utility) {
         this.utility = utility;
     }
 

@@ -1,29 +1,14 @@
 package com.homer.fantasy;
 
+import com.homer.PlayerStatus;
+
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by arigolub on 1/29/15.
  */
-public class DailyPlayer extends Player {
-
-	public static final PlayerStatus ACTIVE = new PlayerStatus("ACTIVE", "A");
-	public static final PlayerStatus DISABLEDLIST = new PlayerStatus("DISABLED LIST", "DL");
-	public static final PlayerStatus MINORS = new PlayerStatus("MINORS", "MIN");
-	public static final PlayerStatus FREEAGENT = new PlayerStatus("FREEAGENT", "FA");
-	public static final PlayerStatus RESTRICTED = new PlayerStatus("RESTRICTED", "RST");
-	//public static final PlayerStatus MINORLEAGUER = new PlayerStatus("MINORLEAGUER", "ML");
-
-	static {
-		PlayerStatus.map.put(ACTIVE.getName(), ACTIVE);
-		PlayerStatus.map.put(DISABLEDLIST.getName(), DISABLEDLIST);
-		PlayerStatus.map.put(MINORS.getName(), MINORS);
-		PlayerStatus.map.put(FREEAGENT.getName(), FREEAGENT);
-		PlayerStatus.map.put(RESTRICTED.getName(), RESTRICTED);
-	}
+public class DailyPlayerInfo {
 
 	private Team fantasyTeam;
 	private Team mlbTeam;
@@ -33,11 +18,9 @@ public class DailyPlayer extends Player {
 	private PlayerStatus mlbStatus;
 	private List<Game> games;
 
-	public DailyPlayer() { }
+	public DailyPlayerInfo() { }
 
-	public DailyPlayer(long playerId, String playerName, Position primaryPosition, 
-			Team fantasyTeam, Team mlbTeam, Date date, Position fantasyPosition, List<Game> games) {
-		super(playerId, playerName, primaryPosition);
+	public DailyPlayerInfo(Team fantasyTeam, Team mlbTeam, Date date, Position fantasyPosition, List<Game> games) {
 		setFantasyTeam(fantasyTeam);
 		setMlbTeam(mlbTeam);
 		setDate(date);
@@ -104,8 +87,7 @@ public class DailyPlayer extends Player {
 	@Override
 	public String toString() {
 		return "DailyPlayer{" +
-				"player=" + super.toString() +
-				", fantasyTeam=" + fantasyTeam +
+				"fantasyTeam=" + fantasyTeam +
 				", mlbTeam=" + mlbTeam +
 				", date=" + date +
 				", fantasyPosition=" + fantasyPosition +
@@ -119,9 +101,8 @@ public class DailyPlayer extends Player {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		if (!super.equals(o)) return false;
 
-		DailyPlayer that = (DailyPlayer) o;
+		DailyPlayerInfo that = (DailyPlayerInfo) o;
 
 		if (date != null ? !date.equals(that.date) : that.date != null) return false;
 		if (fantasyPosition != null ? !fantasyPosition.equals(that.fantasyPosition) : that.fantasyPosition != null)
@@ -143,30 +124,5 @@ public class DailyPlayer extends Player {
 		return result;
 	}
 
-	public static class PlayerStatus {
-		private String name;
-		private String code;
-		protected static final Map<String, PlayerStatus> map = new HashMap<String, PlayerStatus>();
-		private PlayerStatus(String name, String code) {
-			this.name = name;
-			this.code = code;
-		}
-		public String getName() { return name; }
-		public String getCode() { return code; }
-		public static PlayerStatus get(String name) throws Exception {
-			PlayerStatus status = map.get(name);
-			if(map == null) {
-				throw new Exception("PlayerStatus not found for name: " + name);
-			}
-			return status;
-		}
-		@Override
-		public String toString() {
-			return "PlayerStatus{" +
-					"name='" + name + '\'' +
-					", code='" + code + '\'' +
-					'}';
-		}
-	}
 }
 

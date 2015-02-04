@@ -1,9 +1,15 @@
-package com.homer.fantasy;
+package com.homer.fantasy.types;
 
 import com.homer.SportType;
-import com.homer.dao.BaseballDAO;
+import com.homer.fantasy.dao.BaseballDAO;
+import com.homer.fantasy.DailyPlayerInfo;
+import com.homer.fantasy.DailyTeam;
+import com.homer.fantasy.Player;
+import com.homer.fantasy.Team;
+import com.homer.fantasy.types.util.DBPreparer;
 import com.homer.util.PropertyRetriever;
 
+import com.ninja_squad.dbsetup.Operations;
 import junit.framework.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,8 +21,6 @@ import java.util.List;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.destination.DriverManagerDestination;
 import com.ninja_squad.dbsetup.operation.Operation;
-import static com.ninja_squad.dbsetup.Operations.deleteAllFrom;
-import static com.ninja_squad.dbsetup.Operations.sequenceOf;
 
 /**
  * Created by arigolub on 1/26/15.
@@ -25,22 +29,14 @@ public class BaseballDAOTest {
 
     private static BaseballDAO dao;
 
-    private static String propertyFile = "database.properties";
-    private static String connectionStringProperty = "connectionString";
-    private static String usernameProperty = "username";
-    private static String passwordProperty = "password";
-
     @BeforeClass
     public static void prepare() throws Exception {
-        String dbURL = PropertyRetriever.getInstance().getProperty(propertyFile, connectionStringProperty);
-        String dbUser = PropertyRetriever.getInstance().getProperty(propertyFile, usernameProperty);
-        String dbPass = PropertyRetriever.getInstance().getProperty(propertyFile, passwordProperty);
 
-        Operation operation = sequenceOf(deleteAllFrom("PLAYER"));
+        Operation operation = Operations.sequenceOf(Operations.deleteAllFrom("PLAYER"));
 
-        System.out.println("deleting all players from player in db " + dbURL);
+        System.out.println("deleting all players from player in db");
 
-        DbSetup dbSetup = new DbSetup(new DriverManagerDestination(dbURL, dbUser, dbPass), operation);
+        DbSetup dbSetup = new DbSetup(DBPreparer.getDriverManagerDestination(), operation);
         dbSetup.launch();
 
         dao = new BaseballDAO();
@@ -86,10 +82,10 @@ public class BaseballDAOTest {
 
     @Test
     public void testGetDailies() {
-        List<DailyPlayer> dailies = dao.getPlayerDailies(1);
+        List<DailyPlayerInfo> dailies = dao.getPlayerDailies(1);
         Assert.assertEquals(2, dailies.size());
-        for(DailyPlayer dp : dailies) {
-            Assert.assertNotNull(dp.getPlayerId());
+        for(DailyPlayerInfo dp : dailies) {
+            Assert.assertNotNull(dp.getDate());
         }
     }
 

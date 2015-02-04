@@ -1,8 +1,6 @@
 package com.homer.fantasy.dao.searcher.player;
 
 import com.homer.fantasy.Player;
-import com.homer.fantasy.ThirdPartyPlayerInfo;
-import com.homer.dao.MySQLDAO;
 import com.homer.dao.TypesFactory;
 import com.homer.fantasy.dao.searcher.DataSearchMethod;
 

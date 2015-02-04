@@ -1,4 +1,4 @@
-package com.homer.fantasy;
+package com.homer.fantasy.types;
 
 import com.homer.mlb.MLBClientREST;
 import com.homer.mlb.MLBJSONObject;

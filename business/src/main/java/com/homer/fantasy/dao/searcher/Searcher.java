@@ -35,9 +35,11 @@ public class Searcher<T> {
         T foundPlayer = null;
 
         for(DataSearchMethod<T> method : methods) {
-            foundPlayer = method.find(example, connection);
-            if(foundPlayer != null) {
-                break;
+            if(method.searchAllowed(example)) {
+                foundPlayer = method.find(example, connection);
+                if (foundPlayer != null) {
+                    break;
+                }
             }
         }
         return foundPlayer;

@@ -12,26 +12,47 @@ public class PlayerFacade {
 
     private static final Logger LOG = LoggerFactory.getLogger(PlayerFacade.class);
 
-    public PlayerResponse createPlayer(com.homer.mlb.Player mlbPlayer) {
-        PlayerResponse createResponse = new PlayerResponse();
+    private HomerDAO dao;
+
+    public PlayerFacade() {
+        dao = new HomerDAO();
+    }
+
+    public Player getPlayer(Player examplePlayer) {
+        return dao.findByExample(examplePlayer);
+    }
+
+    public boolean createOrUpdatePlayer(com.homer.mlb.Player mlbPlayer) {
+        boolean success;
 
         Player examplePlayer = new Player();
+        examplePlayer.setPrimaryPosition(Position.get(mlbPlayer.getPrimary_position()));
         examplePlayer.setPlayerName(mlbPlayer.getName_display_first_last());
-        ThirdPartyPlayerInfo info = new ThirdPartyPlayerInfo(examplePlayer, mlbPlayer.getPlayer_id(), ThirdPartyPlayerInfo.MLB);
-        examplePlayer.getThirdPartyPlayerInfoList().add(info);
+        examplePlayer.addThirdPartyPlayerInfo(
+                new ThirdPartyPlayerInfo(mlbPlayer.getPlayer_id(), ThirdPartyPlayerInfo.MLB));
 
-        HomerDAO dao = new HomerDAO();
-
-        PlayerResponse findByExampleResponse = dao.findByExample(examplePlayer);
-        if(PlayerResponse.DATA_NOT_FOUND == findByExampleResponse.getStatus()) {
+        Player dbPlayer = dao.findByExample(examplePlayer);
+        if(dbPlayer == null) {
             LOG.info("No player found, creating new player");
-            createResponse = dao.createPlayer(mlbPlayer);
-        } else if(PlayerResponse.SUCCESS == findByExampleResponse.getStatus()) {
-            LOG.info("Found player: {}", findByExampleResponse.getPlayer());
-            createResponse.setStatus(PlayerResponse.DATA_ALREADY_EXISTS);
+            success = dao.createPlayer(mlbPlayer);
         } else {
-            LOG.error("Something went wrong trying to find player: " + findByExampleResponse.getErrorMesage(),  findByExampleResponse.getException());
+            LOG.info("found " + dbPlayer +", updating");
+            success = dao.updatePlayer(dbPlayer, examplePlayer);
         }
-        return createResponse;
+        return success;
+    }
+
+    public boolean createOrUpdatePlayer(com.homer.fantasy.Player fantasyPlayer) {
+        boolean success;
+
+        Player dbPlayer = dao.findByExample(fantasyPlayer);
+        if(dbPlayer == null) {
+            LOG.info("No player found, creating new player");
+            success = dao.createPlayer(fantasyPlayer);
+        } else {
+            LOG.info("Found " + dbPlayer +", updating");
+            success = dao.updatePlayer(dbPlayer, fantasyPlayer);
+        }
+        return success;
     }
 }

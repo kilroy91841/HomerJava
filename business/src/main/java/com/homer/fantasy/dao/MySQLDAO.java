@@ -1,12 +1,8 @@
-package com.homer.dao;
+package com.homer.fantasy.dao;
 
 import com.homer.util.PropertyRetriever;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.sql.*;
-import java.util.Properties;
 
 /**
  * Created by arigolub on 1/26/15.

@@ -1,7 +1,6 @@
 CREATE TABLE PLAYERSTATUS (
-    playerStatusId int PRIMARY KEY,
-    playerStatusName VARCHAR(20) NOT NULL,
-    playerStatusCode VARCHAR(5) NOT NULL
+    playerStatusCode VARCHAR(10) PRIMARY KEY,
+    playerStatusName VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE POSITION (
@@ -31,15 +30,15 @@ CREATE TABLE PLAYERTOTEAM (
     gameDate DATE NOT NULL,
     fantasyTeamId INT,
     mlbTeamId INT,
-    fantasyPlayerStatusId INT,
-    mlbPlayerStatusId INT,
+    fantasyPlayerStatusCode VARCHAR(10),
+    mlbPlayerStatusCode VARCHAR(10),
     fantasyPositionId INT,
     PRIMARY KEY (playerId, gameDate),
     FOREIGN KEY (playerId) REFERENCES PLAYER (playerId),
     FOREIGN KEY (fantasyTeamId) REFERENCES TEAM (teamId),
     FOREIGN KEY (mlbTeamId) REFERENCES TEAM (teamId),
-    FOREIGN KEY (fantasyPlayerStatusId) REFERENCES PLAYERSTATUS (playerStatusId),
-    FOREIGN KEY (mlbPlayerStatusId) REFERENCES PLAYERSTATUS (playerStatusId),
+    FOREIGN KEY (fantasyPlayerStatusCode) REFERENCES PLAYERSTATUS (playerStatusCode),
+    FOREIGN KEY (mlbPlayerStatusCode) REFERENCES PLAYERSTATUS (playerStatusCode),
     FOREIGN KEY (fantasyPositionId) REFERENCES POSITION (positionId)
 );
 

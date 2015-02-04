@@ -8,24 +8,14 @@ public class ThirdPartyPlayerInfo {
     public static ThirdPartyProvider MLB    = new ThirdPartyProvider("MLB");
     public static ThirdPartyProvider ESPN   = new ThirdPartyProvider("ESPN");
 
-    private Player player;
     private long thirdPartyPlayerId;
     private ThirdPartyProvider provider;
 
     public ThirdPartyPlayerInfo() { }
 
-    public ThirdPartyPlayerInfo(Player player, long thirdPartyPlayerId, ThirdPartyProvider provider) {
-        this.player = player;
+    public ThirdPartyPlayerInfo(long thirdPartyPlayerId, ThirdPartyProvider provider) {
         this.thirdPartyPlayerId = thirdPartyPlayerId;
         this.provider = provider;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
     }
 
     public Long getThirdPartyPlayerId() {
@@ -55,22 +45,20 @@ public class ThirdPartyPlayerInfo {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof ThirdPartyPlayerInfo)) return false;
 
         ThirdPartyPlayerInfo that = (ThirdPartyPlayerInfo) o;
 
         if (thirdPartyPlayerId != that.thirdPartyPlayerId) return false;
-        if (player.getPlayerId() != that.getPlayer().getPlayerId()) return false;
-        if (!provider.equals(that.provider)) return false;
+        if (provider != null ? !provider.equals(that.provider) : that.provider != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = player != null ? player.hashCode() : 0;
-        result = 31 * result + (int) (thirdPartyPlayerId ^ (thirdPartyPlayerId >>> 32));
-        result = 31 * result + provider.hashCode();
+        int result = (int) (thirdPartyPlayerId ^ (thirdPartyPlayerId >>> 32));
+        result = 31 * result + (provider != null ? provider.hashCode() : 0);
         return result;
     }
 

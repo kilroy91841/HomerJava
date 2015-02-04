@@ -1,8 +1,12 @@
-package com.homer.fantasy;
+package com.homer.fantasy.types;
 
 import com.homer.SportType;
-import com.homer.fantasy.factory.TestObjectFactory;
-import com.homer.dao.BaseballDAO;
+import com.homer.fantasy.DailyPlayerInfo;
+import com.homer.fantasy.FantasyRoster;
+import com.homer.fantasy.Position;
+import com.homer.fantasy.Team;
+import com.homer.fantasy.types.factory.TestObjectFactory;
+import com.homer.fantasy.dao.BaseballDAO;
 import junit.framework.Assert;
 import org.junit.Test;
 
@@ -32,7 +36,7 @@ public class FantasyRosterTest {
 
     @Test
     public void testPojo() {
-        List<DailyPlayer> dailies = new ArrayList<DailyPlayer>();
+        List<DailyPlayerInfo> dailies = new ArrayList<DailyPlayerInfo>();
 
         Map<Integer, Position> positionMap = Position.getPositionMap();
         Set<Integer> keySet = positionMap.keySet();
@@ -93,8 +97,8 @@ public class FantasyRosterTest {
         System.out.println(roster);
     }
 
-    private DailyPlayer generatePlayer(Position position) {
-        DailyPlayer player = new DailyPlayer(1L, "Ari Golub", Position.STARTINGPITCHER, fantasyTeam, mlbTeam, cal.getTime(), position, null);
+    private DailyPlayerInfo generatePlayer(Position position) {
+        DailyPlayerInfo player = new DailyPlayerInfo(fantasyTeam, mlbTeam, cal.getTime(), position, null);
         return player;
     }
 }

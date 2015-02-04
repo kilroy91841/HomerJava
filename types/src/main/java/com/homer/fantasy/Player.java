@@ -1,7 +1,9 @@
 package com.homer.fantasy;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by MLB on 1/25/15.
@@ -14,7 +16,8 @@ public class Player implements Tradable {
     private String firstName;
     private String lastName;
     private String nameLastFirst;
-    private List<ThirdPartyPlayerInfo> thirdPartyPlayerInfoList;
+    private Set<ThirdPartyPlayerInfo> thirdPartyPlayerInfoSet;
+    private List<DailyPlayerInfo> dailyPlayerInfoList;
 
     public Player() { }
 
@@ -48,24 +51,39 @@ public class Player implements Tradable {
         this.primaryPosition = primaryPosition;
     }
 
-    public List<ThirdPartyPlayerInfo> getThirdPartyPlayerInfoList() {
-        if(thirdPartyPlayerInfoList == null) {
-            thirdPartyPlayerInfoList = new ArrayList<ThirdPartyPlayerInfo>();
+    public Set<ThirdPartyPlayerInfo> getThirdPartyPlayerInfoSet() {
+        if(thirdPartyPlayerInfoSet == null) {
+            thirdPartyPlayerInfoSet = new HashSet<ThirdPartyPlayerInfo>();
         }
-        return thirdPartyPlayerInfoList;
+        return thirdPartyPlayerInfoSet;
     }
 
-    public void setThirdPartyPlayerInfoList(List<ThirdPartyPlayerInfo> thirdPartyPlayerInfoList) {
-        this.thirdPartyPlayerInfoList = thirdPartyPlayerInfoList;
+    public void setThirdPartyPlayerInfoSet(Set<ThirdPartyPlayerInfo> thirdPartyPlayerInfoSet) {
+        this.thirdPartyPlayerInfoSet = thirdPartyPlayerInfoSet;
     }
 
     public ThirdPartyPlayerInfo getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.ThirdPartyProvider provider) {
-        for(ThirdPartyPlayerInfo info : getThirdPartyPlayerInfoList()) {
+        for(ThirdPartyPlayerInfo info : getThirdPartyPlayerInfoSet()) {
             if(info.getProvider().equals(provider)) {
                 return info;
             }
         }
         return null;
+    }
+
+    public void addThirdPartyPlayerInfo(ThirdPartyPlayerInfo info) {
+        getThirdPartyPlayerInfoSet().add(info);
+    }
+
+    public List<DailyPlayerInfo> getDailyPlayerInfoList() {
+        if(dailyPlayerInfoList == null) {
+            dailyPlayerInfoList = new ArrayList<DailyPlayerInfo>();
+        }
+        return dailyPlayerInfoList;
+    }
+
+    public void setDailyPlayerInfoList(List<DailyPlayerInfo> dailyPlayerInfoList) {
+        this.dailyPlayerInfoList = dailyPlayerInfoList;
     }
 
     @Override
@@ -74,7 +92,7 @@ public class Player implements Tradable {
                 "playerId=" + playerId +
                 ", playerName='" + playerName + '\'' +
                 ", primaryPosition=" + primaryPosition +
-                ", thirdPartyPlayerInfoList=" + thirdPartyPlayerInfoList +
+                ", thirdPartyPlayerInfoSet=" + thirdPartyPlayerInfoSet +
                 '}';
     }
 

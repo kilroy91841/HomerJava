@@ -1,9 +1,18 @@
-package com.homer.fantasy;
+package com.homer.fantasy.types;
 
-import com.homer.fantasy.factory.TestObjectFactory;
-import com.homer.dao.MySQLDAO;
+import com.homer.fantasy.Player;
+import com.homer.fantasy.dao.BaseballDAO;
+import com.homer.fantasy.types.factory.TestObjectFactory;
+import com.homer.fantasy.dao.MySQLDAO;
 import com.homer.dao.TypesFactory;
+import com.homer.fantasy.types.util.DBPreparer;
+import com.homer.util.PropertyRetriever;
+import com.ninja_squad.dbsetup.DbSetup;
+import com.ninja_squad.dbsetup.Operations;
+import com.ninja_squad.dbsetup.destination.DriverManagerDestination;
+import com.ninja_squad.dbsetup.operation.Operation;
 import junit.framework.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.sql.Connection;
@@ -16,13 +25,38 @@ import java.sql.SQLException;
  */
 public class PlayerTest {
 
+    private DAO dao;
+
+    @BeforeClass
+    public void prepare() {
+
+        Operation operation = Operations.sequenceOf(Operations.deleteAllFrom("PLAYER"));
+
+        System.out.println("deleting all players from player in db ");
+
+        DbSetup dbSetup = new DbSetup(DBPreparer.getDriverManagerDestination(), operation);
+        dbSetup.launch();
+
+        dao = new DAO();
+    }
+
     @Test
-    public void testDo() {
+    public void testCreate() {
         Player player = TestObjectFactory.getMikeTrout();
 
         DAO dao = new DAO();
         Player dbPlayer = dao.get();
         Assert.assertEquals(player, dbPlayer);
+    }
+
+    @Test
+    public void testUpdate() {
+
+    }
+
+    @Test
+    public void testFind() {
+
     }
 
     private class DAO extends MySQLDAO {

@@ -1,8 +1,7 @@
 package com.homer.fantasy.dao.searcher.player;
 
 import com.homer.fantasy.Player;
-import com.homer.fantasy.ThirdPartyPlayerInfo;
-import com.homer.dao.MySQLDAO;
+import com.homer.fantasy.dao.MySQLDAO;
 import com.homer.dao.TypesFactory;
 import com.homer.fantasy.dao.searcher.DataSearchMethod;
 
@@ -14,7 +13,7 @@ import java.sql.SQLException;
 /**
  * Created by arigolub on 2/2/15.
  */
-public class PlayerSearchByPlayerId extends MySQLDAO implements DataSearchMethod<Player> {
+public class PlayerSearchByPlayerId implements DataSearchMethod<Player> {
 
 
     @Override

@@ -9,24 +9,24 @@ import java.util.List;
  */
 public class DailyTeam {
 
-	private List<DailyPlayer> players;
+	private List<DailyPlayerInfo> players;
 	private Team team;
 	private Date date;
 
 	public DailyTeam() { }
 
-	public DailyTeam(Team team, List<DailyPlayer> players) {
+	public DailyTeam(Team team, List<DailyPlayerInfo> players) {
 		setTeam(team);
 		setPlayers(players);
 	}
 
-	public void setPlayers(List<DailyPlayer> players) {
+	public void setPlayers(List<DailyPlayerInfo> players) {
 		this.players = players;
 	}
 
-	public List<DailyPlayer> getPlayers() {
+	public List<DailyPlayerInfo> getPlayers() {
 		if(players == null) {
-			players = new ArrayList<DailyPlayer>();
+			players = new ArrayList<DailyPlayerInfo>();
 		}
 		return players;
 	}

@@ -1,8 +1,10 @@
-package com.homer.fantasy;
+package com.homer.fantasy.types;
 
 import com.homer.SportType;
-import com.homer.dao.MySQLDAO;
+import com.homer.fantasy.dao.MySQLDAO;
 import com.homer.dao.TypesFactory;
+import com.homer.fantasy.Money;
+import com.homer.fantasy.Team;
 import org.junit.Assert;
 import org.junit.Test;
 
