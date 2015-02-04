@@ -1,0 +1,42 @@
+Player
+	-create a player from MLB player information
+		-find player by either mlbPlayerId or playerName
+			-if player exists
+				-UPDATE EXISTING PLAYER
+			-if player does not exist
+				-PERSIST NEW PLAYER
+	-create a player that does not have MLB information
+		-find player by playerName
+			-if player exists
+				-UPDATE EXISTING PLAYER
+			-if player does not exist
+				-PERSIST NEW PLAYER
+	-update a player that does not have MLB information with MLB information
+		-see "create a player from MLB player information"
+
+
+Transactions
+	-add a free agent to a team
+		-find player by playerId
+			-if player exists
+				-UPDATE LATEST PLAYERTOTEAM
+			-if player does not exist
+				-RETURN ERROR
+	-drop a player from a team
+		-find player by playerId
+			-if player exists
+				-UPDATE LATEST PLAYERTOTEAM
+			-if player does not exist
+				-RETURN ERROR
+	-change a player's fantasy position (including to/from DL, Minors, Suspended)
+		-find player by playerId
+			-if player exists
+				-UPDATE LATEST PLAYERTOTEAM
+			-if player does not exist
+				-RETURN ERROR
+	-trade a player
+		-find player by playerId
+			-if player exists
+				-UPDATE LATEST PLAYERTOTEAM
+			-if player does not exist
+				-RETURN ERROR

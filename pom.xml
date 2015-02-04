@@ -81,6 +81,12 @@
                 <version>4.11</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>com.ninja-squad</groupId>
+                <artifactId>DbSetup</artifactId>
+                <version>1.3.1</version>
+                <scope>test</scope>
+            </dependency>
 
             <!-- Server -->
             <dependency>
