@@ -23,6 +23,10 @@ public class Player implements Tradable {
 
     public Player() { }
 
+    public Player(String name) {
+        setPlayerName(name);
+    }
+
     public Player(long playerId, String playerName, Position primaryPosition) {
         setPlayerId(playerId);
         setPlayerName(playerName);
@@ -86,6 +90,10 @@ public class Player implements Tradable {
 
     public void setDailyPlayerInfoList(List<DailyPlayerInfo> dailyPlayerInfoList) {
         this.dailyPlayerInfoList = dailyPlayerInfoList;
+    }
+
+    public void addDailyPlayerInfoList(DailyPlayerInfo dailyPlayerInfo) {
+        getDailyPlayerInfoList().add(dailyPlayerInfo);
     }
 
     @Override

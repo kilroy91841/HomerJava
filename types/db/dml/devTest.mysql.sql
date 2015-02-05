@@ -55,3 +55,71 @@ union all
 select 109, "CORNERINFIELD", "FANTASY", "CI"
 union all
 select 110, "UTILITY", "FANTASY", "U";
+
+delete from TEAM;
+
+insert into TEAM (teamId, teamName, teamType, teamCode)
+select 1, "Mark Loretta\'s Scars", "FANTASY", "MLS"
+union all
+select 2, "BSnaxx Cracker Jaxx", "FANTASY", "SNAXX"
+union all
+select 108, "Los Angeles Angels", "MLB", "LAA"
+union all
+select 109, "Arizona Diamondbacks", "MLB", "ARI"
+union all
+select 144, "Atlanta Braves", "MLB", "ATL"
+union all
+select 110, "Baltimore Orioles", "MLB", "BAL"
+union all
+select 111, "Boston Red Sox", "MLB", "BOS"
+union all
+select 112, "Chicago Cubs", "MLB", "CHC"
+union all
+select 113, "Cincinnati Reds", "MLB", "CIN"
+union all
+select 114, "Cleveland Indians", "MLB", "CLE"
+union all
+select 115, "Colorado Rockies", "MLB", "COL"
+union all
+select 145, "Chicago White Sox", "MLB", "CWS"
+union all
+select 116, "Detroit Tigers", "MLB", "DET"
+union all
+select 117, "Houston Astros", "MLB", "HOU"
+union all
+select 118, "Kansas City Royals", "MLB", "KC"
+union all
+select 119, "Los Angeles Dodgers", "MLB", "LAD"
+union all
+select 146, "Miami Marlins", "MLB", "MIA"
+union all
+select 158, "Milwaukee Brewers", "MLB", "MIL"
+union all
+select 142, "Minnesota Twins", "MLB", "MIN"
+union all
+select 121, "New York Mets", "MLB", "NYM"
+union all
+select 147, "New York Yankees", "MLB", "NYY"
+union all
+select 133, "Oakland Athletics", "MLB", "OAK"
+union all
+select 143, "Philadelphia Phillies", "MLB", "PHI"
+union all
+select 134, "Pittsburgh Pirates", "MLB", "PIT"
+union all
+select 135, "San Diego Padres", "MLB", "SD"
+union all
+select 136, "Seattle Mariners", "MLB", "SEA"
+union all
+select 137, "San Francisco Giants", "MLB", "SF"
+union all
+select 138, "St. Louis Cardinals", "MLB", "STL"
+union all
+select 139, "Tampa Bay Rays", "MLB", "TB"
+union all
+select 140, "Texas Rangers", "MLB", "TEX"
+union all
+select 141, "Toronto Blue Jays", "MLB", "TOR"
+union all
+select 120, "Washington Nationals", "MLB", "WSH"
+;

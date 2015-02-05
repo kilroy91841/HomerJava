@@ -1,6 +1,9 @@
 package com.homer.fantasy.dao.searcher.player;
 
+import com.homer.fantasy.DailyPlayerInfo;
 import com.homer.fantasy.Player;
+import com.homer.fantasy.Position;
+import com.homer.fantasy.Team;
 import com.homer.fantasy.dao.searcher.DataSearchMethod;
 
 import java.sql.Connection;
@@ -28,15 +31,31 @@ public class PlayerSearchByPlayerName implements DataSearchMethod<Player> {
         try {
 
             String sql = "select * from PLAYER player " +
-                    "inner join POSITION position " +
-                    "on position.positionId = player.primaryPositionId " +
+                    "left join PLAYERTOTEAM playerToTeam " +
+                    "on player.playerId = playerToTeam.playerId " +
+                    "left join TEAM fantasyTeam " +
+                    "on playerToTeam.fantasyTeamId = fantasyTeam.teamId " +
+                    "left join TEAM mlbTeam " +
+                    "on playerToTeam.mlbTeamId = mlbTeam.teamId " +
                     "where player.playerName = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, example.getPlayerName());
             ResultSet rs = statement.executeQuery();
 
-            while(rs.next()) {
+            if(rs.first()) {
                 returnPlayer = Player.create(rs, "player");
+
+                rs.beforeFirst();
+                while(rs.next()) {
+                    Team fantasyTeam = Team.create(rs, "fantasyTeam");
+                    Team mlbTeam = Team.create(rs, "mlbTeam");
+                    DailyPlayerInfo info = new DailyPlayerInfo(fantasyTeam, mlbTeam,
+                            rs.getDate("playerToTeam.gameDate"),
+                            Position.get(rs.getInt("playerToTeam.fantasyPositionId")),
+                            null
+                    );
+                    returnPlayer.addDailyPlayerInfoList(info);
+                }
             }
 
             rs.close();

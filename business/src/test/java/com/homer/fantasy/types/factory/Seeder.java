@@ -12,9 +12,6 @@ public class Seeder {
         if("PLAYER".equals(tableName)) {
             PlayerTest playerTest = new PlayerTest();
             playerTest.seed();
-        } else if("TEAM".equals(tableName)) {
-            TeamTest teamTest = new TeamTest();
-            teamTest.seed();
         }
     }
 }

@@ -34,7 +34,7 @@ public class DailyPlayerInfoTest {
     @BeforeClass
     public static void prepare() throws Exception {
 
-        Operation operation = Operations.sequenceOf(Operations.deleteAllFrom("PLAYERTOTEAM", "TEAM", "PLAYER"));
+        Operation operation = Operations.sequenceOf(Operations.deleteAllFrom("PLAYERTOTEAM", "PLAYER"));
 
         DbSetup dbSetup = new DbSetup(DBPreparer.getDriverManagerDestination(), operation);
         dbSetup.launch();

@@ -1,7 +1,6 @@
 package com.homer.fantasy.dao.searcher.player;
 
-import com.homer.fantasy.Player;
-import com.homer.fantasy.ThirdPartyPlayerInfo;
+import com.homer.fantasy.*;
 import com.homer.fantasy.dao.searcher.DataSearchMethod;
 
 import java.sql.Connection;
@@ -29,15 +28,31 @@ public class PlayerSearchByMLBPlayerId implements DataSearchMethod<Player> {
 
         try {
             String sql = "select * from PLAYER player " +
-                    "inner join POSITION position " +
-                    "on position.positionId = player.primaryPositionId " +
+                    "left join PLAYERTOTEAM playerToTeam " +
+                    "on player.playerId = playerToTeam.playerId " +
+                    "left join TEAM fantasyTeam " +
+                    "on playerToTeam.fantasyTeamId = fantasyTeam.teamId " +
+                    "left join TEAM mlbTeam " +
+                    "on playerToTeam.mlbTeamId = mlbTeam.teamId " +
                     "where player.mlbPlayerId = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, example.getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.MLB).getThirdPartyPlayerId());
             ResultSet rs = statement.executeQuery();
 
-            while(rs.next()) {
+            if(rs.first()) {
                 returnPlayer = Player.create(rs, "player");
+
+                rs.beforeFirst();
+                while(rs.next()) {
+                    Team fantasyTeam = Team.create(rs, "fantasyTeam");
+                    Team mlbTeam = Team.create(rs, "mlbTeam");
+                    DailyPlayerInfo info = new DailyPlayerInfo(fantasyTeam, mlbTeam,
+                            rs.getDate("playerToTeam.gameDate"),
+                            Position.get(rs.getInt("playerToTeam.fantasyPositionId")),
+                            null
+                            );
+                    returnPlayer.addDailyPlayerInfoList(info);
+                }
             }
 
             rs.close();

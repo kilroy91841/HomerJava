@@ -3,11 +3,8 @@ package com.homer.fantasy.types;
 import com.homer.fantasy.Player;
 import com.homer.fantasy.Team;
 import com.homer.fantasy.Vulture;
-import com.homer.fantasy.dao.BaseballDAO;
 import com.homer.fantasy.dao.HomerDAO;
 import com.homer.fantasy.types.factory.Seeder;
-import com.homer.fantasy.types.factory.TestObjectFactory;
-import com.homer.fantasy.dao.MySQLDAO;
 import com.homer.fantasy.types.util.DBPreparer;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.Operations;
@@ -18,10 +15,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 

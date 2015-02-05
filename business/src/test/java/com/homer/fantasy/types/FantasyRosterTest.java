@@ -7,7 +7,6 @@ import com.homer.fantasy.Position;
 import com.homer.fantasy.Team;
 import com.homer.fantasy.dao.HomerDAO;
 import com.homer.fantasy.types.factory.TestObjectFactory;
-import com.homer.fantasy.dao.BaseballDAO;
 import junit.framework.Assert;
 import org.junit.Test;
 

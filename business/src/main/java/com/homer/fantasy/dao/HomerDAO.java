@@ -32,6 +32,16 @@ public class HomerDAO extends MySQLDAO {
         }
     }
 
+    private boolean executeUpdate(PreparedStatement preparedStatement) throws SQLException {
+        boolean success = false;
+        int rowCount = preparedStatement.executeUpdate();
+        if(rowCount > 0) {
+            success = true;
+        }
+        preparedStatement.close();
+        return success;
+    }
+
     public Player findByExample(Player example) {
         Searcher<Player> searcher = new Searcher<Player>().findExample(example)
                 .addSearcher(new PlayerSearchByPlayerId())
@@ -109,12 +119,7 @@ public class HomerDAO extends MySQLDAO {
             }
             statement.setLong(4, newPlayer.getPlayerId());
 
-            int rowCount = statement.executeUpdate();
-            if(rowCount > 0) {
-                success = true;
-            }
-
-            statement.close();
+            success = executeUpdate(statement);
 
         } catch (SQLException e) {
             LOG.error("Something went wrong talking to the database", e);
@@ -143,15 +148,13 @@ public class HomerDAO extends MySQLDAO {
             statement.setTimestamp(4, new java.sql.Timestamp(vulture.getDeadline().getTime()));
             statement.setString(5, vulture.getStatus().getName());
 
-            int rowCount = statement.executeUpdate();
-            if(rowCount > 0) {
-                success = true;
-            }
-            statement.close();
+            success = executeUpdate(statement);
+
         } catch (SQLException e) {
             LOG.error("Something went wrong talking to the database", e);
             success = false;
         }
+
         closeConnection(connection);
         return success;
     }
@@ -191,36 +194,6 @@ public class HomerDAO extends MySQLDAO {
         }
 
         return vultures;
-    }
-
-    public boolean createTeam(Team team) {
-        boolean success = false;
-
-        Connection connection = getConnection();
-        try {
-            String sql = "insert into TEAM " +
-                    "(teamId, teamName, teamType, teamCode) " +
-                    "values " +
-                    "(?, ?, ?, ?)";
-
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, team.getTeamId());
-            statement.setString(2, team.getTeamName());
-            statement.setString(3, team.getTeamType().getName());
-            statement.setString(4, team.getTeamCode());
-            int rowCount = statement.executeUpdate();
-            if(rowCount > 0) {
-                success = true;
-            }
-
-            statement.close();
-            closeConnection(connection);
-
-        } catch (SQLException e) {
-            LOG.error("Something went wrong talking to the database", e);
-        }
-
-        return success;
     }
 
     public List<Team> getTeams() {
@@ -271,7 +244,7 @@ public class HomerDAO extends MySQLDAO {
     public boolean createPlayerToTeam(Player fantasyPlayer, java.util.Date gameDate, int fantasyTeamId, int mlbTeamId,
                                               String fantasyPlayerStatusCode, String mlbPlayerStatusCode,
                                               Position fantasyPosition) {
-        LOG.info("Creating/updating player to team");
+        LOG.info("Creating player to team");
         boolean success = false;
         Connection connection = getConnection();
 
@@ -290,17 +263,68 @@ public class HomerDAO extends MySQLDAO {
             statement.setString(6, mlbPlayerStatusCode);
             statement.setInt(7, fantasyPosition.getPositionId());
 
-            int rowCount = statement.executeUpdate();
-            if(rowCount > 0) {
-                success = true;
-            }
-
-            statement.close();
-            closeConnection(connection);
+            success = executeUpdate(statement);
 
         } catch (SQLException e) {
             LOG.error("Something went wrong talking to the database", e);
         }
+
+        closeConnection(connection);
+        return success;
+    }
+
+    public boolean updateDailyFantasyProperties(Player fantasyPlayer, int fantasyTeamId, String fantasyPlayerStatusCode,
+                                                Position fantasyPosition) {
+        LOG.info("Updating fantasy properties");
+        boolean success = false;
+        Connection connection = getConnection();
+
+        try {
+            String sql = "update PLAYERTOTEAM " +
+                    "set fantasyTeamId=?, fantasyPlayerStatusCode=?, fantasyPositionId=? " +
+                    "where playerId = ? " +
+                    "order by gameDate desc " +
+                    "limit 1;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, fantasyTeamId);
+            preparedStatement.setString(2, fantasyPlayerStatusCode);
+            preparedStatement.setInt(3, fantasyPosition.getPositionId());
+            preparedStatement.setLong(4, fantasyPlayer.getPlayerId());
+
+            success = executeUpdate(preparedStatement);
+
+        } catch (SQLException e) {
+            LOG.error("Something went wrong talking to the database", e);
+        }
+
+        closeConnection(connection);
+        return success;
+    }
+
+    public boolean updateDailyMLBProperties(Player fantasyPlayer, int mlbTeamId, String mlbPlayerStatusCode,
+                                            Position mlbPosition) {
+        LOG.info("Updating fantasy properties");
+        boolean success = false;
+        Connection connection = getConnection();
+
+        try {
+            String sql = "update PLAYERTOTEAM " +
+                    "set fantasyTeamId=?, fantasyPlayerStatusCode=?, fantasyPositionId=? " +
+                    "where playerId = ? " +
+                    "order by gameDate desc " +
+                    "limit 1;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, mlbTeamId);
+            preparedStatement.setString(2, mlbPlayerStatusCode);
+            preparedStatement.setInt(3, mlbPosition.getPositionId());
+
+            success = executeUpdate(preparedStatement);
+
+        } catch (SQLException e) {
+            LOG.error("Something went wrong talking to the database", e);
+        }
+
+        closeConnection(connection);
         return success;
     }
 
@@ -343,9 +367,7 @@ public class HomerDAO extends MySQLDAO {
                 e.printStackTrace();
             }
 
-            rs.close();
-            statement.close();
-            connection.close();
+            closeAll(rs, statement, connection);
 
         } catch (SQLException e) {
             LOG.error("Something went wrong talking to the database", e);
