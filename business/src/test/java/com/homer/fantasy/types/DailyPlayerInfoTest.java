@@ -2,12 +2,12 @@ package com.homer.fantasy.types;
 
 import com.homer.SportType;
 import com.homer.fantasy.Player;
-import com.homer.fantasy.dao.BaseballDAO;
+import com.homer.fantasy.dao.HomerDAO;
 import com.homer.fantasy.dao.MySQLDAO;
-import com.homer.dao.TypesFactory;
 import com.homer.fantasy.DailyPlayerInfo;
 import com.homer.fantasy.Position;
 import com.homer.fantasy.Team;
+import com.homer.fantasy.types.factory.Seeder;
 import com.homer.fantasy.types.util.DBPreparer;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.Operations;
@@ -28,36 +28,49 @@ import java.util.TimeZone;
  */
 public class DailyPlayerInfoTest {
 
-    private DAO dao = new DAO();
-    private DailyPlayerInfo dailyPlayerInfo;
+    private static DailyPlayerInfo dailyPlayerInfo;
+    private static HomerDAO dao;
 
     @BeforeClass
-    public void prepare() throws Exception {
+    public static void prepare() throws Exception {
 
-        Operation operation = Operations.sequenceOf(Operations.deleteAllFrom("PLAYERTOTEAM"));
+        Operation operation = Operations.sequenceOf(Operations.deleteAllFrom("PLAYERTOTEAM", "TEAM", "PLAYER"));
 
         DbSetup dbSetup = new DbSetup(DBPreparer.getDriverManagerDestination(), operation);
         dbSetup.launch();
 
-        dailyPlayerInfo = createDailyPlayerInfo();
+        Seeder.seedTable("PLAYER");
+        Seeder.seedTable("TEAM");
+
+        //dailyPlayerInfo = createDailyPlayerInfo();
+
+        dao = new HomerDAO();
     }
 
-    @Test
-    public void testDo() {
-        DAO dao = new DAO();
-        DailyPlayerInfo dbDailyPlayerInfo = dao.get();
+//    @Test
+//    public void testDo() {
+//        DAO dao = new DAO();
+//        DailyPlayerInfo dbDailyPlayerInfo = dao.get();
+//
+//        Assert.assertEquals(dailyPlayerInfo, dbDailyPlayerInfo);
+//    }
 
-        Assert.assertEquals(dailyPlayerInfo, dbDailyPlayerInfo);
+    @Test
+    public void save() {
+        Player example = new Player();
+        example.setPlayerName("Mike Trout");
+        Player player = dao.findByExample(example);
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        dao.createPlayerToTeam(player, cal.getTime(), 1, 3, "A", "A", Position.FANTASYOUTFIELD);
     }
 
     private static class DAO extends MySQLDAO {
 
-//        public void save(Player player, DailyPlayerInfo dpi) {
-//            Connection connection = getConnection();
-//            try {
-//                String sql = "insert into PLAYERTOTEAM"
-//            }
-//        }
 
         public DailyPlayerInfo get() {
             DailyPlayerInfo player = null;
@@ -76,8 +89,8 @@ public class DailyPlayerInfoTest {
                 ResultSet rs = statement.executeQuery();
 
                 while(rs.next()) {
-                    Team fantasyTeam = TypesFactory.createTeam(rs, "fantasyTeam");
-                    Team mlbTeam = TypesFactory.createTeam(rs, "mlbTeam");
+                    Team fantasyTeam = Team.create(rs, "fantasyTeam");
+                    Team mlbTeam = Team.create(rs, "mlbTeam");
                     player = new DailyPlayerInfo(
                         fantasyTeam,
                         mlbTeam,

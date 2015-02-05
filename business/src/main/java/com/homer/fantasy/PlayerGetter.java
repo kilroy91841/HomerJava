@@ -1,6 +1,8 @@
 package com.homer.fantasy;
 
 import com.homer.fantasy.dao.BaseballDAO;
+import com.homer.fantasy.dao.HomerDAO;
+import com.homer.fantasy.facade.PlayerFacade;
 import com.homer.mlb.MLBClientREST;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +20,7 @@ public class PlayerGetter {
 
     public static void main(String[] args) {
         LOG.debug("hi");
-        BaseballDAO dao = new BaseballDAO();
+        HomerDAO dao = new HomerDAO();
         List<Team> teams = dao.getTeams();
         MLBClientREST client = new MLBClientREST();
         PlayerFacade facade = new PlayerFacade();

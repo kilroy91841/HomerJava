@@ -1,5 +1,8 @@
 package com.homer.fantasy;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  * Created by arigolub on 1/30/15.
  */
@@ -110,5 +113,30 @@ public class PlayerHistory {
         result = 31 * result + (keeperTeam != null ? keeperTeam.hashCode() : 0);
         return result;
     }
+
+	public static PlayerHistory create(ResultSet rs, String tableName) throws SQLException {
+		Team draftTeam = null;
+		Team keeperTeam = null;
+
+		Integer draftTeamId = rs.getInt("draftTeam.teamId");
+		if(!rs.wasNull()) {
+			draftTeam = Team.create(rs, "draftTeam");
+		}
+
+		Integer keeperTeamId = rs.getInt("keeperTeam.teamId");
+		if(!rs.wasNull()) {
+			keeperTeam = Team.create(rs, "keeperTeam");
+		}
+
+		return new PlayerHistory(
+				rs.getInt("history.season"),
+				rs.getInt("history.salary"),
+				rs.getInt("history.keeperSeason"),
+				rs.getBoolean("history.minorLeaguer"),
+				draftTeam,
+				keeperTeam
+		);
+
+	}
 
 }

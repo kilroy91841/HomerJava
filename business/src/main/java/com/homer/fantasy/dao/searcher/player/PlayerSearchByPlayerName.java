@@ -1,7 +1,6 @@
 package com.homer.fantasy.dao.searcher.player;
 
 import com.homer.fantasy.Player;
-import com.homer.dao.TypesFactory;
 import com.homer.fantasy.dao.searcher.DataSearchMethod;
 
 import java.sql.Connection;
@@ -37,7 +36,7 @@ public class PlayerSearchByPlayerName implements DataSearchMethod<Player> {
             ResultSet rs = statement.executeQuery();
 
             while(rs.next()) {
-                returnPlayer = TypesFactory.createPlayer(rs, "player");
+                returnPlayer = Player.create(rs, "player");
             }
 
             rs.close();

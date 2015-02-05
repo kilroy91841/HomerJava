@@ -58,6 +58,10 @@ public class TestObjectFactory {
         return new Team(2, "BSnaxx Cracker Jaxx", SportType.FANTASY, "SNAXX");
     }
 
+    public static Team getYankees() {
+        return new Team(3, "New York Yankees", SportType.MLB, "NYY");
+    }
+
     public static FreeAgentAuction getFreeAgentAuction() {
         Team requestingTeam = getMarkLorettasScars();
         Player player = getMiguelCabrera();

@@ -1,5 +1,7 @@
 package com.homer.fantasy;
 
+import com.homer.exception.StatusNotFoundException;
+
 import java.util.Date;
 
 /**
@@ -116,7 +118,7 @@ public class Vulture {
             return name;
         }
 
-        public static VultureStatus get(String vultureStatusName) throws Exception {
+        public static VultureStatus get(String vultureStatusName) throws StatusNotFoundException {
             if(ACTIVE.getName().equals(vultureStatusName)) {
                 return ACTIVE;
             } else if(RESOLVED.getName().equals(vultureStatusName)) {
@@ -124,7 +126,7 @@ public class Vulture {
             } else if(GRANTED.getName().equals(vultureStatusName)) {
                 return GRANTED;
             }
-            throw new Exception("Unrecognized vulture status name: " + vultureStatusName);
+            throw new StatusNotFoundException("Unrecognized vulture status name: " + vultureStatusName);
         }
     }
 }

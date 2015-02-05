@@ -1,7 +1,5 @@
 package com.homer.searcher.player;
 
-import com.homer.dao.MySQLDAO;
-import com.homer.dao.TypesFactory;
 import com.homer.exception.NoDataSearchMethodsProvidedException;
 import com.homer.fantasy.Player;
 import com.homer.fantasy.ThirdPartyPlayerInfo;
@@ -11,30 +9,42 @@ import com.homer.fantasy.dao.searcher.Searcher;
 import com.homer.fantasy.dao.searcher.player.PlayerSearchByMLBPlayerId;
 import com.homer.fantasy.dao.searcher.player.PlayerSearchByPlayerId;
 import com.homer.fantasy.dao.searcher.player.PlayerSearchByPlayerName;
+import com.homer.fantasy.types.factory.Seeder;
+import com.homer.fantasy.types.util.DBPreparer;
+import com.ninja_squad.dbsetup.DbSetup;
+import com.ninja_squad.dbsetup.Operations;
+import com.ninja_squad.dbsetup.operation.Operation;
 import junit.framework.Assert;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 /**
  * Created by arigolub on 2/3/15.
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PlayerSearchByPlayerIdTest {
 
-    private static final HomerDAO dao = new HomerDAO();
+    private static HomerDAO dao;
+    private long playerId;
 
-    @Test
-    public void testPlayerSearchByPlayerId() throws NoDataSearchMethodsProvidedException {
-        DataSearchMethod method = new PlayerSearchByPlayerId();
-        Player example = new Player();
-        example.setPlayerId(1L);
-        Searcher<Player> searcher = new Searcher<Player>()
-                .findExample(example)
-                .addSearcher(method);
-        Player dbPlayer = searcher.search(dao.getConnection());
-        Assert.assertEquals(example.getPlayerId(), dbPlayer.getPlayerId());
+    @BeforeClass
+    public static void prepare() {
+        Operation operation = Operations.sequenceOf(Operations.deleteAllFrom("VULTURE", "PLAYER"));
+
+        System.out.println("Preparing db for test VultureTest");
+
+        DbSetup dbSetup = new DbSetup(DBPreparer.getDriverManagerDestination(), operation);
+        dbSetup.launch();
+
+        Seeder.seedTable("PLAYER");
+
+        dao = new HomerDAO();
     }
 
     @Test
-    public void testPlayerSearchByPlayerName() throws NoDataSearchMethodsProvidedException {
+    public void test1_PlayerSearchByPlayerName() throws NoDataSearchMethodsProvidedException {
         DataSearchMethod method = new PlayerSearchByPlayerName();
         Player example = new Player();
         example.setPlayerName("Mike Trout");
@@ -43,19 +53,29 @@ public class PlayerSearchByPlayerIdTest {
                 .addSearcher(method);
         Player dbPlayer = searcher.search(dao.getConnection());
         Assert.assertEquals(example.getPlayerName(), dbPlayer.getPlayerName());
+        playerId = dbPlayer.getPlayerId();
+
+        DataSearchMethod method2 = new PlayerSearchByPlayerId();
+        Player example2 = new Player();
+        example2.setPlayerId(playerId);
+        Searcher<Player> searcher2 = new Searcher<Player>()
+                .findExample(example2)
+                .addSearcher(method2);
+        Player dbPlayer2 = searcher.search(dao.getConnection());
+        Assert.assertEquals(example2.getPlayerId(), dbPlayer2.getPlayerId());
     }
 
     @Test
     public void testPlayerSearchByMLBPlayerId() throws NoDataSearchMethodsProvidedException {
         DataSearchMethod method = new PlayerSearchByMLBPlayerId();
         Player example = new Player();
-        example.getThirdPartyPlayerInfoList().add(new ThirdPartyPlayerInfo(example, 545361, ThirdPartyPlayerInfo.MLB));
+        example.getThirdPartyPlayerInfoSet().add(new ThirdPartyPlayerInfo(545361, ThirdPartyPlayerInfo.MLB));
         Searcher<Player> searcher = new Searcher<Player>()
                 .findExample(example)
                 .addSearcher(method);
         Player dbPlayer = searcher.search(dao.getConnection());
-        Assert.assertEquals(example.getThirdPartyPlayerInfoList().get(0).getThirdPartyPlayerId(),
-                dbPlayer.getThirdPartyPlayerInfoList().get(0).getThirdPartyPlayerId());
+        Assert.assertEquals(example.getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.MLB).getThirdPartyPlayerId(),
+                dbPlayer.getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.MLB).getThirdPartyPlayerId());
     }
 
     @Test

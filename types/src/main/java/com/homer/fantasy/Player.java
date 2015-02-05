@@ -1,5 +1,7 @@
 package com.homer.fantasy;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -103,7 +105,6 @@ public class Player implements Tradable {
 
         Player player = (Player) o;
 
-        if (playerId != player.playerId) return false;
         if (playerName != null ? !playerName.equals(player.playerName) : player.playerName != null) return false;
         if (primaryPosition != null ? !primaryPosition.equals(player.primaryPosition) : player.primaryPosition != null)
             return false;
@@ -113,5 +114,27 @@ public class Player implements Tradable {
                 ) return false;
 
         return true;
+    }
+
+
+    public static Player create(ResultSet rs, String tableName) throws SQLException {
+        Long playerId = rs.getLong(tableName + ".playerId");
+        if(rs.wasNull()) {
+            return null;
+        }
+        Player player = new Player(
+                playerId,
+                rs.getString(tableName + ".playerName"),
+                Position.get(rs.getInt(tableName + ".primaryPositionId"))
+        );
+
+        Set<ThirdPartyPlayerInfo> thirdPartyPlayerInfoList = new HashSet<ThirdPartyPlayerInfo>();
+        Long mlbPlayerId = rs.getLong(tableName + ".mlbPlayerId");
+        if(!rs.wasNull()) {
+            thirdPartyPlayerInfoList.add(new ThirdPartyPlayerInfo(mlbPlayerId, ThirdPartyPlayerInfo.MLB));
+        }
+        player.setThirdPartyPlayerInfoSet(thirdPartyPlayerInfoList);
+
+        return player;
     }
 }

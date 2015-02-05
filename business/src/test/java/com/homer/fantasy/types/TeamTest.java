@@ -1,62 +1,65 @@
 package com.homer.fantasy.types;
 
 import com.homer.SportType;
+import com.homer.fantasy.dao.HomerDAO;
 import com.homer.fantasy.dao.MySQLDAO;
-import com.homer.dao.TypesFactory;
 import com.homer.fantasy.Team;
+import com.homer.fantasy.facade.PlayerFacade;
+import com.homer.fantasy.types.factory.TestObjectFactory;
+import com.homer.fantasy.types.util.DBPreparer;
+import com.ninja_squad.dbsetup.DbSetup;
+import com.ninja_squad.dbsetup.Operations;
+import com.ninja_squad.dbsetup.operation.Operation;
 import junit.framework.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by arigolub on 1/29/15.
  */
 public class TeamTest {
 
-    @Test
-    public void testDo() {
-        Team team = new Team();
-        team.setTeamId(1);
-        team.setTeamName("Mark Loretta\'s Scars");
-        team.setTeamType(SportType.FANTASY);
-        team.setTeamCode("MLS");
+    private static HomerDAO dao;
 
-        DAO dao = new DAO();
-        Team dbTeam = dao.get();
+    @BeforeClass
+    public static void prepare() throws Exception {
 
-        Assert.assertEquals(team, dbTeam);
+        Operation operation = Operations.sequenceOf(Operations.deleteAllFrom("VULTURE", "TEAM"));
+
+        System.out.println("Preparing for class TeamTest");
+
+        DbSetup dbSetup = new DbSetup(DBPreparer.getDriverManagerDestination(), operation);
+        dbSetup.launch();
+
+        dao = new HomerDAO();
     }
 
-    private class DAO extends MySQLDAO {
+    @Test
+    public void saveAndFind() {
+        Team mls = TestObjectFactory.getMarkLorettasScars();
 
-        public Team get() {
-            Team team = null;
-            Connection connection = getConnection();
-            try {
+        dao.createTeam(mls);
 
-                String sql = "select * from TEAM team " +
-                        "where team.teamId = 1 ";
+        List<Team> teams = dao.getTeams();
+        Assert.assertEquals(1, teams.size());
+        Assert.assertEquals(mls, teams.get(0));
+    }
 
-                PreparedStatement statement = connection.prepareStatement(sql);
-                ResultSet rs = statement.executeQuery();
+    public void seed() {
+        dao = new HomerDAO();
 
-                while(rs.next()) {
-                    team = TypesFactory.createTeam(rs, "team");
-                }
+        Team mls = TestObjectFactory.getMarkLorettasScars();
+        Team snxx = TestObjectFactory.getBSnaxx();
+        Team yankees = TestObjectFactory.getYankees();
 
-                rs.close();
-                statement.close();
-                connection.close();
-
-            } catch (SQLException e) {
-                System.out.println("Connection Failed! Check output console");
-                e.printStackTrace();
-            }
-            return team;
-        }
+        dao.createTeam(mls);
+        dao.createTeam(snxx);
+        dao.createTeam(yankees);
     }
 }

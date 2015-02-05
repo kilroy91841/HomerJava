@@ -1,5 +1,7 @@
 package com.homer.fantasy;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -176,6 +178,62 @@ public class Trade {
                     "name='" + name + '\'' +
                     '}';
         }
+    }
+
+    public static List<Trade> createTradeList(ResultSet rs) throws Exception {
+        Trade trade = null;
+        if(rs.first()) {
+
+            trade = new Trade();
+            trade.setProposingTeam(Team.create(rs, "proposingTeam"));
+            trade.setProposedToTeam(Team.create(rs, "proposedToTeam"));
+            trade.setCreatedDate(rs.getTimestamp("trade.createdDate"));
+            trade.setDeadline(rs.getTimestamp("trade.deadline"));
+            trade.setTradeStatus(Trade.TradeStatus.get(rs.getString("trade.tradeStatus")));
+
+            rs.beforeFirst();
+            while(rs.next()) {
+                String assetType = rs.getString("tradeAsset.assetType");
+                int assetOwningTeamId = rs.getInt("tradeAsset.teamId");
+                Tradable asset = null;
+                if(assetType.equals("PLAYER")) {
+                    asset = Player.create(rs, "player");
+                } else if(assetType.equals("MONEY")) {
+                    asset = new Money(
+                            null,
+                            rs.getInt("money.season"),
+                            Money.MoneyType.get(rs.getString("money.moneyType")),
+                            rs.getInt("money.amount")
+                    );
+                } else if(assetType.equals("MINORLEAGUEDRAFTPICK")) {
+                    Team originalTeam = Team.create(rs, "draftPickOriginalTeam");
+                    Integer overall = rs.getInt("minorLeagueDraftPick.overall");
+                    if(rs.wasNull()) {
+                        overall = null;
+                    }
+                    asset = new MinorLeagueDraftPick(
+                            originalTeam,
+                            rs.getInt("minorLeagueDraftPick.season"),
+                            rs.getInt("minorLeagueDraftPick.round"),
+                            originalTeam,
+                            overall,
+                            null,
+                            null,
+                            null
+                    );
+                } else {
+                    throw new Exception("Trade asset type " + assetType + " not recognized!");
+                }
+                if(trade.getProposingTeam().getTeamId().equals(assetOwningTeamId)) {
+                    trade.getProposingTeamAssets().add(asset);
+                } else if(trade.getProposedToTeam().getTeamId().equals(assetOwningTeamId)) {
+                    trade.getProposedToTeamAssets().add(asset);
+                } else {
+                    throw new Exception("Trade asset " + asset + " not owned by either team in trade!");
+                }
+            }
+        }
+        return null;
     }
 
 }

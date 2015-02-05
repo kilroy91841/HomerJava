@@ -1,4 +1,6 @@
-package com.homer.fantasy;
+package com.homer.mlb;
+
+import com.homer.fantasy.Team;
 
 import java.util.Date;
 

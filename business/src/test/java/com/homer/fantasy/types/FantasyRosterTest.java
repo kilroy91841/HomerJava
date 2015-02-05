@@ -5,6 +5,7 @@ import com.homer.fantasy.DailyPlayerInfo;
 import com.homer.fantasy.FantasyRoster;
 import com.homer.fantasy.Position;
 import com.homer.fantasy.Team;
+import com.homer.fantasy.dao.HomerDAO;
 import com.homer.fantasy.types.factory.TestObjectFactory;
 import com.homer.fantasy.dao.BaseballDAO;
 import junit.framework.Assert;
@@ -79,7 +80,7 @@ public class FantasyRosterTest {
 
     @Test
     public void testDB() {
-        BaseballDAO dao = new BaseballDAO();
+        HomerDAO dao = new HomerDAO();
         FantasyRoster roster = dao.getFantasyRoster(1, cal.getTime());
 
         Assert.assertEquals(2, roster.getCatchers().size());

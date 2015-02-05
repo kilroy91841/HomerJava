@@ -1,7 +1,5 @@
 package com.homer.fantasy.dao.creator;
 
-import com.homer.fantasy.dao.MySQLDAO;
-import com.homer.dao.response.PlayerResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

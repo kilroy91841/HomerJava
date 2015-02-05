@@ -1,7 +1,6 @@
 package com.homer.fantasy.dao;
 
 import com.homer.SportType;
-import com.homer.dao.TypesFactory;
 import com.homer.fantasy.*;
 
 import java.sql.*;
@@ -32,7 +31,7 @@ public class BaseballDAO extends MySQLDAO {
             ResultSet rs = statement.executeQuery();
 
             while(rs.next()) {
-                player = TypesFactory.createPlayer(rs, "player");
+                player = Player.create(rs, "player");
             }
 
             rs.close();
@@ -47,30 +46,7 @@ public class BaseballDAO extends MySQLDAO {
         return player;
     }
 
-    public List<Team> getTeams() {
-        List<Team> teams = new ArrayList<Team>();
-        Connection connection = getConnection();
-        try {
 
-            String sql = "select * from TEAM team";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet rs = statement.executeQuery();
-
-            while(rs.next()) {
-                Team t = TypesFactory.createTeam(rs, "team");
-                teams.add(t);
-            }
-
-            rs.close();
-            statement.close();
-            connection.close();
-
-        } catch (SQLException e) {
-            System.out.println("Connection Failed! Check output console");
-            e.printStackTrace();
-        }
-        return teams;
-    }
 
     public List<Player> getPlayersByTeam(int teamId, SportType teamType) {
         return getPlayersByTeam(teamId, teamType, new Date());
@@ -98,7 +74,7 @@ public class BaseballDAO extends MySQLDAO {
             ResultSet rs = statement.executeQuery();
 
             while(rs.next()) {
-                Player player = TypesFactory.createPlayer(rs, "player");
+                Player player = Player.create(rs, "player");
                 players.add(player);
             }
 
@@ -130,8 +106,8 @@ public class BaseballDAO extends MySQLDAO {
             ResultSet rs = statement.executeQuery();
 
             while(rs.next()) {
-                Team fantasyTeam = TypesFactory.createTeam(rs, "fantasyTeam");
-                Team mlbTeam = TypesFactory.createTeam(rs, "mlbTeam");
+                Team fantasyTeam = Team.create(rs, "fantasyTeam");
+                Team mlbTeam = Team.create(rs, "mlbTeam");
                 DailyPlayerInfo daily = new DailyPlayerInfo(
                     fantasyTeam,
                     mlbTeam,
@@ -179,12 +155,12 @@ public class BaseballDAO extends MySQLDAO {
 
             try {
                 if(rs.first()) {
-                    Team primaryTeam = TypesFactory.createTeam(rs, teamTableName);
+                    Team primaryTeam = Team.create(rs, teamTableName);
                     List<DailyPlayerInfo> players = new ArrayList<DailyPlayerInfo>();
                     rs.beforeFirst();
                     while(rs.next()) {
-                        Team fantasyTeam = TypesFactory.createTeam(rs, "fantasyTeam");
-                        Team mlbTeam = TypesFactory.createTeam(rs, "mlbTeam");
+                        Team fantasyTeam = Team.create(rs, "fantasyTeam");
+                        Team mlbTeam = Team.create(rs, "mlbTeam");
                         DailyPlayerInfo p = new DailyPlayerInfo(
                             fantasyTeam,
                             mlbTeam,
@@ -212,55 +188,6 @@ public class BaseballDAO extends MySQLDAO {
         return team;
     }
 
-    public FantasyRoster getFantasyRoster(int teamId, Date date) {
-        Connection connection = getConnection();
-        FantasyRoster roster = null;
-        try {
-            String teamTableName;
-            String sql = "select * from PLAYER player, PLAYERTOTEAM playertoteam, TEAM mlbTeam, TEAM fantasyTeam " +
-                    "where player.playerId = playertoteam.playerid " +
-                    "and fantasyTeam.teamId = playertoteam.fantasyTeamId " +
-                    "and mlbTeam.teamId = playertoteam.mlbTeamId " +
-                    "and playertoteam.fantasyTeamId = ? " + 
-                    "and playerToTeam.gameDate = ? ";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, teamId);
-            statement.setDate(2, new java.sql.Date(date.getTime()));
-            System.out.println(statement.toString());
-            ResultSet rs = statement.executeQuery();
 
-            try {
-                if(rs.first()) {
-                    Team fantasyTeam = TypesFactory.createTeam(rs, "fantasyTeam");
-                    List<DailyPlayerInfo> players = new ArrayList<DailyPlayerInfo>();
-                    rs.beforeFirst();
-                    while(rs.next()) {
-                        Team mlbTeam = TypesFactory.createTeam(rs, "mlbTeam");
-                        DailyPlayerInfo p = new DailyPlayerInfo(
-                            fantasyTeam,
-                            mlbTeam,
-                            rs.getDate("playerToTeam.gameDate"),
-                            Position.get(rs.getInt("playerToTeam.fantasyPositionId")),
-                            null
-                        );
-                        players.add(p);
-                    }
-                    roster = new FantasyRoster(fantasyTeam, players);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            rs.close();
-            statement.close();
-            connection.close();
-
-        } catch (SQLException e) {
-            System.out.println("Connection Failed! Check output console");
-            e.printStackTrace();
-        }
-
-        return roster;
-    }
 
 }

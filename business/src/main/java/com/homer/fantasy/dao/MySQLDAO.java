@@ -7,7 +7,7 @@ import java.sql.*;
 /**
  * Created by arigolub on 1/26/15.
  */
-public class MySQLDAO {
+public abstract class MySQLDAO {
 
     private static String env;
     private String connectionString;
@@ -40,18 +40,6 @@ public class MySQLDAO {
         rs.close();
         statement.close();
         connection.close();
-    }
-
-    public static class FACTORY {
-
-        private static MySQLDAO instance;
-
-        public static MySQLDAO getInstance() {
-            if(instance == null) {
-                instance = new MySQLDAO();
-            }
-            return instance;
-        }
     }
 
 }

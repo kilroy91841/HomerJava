@@ -2,6 +2,9 @@ package com.homer.fantasy;
 
 import com.homer.SportType;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  * Created by MLB on 1/25/15.
  */
@@ -85,5 +88,19 @@ public class Team {
         result = 31 * result + (teamType != null ? teamType.hashCode() : 0);
         result = 31 * result + (teamCode != null ? teamCode.hashCode() : 0);
         return result;
+    }
+
+
+    public static Team create(ResultSet rs, String tableName) throws SQLException {
+        int teamId = rs.getInt(tableName + ".teamId");
+        if(rs.wasNull()) {
+            return null;
+        }
+        return new Team(
+                teamId,
+                rs.getString(tableName + ".teamName"),
+                SportType.getSportType(rs.getString(tableName + ".teamType")),
+                rs.getString(tableName + ".teamCode")
+        );
     }
 }

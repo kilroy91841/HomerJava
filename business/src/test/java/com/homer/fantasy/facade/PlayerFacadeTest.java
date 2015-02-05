@@ -1,7 +1,8 @@
-package com.homer.fantasy;
+package com.homer.fantasy.facade;
 
-import com.homer.dao.response.PlayerResponse;
-import com.homer.fantasy.dao.BaseballDAO;
+import com.homer.fantasy.Player;
+import com.homer.fantasy.Position;
+import com.homer.fantasy.ThirdPartyPlayerInfo;
 import com.homer.fantasy.types.util.DBPreparer;
 import com.homer.mlb.MLBJSONObject;
 import com.ninja_squad.dbsetup.DbSetup;
@@ -25,7 +26,7 @@ public class PlayerFacadeTest {
     @BeforeClass
     public static void prepare() throws Exception {
 
-        Operation operation = Operations.sequenceOf(Operations.deleteAllFrom("PLAYER"));
+        Operation operation = Operations.sequenceOf(Operations.deleteAllFrom("TRADE", "VULTURE", "PLAYERTOTEAM", "PLAYER"));
 
         System.out.println("deleting all players from player in db");
 
@@ -118,4 +119,47 @@ public class PlayerFacadeTest {
         Assert.assertEquals(player.getPlayerName(), dbPlayer.getPlayerName());
         Assert.assertEquals(new Long("8910"), dbPlayer.getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.MLB).getThirdPartyPlayerId());
     }
+
+    @Test
+    public void createFantasyPlayer2() {
+        Player player = new Player();
+        player.setPlayerName("Miguel Cabrera");
+        player.setPrimaryPosition(Position.FIRSTBASE);
+
+        boolean success = false;
+        try {
+            success = facade.createOrUpdatePlayer(player);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        Assert.assertTrue(success);
+        Player dbPlayer = facade.getPlayer(player);
+        Assert.assertEquals(player.getPlayerName(), dbPlayer.getPlayerName());
+        Assert.assertNotNull(dbPlayer.getPlayerId());
+    }
+
+    @Test
+    public void createFantasyPlayer2UpdateWithMLBInfo() {
+        JSONObject json = new JSONObject();
+        json.put("name_display_first_last", "Miguel Cabrera");
+        json.put("player_id", "345");
+        json.put("primary_position", "3");
+        MLBJSONObject mlb = new MLBJSONObject(json);
+
+        boolean success = false;
+        try {
+            com.homer.mlb.Player mlbPlayer = new com.homer.mlb.Player(mlb);
+            success = facade.createOrUpdatePlayer(mlbPlayer);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        Assert.assertTrue(success);
+        Player example = new Player();
+        example.setPlayerName("Miguel Cabrera");
+        example.addThirdPartyPlayerInfo(new ThirdPartyPlayerInfo(345, ThirdPartyPlayerInfo.MLB));
+        Player dbPlayer = facade.getPlayer(example);
+        Assert.assertEquals(example.getPlayerName(), dbPlayer.getPlayerName());
+        Assert.assertEquals(new Long("345"), dbPlayer.getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.MLB).getThirdPartyPlayerId());
+    }
+
 }

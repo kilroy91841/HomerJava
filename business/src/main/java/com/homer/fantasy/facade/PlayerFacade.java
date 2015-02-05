@@ -1,6 +1,8 @@
-package com.homer.fantasy;
+package com.homer.fantasy.facade;
 
-import com.homer.dao.response.PlayerResponse;
+import com.homer.fantasy.Player;
+import com.homer.fantasy.Position;
+import com.homer.fantasy.ThirdPartyPlayerInfo;
 import com.homer.fantasy.dao.HomerDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

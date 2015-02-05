@@ -1,10 +1,12 @@
 package com.homer.fantasy.types;
 
 import com.homer.fantasy.Player;
+import com.homer.fantasy.Position;
+import com.homer.fantasy.ThirdPartyPlayerInfo;
 import com.homer.fantasy.dao.BaseballDAO;
+import com.homer.fantasy.dao.HomerDAO;
 import com.homer.fantasy.types.factory.TestObjectFactory;
 import com.homer.fantasy.dao.MySQLDAO;
-import com.homer.dao.TypesFactory;
 import com.homer.fantasy.types.util.DBPreparer;
 import com.homer.util.PropertyRetriever;
 import com.ninja_squad.dbsetup.DbSetup;
@@ -25,64 +27,35 @@ import java.sql.SQLException;
  */
 public class PlayerTest {
 
-    private DAO dao;
+    private static HomerDAO dao;
 
     @BeforeClass
-    public void prepare() {
+    public static void prepare() {
 
-        Operation operation = Operations.sequenceOf(Operations.deleteAllFrom("PLAYER"));
+        Operation operation = Operations.sequenceOf(Operations.deleteAllFrom("VULTURE", "TRADE", "PLAYERTOTEAM", "PLAYER"));
 
         System.out.println("deleting all players from player in db ");
 
         DbSetup dbSetup = new DbSetup(DBPreparer.getDriverManagerDestination(), operation);
         dbSetup.launch();
-
-        dao = new DAO();
     }
 
     @Test
-    public void testCreate() {
-        Player player = TestObjectFactory.getMikeTrout();
+    public void saveAndFind() {
+        Player player = new Player();
+        player.setPlayerName("Mike Trout");
+        player.setPrimaryPosition(Position.CENTERFIELD);
+        player.addThirdPartyPlayerInfo(new ThirdPartyPlayerInfo(545361, ThirdPartyPlayerInfo.MLB));
 
-        DAO dao = new DAO();
-        Player dbPlayer = dao.get();
+        dao = new HomerDAO();
+        dao.createPlayer(player);
+
+        Player dbPlayer = dao.findByExample(player);
         Assert.assertEquals(player, dbPlayer);
     }
 
-    @Test
-    public void testUpdate() {
-
+    public void seed() {
+        saveAndFind();
     }
 
-    @Test
-    public void testFind() {
-
-    }
-
-    private class DAO extends MySQLDAO {
-
-        public Player get() {
-            Player player = null;
-            Connection connection = getConnection();
-            try {
-
-                String sql = "select * from PLAYER player " +
-                        "where player.playerId = 1 ";
-
-                PreparedStatement statement = connection.prepareStatement(sql);
-                ResultSet rs = statement.executeQuery();
-
-                while(rs.next()) {
-                    player = TypesFactory.createPlayer(rs, "player");
-                }
-
-                closeAll(rs, statement, connection);
-
-            } catch (SQLException e) {
-                System.out.println("Connection Failed! Check output console");
-                e.printStackTrace();
-            }
-            return player;
-        }
-    }
 }

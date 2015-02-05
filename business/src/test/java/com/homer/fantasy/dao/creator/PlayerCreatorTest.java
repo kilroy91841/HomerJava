@@ -1,6 +1,5 @@
 package com.homer.fantasy.dao.creator;
 
-import com.homer.dao.MySQLDAO;
 import com.homer.fantasy.dao.HomerDAO;
 import com.homer.mlb.MLBJSONObject;
 import junit.framework.Assert;

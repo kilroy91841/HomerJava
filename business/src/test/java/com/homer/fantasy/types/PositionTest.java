@@ -16,13 +16,12 @@ import java.util.List;
 /**
  * Created by arigolub on 1/29/15.
  */
-public class PositionTest {
+public class PositionTest extends MySQLDAO {
 
     @Test
     public void testDo() {
-        MySQLDAO dao = MySQLDAO.FACTORY.getInstance();
         List<Position> positions = new ArrayList<Position>();
-        Connection connection = dao.getConnection();
+        Connection connection = getConnection();
         try {
 
             String sql = "select * from POSITION position";

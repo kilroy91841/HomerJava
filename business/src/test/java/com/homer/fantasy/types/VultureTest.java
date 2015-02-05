@@ -3,63 +3,78 @@ package com.homer.fantasy.types;
 import com.homer.fantasy.Player;
 import com.homer.fantasy.Team;
 import com.homer.fantasy.Vulture;
+import com.homer.fantasy.dao.BaseballDAO;
+import com.homer.fantasy.dao.HomerDAO;
+import com.homer.fantasy.types.factory.Seeder;
 import com.homer.fantasy.types.factory.TestObjectFactory;
 import com.homer.fantasy.dao.MySQLDAO;
-import com.homer.dao.TypesFactory;
+import com.homer.fantasy.types.util.DBPreparer;
+import com.ninja_squad.dbsetup.DbSetup;
+import com.ninja_squad.dbsetup.Operations;
+import com.ninja_squad.dbsetup.operation.Operation;
 import junit.framework.Assert;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by arigolub on 2/1/15.
  */
 public class VultureTest {
 
-    @Test
-    public void testDo() throws Exception {
-        Vulture vulture = TestObjectFactory.getVulture();
+    private static HomerDAO dao;
 
-        DAO dao = new DAO();
-        Vulture dbVulture = dao.get();
-        Assert.assertEquals(vulture, dbVulture);
+    @BeforeClass
+    public static void prepare() throws Exception {
+
+        Operation operation = Operations.sequenceOf(Operations.deleteAllFrom("VULTURE"));
+
+        System.out.println("Preparing db for test VultureTest");
+
+        DbSetup dbSetup = new DbSetup(DBPreparer.getDriverManagerDestination(), operation);
+        dbSetup.launch();
+
+        Seeder.seedTable("PLAYER");
+        Seeder.seedTable("TEAM");
+
+        dao = new HomerDAO();
     }
 
-    public class DAO extends MySQLDAO {
+    @Test
+    public void saveAndFind() throws Exception {
+        Calendar cal = Calendar.getInstance();
+        cal.clear();
+        cal.set(Calendar.YEAR, 2015);
+        cal.set(Calendar.MONTH, 1);
+        cal.set(Calendar.DAY_OF_MONTH, 3);
+        cal.set(Calendar.HOUR, 16);
+        Vulture vulture = new Vulture();
 
-        public Vulture get() throws Exception {
-            Vulture vulture = null;
-            Connection connection = getConnection();
-            try {
-                String sql = "select * from VULTURE vulture, TEAM vulturingTeam, TEAM offendingTeam, PLAYER player " +
-                "where vulture.vulturingTeamId = vulturingTeam.teamId " +
-                "and vulture.offendingTeamId = offendingTeam.teamId " +
-                "and player.playerId = vulture.playerId ";
+        Player player = new Player();
+        player.setPlayerName("Mike Trout");
+        player = dao.findByExample(player);
 
-                PreparedStatement statement = connection.prepareStatement(sql);
-                ResultSet rs = statement.executeQuery();
+        Team offendingTeam = dao.getTeamByName("Mark Loretta\'s Scars");
+        Team vulturingTeam = dao.getTeamByName("BSnaxx Cracker Jaxx");
 
-                while(rs.next()) {
-                    Team vulturingTeam = TypesFactory.createTeam(rs, "vulturingTeam");
-                    Team offendingTeam = TypesFactory.createTeam(rs, "offendingTeam");
-                    Player player = TypesFactory.createPlayer(rs, "player");
-                    vulture = new Vulture(
-                        vulturingTeam,
-                        offendingTeam,
-                        player,
-                        rs.getTimestamp("vulture.deadline"),
-                        Vulture.VultureStatus.get(rs.getString("vulture.vultureStatus"))
-                    );
-                }
+        vulture.setPlayer(player);
+        vulture.setDeadline(cal.getTime());
+        vulture.setStatus(Vulture.ACTIVE);
+        vulture.setOffendingTeam(offendingTeam);
+        vulture.setVulturingTeam(vulturingTeam);
 
-                closeAll(rs, statement, connection);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return vulture;
-        }
+        dao.saveVulture(vulture);
+
+        List<Vulture> vultures = dao.getVultures();
+        Assert.assertEquals(1, vultures.size());
+        Assert.assertEquals(vulture, vultures.get(0));
     }
 }

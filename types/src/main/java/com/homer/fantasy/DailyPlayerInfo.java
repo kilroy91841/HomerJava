@@ -1,6 +1,7 @@
 package com.homer.fantasy;
 
 import com.homer.PlayerStatus;
+import com.homer.mlb.Game;
 
 import java.util.Date;
 import java.util.List;
