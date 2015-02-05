@@ -1,5 +1,6 @@
 package com.homer.fantasy.dao;
 
+import com.homer.PlayerStatus;
 import com.homer.exception.NoDataSearchMethodsProvidedException;
 import com.homer.exception.StatusNotFoundException;
 import com.homer.fantasy.*;
@@ -241,7 +242,7 @@ public class HomerDAO extends MySQLDAO {
         return team;
     }
 
-    public boolean createPlayerToTeam(Player fantasyPlayer, java.util.Date gameDate, int fantasyTeamId, int mlbTeamId,
+    public boolean createPlayerToTeam(Player fantasyPlayer, java.util.Date gameDate, Integer fantasyTeamId, Integer mlbTeamId,
                                               String fantasyPlayerStatusCode, String mlbPlayerStatusCode,
                                               Position fantasyPosition) {
         LOG.info("Creating player to team");
@@ -257,8 +258,16 @@ public class HomerDAO extends MySQLDAO {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, fantasyPlayer.getPlayerId());
             statement.setDate(2, new java.sql.Date(gameDate.getTime()));
-            statement.setInt(3, fantasyTeamId);
-            statement.setInt(4, mlbTeamId);
+            if(fantasyTeamId != null) {
+                statement.setInt(3, fantasyTeamId);
+            } else {
+                statement.setNull(3, Types.INTEGER);
+            }
+            if(mlbTeamId != null) {
+                statement.setInt(4, mlbTeamId);
+            } else {
+                statement.setNull(4, Types.INTEGER);
+            }
             statement.setString(5, fantasyPlayerStatusCode);
             statement.setString(6, mlbPlayerStatusCode);
             statement.setInt(7, fantasyPosition.getPositionId());
@@ -357,6 +366,8 @@ public class HomerDAO extends MySQLDAO {
                                 mlbTeam,
                                 rs.getDate("playerToTeam.gameDate"),
                                 Position.get(rs.getInt("playerToTeam.fantasyPositionId")),
+                                PlayerStatus.get(rs.getString("playerToTeam.fantasyPlayerStatusCode")),
+                                PlayerStatus.get(rs.getString("playerToTeam.mlbPlayerStatusCode")),
                                 null
                         );
                         players.add(p);

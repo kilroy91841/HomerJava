@@ -1,6 +1,5 @@
 package com.homer.fantasy;
 
-import com.homer.fantasy.dao.BaseballDAO;
 import com.homer.fantasy.dao.HomerDAO;
 import com.homer.fantasy.facade.PlayerFacade;
 import com.homer.mlb.MLBClientREST;

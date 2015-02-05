@@ -14,17 +14,19 @@ public class PlayerStatus {
     public static final PlayerStatus FREEAGENT = new PlayerStatus("FREEAGENT", "FA");
     public static final PlayerStatus RESTRICTED = new PlayerStatus("RESTRICTED", "RST");
 
+    protected static final Map<String, PlayerStatus> map = new HashMap<String, PlayerStatus>();
+
     static {
-        PlayerStatus.map.put(ACTIVE.getName(), ACTIVE);
-        PlayerStatus.map.put(DISABLEDLIST.getName(), DISABLEDLIST);
-        PlayerStatus.map.put(MINORS.getName(), MINORS);
-        PlayerStatus.map.put(FREEAGENT.getName(), FREEAGENT);
-        PlayerStatus.map.put(RESTRICTED.getName(), RESTRICTED);
+        map.put(ACTIVE.getCode(), ACTIVE);
+        map.put(DISABLEDLIST.getCode(), DISABLEDLIST);
+        map.put(MINORS.getCode(), MINORS);
+        map.put(FREEAGENT.getCode(), FREEAGENT);
+        map.put(RESTRICTED.getCode(), RESTRICTED);
     }
 
     private String name;
     private String code;
-    protected static final Map<String, PlayerStatus> map = new HashMap<String, PlayerStatus>();
+
     private PlayerStatus(String name, String code) {
         this.name = name;
         this.code = code;

@@ -1,5 +1,6 @@
 package com.homer.fantasy.dao.searcher.player;
 
+import com.homer.PlayerStatus;
 import com.homer.fantasy.DailyPlayerInfo;
 import com.homer.fantasy.Player;
 import com.homer.fantasy.Position;
@@ -52,6 +53,8 @@ public class PlayerSearchByPlayerName implements DataSearchMethod<Player> {
                     DailyPlayerInfo info = new DailyPlayerInfo(fantasyTeam, mlbTeam,
                             rs.getDate("playerToTeam.gameDate"),
                             Position.get(rs.getInt("playerToTeam.fantasyPositionId")),
+                            PlayerStatus.get(rs.getString("playerToTeam.fantasyPlayerStatusCode")),
+                            PlayerStatus.get(rs.getString("playerToTeam.mlbPlayerStatusCode")),
                             null
                     );
                     returnPlayer.addDailyPlayerInfoList(info);
@@ -63,6 +66,8 @@ public class PlayerSearchByPlayerName implements DataSearchMethod<Player> {
 
         } catch (SQLException e) {
             System.out.println("Connection Failed! Check output console");
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

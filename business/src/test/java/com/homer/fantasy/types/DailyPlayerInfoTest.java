@@ -1,5 +1,6 @@
 package com.homer.fantasy.types;
 
+import com.homer.PlayerStatus;
 import com.homer.SportType;
 import com.homer.fantasy.Player;
 import com.homer.fantasy.dao.HomerDAO;
@@ -96,6 +97,8 @@ public class DailyPlayerInfoTest {
                         mlbTeam,
                         rs.getDate("playerToTeam.gameDate"),
                         Position.get(rs.getInt("playerToTeam.fantasyPositionId")),
+                        PlayerStatus.get(rs.getString("playerToTeam.fantasyPlayerStatusCode")),
+                        PlayerStatus.get(rs.getString("playerToTeam.mlbPlayerStatusCode")),
                         null
                     );
                 }
@@ -106,6 +109,8 @@ public class DailyPlayerInfoTest {
 
             } catch (SQLException e) {
                 System.out.println("Connection Failed! Check output console");
+                e.printStackTrace();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return player;

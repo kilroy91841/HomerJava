@@ -98,7 +98,7 @@ public class FantasyRosterTest {
     }
 
     private DailyPlayerInfo generatePlayer(Position position) {
-        DailyPlayerInfo player = new DailyPlayerInfo(fantasyTeam, mlbTeam, cal.getTime(), position, null);
+        DailyPlayerInfo player = new DailyPlayerInfo(fantasyTeam, mlbTeam, cal.getTime(), position, null, null, null);
         return player;
     }
 }

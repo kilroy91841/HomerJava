@@ -21,11 +21,14 @@ public class DailyPlayerInfo {
 
 	public DailyPlayerInfo() { }
 
-	public DailyPlayerInfo(Team fantasyTeam, Team mlbTeam, Date date, Position fantasyPosition, List<Game> games) {
+	public DailyPlayerInfo(Team fantasyTeam, Team mlbTeam, Date date, Position fantasyPosition, PlayerStatus fantasyStatus,
+						   PlayerStatus mlbStatus, List<Game> games) {
 		setFantasyTeam(fantasyTeam);
 		setMlbTeam(mlbTeam);
 		setDate(date);
 		setFantasyPosition(fantasyPosition);
+		setFantasyStatus(fantasyStatus);
+		setMlbStatus(mlbStatus);
 		setGames(games);
 	}
 
