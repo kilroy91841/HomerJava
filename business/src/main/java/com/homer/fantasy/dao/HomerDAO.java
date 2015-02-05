@@ -268,9 +268,21 @@ public class HomerDAO extends MySQLDAO {
             } else {
                 statement.setNull(4, Types.INTEGER);
             }
-            statement.setString(5, fantasyPlayerStatusCode);
-            statement.setString(6, mlbPlayerStatusCode);
-            statement.setInt(7, fantasyPosition.getPositionId());
+            if(fantasyPlayerStatusCode != null) {
+                statement.setString(5, fantasyPlayerStatusCode);
+            } else {
+                statement.setNull(5, Types.VARCHAR);
+            }
+            if(mlbPlayerStatusCode != null) {
+                statement.setString(6, mlbPlayerStatusCode);
+            } else {
+                statement.setNull(6, Types.VARCHAR);
+            }
+            if(fantasyPosition != null) {
+                statement.setInt(7, fantasyPosition.getPositionId());
+            } else {
+                statement.setNull(7, Types.INTEGER);
+            }
 
             success = executeUpdate(statement);
 
@@ -282,7 +294,7 @@ public class HomerDAO extends MySQLDAO {
         return success;
     }
 
-    public boolean updateDailyFantasyProperties(Player fantasyPlayer, int fantasyTeamId, String fantasyPlayerStatusCode,
+    public boolean updateDailyFantasyProperties(Player fantasyPlayer, int fantasyTeamId, PlayerStatus fantasyPlayerStatus,
                                                 Position fantasyPosition) {
         LOG.info("Updating fantasy properties");
         boolean success = false;
@@ -296,7 +308,7 @@ public class HomerDAO extends MySQLDAO {
                     "limit 1;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, fantasyTeamId);
-            preparedStatement.setString(2, fantasyPlayerStatusCode);
+            preparedStatement.setString(2, fantasyPlayerStatus.getCode());
             preparedStatement.setInt(3, fantasyPosition.getPositionId());
             preparedStatement.setLong(4, fantasyPlayer.getPlayerId());
 

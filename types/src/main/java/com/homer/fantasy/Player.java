@@ -96,6 +96,14 @@ public class Player implements Tradable {
         getDailyPlayerInfoList().add(dailyPlayerInfo);
     }
 
+    public Team getCurrentFantasyTeam() throws Exception {
+        if(dailyPlayerInfoList.size() == 0) {
+            throw new Exception("Player does not have any daily info");
+        }
+        DailyPlayerInfo latestDailyPlayerInfo = dailyPlayerInfoList.get(0);
+        return latestDailyPlayerInfo.getFantasyTeam();
+    }
+
     @Override
     public String toString() {
         return "Player{" +

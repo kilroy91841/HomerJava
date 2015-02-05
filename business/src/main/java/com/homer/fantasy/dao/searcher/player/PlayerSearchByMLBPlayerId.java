@@ -4,10 +4,7 @@ import com.homer.PlayerStatus;
 import com.homer.fantasy.*;
 import com.homer.fantasy.dao.searcher.DataSearchMethod;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * Created by arigolub on 2/2/15.
@@ -35,7 +32,8 @@ public class PlayerSearchByMLBPlayerId implements DataSearchMethod<Player> {
                     "on playerToTeam.fantasyTeamId = fantasyTeam.teamId " +
                     "left join TEAM mlbTeam " +
                     "on playerToTeam.mlbTeamId = mlbTeam.teamId " +
-                    "where player.mlbPlayerId = ?";
+                    "where player.mlbPlayerId = ? " +
+                    "order by playerToTeam.gameDate desc";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, example.getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.MLB).getThirdPartyPlayerId());
             ResultSet rs = statement.executeQuery();
@@ -47,14 +45,17 @@ public class PlayerSearchByMLBPlayerId implements DataSearchMethod<Player> {
                 while(rs.next()) {
                     Team fantasyTeam = Team.create(rs, "fantasyTeam");
                     Team mlbTeam = Team.create(rs, "mlbTeam");
-                    DailyPlayerInfo info = new DailyPlayerInfo(fantasyTeam, mlbTeam,
-                            rs.getDate("playerToTeam.gameDate"),
-                            Position.get(rs.getInt("playerToTeam.fantasyPositionId")),
-                            PlayerStatus.get(rs.getString("playerToTeam.fantasyPlayerStatusCode")),
-                            PlayerStatus.get(rs.getString("playerToTeam.mlbPlayerStatusCode")),
-                            null
-                            );
-                    returnPlayer.addDailyPlayerInfoList(info);
+                    Date gameDate = rs.getDate("playerToTeam.gameDate");
+                    if(gameDate != null) {
+                        DailyPlayerInfo info = new DailyPlayerInfo(fantasyTeam, mlbTeam,
+                                gameDate,
+                                Position.get(rs.getInt("playerToTeam.fantasyPositionId")),
+                                PlayerStatus.get(rs.getString("playerToTeam.fantasyPlayerStatusCode")),
+                                PlayerStatus.get(rs.getString("playerToTeam.mlbPlayerStatusCode")),
+                                null
+                        );
+                        returnPlayer.addDailyPlayerInfoList(info);
+                    }
                 }
             }
 

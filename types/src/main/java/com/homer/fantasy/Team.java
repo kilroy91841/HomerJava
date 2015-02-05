@@ -10,6 +10,8 @@ import java.sql.SQLException;
  */
 public class Team {
 
+    public static final int FANTASY_FREE_AGENT_TEAM = 0;
+
     private Integer teamId;
     private String teamName;
     private SportType teamType;

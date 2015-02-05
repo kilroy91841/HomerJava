@@ -69,7 +69,7 @@ public class HomerDAOTest {
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
-        boolean success = dao.updateDailyFantasyProperties(player, 2, "DL", Position.FANTASYCATCHER);
+        boolean success = dao.updateDailyFantasyProperties(player, 2, PlayerStatus.DISABLEDLIST, Position.FANTASYCATCHER);
         Assert.assertTrue(success);
 
         Player dbPlayer = dao.findByExample(new Player("Mike Trout"));
@@ -81,6 +81,8 @@ public class HomerDAOTest {
         Assert.assertEquals(PlayerStatus.get("DL"), dpi.getFantasyStatus());
         Assert.assertEquals(PlayerStatus.get("A"), dpi.getMlbStatus());
         Assert.assertEquals(Position.FANTASYCATCHER, dpi.getFantasyPosition());
+
+        Assert.assertEquals("BSnaxx Cracker Jaxx", dpi.getFantasyTeam().getTeamName());
     }
 
     @Test
@@ -98,13 +100,15 @@ public class HomerDAOTest {
 
         Player dbPlayer = dao.findByExample(new Player("Mike Trout"));
         Assert.assertEquals(2, dbPlayer.getDailyPlayerInfoList().size());
-        DailyPlayerInfo dpi = dbPlayer.getDailyPlayerInfoList().get(1);
-        Assert.assertEquals(108, (int)dpi.getMlbTeam().getTeamId());
-        Assert.assertEquals(2, (int)dpi.getFantasyTeam().getTeamId());
+        DailyPlayerInfo dpi = dbPlayer.getDailyPlayerInfoList().get(0);
+        Assert.assertNull(dpi.getMlbTeam());
+        Assert.assertEquals(1, (int)dpi.getFantasyTeam().getTeamId());
         Assert.assertEquals(cal.getTime(), dpi.getDate());
-        Assert.assertEquals(PlayerStatus.get("DL"), dpi.getFantasyStatus());
+        Assert.assertEquals(PlayerStatus.get("A"), dpi.getFantasyStatus());
         Assert.assertEquals(PlayerStatus.get("A"), dpi.getMlbStatus());
         Assert.assertEquals(Position.FANTASYCATCHER, dpi.getFantasyPosition());
+
+        Assert.assertEquals("Mark Loretta\'s Scars", dpi.getFantasyTeam().getTeamName());
     }
 
 }
