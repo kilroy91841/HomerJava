@@ -28,6 +28,12 @@ public class PlayerFacade {
         return dao.findByExample(examplePlayer);
     }
 
+    public Player getPlayer(long playerId) {
+        Player example = new Player();
+        example.setPlayerId(playerId);
+        return getPlayer(example);
+    }
+
     public boolean createOrUpdatePlayer(com.homer.mlb.Player mlbPlayer) {
         boolean success;
 
@@ -44,7 +50,7 @@ public class PlayerFacade {
             dbPlayer = dao.findByExample(examplePlayer);
             //TODO fix the date
             success = dao.createPlayerToTeam(dbPlayer, new Date(), null,
-                    mlbPlayer.getTeam_id(), null, mlbPlayer.getStatus_code(), Position.get(mlbPlayer.getPrimary_position()))
+                    mlbPlayer.getTeam_id(), null, mlbPlayer.getStatus_code(), null)
                 && success;
         } else {
             LOG.info("found " + dbPlayer +", updating");
@@ -60,15 +66,19 @@ public class PlayerFacade {
         if(dbPlayer == null) {
             LOG.info("No player found, creating new player");
             success = dao.createPlayer(fantasyPlayer);
-            dbPlayer = dao.findByExample(dbPlayer);
+            dbPlayer = dao.findByExample(fantasyPlayer);
             //TODO fix the date
             success = dao.createPlayerToTeam(dbPlayer, new Date(), fantasyTeam != null ? fantasyTeam.getTeamId() : null,
-                    null, PlayerStatus.FREEAGENT.getCode(), null, dbPlayer.getPrimaryPosition())
+                    null, null, null, dbPlayer.getPrimaryPosition())
                     && success;
         } else {
             LOG.info("Found " + dbPlayer +", updating");
             success = dao.updatePlayer(dbPlayer, fantasyPlayer);
         }
         return success;
+    }
+
+    public boolean createOrUpdatePlayer(com.homer.fantasy.Player fantasyPlayer) {
+        return createOrUpdatePlayer(fantasyPlayer, null);
     }
 }

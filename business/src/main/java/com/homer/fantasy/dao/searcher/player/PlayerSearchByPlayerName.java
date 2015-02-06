@@ -16,7 +16,7 @@ public class PlayerSearchByPlayerName implements DataSearchMethod<Player> {
 
     @Override
     public boolean searchAllowed(Player example) {
-        if(example.getPlayerName().equals(null) || example.getPlayerName().equals("")) {
+        if(example.getPlayerName() == null || example.getPlayerName().equals("")) {
             return false;
         }
         return true;

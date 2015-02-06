@@ -22,6 +22,7 @@ CREATE TABLE PLAYER (
     playerName VARCHAR(50) NOT NULL,
     primaryPositionId INT,
     mlbPlayerId BIGINT NULL,
+    espnPlayerId BIGINT NULL,
     FOREIGN KEY (primaryPositionId) REFERENCES POSITION (positionId)
 );
 

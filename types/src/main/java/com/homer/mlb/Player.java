@@ -1,5 +1,6 @@
 package com.homer.mlb;
 
+import com.homer.fantasy.Position;
 import org.joda.time.DateTime;
 import org.json.JSONObject;
 
@@ -62,7 +63,18 @@ public class Player {
         this._throws = jsonObject.getString("throws");
         this.twitter_id = jsonObject.getString("twitter_id");
         this.jersey_number = jsonObject.getInteger("jersey_number");
-        this.primary_position = jsonObject.getInteger("primary_position");
+        try {
+            this.primary_position = jsonObject.getInteger("primary_position");
+        } catch(Exception e) {
+            String position = jsonObject.getString("primary_position");
+            if("O".equals(position)) {
+                this.primary_position = Position.CENTERFIELD.getPositionId();
+            } else if("D".equals(position)) {
+                this.primary_position = Position.DESIGNATEDHITTER.getPositionId();
+            } else {
+                throw e;
+            }
+        }
         this.team_id = jsonObject.getInteger("team_id");
         this.birth_date = jsonObject.getDateTime("birth_date");
         this.pro_debut_date = jsonObject.getDateTime("pro_debut_date");

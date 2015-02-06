@@ -3,11 +3,15 @@ package com.homer.mlb;
 import org.joda.time.DateTime;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by arigolub on 2/1/15.
  */
 public class MLBJSONObject extends JSONObject {
+
+    private static final Logger LOG = LoggerFactory.getLogger(MLBJSONObject.class);
 
     private JSONObject parent;
     
@@ -23,6 +27,7 @@ public class MLBJSONObject extends JSONObject {
         } catch(JSONException e) {
             String emptyValue = parent.getString(key);
             if(emptyValue == null || !emptyValue.equals("")) {
+                LOG.debug("Found position " + emptyValue);
                 throw new Exception("Something really went wrong finding property [" + key + "]");
             }
         }

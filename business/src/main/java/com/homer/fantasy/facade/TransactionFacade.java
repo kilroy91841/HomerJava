@@ -23,6 +23,7 @@ public class TransactionFacade {
     }
 
     public boolean addFreeAgent(long mlbPlayerId, int newFantasyTeam, Position fantasyPosition) throws Exception {
+        LOG.debug("Adding " + mlbPlayerId + " to team " + newFantasyTeam);
         boolean success = false;
 
         Player example = new Player();

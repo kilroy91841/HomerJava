@@ -104,3 +104,41 @@ select 141, "Toronto Blue Jays", "MLB", "TOR"
 union all
 select 120, "Washington Nationals", "MLB", "WSH"
 ;
+
+insert into TEAM (teamName, teamCode, teamId, teamType)
+select "Mark Loretta's Scars","MLS",1,"FANTASY"
+union all
+select "Ron Paul Revolution","GRAN",7,"FANTASY"
+union all
+select "Kershawshank Redemption","SHAW",12,"FANTASY"
+union all
+select "McGlade PlugIns","BMAC",6,"FANTASY"
+union all
+select "Bull Doziers","DOZE",3,"FANTASY"
+union all
+select "Crown Heights Riots","SIDO",4,"FANTASY"
+union all
+select "The Baghdad Daddy Bags","DBAG",9,"FANTASY"
+union all
+select "BSnaxx CrackerJaxx","SNXX",2,"FANTASY"
+union all
+select "Big Wheelie Style","HIV+",10,"FANTASY"
+union all
+select "Que? Manbearpuig","TACO",11,"FANTASY"
+union all
+select "Brooklyn No Sox","MAD",5,"FANTASY"
+union all
+select "Las Vegas Isotopes","LAZ",8,"FANTASY"
+union all
+select "Free Agent","FA",0,"FANTASY";
+
+insert into PLAYERSTATUS (playerStatusCode, playerStatusName)
+select 'A', 'ACTIVE'
+union all
+select 'DL', 'DISABLED LIST'
+union all
+select 'B', 'BENCH'
+union all
+select 'ML', 'MINOR LEAGUES'
+union all
+select 'SUSP', 'SUSPENDED';

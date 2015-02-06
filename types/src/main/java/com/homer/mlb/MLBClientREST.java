@@ -7,6 +7,8 @@ import com.mashape.unirest.http.async.Callback;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +20,8 @@ import java.util.concurrent.Future;
  * Created by arigolub on 2/1/15.
  */
 public class MLBClientREST implements MLBClient {
+
+    private static final Logger LOG = LoggerFactory.getLogger(MLBClient.class);
 
     @Override
     public Player getPlayer(long playerId) {
@@ -122,6 +126,19 @@ public class MLBClientREST implements MLBClient {
             e.printStackTrace();
         }
         return players;
+    }
+
+    public void get40ManRosterAsync(int teamId, Callback<JsonNode> callback) {
+        //http://mlb.mlb.com/lookup/json/named.roster_40.bam
+        Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("team_id", teamId);
+        try {
+            Unirest.get("http://mlb.mlb.com/lookup/json/named.roster_40.bam")
+                    .queryString(parameters)
+                    .asJsonAsync(callback);
+        } catch (Exception e) {
+            LOG.error("Runtime exception", e);
+        }
     }
 
     public Player getPlayerAsync(long playerId) {
