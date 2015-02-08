@@ -24,12 +24,14 @@
         <processorPath useClasspath="true" />
         <module name="business" />
         <module name="types" />
+        <module name="web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="business" target="1.7" />
       <module name="parent" target="1.7" />
       <module name="types" target="1.7" />
+      <module name="web" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

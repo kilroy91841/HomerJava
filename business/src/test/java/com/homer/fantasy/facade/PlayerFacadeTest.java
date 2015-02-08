@@ -1,15 +1,9 @@
 package com.homer.fantasy.facade;
 
-import com.homer.fantasy.Player;
-import com.homer.fantasy.Position;
-import com.homer.fantasy.ThirdPartyPlayerInfo;
-import com.homer.fantasy.types.util.DBPreparer;
-import com.homer.mlb.MLBJSONObject;
+import com.homer.fantasy.util.DBPreparer;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.Operations;
 import com.ninja_squad.dbsetup.operation.Operation;
-import junit.framework.Assert;
-import org.json.JSONObject;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -32,134 +26,6 @@ public class PlayerFacadeTest {
 
         DbSetup dbSetup = new DbSetup(DBPreparer.getDriverManagerDestination(), operation);
         dbSetup.launch();
-    }
-
-    @Test
-    public void createMLBPlayer() {
-        JSONObject json = new JSONObject();
-        json.put("name_display_first_last", "Ari Golub");
-        json.put("player_id", "012345");
-        json.put("primary_position", "8");
-        MLBJSONObject mlb = new MLBJSONObject(json);
-
-        boolean success = false;
-
-        try {
-            com.homer.mlb.Player mlbPlayer = new com.homer.mlb.Player(mlb);
-            success = facade.createOrUpdatePlayer(mlbPlayer);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Assert.assertTrue(success);
-
-        Player example = new Player();
-        example.setPlayerName("Ari Golub");
-        Player player = facade.getPlayer(example);
-        Assert.assertEquals(new Long("012345"), player.getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.MLB).getThirdPartyPlayerId());
-        Assert.assertEquals("Ari Golub", player.getPlayerName());
-    }
-
-    @Test
-    public void createMLBPlayerUpdate() {
-        JSONObject json = new JSONObject();
-        json.put("name_display_first_last", "Lindsay Young");
-        json.put("player_id", "012345");
-        json.put("primary_position", "8");
-        MLBJSONObject mlb = new MLBJSONObject(json);
-
-        boolean success = false;
-
-        try {
-            com.homer.mlb.Player mlbPlayer = new com.homer.mlb.Player(mlb);
-            success = facade.createOrUpdatePlayer(mlbPlayer);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Assert.assertTrue(success);
-        Player example = new Player();
-        example.setPlayerName("Lindsay Young");
-        Player player = facade.getPlayer(example);
-        Assert.assertEquals(new Long("012345"), player.getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.MLB).getThirdPartyPlayerId());
-        Assert.assertEquals("Lindsay Young", player.getPlayerName());
-    }
-
-    @Test
-    public void createFantasyPlayer() {
-        Player player = new Player();
-        player.setPlayerName("Mike Trout");
-        player.setPrimaryPosition(Position.CENTERFIELD);
-
-        boolean success = false;
-        try {
-            success = facade.createOrUpdatePlayer(player);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        Assert.assertTrue(success);
-        Player dbPlayer = facade.getPlayer(player);
-        Assert.assertEquals(player.getPlayerName(), dbPlayer.getPlayerName());
-        Assert.assertNotNull(dbPlayer.getPlayerId());
-    }
-
-    @Test
-    public void createFantasyPlayerUpdate() {
-        Player player = new Player();
-        player.setPlayerName("Mike Trout");
-        player.setPrimaryPosition(Position.CENTERFIELD);
-        player.addThirdPartyPlayerInfo(new ThirdPartyPlayerInfo(8910, ThirdPartyPlayerInfo.MLB));
-
-        boolean success = false;
-        try {
-            success = facade.createOrUpdatePlayer(player);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        Assert.assertTrue(success);
-        Player dbPlayer = facade.getPlayer(player);
-        Assert.assertEquals(player.getPlayerName(), dbPlayer.getPlayerName());
-        Assert.assertEquals(new Long("8910"), dbPlayer.getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.MLB).getThirdPartyPlayerId());
-    }
-
-    @Test
-    public void createFantasyPlayer2() {
-        Player player = new Player();
-        player.setPlayerName("Miguel Cabrera");
-        player.setPrimaryPosition(Position.FIRSTBASE);
-
-        boolean success = false;
-        try {
-            success = facade.createOrUpdatePlayer(player);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        Assert.assertTrue(success);
-        Player dbPlayer = facade.getPlayer(player);
-        Assert.assertEquals(player.getPlayerName(), dbPlayer.getPlayerName());
-        Assert.assertNotNull(dbPlayer.getPlayerId());
-    }
-
-    @Test
-    public void createFantasyPlayer2UpdateWithMLBInfo() {
-        JSONObject json = new JSONObject();
-        json.put("name_display_first_last", "Miguel Cabrera");
-        json.put("player_id", "345");
-        json.put("primary_position", "3");
-        MLBJSONObject mlb = new MLBJSONObject(json);
-
-        boolean success = false;
-        try {
-            com.homer.mlb.Player mlbPlayer = new com.homer.mlb.Player(mlb);
-            success = facade.createOrUpdatePlayer(mlbPlayer);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        Assert.assertTrue(success);
-        Player example = new Player();
-        example.setPlayerName("Miguel Cabrera");
-        example.addThirdPartyPlayerInfo(new ThirdPartyPlayerInfo(345, ThirdPartyPlayerInfo.MLB));
-        Player dbPlayer = facade.getPlayer(example);
-        Assert.assertEquals(example.getPlayerName(), dbPlayer.getPlayerName());
-        Assert.assertEquals(new Long("345"), dbPlayer.getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.MLB).getThirdPartyPlayerId());
     }
 
 }

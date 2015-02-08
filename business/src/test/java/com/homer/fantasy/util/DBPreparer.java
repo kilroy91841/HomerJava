@@ -1,12 +1,10 @@
-package com.homer.fantasy.types.util;
+package com.homer.fantasy.util;
 
 import com.homer.util.PropertyRetriever;
 import com.ninja_squad.dbsetup.destination.DriverManagerDestination;
 
-import java.sql.Driver;
-
 /**
- * Created by golub on 2/4/15.
+ * Created by arigolub on 2/8/15.
  */
 public class DBPreparer {
 

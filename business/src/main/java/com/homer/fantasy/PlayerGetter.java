@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.homer.mlb.Player;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +26,9 @@ public class PlayerGetter {
 
     private static final Logger LOG = LoggerFactory.getLogger(PlayerGetter.class);
 
-    public static void main(String[] args) {
-        LOG.debug("hi");
+    public static void main(String[] args) throws SQLException {
         HomerDAO dao = new HomerDAO();
-        List<Team> teams = dao.getTeams();
+        List<Team> teams = dao.getMLBTeams();
         MLBClientREST client = new MLBClientREST();
 
         for(Team team : teams) {

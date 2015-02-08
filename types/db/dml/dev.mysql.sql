@@ -135,6 +135,8 @@ select "Free Agent","FA",0,"FANTASY";
 insert into PLAYERSTATUS (playerStatusCode, playerStatusName)
 select 'A', 'ACTIVE'
 union all
+select 'I', 'INACTIVE'
+union all
 select 'DL', 'DISABLED LIST'
 union all
 select 'B', 'BENCH'

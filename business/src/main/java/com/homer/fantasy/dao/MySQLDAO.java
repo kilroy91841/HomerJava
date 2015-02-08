@@ -37,9 +37,9 @@ public abstract class MySQLDAO {
     }
 
     public void closeAll(ResultSet rs, Statement statement, Connection connection) throws SQLException {
-        rs.close();
-        statement.close();
-        connection.close();
+        if(rs != null) rs.close();
+        if(statement != null) statement.close();
+        if(connection != null) connection.close();
     }
 
 }

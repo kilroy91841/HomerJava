@@ -29,6 +29,12 @@
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
 
+        <!-- Scheduling -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+        </dependency>
+
         <!-- Test -->
         <dependency>
             <groupId>junit</groupId>

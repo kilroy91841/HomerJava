@@ -104,6 +104,30 @@ public class Player implements Tradable {
         return latestDailyPlayerInfo.getFantasyTeam();
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getNameLastFirst() {
+        return nameLastFirst;
+    }
+
+    public void setNameLastFirst(String nameLastFirst) {
+        this.nameLastFirst = nameLastFirst;
+    }
+
     @Override
     public String toString() {
         return "Player{" +
@@ -148,6 +172,10 @@ public class Player implements Tradable {
         Long mlbPlayerId = rs.getLong(tableName + ".mlbPlayerId");
         if(!rs.wasNull()) {
             thirdPartyPlayerInfoList.add(new ThirdPartyPlayerInfo(mlbPlayerId, ThirdPartyPlayerInfo.MLB));
+        }
+        Long espnPlayerId = rs.getLong(tableName + ".espnPlayerId");
+        if(!rs.wasNull()) {
+            thirdPartyPlayerInfoList.add(new ThirdPartyPlayerInfo(espnPlayerId, ThirdPartyPlayerInfo.ESPN));
         }
         player.setThirdPartyPlayerInfoSet(thirdPartyPlayerInfoList);
 

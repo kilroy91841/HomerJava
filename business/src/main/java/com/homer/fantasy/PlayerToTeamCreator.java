@@ -29,7 +29,9 @@ public class PlayerToTeamCreator {
                 long playerId = obj.getLong("mlbPlayerId");
                 int fantasyTeam = obj.getInt("fantasyTeamId");
                 LOG.debug("player: " + playerId + ", fantasyTeam: " + fantasyTeam);
-                facade.addFreeAgent(playerId, fantasyTeam, Position.FANTASYCATCHER);
+                Player player = new Player();
+                player.addThirdPartyPlayerInfo(new ThirdPartyPlayerInfo(playerId, ThirdPartyPlayerInfo.MLB));
+                facade.addFreeAgent(player, fantasyTeam, Position.FANTASYCATCHER);
             } catch(Throwable t) {
                 LOG.error("thrown", t);
             }

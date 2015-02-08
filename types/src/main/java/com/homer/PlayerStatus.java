@@ -9,6 +9,7 @@ import java.util.Map;
 public class PlayerStatus {
 
     public static final PlayerStatus ACTIVE = new PlayerStatus("ACTIVE", "A");
+    public static final PlayerStatus INACTIVE = new PlayerStatus("INACTIVE", "I");
     public static final PlayerStatus DISABLEDLIST = new PlayerStatus("DISABLED LIST", "DL");
     public static final PlayerStatus MINORS = new PlayerStatus("MINORS", "MIN");
     public static final PlayerStatus FREEAGENT = new PlayerStatus("FREEAGENT", "FA");
@@ -18,6 +19,7 @@ public class PlayerStatus {
 
     static {
         map.put(ACTIVE.getCode(), ACTIVE);
+        map.put(INACTIVE.getCode(), INACTIVE);
         map.put(DISABLEDLIST.getCode(), DISABLEDLIST);
         map.put(MINORS.getCode(), MINORS);
         map.put(FREEAGENT.getCode(), FREEAGENT);

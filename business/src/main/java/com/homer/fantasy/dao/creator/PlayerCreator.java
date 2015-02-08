@@ -21,12 +21,12 @@ public class PlayerCreator {
         this.connection = connection;
     }
 
-    public boolean create(String playerName, int primaryPositionId, Long mlbPlayerId) {
+    public boolean create(String playerName, int primaryPositionId, Long mlbPlayerId, Long espnPlayerId) {
         boolean success = false;
 
         try {
-            String sql = "insert into PLAYER (playerName, primaryPositionId, mlbPlayerId)" +
-                    "values (?, ?, ?)";
+            String sql = "insert into PLAYER (playerName, primaryPositionId, mlbPlayerId, espnPlayerId)" +
+                    "values (?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, playerName);
             statement.setInt(2, primaryPositionId);
@@ -34,6 +34,11 @@ public class PlayerCreator {
                 statement.setLong(3, mlbPlayerId);
             } else {
                 statement.setNull(3, Types.BIGINT);
+            }
+            if(espnPlayerId != null) {
+                statement.setLong(4, espnPlayerId);
+            } else {
+                statement.setNull(4, Types.BIGINT);
             }
 
             int rowCount = statement.executeUpdate();

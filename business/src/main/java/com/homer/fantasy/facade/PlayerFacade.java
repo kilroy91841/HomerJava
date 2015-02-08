@@ -9,6 +9,8 @@ import com.homer.fantasy.dao.HomerDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -34,7 +36,7 @@ public class PlayerFacade {
         return getPlayer(example);
     }
 
-    public boolean createOrUpdatePlayer(com.homer.mlb.Player mlbPlayer) {
+    public boolean createOrUpdatePlayer(com.homer.mlb.Player mlbPlayer) throws SQLException {
         boolean success;
 
         Player examplePlayer = new Player();
@@ -52,6 +54,8 @@ public class PlayerFacade {
             success = dao.createPlayerToTeam(dbPlayer, new Date(), null,
                     mlbPlayer.getTeam_id(), null, mlbPlayer.getStatus_code(), null)
                 && success;
+            success = dao.createPlayerHistory(dbPlayer, Calendar.getInstance().get(Calendar.YEAR), 0,
+                    0, false, null, null, false) && success;
         } else {
             LOG.info("found " + dbPlayer +", updating");
             success = dao.updatePlayer(dbPlayer, examplePlayer);
@@ -59,7 +63,7 @@ public class PlayerFacade {
         return success;
     }
 
-    public boolean createOrUpdatePlayer(com.homer.fantasy.Player fantasyPlayer, Team fantasyTeam) {
+    public boolean createOrUpdatePlayer(com.homer.fantasy.Player fantasyPlayer, Team fantasyTeam) throws SQLException {
         boolean success;
 
         Player dbPlayer = dao.findByExample(fantasyPlayer);
@@ -71,6 +75,8 @@ public class PlayerFacade {
             success = dao.createPlayerToTeam(dbPlayer, new Date(), fantasyTeam != null ? fantasyTeam.getTeamId() : null,
                     null, null, null, dbPlayer.getPrimaryPosition())
                     && success;
+            success = dao.createPlayerHistory(dbPlayer, Calendar.getInstance().get(Calendar.YEAR), 0,
+                    0, false, null, null, false) && success;
         } else {
             LOG.info("Found " + dbPlayer +", updating");
             success = dao.updatePlayer(dbPlayer, fantasyPlayer);
@@ -78,7 +84,7 @@ public class PlayerFacade {
         return success;
     }
 
-    public boolean createOrUpdatePlayer(com.homer.fantasy.Player fantasyPlayer) {
+    public boolean createOrUpdatePlayer(com.homer.fantasy.Player fantasyPlayer) throws SQLException {
         return createOrUpdatePlayer(fantasyPlayer, null);
     }
 }

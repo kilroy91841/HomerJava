@@ -1,10 +1,7 @@
 package com.homer.fantasy.dao.searcher.player;
 
 import com.homer.PlayerStatus;
-import com.homer.fantasy.DailyPlayerInfo;
-import com.homer.fantasy.Player;
-import com.homer.fantasy.Position;
-import com.homer.fantasy.Team;
+import com.homer.fantasy.*;
 import com.homer.fantasy.dao.parser.PlayerParser;
 import com.homer.fantasy.dao.searcher.DataSearchMethod;
 import org.slf4j.Logger;
@@ -13,15 +10,16 @@ import org.slf4j.LoggerFactory;
 import java.sql.*;
 
 /**
- * Created by arigolub on 2/2/15.
+ * Created by arigolub on 2/8/15.
  */
-public class PlayerSearchByPlayerId implements DataSearchMethod<Player> {
+public class PlayerSearchByESPNPlayerId implements DataSearchMethod<Player> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(PlayerSearchByPlayerId.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PlayerSearchByESPNPlayerId.class);
 
     @Override
     public boolean searchAllowed(Player example) {
-        if(example.getPlayerId() == null) {
+        ThirdPartyPlayerInfo info = example.getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.ESPN);
+        if(info == null || info.getThirdPartyPlayerId() == null) {
             return false;
         }
         return true;
@@ -32,7 +30,6 @@ public class PlayerSearchByPlayerId implements DataSearchMethod<Player> {
         Player returnPlayer = null;
 
         try {
-
             String sql = "select * from PLAYER player " +
                     "left join PLAYERTOTEAM playerToTeam " +
                     "on player.playerId = playerToTeam.playerId " +
@@ -40,10 +37,10 @@ public class PlayerSearchByPlayerId implements DataSearchMethod<Player> {
                     "on playerToTeam.fantasyTeamId = fantasyTeam.teamId " +
                     "left join TEAM mlbTeam " +
                     "on playerToTeam.mlbTeamId = mlbTeam.teamId " +
-                    "where player.playerId = ? " +
+                    "where player.espnPlayerId = ? " +
                     "order by playerToTeam.gameDate desc";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setLong(1, example.getPlayerId());
+            statement.setLong(1, example.getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.ESPN).getThirdPartyPlayerId());
             ResultSet rs = statement.executeQuery();
 
             returnPlayer = PlayerParser.create(rs);

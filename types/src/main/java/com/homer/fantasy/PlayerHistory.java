@@ -14,16 +14,19 @@ public class PlayerHistory {
 	private Boolean minorLeaguer;
 	private Team draftTeam;
 	private Team keeperTeam;
+	private Boolean rookieStatus;
 
 	public PlayerHistory() { }
 
-	public PlayerHistory(int season, int salary, int keeperSeason, Boolean isMinorLeaguer, Team draftTeam, Team keeperTeam) {
+	public PlayerHistory(int season, int salary, int keeperSeason, Boolean isMinorLeaguer,
+						 Team draftTeam, Team keeperTeam, Boolean rookieStatus) {
 		setSeason(season);
 		setSalary(salary);
 		setKeeperSeason(keeperSeason);
 		setMinorLeaguer(isMinorLeaguer);
 		setDraftTeam(draftTeam);
 		setKeeperTeam(keeperTeam);
+		setRookieStatus(rookieStatus);
 	}
 
 	public void setSeason(int season) {
@@ -74,6 +77,14 @@ public class PlayerHistory {
 		return keeperTeam;
 	}
 
+	public Boolean hasRookieStatus() {
+		return rookieStatus;
+	}
+
+	public void setRookieStatus(Boolean rookieStatus) {
+		this.rookieStatus = rookieStatus;
+	}
+
 	@Override
     public String toString() {
         return "PlayerHistory{" +
@@ -83,6 +94,7 @@ public class PlayerHistory {
                 ", minorLeaguer=" + minorLeaguer +
                 ", draftTeam=" + draftTeam +
                 ", keeperTeam=" + keeperTeam +
+				", rookieStatus=" + rookieStatus +
                 '}';
     }
 
@@ -99,6 +111,7 @@ public class PlayerHistory {
         if (season != that.season) return false;
         if (draftTeam != null ? !draftTeam.equals(that.draftTeam) : that.draftTeam != null) return false;
         if (keeperTeam != null ? !keeperTeam.equals(that.keeperTeam) : that.keeperTeam != null) return false;
+		if (rookieStatus != that.rookieStatus) return false;
 
         return true;
     }
@@ -111,6 +124,7 @@ public class PlayerHistory {
         result = 31 * result + (minorLeaguer ? 1 : 0);
         result = 31 * result + (draftTeam != null ? draftTeam.hashCode() : 0);
         result = 31 * result + (keeperTeam != null ? keeperTeam.hashCode() : 0);
+		result = 31 * result + (rookieStatus ? 1 : 0);
         return result;
     }
 
@@ -134,9 +148,9 @@ public class PlayerHistory {
 				rs.getInt("history.keeperSeason"),
 				rs.getBoolean("history.minorLeaguer"),
 				draftTeam,
-				keeperTeam
+				keeperTeam,
+				rs.getBoolean("history.rookieStatus")
 		);
 
 	}
-
 }
