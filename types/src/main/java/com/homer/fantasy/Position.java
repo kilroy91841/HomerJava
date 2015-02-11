@@ -2,12 +2,15 @@ package com.homer.fantasy;
 
 import com.homer.SportType;
 
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by MLB on 1/25/15.
  */
+@Entity
+@Table(name="POSITION")
 public class Position {
 
     public static final Position STARTINGPITCHER = new Position(1, "STARTINGPITCHER", SportType.getSportType("MLB"), "P");
@@ -58,9 +61,13 @@ public class Position {
         positionMap.put(FANTASYPITCHER.getPositionId(), FANTASYPITCHER);
     }
 
+    @Id
     private Integer positionId;
+    @Column(name="positionName")
     private String positionName;
+    @Transient
     private SportType positionType;
+    @Transient
     private String positionCode;
 
     private Position(Integer positionId, String positionName, SportType positionType, String positionCode) {

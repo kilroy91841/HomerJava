@@ -197,7 +197,7 @@ public class Trade {
                 int assetOwningTeamId = rs.getInt("tradeAsset.teamId");
                 Tradable asset = null;
                 if(assetType.equals("PLAYER")) {
-                    asset = Player.create(rs, "player");
+                    //asset = Player.create(rs, "player");
                 } else if(assetType.equals("MONEY")) {
                     asset = new Money(
                             null,

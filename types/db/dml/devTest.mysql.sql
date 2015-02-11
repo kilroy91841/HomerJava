@@ -1,3 +1,10 @@
+delete from SPORTTYPE;
+
+insert into SPORTTYPE (type)
+select 'MLB'
+union all
+select 'FANTASY';
+
 delete from PLAYERSTATUS;
 
 insert into PLAYERSTATUS (playerStatusCode, playerStatusName)

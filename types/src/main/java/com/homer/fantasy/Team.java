@@ -2,19 +2,26 @@ package com.homer.fantasy;
 
 import com.homer.SportType;
 
+import javax.persistence.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
  * Created by MLB on 1/25/15.
  */
+@Entity
+@Table(name="TEAM")
 public class Team {
 
     public static final int FANTASY_FREE_AGENT_TEAM = 0;
 
+    @Id
     private Integer teamId;
+    @Column(name="teamName")
     private String teamName;
+    @Enumerated(EnumType.STRING)
     private SportType teamType;
+    @Column(name="teamCode")
     private String teamCode;
 
     public Team() { }
@@ -92,17 +99,4 @@ public class Team {
         return result;
     }
 
-
-    public static Team create(ResultSet rs, String tableName) throws SQLException {
-        int teamId = rs.getInt(tableName + ".teamId");
-        if(rs.wasNull()) {
-            return null;
-        }
-        return new Team(
-                teamId,
-                rs.getString(tableName + ".teamName"),
-                SportType.getSportType(rs.getString(tableName + ".teamType")),
-                rs.getString(tableName + ".teamCode")
-        );
-    }
 }

@@ -1,5 +1,6 @@
 package com.homer.fantasy;
 
+import javax.persistence.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,15 +11,29 @@ import java.util.Set;
 /**
  * Created by MLB on 1/25/15.
  */
+@Entity
+@Table(name="PLAYER")
 public class Player implements Tradable {
 
+    @Id
+    @Column(name="playerId")
     private long playerId;
+    @Column(name="playerName")
     private String playerName;
+    @OneToOne
+    @JoinColumn(name="primaryPositionId", referencedColumnName="positionId")
     private Position primaryPosition;
+    @Column(name="firstName")
     private String firstName;
+    @Column(name="lastName")
     private String lastName;
+    @Column(name="nameLastFirst")
     private String nameLastFirst;
-    private Set<ThirdPartyPlayerInfo> thirdPartyPlayerInfoSet;
+    @Column(name="mlbPlayerId")
+    private long mlbPlayerId;
+    @Column(name="espnPlayerId")
+    private long espnPlayerId;
+    @Transient
     private List<DailyPlayerInfo> dailyPlayerInfoList;
 
     public Player() { }
@@ -57,28 +72,44 @@ public class Player implements Tradable {
         this.primaryPosition = primaryPosition;
     }
 
-    public Set<ThirdPartyPlayerInfo> getThirdPartyPlayerInfoSet() {
-        if(thirdPartyPlayerInfoSet == null) {
-            thirdPartyPlayerInfoSet = new HashSet<ThirdPartyPlayerInfo>();
-        }
-        return thirdPartyPlayerInfoSet;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setThirdPartyPlayerInfoSet(Set<ThirdPartyPlayerInfo> thirdPartyPlayerInfoSet) {
-        this.thirdPartyPlayerInfoSet = thirdPartyPlayerInfoSet;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public ThirdPartyPlayerInfo getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.ThirdPartyProvider provider) {
-        for(ThirdPartyPlayerInfo info : getThirdPartyPlayerInfoSet()) {
-            if(info.getProvider().equals(provider)) {
-                return info;
-            }
-        }
-        return null;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void addThirdPartyPlayerInfo(ThirdPartyPlayerInfo info) {
-        getThirdPartyPlayerInfoSet().add(info);
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getNameLastFirst() {
+        return nameLastFirst;
+    }
+
+    public void setNameLastFirst(String nameLastFirst) {
+        this.nameLastFirst = nameLastFirst;
+    }
+
+    public long getMlbPlayerId() {
+        return mlbPlayerId;
+    }
+
+    public void setMlbPlayerId(long mlbPlayerId) {
+        this.mlbPlayerId = mlbPlayerId;
+    }
+
+    public long getEspnPlayerId() {
+        return espnPlayerId;
+    }
+
+    public void setEspnPlayerId(long espnPlayerId) {
+        this.espnPlayerId = espnPlayerId;
     }
 
     public List<DailyPlayerInfo> getDailyPlayerInfoList() {
@@ -104,40 +135,6 @@ public class Player implements Tradable {
         return latestDailyPlayerInfo.getFantasyTeam();
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getNameLastFirst() {
-        return nameLastFirst;
-    }
-
-    public void setNameLastFirst(String nameLastFirst) {
-        this.nameLastFirst = nameLastFirst;
-    }
-
-    @Override
-    public String toString() {
-        return "Player{" +
-                "playerId=" + playerId +
-                ", playerName='" + playerName + '\'' +
-                ", primaryPosition=" + primaryPosition +
-                ", thirdPartyPlayerInfoSet=" + thirdPartyPlayerInfoSet +
-                '}';
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -148,37 +145,8 @@ public class Player implements Tradable {
         if (playerName != null ? !playerName.equals(player.playerName) : player.playerName != null) return false;
         if (primaryPosition != null ? !primaryPosition.equals(player.primaryPosition) : player.primaryPosition != null)
             return false;
-        if (getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.MLB) != null ?
-                !getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.MLB).equals(player.getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.MLB)) :
-                player.getThirdPartyPlayerInfoByProvider(ThirdPartyPlayerInfo.MLB) != null
-                ) return false;
 
         return true;
     }
 
-
-    public static Player create(ResultSet rs, String tableName) throws SQLException {
-        Long playerId = rs.getLong(tableName + ".playerId");
-        if(rs.wasNull()) {
-            return null;
-        }
-        Player player = new Player(
-                playerId,
-                rs.getString(tableName + ".playerName"),
-                Position.get(rs.getInt(tableName + ".primaryPositionId"))
-        );
-
-        Set<ThirdPartyPlayerInfo> thirdPartyPlayerInfoList = new HashSet<ThirdPartyPlayerInfo>();
-        Long mlbPlayerId = rs.getLong(tableName + ".mlbPlayerId");
-        if(!rs.wasNull()) {
-            thirdPartyPlayerInfoList.add(new ThirdPartyPlayerInfo(mlbPlayerId, ThirdPartyPlayerInfo.MLB));
-        }
-        Long espnPlayerId = rs.getLong(tableName + ".espnPlayerId");
-        if(!rs.wasNull()) {
-            thirdPartyPlayerInfoList.add(new ThirdPartyPlayerInfo(espnPlayerId, ThirdPartyPlayerInfo.ESPN));
-        }
-        player.setThirdPartyPlayerInfoSet(thirdPartyPlayerInfoList);
-
-        return player;
-    }
 }

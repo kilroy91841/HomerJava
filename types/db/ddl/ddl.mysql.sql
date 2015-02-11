@@ -1,3 +1,7 @@
+CREATE TABLE SPORTTYPE (
+    type VARCHAR(7) PRIMARY KEY
+);
+
 CREATE TABLE PLAYERSTATUS (
     playerStatusCode VARCHAR(10) PRIMARY KEY,
     playerStatusName VARCHAR(20) NOT NULL
@@ -7,19 +11,24 @@ CREATE TABLE POSITION (
     positionId int PRIMARY KEY,
     positionName VARCHAR(20) NOT NULL,
     positionType VARCHAR(10) NOT NULL,
-    positionCode VARCHAR(10) NOT NULL
+    positionCode VARCHAR(10) NOT NULL,
+    FOREIGN KEY (positionType) REFERENCES SPORTTYPE (type)
 );
 
 CREATE TABLE TEAM (
     teamId INT PRIMARY KEY,
     teamName VARCHAR(50) NOT NULL,
     teamType VARCHAR(10) NOT NULL,
-    teamCode VARCHAR(10) NOT NULL
+    teamCode VARCHAR(10) NOT NULL,
+    FOREIGN KEY (teamType) REFERENCES SPORTTYPE (type)
 );
 
 CREATE TABLE PLAYER (
     playerId BIGINT AUTO_INCREMENT PRIMARY KEY,
     playerName VARCHAR(50) NOT NULL,
+    firstName VARCHAR(25),
+    lastName VARCHAR(25),
+    nameLastFirst VARCHAR(50),
     primaryPositionId INT,
     mlbPlayerId BIGINT NULL,
     espnPlayerId BIGINT NULL,

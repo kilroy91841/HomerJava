@@ -1,3 +1,10 @@
+delete from SPORTTYPE;
+
+insert into SPORTTYPE (type)
+select 'MLB'
+union all
+select 'FANTASY';
+
 insert into POSITION (positionId, positionName, positionType, positionCode)
 select 1, "STARTINGPITCHER", "MLB", "P"
 union all
