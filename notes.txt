@@ -7,25 +7,25 @@ What users can do:
 
 Transactions
 	-add a free agent to a team
-		-find player by playerId
+		-find player by player
 			-if player exists
 				-UPDATE LATEST PLAYERTOTEAM
 			-if player does not exist
 				-RETURN ERROR
 	-drop a player from a team
-		-find player by playerId
+		-find player by player
 			-if player exists
 				-UPDATE LATEST PLAYERTOTEAM
 			-if player does not exist
 				-RETURN ERROR
 	-change a player's fantasy position (including to/from DL, Minors, Suspended)
-		-find player by playerId
+		-find player by player
 			-if player exists
 				-UPDATE LATEST PLAYERTOTEAM
 			-if player does not exist
 				-RETURN ERROR
 	-trade a player
-		-find player by playerId
+		-find player by player
 			-if player exists
 				-UPDATE LATEST PLAYERTOTEAM
 			-if player does not exist

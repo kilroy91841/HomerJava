@@ -64,7 +64,7 @@ public class PlayerGetter {
                         fantasyPlayer.setNameLastFirst(player.getName_display_last_first());
                         fantasyPlayer.setPrimaryPosition(Position.get(player.getPrimary_position()));
                         fantasyPlayer.setMlbPlayerId(player.getPlayer_id());
-                        dao.saveOrUpdate(fantasyPlayer);
+                        dao.createPlayer(fantasyPlayer);
                     } catch (Exception e) {
                         LOG.error("Unable to create player from obj " + obj);
                     }

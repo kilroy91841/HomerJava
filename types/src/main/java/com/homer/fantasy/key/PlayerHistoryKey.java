@@ -1,7 +1,9 @@
 package com.homer.fantasy.key;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import com.homer.fantasy.Player;
+import org.hibernate.annotations.Cascade;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -10,19 +12,21 @@ import java.io.Serializable;
 @Embeddable
 public class PlayerHistoryKey implements Serializable {
 
-    @Column(name="playerId")
-    private long playerId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="playerId", referencedColumnName="playerId")
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+    private Player player;
     @Column(name="season")
     private int season;
 
     public PlayerHistoryKey() { }
 
-    public long getPlayerId() {
-        return playerId;
+    public Player getPlayer() {
+        return player;
     }
 
-    public void setPlayerId(long playerId) {
-        this.playerId = playerId;
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     public int getSeason() {
@@ -34,21 +38,29 @@ public class PlayerHistoryKey implements Serializable {
     }
 
     @Override
+    public String toString() {
+        return "PlayerHistoryKey{" +
+                "playerId=" + player.getPlayerId() +
+                ", season=" + season +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         PlayerHistoryKey that = (PlayerHistoryKey) o;
 
-        if (playerId != that.playerId) return false;
         if (season != that.season) return false;
+        if (!player.equals(that.player)) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (playerId ^ (playerId >>> 32));
+        int result = player.hashCode();
         result = 31 * result + season;
         return result;
     }

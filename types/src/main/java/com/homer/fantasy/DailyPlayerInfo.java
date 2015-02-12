@@ -36,7 +36,9 @@ public class DailyPlayerInfo {
 	@Transient
 	private List<Game> games;
 
-	public DailyPlayerInfo() { }
+	public DailyPlayerInfo() {
+		this.dailyPlayerInfoKey = new DailyPlayerInfoKey();
+	}
 
 	public DailyPlayerInfo(Team fantasyTeam, Team mlbTeam, Date date, Position fantasyPosition, PlayerStatus fantasyStatus,
 						   PlayerStatus mlbStatus, List<Game> games) {
@@ -71,6 +73,10 @@ public class DailyPlayerInfo {
 
 	public Team getMlbTeam() {
 		return mlbTeam;
+	}
+
+	public void setPlayer(Player player) {
+		this.getDailyPlayerInfoKey().setPlayer(player);
 	}
 
 	public void setDate(Date date) {
@@ -116,6 +122,7 @@ public class DailyPlayerInfo {
 	@Override
 	public String toString() {
 		return "DailyPlayer{" +
+				"player=" + getDailyPlayerInfoKey().toString() +
 				"fantasyTeam=" + fantasyTeam +
 				", mlbTeam=" + mlbTeam +
 				", date=" + getDailyPlayerInfoKey().getDate() +

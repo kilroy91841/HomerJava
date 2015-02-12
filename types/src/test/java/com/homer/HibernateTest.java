@@ -1,17 +1,13 @@
 package com.homer;
 
 import com.homer.fantasy.*;
-import junit.framework.Assert;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.Restrictions;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.List;
-import java.util.concurrent.Callable;
+import java.util.Date;
 
 /**
  * Created by arigolub on 2/10/15.
@@ -30,29 +26,41 @@ public class HibernateTest {
 
     @Test
     public void save() {
-        Player p = new Player("Mike Trout1");
+        Player p = new Player("Ira Bulog");
         p.setPrimaryPosition(Position.CENTERFIELD);
+        DailyPlayerInfo info = new DailyPlayerInfo();
+        info.setMlbStatus(PlayerStatus.ACTIVE);
+        info.setDate(new Date());
+        info.getDailyPlayerInfoKey().setPlayer(p);
+        p.getDailyPlayerInfoList().add(info);
+        PlayerHistory history = new PlayerHistory();
+        history.setPlayer(p);
+        history.setSeason(2015);
+        p.getPlayerHistoryList().add(history);
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.saveOrUpdate(p);
         session.getTransaction().commit();
+        session.flush();
+        System.out.println(p);
         session.close();
 
-        Team t = new Team();
-        t.setTeamId(300);
-        t.setTeamName("ari golub");
-        t.setTeamCode("code");
-        t.setTeamType(SportType.FANTASY);
 
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.saveOrUpdate(t);
-        session.getTransaction().commit();
-
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        List<DailyPlayerInfo> positions = session.createCriteria(DailyPlayerInfo.class).list();
-        System.out.println(positions);
+//        Team t = new Team();
+//        t.setTeamId(300);
+//        t.setTeamName("ari golub");
+//        t.setTeamCode("code");
+//        t.setTeamType(SportType.FANTASY);
+//
+//        session = sessionFactory.openSession();
+//        session.beginTransaction();
+//        session.saveOrUpdate(t);
+//        session.getTransaction().commit();
+//
+//        session = sessionFactory.openSession();
+//        session.beginTransaction();
+//        List<DailyPlayerInfo> positions = session.createCriteria(DailyPlayerInfo.class).list();
+//        System.out.println(positions);
 
 //        session = sessionFactory.openSession();
 //        session.beginTransaction();
@@ -83,11 +91,11 @@ public class HibernateTest {
 //        List<Vulture> vultures = session.createCriteria(Vulture.class).list();
 //        System.out.println(vultures);
 
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        List<Trade> trades = session.createCriteria(Trade.class).list();
-        System.out.println(trades);
-
-        session.close();
+//        session = sessionFactory.openSession();
+//        session.beginTransaction();
+//        List<Trade> trades = session.createCriteria(Trade.class).list();
+//        System.out.println(trades);
+//
+//        session.close();
     }
 }

@@ -1,11 +1,13 @@
 package com.homer.fantasy;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.*;
 import org.hibernate.annotations.OrderBy;
 
 /**
@@ -16,6 +18,7 @@ import org.hibernate.annotations.OrderBy;
 public class Player {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="playerId")
     private long playerId;
     @Column(name="playerName")
@@ -33,11 +36,13 @@ public class Player {
     private long mlbPlayerId;
     @Column(name="espnPlayerId")
     private long espnPlayerId;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name="playerId", referencedColumnName="playerId")
     @OrderBy(clause = "gameDate desc")
     private List<DailyPlayerInfo> dailyPlayerInfoList;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name="playerId", referencedColumnName="playerId")
     @OrderBy(clause = "season desc")
     private List<PlayerHistory> playerHistoryList;
@@ -134,6 +139,9 @@ public class Player {
     }
 
     public List<PlayerHistory> getPlayerHistoryList() {
+        if(playerHistoryList == null) {
+            playerHistoryList = new ArrayList<PlayerHistory>();
+        }
         return playerHistoryList;
     }
 

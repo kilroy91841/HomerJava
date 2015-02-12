@@ -28,7 +28,9 @@ public class PlayerHistory {
 	@Column(name="rookieStatus")
 	private Boolean rookieStatus;
 
-	public PlayerHistory() { }
+	public PlayerHistory() {
+		playerHistoryKey = new PlayerHistoryKey();
+	}
 
 	public PlayerHistory(int season, int salary, int keeperSeason, Boolean isMinorLeaguer,
 						 Team draftTeam, Team keeperTeam, Boolean rookieStatus) {
@@ -40,6 +42,10 @@ public class PlayerHistory {
 		setKeeperTeam(keeperTeam);
 		setRookieStatus(rookieStatus);
 	}
+
+	public void setPlayer(Player player) { playerHistoryKey.setPlayer(player);}
+
+	public Player getPlayer() { return playerHistoryKey.getPlayer(); }
 
 	public void setSeason(int season) {
 		playerHistoryKey.setSeason(season);
