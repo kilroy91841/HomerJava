@@ -1,4 +1,7 @@
-package com.homer.fantasy;
+package com.homer.fantasy.wrapper;
+
+import com.homer.fantasy.DailyPlayerInfo;
+import com.homer.fantasy.Team;
 
 import java.util.ArrayList;
 import java.util.Date;

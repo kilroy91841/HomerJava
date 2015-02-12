@@ -1,32 +1,51 @@
 package com.homer.fantasy;
 
-import com.homer.exception.StatusNotFoundException;
-
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by arigolub on 2/1/15.
  */
+@Entity
+@Table(name="VULTURE")
 public class Vulture {
 
-    public static final VultureStatus ACTIVE = new VultureStatus("ACTIVE");
-    public static final VultureStatus RESOLVED = new VultureStatus("RESOLVED");
-    public static final VultureStatus GRANTED = new VultureStatus("GRANTED");
+    public enum Status {
+        ACTIVE,
+        RESOLVED,
+        GRANTED
+    }
 
+    @Id
+    @Column(name="vultureId")
+    public int vultureId;
+    @OneToOne
+    @JoinColumn(name="vulturingTeamId", referencedColumnName="teamId")
     public Team vulturingTeam;
+    @OneToOne
+    @JoinColumn(name="offendingTeamId", referencedColumnName="teamId")
     public Team offendingTeam;
+    @OneToOne
+    @JoinColumn(name="playerId", referencedColumnName="playerId")
     public Player player;
+    @Temporal(value=TemporalType.TIMESTAMP)
+    @Column(name="createdDate")
+    public Date createdDate;
+    @Temporal(value=TemporalType.TIMESTAMP)
+    @Column(name="deadline")
     public Date deadline;
-    public VultureStatus status;
+    @Enumerated(EnumType.STRING)
+    @Column(name="vultureStatus")
+    public Status vultureStatus;
 
     public Vulture() { }
 
-    public Vulture(Team vulturingTeam, Team offendingTeam, Player player, Date deadline, VultureStatus status) {
+    public Vulture(Team vulturingTeam, Team offendingTeam, Player player, Date deadline, Status vultureStatus) {
         this.vulturingTeam = vulturingTeam;
         this.offendingTeam = offendingTeam;
         this.player = player;
         this.deadline = deadline;
-        this.status = status;
+        this.vultureStatus = vultureStatus;
     }
 
     public Team getVulturingTeam() {
@@ -53,6 +72,14 @@ public class Vulture {
         this.player = player;
     }
 
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
     public Date getDeadline() {
         return deadline;
     }
@@ -61,72 +88,24 @@ public class Vulture {
         this.deadline = deadline;
     }
 
-    public VultureStatus getStatus() {
-        return status;
+    public Status getVultureStatus() {
+        return vultureStatus;
     }
 
-    public void setStatus(VultureStatus status) {
-        this.status = status;
+    public void setVultureStatus(Status vultureStatus) {
+        this.vultureStatus = vultureStatus;
     }
 
     @Override
     public String toString() {
         return "Vulture{" +
-                "vulturingTeam=" + vulturingTeam +
+                "vultureId=" + vultureId +
+                ", vulturingTeam=" + vulturingTeam +
                 ", offendingTeam=" + offendingTeam +
                 ", player=" + player +
+                ", createdDate=" + createdDate +
                 ", deadline=" + deadline +
-                ", status=" + status +
+                ", vultureStatus=" + vultureStatus +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Vulture vulture = (Vulture) o;
-
-        if (!deadline.equals(vulture.deadline)) return false;
-        if (!offendingTeam.equals(vulture.offendingTeam)) return false;
-        if (!player.equals(vulture.player)) return false;
-        if (!status.equals(vulture.status)) return false;
-        if (!vulturingTeam.equals(vulture.vulturingTeam)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = vulturingTeam.hashCode();
-        result = 31 * result + offendingTeam.hashCode();
-        result = 31 * result + player.hashCode();
-        result = 31 * result + deadline.hashCode();
-        result = 31 * result + status.hashCode();
-        return result;
-    }
-
-    public static class VultureStatus {
-
-        private String name;
-
-        private VultureStatus(String name) {
-            this.name = name;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public static VultureStatus get(String vultureStatusName) throws StatusNotFoundException {
-            if(ACTIVE.getName().equals(vultureStatusName)) {
-                return ACTIVE;
-            } else if(RESOLVED.getName().equals(vultureStatusName)) {
-                return RESOLVED;
-            } else if(GRANTED.getName().equals(vultureStatusName)) {
-                return GRANTED;
-            }
-            throw new StatusNotFoundException("Unrecognized vulture status name: " + vultureStatusName);
-        }
     }
 }

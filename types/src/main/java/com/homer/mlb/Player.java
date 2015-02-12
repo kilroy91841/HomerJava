@@ -55,7 +55,7 @@ public class Player {
         this.name_use = jsonObject.getString("name_use");
         this.primary_position_txt = jsonObject.getString("primary_position_txt");
         this.primary_stat_type = jsonObject.getString("primary_stat_type");
-        this.status = jsonObject.getString("status");
+        this.status = jsonObject.getString("vultureStatus");
         this.status_code = jsonObject.getString("status_code");
         this.team_abbrev = jsonObject.getString("team_abbrev");
         this.team_code = jsonObject.getString("team_code");
@@ -348,7 +348,7 @@ public class Player {
                 ", primary_stat_type='" + primary_stat_type + '\'' +
                 ", pro_debut_date=" + pro_debut_date +
                 ", start_date=" + start_date +
-                ", status='" + status + '\'' +
+                ", vultureStatus='" + status + '\'' +
                 ", status_code='" + status_code + '\'' +
                 ", status_date=" + status_date +
                 ", team_abbrev='" + team_abbrev + '\'' +

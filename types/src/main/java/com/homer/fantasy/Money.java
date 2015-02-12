@@ -1,16 +1,31 @@
 package com.homer.fantasy;
 
+import javax.persistence.*;
+
 /**
  * Created by arigolub on 1/31/15.
  */
-public class Money implements Tradable {
+@Entity
+@Table(name="MONEY")
+public class Money {
 
-    public static final MoneyType MAJORLEAGUEDRAFT = new MoneyType("MAJORLEAGUEDRAFT");
-    public static final MoneyType FREEAGENTAUCTION = new MoneyType("FREEAGENTAUCTION");
+    public enum MoneyType {
+        MAJORLEAGUEDRAFT,
+        FREEAGENTAUCTION
+    }
 
+    @Id
+    @Column(name="moneyId")
+    private long moneyId;
+    @OneToOne
+    @JoinColumn(name="teamId", referencedColumnName="teamId")
     private Team team;
+    @Column(name="season")
     private int season;
+    @Enumerated(EnumType.STRING)
+    @Column(name="moneyType")
     private MoneyType moneyType;
+    @Column(name="amount")
     private int amount;
 
     public Money() { }
@@ -57,7 +72,8 @@ public class Money implements Tradable {
     @Override
     public String toString() {
         return "Money{" +
-                "team=" + team +
+                "moneyId=" + moneyId +
+                ", team=" + team +
                 ", season=" + season +
                 ", moneyType=" + moneyType +
                 ", amount=" + amount +
@@ -71,61 +87,13 @@ public class Money implements Tradable {
 
         Money money = (Money) o;
 
-        if (amount != money.amount) return false;
-        if (season != money.season) return false;
-        if (!moneyType.equals(money.moneyType)) return false;
-        if (!team.equals(money.team)) return false;
+        if (moneyId != money.moneyId) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = team.hashCode();
-        result = 31 * result + season;
-        result = 31 * result + moneyType.hashCode();
-        result = 31 * result + amount;
-        return result;
-    }
-
-    public static class MoneyType {
-
-        private String typeName;
-
-        private MoneyType(String typeName) {
-            this.typeName = typeName;
-        }
-
-        public static MoneyType get(String typeName) {
-            if(typeName.equals(MAJORLEAGUEDRAFT.typeName)) {
-                return MAJORLEAGUEDRAFT;
-            } else {
-                return FREEAGENTAUCTION;
-            }
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            MoneyType moneyType = (MoneyType) o;
-
-            if (!typeName.equals(moneyType.typeName)) return false;
-
-            return true;
-        }
-
-        @Override
-        public int hashCode() {
-            return typeName.hashCode();
-        }
-
-        @Override
-        public String toString() {
-            return "MoneyType{" +
-                    "typeName='" + typeName + '\'' +
-                    '}';
-        }
+        return (int) (moneyId ^ (moneyId >>> 32));
     }
 }

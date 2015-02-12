@@ -13,27 +13,27 @@ import java.util.Map;
 @Table(name="POSITION")
 public class Position {
 
-    public static final Position STARTINGPITCHER = new Position(1, "STARTINGPITCHER", SportType.getSportType("MLB"), "P");
-    public static final Position CATCHER = new Position(2, "CATCHER", SportType.getSportType("MLB"), "C");
-    public static final Position FIRSTBASE = new Position(3, "FIRSTBASE", SportType.getSportType("MLB"), "1B");
-    public static final Position SECONDBASE = new Position(4, "SECONDBASE", SportType.getSportType("MLB"), "2B");
-    public static final Position THIRDBASE = new Position(5, "THIRDBASE", SportType.getSportType("MLB"), "3B");
-    public static final Position SHORTSTOP = new Position(6, "SHORTSTOP", SportType.getSportType("MLB"), "SS");
-    public static final Position LEFTFIELD = new Position(7, "LEFTFIELD", SportType.getSportType("MLB"), "LF");
-    public static final Position CENTERFIELD = new Position(8, "CENTERFIELD", SportType.getSportType("MLB"), "CF");
-    public static final Position RIGHTFIELD = new Position(9, "RIGHTFIELD", SportType.getSportType("MLB"), "RF");
-    public static final Position DESIGNATEDHITTER = new Position(10, "DESIGNATEDHITTER", SportType.getSportType("MLB"), "DH");
-    public static final Position RELIEFPITCHER = new Position(11, "RELIEFPITCHER", SportType.getSportType("MLB"), "RP");
-    public static final Position FANTASYUTILITY =  new Position(110, "UTILITY", SportType.getSportType("FANTASY"), "U");
-    public static final Position FANTASYCATCHER =  new Position(102, "CATCHER", SportType.getSportType("FANTASY"), "C");
-    public static final Position FANTASYFIRSTBASE =  new Position(103, "FIRSTBASE", SportType.getSportType("FANTASY"), "1B");
-    public static final Position FANTASYSECONDBASE =  new Position(104, "SECONDBASE", SportType.getSportType("FANTASY"), "2B");
-    public static final Position FANTASYTHIRDBASE =  new Position(105, "THIRDBASE", SportType.getSportType("FANTASY"), "3B");
-    public static final Position FANTASYSHORTSTOP =  new Position(106, "SHORTSTOP", SportType.getSportType("FANTASY"), "SS");
-    public static final Position FANTASYOUTFIELD =  new Position(107, "OUTFIELD", SportType.getSportType("FANTASY"), "OF");
-    public static final Position FANTASYMIDDLEINFIELD =  new Position(108, "MIDDLEINFIELD", SportType.getSportType("FANTASY"), "MI");
-    public static final Position FANTASYCORNERINFIELD =  new Position(109, "CORNERINFIELD", SportType.getSportType("FANTASY"), "CI");
-    public static final Position FANTASYPITCHER =  new Position(101, "PITCHER", SportType.getSportType("FANTASY"), "P");
+    public static final Position STARTINGPITCHER = new Position(1, "STARTINGPITCHER", SportType.MLB, "P");
+    public static final Position CATCHER = new Position(2, "CATCHER", SportType.MLB, "C");
+    public static final Position FIRSTBASE = new Position(3, "FIRSTBASE", SportType.MLB, "1B");
+    public static final Position SECONDBASE = new Position(4, "SECONDBASE", SportType.MLB, "2B");
+    public static final Position THIRDBASE = new Position(5, "THIRDBASE", SportType.MLB, "3B");
+    public static final Position SHORTSTOP = new Position(6, "SHORTSTOP", SportType.MLB, "SS");
+    public static final Position LEFTFIELD = new Position(7, "LEFTFIELD", SportType.MLB, "LF");
+    public static final Position CENTERFIELD = new Position(8, "CENTERFIELD", SportType.MLB, "CF");
+    public static final Position RIGHTFIELD = new Position(9, "RIGHTFIELD", SportType.MLB, "RF");
+    public static final Position DESIGNATEDHITTER = new Position(10, "DESIGNATEDHITTER", SportType.MLB, "DH");
+    public static final Position RELIEFPITCHER = new Position(11, "RELIEFPITCHER", SportType.MLB, "RP");
+    public static final Position FANTASYUTILITY =  new Position(110, "UTILITY", SportType.FANTASY, "U");
+    public static final Position FANTASYCATCHER =  new Position(102, "CATCHER", SportType.FANTASY, "C");
+    public static final Position FANTASYFIRSTBASE =  new Position(103, "FIRSTBASE", SportType.FANTASY, "1B");
+    public static final Position FANTASYSECONDBASE =  new Position(104, "SECONDBASE", SportType.FANTASY, "2B");
+    public static final Position FANTASYTHIRDBASE =  new Position(105, "THIRDBASE", SportType.FANTASY, "3B");
+    public static final Position FANTASYSHORTSTOP =  new Position(106, "SHORTSTOP", SportType.FANTASY, "SS");
+    public static final Position FANTASYOUTFIELD =  new Position(107, "OUTFIELD", SportType.FANTASY, "OF");
+    public static final Position FANTASYMIDDLEINFIELD =  new Position(108, "MIDDLEINFIELD", SportType.FANTASY, "MI");
+    public static final Position FANTASYCORNERINFIELD =  new Position(109, "CORNERINFIELD", SportType.FANTASY, "CI");
+    public static final Position FANTASYPITCHER =  new Position(101, "PITCHER", SportType.FANTASY, "P");
 
     private static Map<Integer, Position> positionMap = new HashMap<Integer, Position>();
 
@@ -65,10 +65,12 @@ public class Position {
     private Integer positionId;
     @Column(name="positionName")
     private String positionName;
-    @Transient
+    @Enumerated(EnumType.STRING)
     private SportType positionType;
-    @Transient
+    @Column(name="positionCode")
     private String positionCode;
+
+    public Position() { }
 
     private Position(Integer positionId, String positionName, SportType positionType, String positionCode) {
         setPositionId(positionId);

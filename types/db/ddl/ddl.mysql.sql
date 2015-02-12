@@ -94,24 +94,28 @@ CREATE TABLE MINORLEAGUEDRAFTPICK (
 );
 
 CREATE TABLE TRADE (
-    tradeId INT,
+    tradeId INT AUTO_INCREMENT PRIMARY KEY,
     proposingTeamId INT NOT NULL,
     proposedToTeamId INT NOT NULL,
     createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     deadline TIMESTAMP NULL,
     tradeStatus VARCHAR(20) NOT NULL,
-    PRIMARY KEY (tradeId),
     FOREIGN KEY (proposingTeamId) REFERENCES TEAM (teamId),
     FOREIGN KEY (proposingTeamId) REFERENCES TEAM (teamId)
 );
 
 CREATE TABLE TRADEASSET (
+    tradeAssetId BIGINT AUTO_INCREMENT PRIMARY KEY,
     tradeId INT,
     teamId INT NOT NULL,
-    assetId BIGINT,
-    assetType VARCHAR(30),
-    PRIMARY KEY (tradeId, assetId, assetType),
-    FOREIGN KEY (teamId) REFERENCES TEAM (teamId)
+    playerId BIGINT,
+    moneyId BIGINT,
+    minorLeagueDraftPickId BIGINT,
+    FOREIGN KEY (tradeId) REFERENCES TRADE (tradeId),
+    FOREIGN KEY (teamId) REFERENCES TEAM (teamId),
+    FOREIGN KEY (playerId) REFERENCES PLAYER (playerId),
+    FOREIGN KEY (moneyId) REFERENCES MONEY (moneyId),
+    FOREIGN KEY (minorLeagueDraftPickId) REFERENCES MINORLEAGUEDRAFTPICK (minorLeagueDraftPickId)
 );
 
 CREATE TABLE VULTURE (
@@ -133,7 +137,7 @@ CREATE TABLE FREEAGENTAUCTION (
 	playerId BIGINT NOT NULL,
 	createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	modifiedDate TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
-	deadline TIMESTAMP DEFAULT 0,
+	deadline TIMESTAMP NULL,
 	status VARCHAR(10) NOT NULL,
 	FOREIGN KEY (requestingTeamId) REFERENCES TEAM (teamId),
 	FOREIGN KEY (playerId) REFERENCES PLAYER (playerId)

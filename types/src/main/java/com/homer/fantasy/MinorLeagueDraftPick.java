@@ -1,19 +1,37 @@
 package com.homer.fantasy;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by arigolub on 1/31/15.
  */
-public class MinorLeagueDraftPick implements Tradable {
+@Entity
+@Table(name="MINORLEAGUEDRAFTPICK")
+public class MinorLeagueDraftPick {
 
+    @Id
+    @Column(name="minorLeagueDraftPickId")
+    private long minorLeagueDraftPickId;
+    @OneToOne
+    @JoinColumn(name="originalTeamId", referencedColumnName="teamId")
     private Team originalTeam;
+    @Column(name="season")
     private int season;
+    @Column(name="round")
     private int round;
+    @OneToOne
+    @JoinColumn(name="owningTeamId", referencedColumnName="teamId")
     private Team owningTeam;
+    @Column(name="overall")
     private Integer overall;
+    @OneToOne
+    @JoinColumn(name="playerId", referencedColumnName="playerId")
     private Player player;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="deadline")
     private Date deadline;
+    @Column(name="skipped")
     private Boolean skipped;
 
     public MinorLeagueDraftPick() { }
@@ -115,14 +133,9 @@ public class MinorLeagueDraftPick implements Tradable {
 
         MinorLeagueDraftPick that = (MinorLeagueDraftPick) o;
 
-        if (overall != that.overall) return false;
         if (round != that.round) return false;
         if (season != that.season) return false;
-        if (deadline != null ? !deadline.equals(that.deadline) : that.deadline != null) return false;
         if (!originalTeam.equals(that.originalTeam)) return false;
-        if (!owningTeam.equals(that.owningTeam)) return false;
-        if (player != null ? !player.equals(that.player) : that.player != null) return false;
-        if (skipped != null ? !skipped.equals(that.skipped) : that.skipped != null) return false;
 
         return true;
     }
@@ -132,11 +145,6 @@ public class MinorLeagueDraftPick implements Tradable {
         int result = originalTeam.hashCode();
         result = 31 * result + season;
         result = 31 * result + round;
-        result = 31 * result + owningTeam.hashCode();
-        result = 31 * result + overall;
-        result = 31 * result + (player != null ? player.hashCode() : 0);
-        result = 31 * result + (deadline != null ? deadline.hashCode() : 0);
-        result = 31 * result + (skipped != null ? skipped.hashCode() : 0);
         return result;
     }
 }

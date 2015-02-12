@@ -1,11 +1,17 @@
 package com.homer;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by golub on 2/4/15.
  */
+@Entity
+@Table(name="PLAYERSTATUS")
 public class PlayerStatus {
 
     public static final PlayerStatus ACTIVE = new PlayerStatus("ACTIVE", "A");
@@ -26,15 +32,24 @@ public class PlayerStatus {
         map.put(RESTRICTED.getCode(), RESTRICTED);
     }
 
-    private String name;
+    @Id
+    @Column(name="playerStatusCode")
     private String code;
+    @Column(name="playerStatusName")
+    private String name;
+
+    public PlayerStatus() { }
 
     private PlayerStatus(String name, String code) {
         this.name = name;
         this.code = code;
     }
+
     public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
     public String getCode() { return code; }
+    public void setCode(String code) { this.code = code; }
+
     public static PlayerStatus get(String name) throws Exception {
         PlayerStatus status = map.get(name);
         if(map == null) {

@@ -1,19 +1,19 @@
 package com.homer.fantasy;
 
 import javax.persistence.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.OrderBy;
 
 /**
  * Created by MLB on 1/25/15.
  */
 @Entity
 @Table(name="PLAYER")
-public class Player implements Tradable {
+public class Player {
 
     @Id
     @Column(name="playerId")
@@ -33,8 +33,14 @@ public class Player implements Tradable {
     private long mlbPlayerId;
     @Column(name="espnPlayerId")
     private long espnPlayerId;
-    @Transient
+    @OneToMany
+    @JoinColumn(name="playerId", referencedColumnName="playerId")
+    @OrderBy(clause = "gameDate desc")
     private List<DailyPlayerInfo> dailyPlayerInfoList;
+    @OneToMany
+    @JoinColumn(name="playerId", referencedColumnName="playerId")
+    @OrderBy(clause = "season desc")
+    private List<PlayerHistory> playerHistoryList;
 
     public Player() { }
 
@@ -127,6 +133,14 @@ public class Player implements Tradable {
         getDailyPlayerInfoList().add(dailyPlayerInfo);
     }
 
+    public List<PlayerHistory> getPlayerHistoryList() {
+        return playerHistoryList;
+    }
+
+    public void setPlayerHistoryList(List<PlayerHistory> playerHistoryList) {
+        this.playerHistoryList = playerHistoryList;
+    }
+
     public Team getCurrentFantasyTeam() throws Exception {
         if(dailyPlayerInfoList.size() == 0) {
             throw new Exception("Player does not have any daily info");
@@ -142,11 +156,32 @@ public class Player implements Tradable {
 
         Player player = (Player) o;
 
-        if (playerName != null ? !playerName.equals(player.playerName) : player.playerName != null) return false;
-        if (primaryPosition != null ? !primaryPosition.equals(player.primaryPosition) : player.primaryPosition != null)
-            return false;
+        if (playerId != player.playerId) return false;
+        if (mlbPlayerId != player.mlbPlayerId) return false;
 
         return true;
     }
 
+    @Override
+    public int hashCode() {
+        int result = (int) (playerId ^ (playerId >>> 32));
+        result = 31 * result + (int) (mlbPlayerId ^ (mlbPlayerId >>> 32));
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "playerId=" + playerId +
+                ", playerName='" + playerName + '\'' +
+                ", primaryPosition=" + primaryPosition +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", nameLastFirst='" + nameLastFirst + '\'' +
+                ", mlbPlayerId=" + mlbPlayerId +
+                ", espnPlayerId=" + espnPlayerId +
+                ", dailyPlayerInfoList=" + dailyPlayerInfoList +
+                ", playerHistoryList=" + playerHistoryList +
+                '}';
+    }
 }

@@ -1,22 +1,39 @@
 package com.homer.fantasy;
 
 import com.homer.PlayerStatus;
+import com.homer.fantasy.key.DailyPlayerInfoKey;
 import com.homer.mlb.Game;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by arigolub on 1/29/15.
  */
+@Entity
+@Table(name="PLAYERTOTEAM")
 public class DailyPlayerInfo {
 
+	@EmbeddedId
+	private DailyPlayerInfoKey dailyPlayerInfoKey;
+
+	@OneToOne
+	@JoinColumn(name="fantasyTeamId", referencedColumnName="teamId")
 	private Team fantasyTeam;
+	@OneToOne
+	@JoinColumn(name="mlbTeamId", referencedColumnName="teamId")
 	private Team mlbTeam;
-	private Date date;
+	@OneToOne
+	@JoinColumn(name="fantasyPositionId", referencedColumnName="positionId")
 	private Position fantasyPosition;
+	@OneToOne
+	@JoinColumn(name="fantasyPlayerStatusCode", referencedColumnName="playerStatusCode")
 	private PlayerStatus fantasyStatus;
+	@OneToOne
+	@JoinColumn(name="mlbPlayerStatusCode", referencedColumnName="playerStatusCode")
 	private PlayerStatus mlbStatus;
+	@Transient
 	private List<Game> games;
 
 	public DailyPlayerInfo() { }
@@ -30,6 +47,14 @@ public class DailyPlayerInfo {
 		setFantasyStatus(fantasyStatus);
 		setMlbStatus(mlbStatus);
 		setGames(games);
+	}
+
+	public DailyPlayerInfoKey getDailyPlayerInfoKey() {
+		return dailyPlayerInfoKey;
+	}
+
+	public void setDailyPlayerInfoKey(DailyPlayerInfoKey dailyPlayerInfoKey) {
+		this.dailyPlayerInfoKey = dailyPlayerInfoKey;
 	}
 
 	public void setFantasyTeam(Team fantasyTeam) {
@@ -49,11 +74,11 @@ public class DailyPlayerInfo {
 	}
 
 	public void setDate(Date date) {
-		this.date = date;
+		this.getDailyPlayerInfoKey().setDate(date);
 	}
 
 	public Date getDate() {
-		return date;
+		return this.getDailyPlayerInfoKey().getDate();
 	}
 
 	public void setFantasyPosition(Position fantasyPosition) {
@@ -93,7 +118,7 @@ public class DailyPlayerInfo {
 		return "DailyPlayer{" +
 				"fantasyTeam=" + fantasyTeam +
 				", mlbTeam=" + mlbTeam +
-				", date=" + date +
+				", date=" + getDailyPlayerInfoKey().getDate() +
 				", fantasyPosition=" + fantasyPosition +
 				", games=" + games +
 				", fantasyStatus=" + fantasyStatus +
@@ -108,7 +133,7 @@ public class DailyPlayerInfo {
 
 		DailyPlayerInfo that = (DailyPlayerInfo) o;
 
-		if (date != null ? !date.equals(that.date) : that.date != null) return false;
+		if (this.getDailyPlayerInfoKey() != that.getDailyPlayerInfoKey()) return false;
 		if (fantasyPosition != null ? !fantasyPosition.equals(that.fantasyPosition) : that.fantasyPosition != null)
 			return false;
 		if (fantasyTeam != null ? !fantasyTeam.equals(that.fantasyTeam) : that.fantasyTeam != null) return false;
@@ -121,8 +146,8 @@ public class DailyPlayerInfo {
 	@Override
 	public int hashCode() {
 		int result = fantasyTeam != null ? fantasyTeam.hashCode() : 0;
+		result = 31 * result + getDailyPlayerInfoKey().hashCode();
 		result = 31 * result + (mlbTeam != null ? mlbTeam.hashCode() : 0);
-		result = 31 * result + (date != null ? date.hashCode() : 0);
 		result = 31 * result + (fantasyPosition != null ? fantasyPosition.hashCode() : 0);
 		result = 31 * result + (games != null ? games.hashCode() : 0);
 		return result;

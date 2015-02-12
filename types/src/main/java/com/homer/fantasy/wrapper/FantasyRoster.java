@@ -1,4 +1,9 @@
-package com.homer.fantasy;
+package com.homer.fantasy.wrapper;
+
+import com.homer.fantasy.DailyPlayerInfo;
+import com.homer.fantasy.Position;
+import com.homer.fantasy.Team;
+import com.homer.fantasy.wrapper.DailyTeam;
 
 import java.util.ArrayList;
 import java.util.List;

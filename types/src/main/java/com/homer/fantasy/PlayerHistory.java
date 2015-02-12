@@ -1,19 +1,31 @@
 package com.homer.fantasy;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import com.homer.fantasy.key.PlayerHistoryKey;
+
+import javax.persistence.*;
 
 /**
  * Created by arigolub on 1/30/15.
  */
+@Entity
+@Table(name="PLAYERHISTORY")
 public class PlayerHistory {
 
-	private int season;
+	@EmbeddedId
+	private PlayerHistoryKey playerHistoryKey;
+	@Column(name="salary")
 	private int salary;
+	@Column(name="keeperSeason")
 	private int keeperSeason;
+	@Column(name="minorLeaguer")
 	private Boolean minorLeaguer;
+	@OneToOne
+	@JoinColumn(name="draftTeamId", referencedColumnName="teamId")
 	private Team draftTeam;
+	@OneToOne
+	@JoinColumn(name="keeperTeamId", referencedColumnName="teamId")
 	private Team keeperTeam;
+	@Column(name="rookieStatus")
 	private Boolean rookieStatus;
 
 	public PlayerHistory() { }
@@ -30,11 +42,11 @@ public class PlayerHistory {
 	}
 
 	public void setSeason(int season) {
-		this.season = season;
+		playerHistoryKey.setSeason(season);
 	}
 
 	public int getSeason() {
-		return season;
+		return playerHistoryKey.getSeason();
 	}
 
 	public void setSalary(int salary) {
@@ -88,7 +100,7 @@ public class PlayerHistory {
 	@Override
     public String toString() {
         return "PlayerHistory{" +
-                "season=" + season +
+                "season=" + playerHistoryKey.getSeason() +
                 ", salary=" + salary +
                 ", keeperSeason=" + keeperSeason +
                 ", minorLeaguer=" + minorLeaguer +
@@ -99,58 +111,19 @@ public class PlayerHistory {
     }
 
 	@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof PlayerHistory)) return false;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
 
-        PlayerHistory that = (PlayerHistory) o;
+		PlayerHistory that = (PlayerHistory) o;
 
-        if (keeperSeason != that.keeperSeason) return false;
-        if (minorLeaguer != that.minorLeaguer) return false;
-        if (salary != that.salary) return false;
-        if (season != that.season) return false;
-        if (draftTeam != null ? !draftTeam.equals(that.draftTeam) : that.draftTeam != null) return false;
-        if (keeperTeam != null ? !keeperTeam.equals(that.keeperTeam) : that.keeperTeam != null) return false;
-		if (rookieStatus != that.rookieStatus) return false;
+		if (!playerHistoryKey.equals(that.playerHistoryKey)) return false;
 
-        return true;
-    }
+		return true;
+	}
 
-    @Override
-    public int hashCode() {
-        int result = season;
-        result = 31 * result + salary;
-        result = 31 * result + keeperSeason;
-        result = 31 * result + (minorLeaguer ? 1 : 0);
-        result = 31 * result + (draftTeam != null ? draftTeam.hashCode() : 0);
-        result = 31 * result + (keeperTeam != null ? keeperTeam.hashCode() : 0);
-		result = 31 * result + (rookieStatus ? 1 : 0);
-        return result;
-    }
-
-	public static PlayerHistory create(ResultSet rs, String tableName) throws SQLException {
-		Team draftTeam = null;
-		Team keeperTeam = null;
-
-		Integer draftTeamId = rs.getInt("draftTeam.teamId");
-		if(!rs.wasNull()) {
-			draftTeam = Team.create(rs, "draftTeam");
-		}
-
-		Integer keeperTeamId = rs.getInt("keeperTeam.teamId");
-		if(!rs.wasNull()) {
-			keeperTeam = Team.create(rs, "keeperTeam");
-		}
-
-		return new PlayerHistory(
-				rs.getInt("history.season"),
-				rs.getInt("history.salary"),
-				rs.getInt("history.keeperSeason"),
-				rs.getBoolean("history.minorLeaguer"),
-				draftTeam,
-				keeperTeam,
-				rs.getBoolean("history.rookieStatus")
-		);
-
+	@Override
+	public int hashCode() {
+		return playerHistoryKey.hashCode();
 	}
 }

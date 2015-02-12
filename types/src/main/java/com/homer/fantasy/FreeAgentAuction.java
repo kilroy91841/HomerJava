@@ -1,5 +1,6 @@
 package com.homer.fantasy;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,27 +8,38 @@ import java.util.Map;
 /**
  * Created by arigolub on 2/1/15.
  */
+@Entity
+@Table(name="FREEAGENTAUCTION")
 public class FreeAgentAuction {
 
-    public static final Status REQUESTED = new Status("REQUESTED");
-    public static final Status ACTIVE = new Status("ACTIVE");
-    public static final Status DENIED = new Status("DENIED");
-    public static final Status CANCELLED = new Status("CANCELLED");
-    public static final Status COMPLETE = new Status("COMPLETE");
-
-    static {
-        Status.map.put(REQUESTED.getName(), REQUESTED);
-        Status.map.put(ACTIVE.getName(), ACTIVE);
-        Status.map.put(DENIED.getName(), DENIED);
-        Status.map.put(CANCELLED.getName(), CANCELLED);
-        Status.map.put(COMPLETE.getName(), COMPLETE);
+    public enum Status {
+        REQUESTED,
+        ACTIVE,
+        DENIED,
+        CANCELLED,
+        COMPLETE
     }
 
+    @Id
+    @Column(name="freeAgentAuctionId")
+    private long freeAgentAuctionId;
+    @OneToOne
+    @JoinColumn(name="requestingTeamId", referencedColumnName="teamId")
     private Team requestingTeam;
+    @OneToOne
+    @JoinColumn(name="playerId", referencedColumnName="playerId")
     private Player player;
+    @Temporal(value=TemporalType.TIMESTAMP)
+    @Column(name="createdDate")
     private Date createdDate;
+    @Temporal(value=TemporalType.TIMESTAMP)
+    @Column(name="modifiedDate")
     private Date modifiedDate;
+    @Temporal(value=TemporalType.TIMESTAMP)
+    @Column(name="deadline")
     private Date deadline;
+    @Enumerated(EnumType.STRING)
+    @Column(name="status")
     private Status status;
 
     public FreeAgentAuction() { }
@@ -92,12 +104,13 @@ public class FreeAgentAuction {
     @Override
     public String toString() {
         return "FreeAgentAuction{" +
-                "requestingTeam=" + requestingTeam +
+                "freeAgentAuctionId=" + freeAgentAuctionId +
+                ", requestingTeam=" + requestingTeam +
                 ", player=" + player +
                 ", createdDate=" + createdDate +
                 ", modifiedDate=" + modifiedDate +
                 ", deadline=" + deadline +
-                ", status=" + status +
+                ", vultureStatus=" + status +
                 '}';
     }
 
@@ -108,40 +121,13 @@ public class FreeAgentAuction {
 
         FreeAgentAuction that = (FreeAgentAuction) o;
 
-        if (!createdDate.equals(that.createdDate)) return false;
-        if (!deadline.equals(that.deadline)) return false;
-        if (modifiedDate != null ? !modifiedDate.equals(that.modifiedDate) : that.modifiedDate != null) return false;
-        if (!player.equals(that.player)) return false;
-        if (!requestingTeam.equals(that.requestingTeam)) return false;
-        if (!status.equals(that.status)) return false;
+        if (freeAgentAuctionId != that.freeAgentAuctionId) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = requestingTeam.hashCode();
-        result = 31 * result + player.hashCode();
-        result = 31 * result + createdDate.hashCode();
-        result = 31 * result + (modifiedDate != null ? modifiedDate.hashCode() : 0);
-        result = 31 * result + deadline.hashCode();
-        result = 31 * result + status.hashCode();
-        return result;
-    }
-
-    public static class Status {
-        protected static final Map<String, Status> map = new HashMap<String, Status>();
-        private String name;
-        private Status(String name) {
-            this.name = name;
-        }
-        public String getName() { return name; }
-        public static Status get(String name) throws Exception {
-            Status status = map.get(name);
-            if(map == null) {
-                throw new Exception("Status not found for name: " + name);
-            }
-            return status;
-        }
+        return (int) (freeAgentAuctionId ^ (freeAgentAuctionId >>> 32));
     }
 }
