@@ -1,6 +1,7 @@
 package com.homer.scripts;
 
 import com.homer.fantasy.Player;
+import com.homer.fantasy.Team;
 import com.homer.fantasy.dao.HomerDAO;
 import com.homer.fantasy.mongo.types.MongoPlayer;
 import com.homer.fantasy.mongo.types.MongoPlayerHistory;
@@ -95,12 +96,28 @@ public class PlayerHistory {
                     } catch(NonUniqueResultException e) {
                         player = dao.findPlayerByMLBPlayerId(mongoPlayer.getPlayer_id());
                     }
-                    if(player == null) {
-                        LOG.error("Couldn't find the player with name " + playerName);
-                    } else {
-                        if(player.getPlayerName().equals(mongoPlayer.getName_display_first_last())) {
-                            System.out.println("Found " + mongoPlayer.getName_display_first_last());
+                    if(player != null) {
+                        if(player.getMlbPlayerId() == mongoPlayer.getPlayer_id()) {
+                            for(MongoPlayerHistory history : mongoPlayer.getMongoPlayerHistoryList()) {
+                                com.homer.fantasy.PlayerHistory fantasyHistory = new com.homer.fantasy.PlayerHistory();
+                                fantasyHistory.setSalary(history.getSalary());
+                                fantasyHistory.setSeason(history.getYear());
+                                fantasyHistory.setPlayer(player);
+                                fantasyHistory.setMinorLeaguer(history.isMinor_leaguer());
+                                Team draftTeam = new Team();
+                                draftTeam.setTeamId(history.getDraft_team());
+                                fantasyHistory.setDraftTeam(draftTeam);
+                                fantasyHistory.setKeeperSeason(history.getContract_year());
+                                Team keeperTeam = new Team();
+                                keeperTeam.setTeamId(history.getKeeper_team());
+                                fantasyHistory.setKeeperTeam(keeperTeam);
+                                //fantasyHistory.setRookieStatus(history.is);
+                                player.getPlayerHistoryList().add(fantasyHistory);
+                            }
+                            dao.saveOrUpdate(player);
                         }
+                    } else {
+
                     }
                 } catch(Exception e) {
                     LOG.error("Error with player- " + playerName, e);

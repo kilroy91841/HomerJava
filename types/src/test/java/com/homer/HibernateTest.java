@@ -19,8 +19,9 @@ public class HibernateTest {
     @BeforeClass
     public static void beforeClass() {
         // A SessionFactory is set up once for an application
+
         sessionFactory = new Configuration()
-                .configure() // configures settings from hibernate.cfg.xml
+                .configure("hibernate_dev.cfg.xml") // configures settings from hibernate.cfg.xml
                 .buildSessionFactory();
     }
 

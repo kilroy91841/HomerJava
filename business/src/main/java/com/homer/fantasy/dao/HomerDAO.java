@@ -37,13 +37,25 @@ public class HomerDAO {
         return sessionFactory.openSession();
     }
 
-    public void saveOrUpdate(Object o) {
+    public boolean saveOrUpdate(Object o) {
+        boolean success = false;
         LOG.debug("Saving " + o);
-        Session session = openSession();
-        session.beginTransaction();
-        session.saveOrUpdate(o);
-        session.getTransaction().commit();
-        session.close();
+        Session session = null;
+        try {
+            session = openSession();
+            session.beginTransaction();
+            session.saveOrUpdate(o);
+            session.getTransaction().commit();
+            LOG.debug("Save successful!");
+            success = true;
+        } catch(Exception e) {
+            LOG.error("Exception saving object", e);
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+        return success;
     }
 
     public void createPlayer(Player player) {
@@ -60,25 +72,52 @@ public class HomerDAO {
 
         LOG.debug("Creating player: " + player);
 
-        Session session = openSession();
-        session.beginTransaction();
-        session.saveOrUpdate(player);
-        session.getTransaction().commit();
-        session.close();
+        Session session = null;
+        try {
+            session = openSession();
+            session.beginTransaction();
+            session.saveOrUpdate(player);
+            session.getTransaction().commit();
+            LOG.debug("Save succsesful!");
+        } catch(Exception e) {
+            LOG.error("Exception saving player", e);
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
     }
 
     public List<Team> getTeams(SportType sportType) {
         LOG.debug("Getting all teams for type " + sportType);
-        Session session = openSession();
-        List<Team> teams = session.createCriteria(Team.class).add(Restrictions.like("teamType", sportType)).list();
-        session.close();
+        Session session = null;
+        List<Team> teams = null;
+        try {
+            session = openSession();
+            teams = session.createCriteria(Team.class).add(Restrictions.like("teamType", sportType)).list();
+        } catch(Exception e) {
+            LOG.error("Exception finding teams", e);
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
         return teams;
     }
 
     public <T> T findByExample(Object o, Class<T> clazz) {
-        Session session = openSession();
-        T result = (T) session.createCriteria(clazz).add(Example.create(o)).uniqueResult();
-        session.close();
+        Session session = null;
+        T result = null;
+        try {
+            session = openSession();
+            result = (T) session.createCriteria(clazz).add(Example.create(o)).uniqueResult();
+        } catch(Exception e) {
+            LOG.error("Error finding example", e);
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
         return result;
     }
 
@@ -109,7 +148,7 @@ public class HomerDAO {
         try {
             session = openSession();
             player = (Player) session.createCriteria(Player.class).add(Restrictions.like("mlbPlayerId", playerId)).uniqueResult();
-            LOG.error("Found player: " + player);
+            LOG.debug("Found player: " + player);
         } catch(Exception e) {
             LOG.error("Error finding player with mlb playerid" + playerId, e);
         } finally {
