@@ -6,11 +6,14 @@ import com.homer.fantasy.DailyPlayerInfo;
 import com.homer.fantasy.Player;
 import com.homer.fantasy.PlayerHistory;
 import com.homer.fantasy.Team;
+import org.hibernate.NonUniqueResultException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.List;
@@ -19,6 +22,8 @@ import java.util.List;
  * Created by arigolub on 2/12/15.
  */
 public class HomerDAO {
+
+    private static final Logger LOG = LoggerFactory.getLogger(HomerDAO.class);
 
     private static SessionFactory sessionFactory;
 
@@ -33,6 +38,7 @@ public class HomerDAO {
     }
 
     public void saveOrUpdate(Object o) {
+        LOG.debug("Saving " + o);
         Session session = openSession();
         session.beginTransaction();
         session.saveOrUpdate(o);
@@ -52,6 +58,8 @@ public class HomerDAO {
         history.setSeason(2015);
         player.getPlayerHistoryList().add(history);
 
+        LOG.debug("Creating player: " + player);
+
         Session session = openSession();
         session.beginTransaction();
         session.saveOrUpdate(player);
@@ -60,6 +68,7 @@ public class HomerDAO {
     }
 
     public List<Team> getTeams(SportType sportType) {
+        LOG.debug("Getting all teams for type " + sportType);
         Session session = openSession();
         List<Team> teams = session.createCriteria(Team.class).add(Restrictions.like("teamType", sportType)).list();
         session.close();
@@ -74,13 +83,35 @@ public class HomerDAO {
     }
 
     public Player findPlayerByName(String name) {
+        LOG.debug("Finding player by name: " + name);
         Player player = null;
         Session session = null;
         try {
             session = openSession();
             player = (Player) session.createCriteria(Player.class).add(Restrictions.like("playerName", name)).uniqueResult();
+            LOG.debug("Found player: " + player);
+        } catch(NonUniqueResultException e) {
+            throw e;
         } catch(Exception e) {
+            LOG.error("Error finding player " + name, e);
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+        return player;
+    }
 
+    public Player findPlayerByMLBPlayerId(long playerId) {
+        LOG.debug("Finding player by mlb playerid: " + playerId);
+        Player player = null;
+        Session session = null;
+        try {
+            session = openSession();
+            player = (Player) session.createCriteria(Player.class).add(Restrictions.like("mlbPlayerId", playerId)).uniqueResult();
+            LOG.error("Found player: " + player);
+        } catch(Exception e) {
+            LOG.error("Error finding player with mlb playerid" + playerId, e);
         } finally {
             if(session != null) {
                 session.close();

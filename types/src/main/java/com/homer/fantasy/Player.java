@@ -49,16 +49,6 @@ public class Player {
 
     public Player() { }
 
-    public Player(String name) {
-        setPlayerName(name);
-    }
-
-    public Player(long playerId, String playerName, Position primaryPosition) {
-        setPlayerId(playerId);
-        setPlayerName(playerName);
-        setPrimaryPosition(primaryPosition);
-    }
-
     public Long getPlayerId() {
         return playerId;
     }

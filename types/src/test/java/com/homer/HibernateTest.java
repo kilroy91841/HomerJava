@@ -26,7 +26,8 @@ public class HibernateTest {
 
     @Test
     public void save() {
-        Player p = new Player("Ira Bulog");
+        Player p = new Player();
+        p.setPlayerName("Ira Bulog");
         p.setPrimaryPosition(Position.CENTERFIELD);
         DailyPlayerInfo info = new DailyPlayerInfo();
         info.setMlbStatus(PlayerStatus.ACTIVE);
