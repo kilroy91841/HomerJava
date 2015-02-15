@@ -18,7 +18,9 @@ select 'B', 'BENCH'
 union all
 select 'ML', 'MINOR LEAGUES'
 union all
-select 'SUSP', 'SUSPENDED';
+select 'SUSP', 'SUSPENDED'
+union all
+select 'U', 'UNKNOWN';
 
 delete from POSITION;
 

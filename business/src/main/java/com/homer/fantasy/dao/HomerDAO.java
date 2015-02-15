@@ -27,10 +27,11 @@ public class HomerDAO {
     private static final Logger LOG = LoggerFactory.getLogger(HomerDAO.class);
 
     private static SessionFactory sessionFactory;
+    private static final String HIBERNATE_CONFIG = "hibernate_" + System.getProperty("env") + ".cfg.xml";
 
     public HomerDAO() {
         sessionFactory = new Configuration()
-                .configure() // configures settings from hibernate.cfg.xml
+                .configure(HIBERNATE_CONFIG) // configures settings from hibernate.cfg.xml
                 .buildSessionFactory();
     }
 
@@ -104,22 +105,6 @@ public class HomerDAO {
             }
         }
         return teams;
-    }
-
-    public <T> T findByExample(Object o, Class<T> clazz) {
-        Session session = null;
-        T result = null;
-        try {
-            session = openSession();
-            result = (T) session.createCriteria(clazz).add(Example.create(o)).uniqueResult();
-        } catch(Exception e) {
-            LOG.error("Error finding example", e);
-        } finally {
-            if(session != null) {
-                session.close();
-            }
-        }
-        return result;
     }
 
     public Player findPlayerByName(String name) {

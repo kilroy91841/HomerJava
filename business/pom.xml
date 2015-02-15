@@ -42,6 +42,10 @@
 
         <!-- Database -->
         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
         </dependency>
@@ -62,6 +66,25 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>../common_resources</directory>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <directory>../common_test_resources</directory>
+            </testResource>
+            <testResource>
+                <directory>src/test/resources</directory>
+            </testResource>
+        </testResources>
+    </build>
 
 
 </project>

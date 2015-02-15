@@ -20,6 +20,7 @@ public class PlayerStatus {
     public static final PlayerStatus MINORS = new PlayerStatus("MINORS", "MIN");
     public static final PlayerStatus FREEAGENT = new PlayerStatus("FREEAGENT", "FA");
     public static final PlayerStatus RESTRICTED = new PlayerStatus("RESTRICTED", "RST");
+    public static final PlayerStatus UNKNOWN = new PlayerStatus("UNKNOWN", "UNK");
 
     protected static final Map<String, PlayerStatus> map = new HashMap<String, PlayerStatus>();
 
@@ -30,6 +31,7 @@ public class PlayerStatus {
         map.put(MINORS.getCode(), MINORS);
         map.put(FREEAGENT.getCode(), FREEAGENT);
         map.put(RESTRICTED.getCode(), RESTRICTED);
+        map.put(UNKNOWN.getCode(), UNKNOWN);
     }
 
     @Id
@@ -50,10 +52,10 @@ public class PlayerStatus {
     public String getCode() { return code; }
     public void setCode(String code) { this.code = code; }
 
-    public static PlayerStatus get(String name) throws Exception {
-        PlayerStatus status = map.get(name);
+    public static PlayerStatus get(String code) throws Exception {
+        PlayerStatus status = map.get(code);
         if(map == null) {
-            throw new Exception("PlayerStatus not found for name: " + name);
+            throw new Exception("PlayerStatus not found for code: " + code);
         }
         return status;
     }

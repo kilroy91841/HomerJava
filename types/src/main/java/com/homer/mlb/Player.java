@@ -53,6 +53,9 @@ public class Player {
         this.name_last = jsonObject.getString("name_last");
         this.name_use = jsonObject.getString("name_use");
         this.primary_position_txt = jsonObject.getString("primary_position_txt");
+        if(this.primary_position_txt == null) {
+            this.primary_position_txt = jsonObject.getString("position_txt");
+        }
         this.primary_stat_type = jsonObject.getString("primary_stat_type");
         this.status = jsonObject.getString("vultureStatus");
         this.status_code = jsonObject.getString("status_code");

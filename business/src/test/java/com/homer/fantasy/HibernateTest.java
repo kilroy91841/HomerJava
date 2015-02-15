@@ -1,5 +1,7 @@
-package com.homer;
+package com.homer.fantasy;
 
+import com.homer.PlayerStatus;
+import com.homer.SportType;
 import com.homer.fantasy.*;
 import com.homer.mlb.Game;
 import com.homer.mlb.MLBJSONObject;

@@ -48,6 +48,15 @@ public class Player {
     private List<PlayerHistory> playerHistoryList;
 
     public Player() { }
+    
+    public Player(com.homer.mlb.Player mlbPlayer) {
+        setPlayerName(mlbPlayer.getName_display_first_last());
+        setFirstName(mlbPlayer.getName_first());
+        setLastName(mlbPlayer.getName_last());
+        setNameLastFirst(mlbPlayer.getName_display_last_first());
+        setPrimaryPosition(Position.get(mlbPlayer.getPrimary_position()));
+        setMlbPlayerId(mlbPlayer.getPlayer_id());
+    }
 
     public long getPlayerId() {
         return playerId;
@@ -124,7 +133,7 @@ public class Player {
         this.dailyPlayerInfoList = dailyPlayerInfoList;
     }
 
-    public void addDailyPlayerInfoList(DailyPlayerInfo dailyPlayerInfo) {
+    public void addDailyPlayerInfo(DailyPlayerInfo dailyPlayerInfo) {
         getDailyPlayerInfoList().add(dailyPlayerInfo);
     }
 
@@ -137,6 +146,10 @@ public class Player {
 
     public void setPlayerHistoryList(List<PlayerHistory> playerHistoryList) {
         this.playerHistoryList = playerHistoryList;
+    }
+
+    public void addPlayerHistory(PlayerHistory playerHistory) {
+        getPlayerHistoryList().add(playerHistory);
     }
 
     public Team getCurrentFantasyTeam() throws Exception {

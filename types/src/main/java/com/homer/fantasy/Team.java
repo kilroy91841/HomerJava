@@ -26,11 +26,8 @@ public class Team {
 
     public Team() { }
 
-    public Team(Integer teamId, String teamName, SportType teamType, String teamCode) {
+    public Team(Integer teamId) {
         setTeamId(teamId);
-        setTeamName(teamName);
-        setTeamType(teamType);
-        setTeamCode(teamCode);
     }
 
     public Integer getTeamId() {
