@@ -33,27 +33,27 @@ public class Player {
     @Column(name="nameLastFirst")
     private String nameLastFirst;
     @Column(name="mlbPlayerId")
-    private long mlbPlayerId;
+    private Long mlbPlayerId;
     @Column(name="espnPlayerId")
-    private long espnPlayerId;
-    @OneToMany(cascade=CascadeType.ALL)
-    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+    private Long espnPlayerId;
+    @OneToMany(cascade=CascadeType.PERSIST)
+    @Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name="playerId", referencedColumnName="playerId")
     @OrderBy(clause = "gameDate desc")
     private List<DailyPlayerInfo> dailyPlayerInfoList;
-    @OneToMany(cascade=CascadeType.ALL)
-    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+    @OneToMany(cascade=CascadeType.PERSIST)
+    @Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name="playerId", referencedColumnName="playerId")
     @OrderBy(clause = "season desc")
     private List<PlayerHistory> playerHistoryList;
 
     public Player() { }
 
-    public Long getPlayerId() {
+    public long getPlayerId() {
         return playerId;
     }
 
-    public void setPlayerId(Long playerId) {
+    public void setPlayerId(long playerId) {
         this.playerId = playerId;
     }
 
@@ -97,19 +97,19 @@ public class Player {
         this.nameLastFirst = nameLastFirst;
     }
 
-    public long getMlbPlayerId() {
+    public Long getMlbPlayerId() {
         return mlbPlayerId;
     }
 
-    public void setMlbPlayerId(long mlbPlayerId) {
+    public void setMlbPlayerId(Long mlbPlayerId) {
         this.mlbPlayerId = mlbPlayerId;
     }
 
-    public long getEspnPlayerId() {
+    public Long getEspnPlayerId() {
         return espnPlayerId;
     }
 
-    public void setEspnPlayerId(long espnPlayerId) {
+    public void setEspnPlayerId(Long espnPlayerId) {
         this.espnPlayerId = espnPlayerId;
     }
 

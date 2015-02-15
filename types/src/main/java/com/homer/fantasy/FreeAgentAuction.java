@@ -1,6 +1,9 @@
 package com.homer.fantasy;
 
+import com.homer.util.LocalDateTimePersistenceConverter;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,22 +32,22 @@ public class FreeAgentAuction {
     @OneToOne
     @JoinColumn(name="playerId", referencedColumnName="playerId")
     private Player player;
-    @Temporal(value=TemporalType.TIMESTAMP)
+    @Convert(converter=LocalDateTimePersistenceConverter.class)
     @Column(name="createdDate")
-    private Date createdDate;
-    @Temporal(value=TemporalType.TIMESTAMP)
+    private LocalDateTime createdDate;
+    @Convert(converter=LocalDateTimePersistenceConverter.class)
     @Column(name="modifiedDate")
-    private Date modifiedDate;
-    @Temporal(value=TemporalType.TIMESTAMP)
+    private LocalDateTime modifiedDate;
+    @Convert(converter=LocalDateTimePersistenceConverter.class)
     @Column(name="deadline")
-    private Date deadline;
+    private LocalDateTime deadline;
     @Enumerated(EnumType.STRING)
     @Column(name="status")
     private Status status;
 
     public FreeAgentAuction() { }
 
-    public FreeAgentAuction(Team requestingTeam, Player player, Date createdDate, Date modifiedDate, Date deadline, Status status) {
+    public FreeAgentAuction(Team requestingTeam, Player player, LocalDateTime createdDate, LocalDateTime modifiedDate, LocalDateTime deadline, Status status) {
         this.requestingTeam = requestingTeam;
         this.player = player;
         this.createdDate = createdDate;
@@ -69,27 +72,27 @@ public class FreeAgentAuction {
         this.player = player;
     }
 
-    public Date getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 
-    public Date getModifiedDate() {
+    public LocalDateTime getModifiedDate() {
         return modifiedDate;
     }
 
-    public void setModifiedDate(Date modifiedDate) {
+    public void setModifiedDate(LocalDateTime modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
 
-    public Date getDeadline() {
+    public LocalDateTime getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(LocalDateTime deadline) {
         this.deadline = deadline;
     }
 

@@ -12,12 +12,7 @@
     <artifactId>scripts</artifactId>
 
     <dependencies>
-        <!-- Internal -->
-        <dependency>
-            <groupId>HomerAtTheBat</groupId>
-            <artifactId>types</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+        <!-- HomerAtTheBat -->
         <dependency>
             <groupId>HomerAtTheBat</groupId>
             <artifactId>business</artifactId>

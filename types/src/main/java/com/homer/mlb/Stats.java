@@ -1,54 +1,110 @@
 package com.homer.mlb;
 
-import org.joda.time.DateTime;
-import org.json.JSONObject;
+import com.homer.util.LocalDatePersistenceConverter;
+
+import com.homer.fantasy.Player;
+
+import javax.persistence.*;
+import java.time.LocalDate;
 
 /**
  * Created by arigolub on 2/1/15.
  */
+@Entity
+@Table(name="MLBSTATS")
 public class Stats {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="statsId")
+    private long statsId;
+    @ManyToOne
+    @JoinColumn(name="playerId", referencedColumnName="playerId")
+    private Player player;
+    @ManyToOne
+    @JoinColumn(name="gameId", referencedColumnName="gameId")
+    private Game game;
+    @Column(name="ab")
     private Integer ab;
+    @Column(name="ao")
     private Integer ao;
+    @Column(name="avg")
     private Double avg;
+    @Column(name="bb")
     private Integer bb;
+    @Column(name="cs")
     private Integer cs;
+    @Column(name="d")
     private Integer d;
-    private String date;
-    private DateTime game_date;
-    private String game_id;
-    private Long game_pk;
+    @Column(name="gameDate")
+    @Convert(converter=LocalDatePersistenceConverter.class)
+    private LocalDate game_date;
+    @Column(name="gameType")
     private String game_type;
+    @Column(name="go")
     private Integer go;
+    @Column(name="goAo")
     private Double go_ao;
+    @Column(name="h")
     private Integer h;
+    @Column(name="h2b")
     private Integer h2b;
+    @Column(name="h3b")
     private Integer h3b;
+    @Column(name="hbp")
     private Integer hbp;
+    @Column(name="homeAway")
     private String home_away;
+    @Column(name="hr")
     private Integer hr;
+    @Column(name="ibb")
     private Integer ibb;
+    @Column(name="lob")
     private Integer lob;
+    @Column(name="obp")
     private Double obp;
+    @Column(name="opp")
     private String opp;
+    @Column(name="oppScore")
     private Integer opp_score;
+    @Column(name="oppTeamDisplayFull")
     private String opp_team_display_full;
+    @Column(name="oppTeamDisplayShort")
     private String opp_team_display_short;
+    @Column(name="oppTeamId")
     private Integer opp_team_id;
+    @Column(name="ops")
     private Double ops;
+    @Column(name="r")
     private Integer r;
+    @Column(name="rbi")
     private Integer rbi;
+    @Column(name="sac")
     private Integer sac;
+    @Column(name="sb")
     private Integer sb;
+    @Column(name="sf")
     private Integer sf;
+    @Column(name="slg")
     private Double slg;
+    @Column(name="so")
     private Integer so;
+    @Column(name="t")
     private Integer t;
+    @Column(name="tb")
     private Integer tb;
+    @Column(name="teamResult")
     private String team_result;
+    @Column(name="teamScore")
     private Integer team_score;
 
-    public Stats(MLBJSONObject jsonObject) throws Exception {
+    public Stats() { }
+
+    public Stats(Player player, MLBJSONObject jsonObject) throws Exception {
+        this.setPlayer(player);
+        Game game = new Game();
+        game.setGameId(jsonObject.getLongProtected("game_pk"));
+        this.setGame(game);
         this.ab = jsonObject.getInteger("ab");
         this.ao = jsonObject.getInteger("ao");
         this.bb = jsonObject.getInteger("bb");
@@ -78,16 +134,29 @@ public class Stats {
         this.obp = jsonObject.getDoubleProtected("obp");
         this.ops = jsonObject.getDoubleProtected("ops");
         this.slg = jsonObject.getDoubleProtected("slg");
-        this.date = jsonObject.getString("date");
-        this.game_date = jsonObject.getDateTime("game_date");
-        this.game_id = jsonObject.getString("game_id");
+        this.game_date = jsonObject.getLocalDate("game_date");
         this.game_type = jsonObject.getString("game_type");
         this.home_away = jsonObject.getString("home_away");
         this.opp = jsonObject.getString("opp");
         this.opp_team_display_full = jsonObject.getString("opp_team_display_full");
         this.opp_team_display_short = jsonObject.getString("opp_team_display_short");
         this.team_result = jsonObject.getString("team_result");
-        this.game_pk = jsonObject.getLongProtected("game_pk");
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public Integer getAb() {
@@ -138,36 +207,12 @@ public class Stats {
         this.d = d;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public DateTime getGame_date() {
+    public LocalDate getGame_date() {
         return game_date;
     }
 
-    public void setGame_date(DateTime game_date) {
+    public void setGame_date(LocalDate game_date) {
         this.game_date = game_date;
-    }
-
-    public String getGame_id() {
-        return game_id;
-    }
-
-    public void setGame_id(String game_id) {
-        this.game_id = game_id;
-    }
-
-    public Long getGame_pk() {
-        return game_pk;
-    }
-
-    public void setGame_pk(Long game_pk) {
-        this.game_pk = game_pk;
     }
 
     public String getGame_type() {
@@ -405,16 +450,15 @@ public class Stats {
     @Override
     public String toString() {
         return "Stats{" +
-                "ab=" + ab +
+                " player=" + player.getPlayerId() +
+                ", game=" + game +
+                ", ab=" + ab +
                 ", ao=" + ao +
                 ", avg=" + avg +
                 ", bb=" + bb +
                 ", cs=" + cs +
                 ", d=" + d +
-                ", date=" + date +
                 ", game_date=" + game_date +
-                ", game_id='" + game_id + '\'' +
-                ", game_pk=" + game_pk +
                 ", game_type='" + game_type + '\'' +
                 ", go=" + go +
                 ", go_ao=" + go_ao +
@@ -454,48 +498,16 @@ public class Stats {
 
         Stats stats = (Stats) o;
 
-        if (ab != null ? !ab.equals(stats.ab) : stats.ab != null) return false;
-        if (ao != null ? !ao.equals(stats.ao) : stats.ao != null) return false;
-        if (avg != null ? !avg.equals(stats.avg) : stats.avg != null) return false;
-        if (bb != null ? !bb.equals(stats.bb) : stats.bb != null) return false;
-        if (cs != null ? !cs.equals(stats.cs) : stats.cs != null) return false;
-        if (d != null ? !d.equals(stats.d) : stats.d != null) return false;
-        if (date != null ? !date.equals(stats.date) : stats.date != null) return false;
-        if (game_date != null ? !game_date.equals(stats.game_date) : stats.game_date != null) return false;
-        if (game_id != null ? !game_id.equals(stats.game_id) : stats.game_id != null) return false;
-        if (game_pk != null ? !game_pk.equals(stats.game_pk) : stats.game_pk != null) return false;
-        if (game_type != null ? !game_type.equals(stats.game_type) : stats.game_type != null) return false;
-        if (go != null ? !go.equals(stats.go) : stats.go != null) return false;
-        if (go_ao != null ? !go_ao.equals(stats.go_ao) : stats.go_ao != null) return false;
-        if (h != null ? !h.equals(stats.h) : stats.h != null) return false;
-        if (h2b != null ? !h2b.equals(stats.h2b) : stats.h2b != null) return false;
-        if (h3b != null ? !h3b.equals(stats.h3b) : stats.h3b != null) return false;
-        if (hbp != null ? !hbp.equals(stats.hbp) : stats.hbp != null) return false;
-        if (home_away != null ? !home_away.equals(stats.home_away) : stats.home_away != null) return false;
-        if (hr != null ? !hr.equals(stats.hr) : stats.hr != null) return false;
-        if (ibb != null ? !ibb.equals(stats.ibb) : stats.ibb != null) return false;
-        if (lob != null ? !lob.equals(stats.lob) : stats.lob != null) return false;
-        if (obp != null ? !obp.equals(stats.obp) : stats.obp != null) return false;
-        if (opp != null ? !opp.equals(stats.opp) : stats.opp != null) return false;
-        if (opp_score != null ? !opp_score.equals(stats.opp_score) : stats.opp_score != null) return false;
-        if (opp_team_display_full != null ? !opp_team_display_full.equals(stats.opp_team_display_full) : stats.opp_team_display_full != null)
-            return false;
-        if (opp_team_display_short != null ? !opp_team_display_short.equals(stats.opp_team_display_short) : stats.opp_team_display_short != null)
-            return false;
-        if (opp_team_id != null ? !opp_team_id.equals(stats.opp_team_id) : stats.opp_team_id != null) return false;
-        if (ops != null ? !ops.equals(stats.ops) : stats.ops != null) return false;
-        if (r != null ? !r.equals(stats.r) : stats.r != null) return false;
-        if (rbi != null ? !rbi.equals(stats.rbi) : stats.rbi != null) return false;
-        if (sac != null ? !sac.equals(stats.sac) : stats.sac != null) return false;
-        if (sb != null ? !sb.equals(stats.sb) : stats.sb != null) return false;
-        if (sf != null ? !sf.equals(stats.sf) : stats.sf != null) return false;
-        if (slg != null ? !slg.equals(stats.slg) : stats.slg != null) return false;
-        if (so != null ? !so.equals(stats.so) : stats.so != null) return false;
-        if (t != null ? !t.equals(stats.t) : stats.t != null) return false;
-        if (tb != null ? !tb.equals(stats.tb) : stats.tb != null) return false;
-        if (team_result != null ? !team_result.equals(stats.team_result) : stats.team_result != null) return false;
-        if (team_score != null ? !team_score.equals(stats.team_score) : stats.team_score != null) return false;
+        if (!this.game.equals(stats.game)) return false;
+        if (!this.player.equals(stats.player)) return false;
 
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = player.hashCode();
+        result = result * 31 * game.hashCode();
+        return result;
     }
 }

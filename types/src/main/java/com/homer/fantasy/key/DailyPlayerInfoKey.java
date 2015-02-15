@@ -1,11 +1,13 @@
 package com.homer.fantasy.key;
 
 import com.homer.fantasy.Player;
+import com.homer.util.LocalDatePersistenceConverter;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
 import javax.persistence.CascadeType;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -13,20 +15,19 @@ import java.util.Date;
  */
 @Embeddable
 public class DailyPlayerInfoKey implements Serializable {
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="playerId", referencedColumnName="playerId")
-    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     private Player player;
-    @Temporal(TemporalType.DATE)
+    @Convert(converter=LocalDatePersistenceConverter.class)
     @Column(name="gameDate")
-    private Date date;
+    private LocalDate date;
 
     public DailyPlayerInfoKey() { }
 
     public Player getPlayer() { return player; }
     public void setPlayer(Player player) { this.player = player; }
-    public Date getDate() { return date; }
-    public void setDate(Date date) { this.date = date; }
+    public LocalDate getDate() { return date; }
+    public void setDate(LocalDate date) { this.date = date; }
 
     @Override
     public String toString() {

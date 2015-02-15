@@ -9,19 +9,19 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>business</artifactId>
+    <artifactId>external</artifactId>
 
     <dependencies>
-        <!-- HomerAtTheBat -->
         <dependency>
             <groupId>HomerAtTheBat</groupId>
             <artifactId>types</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <!-- REST Client -->
         <dependency>
-            <groupId>HomerAtTheBat</groupId>
-            <artifactId>external</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>com.mashape.unirest</groupId>
+            <artifactId>unirest-java</artifactId>
         </dependency>
 
         <!-- Logging -->
@@ -32,22 +32,6 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-        </dependency>
-
-        <!-- Scheduling -->
-        <dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz</artifactId>
-        </dependency>
-
-        <!-- Database -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javassist</groupId>
-            <artifactId>javassist</artifactId>
         </dependency>
 
         <!-- Test -->

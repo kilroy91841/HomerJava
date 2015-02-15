@@ -3,8 +3,12 @@ package com.homer.fantasy;
 import com.homer.PlayerStatus;
 import com.homer.fantasy.key.DailyPlayerInfoKey;
 import com.homer.mlb.Game;
+import com.homer.mlb.Stats;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,22 +37,16 @@ public class DailyPlayerInfo {
 	@OneToOne
 	@JoinColumn(name="mlbPlayerStatusCode", referencedColumnName="playerStatusCode")
 	private PlayerStatus mlbStatus;
-	@Transient
-	private List<Game> games;
+	@OneToMany(cascade=CascadeType.PERSIST)
+	@Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+	@JoinColumns({
+			@JoinColumn(name = "playerId", referencedColumnName="playerId"),
+			@JoinColumn(name = "gameDate", referencedColumnName="gameDate")
+	})
+	private List<Stats> statsList;
 
 	public DailyPlayerInfo() {
 		this.dailyPlayerInfoKey = new DailyPlayerInfoKey();
-	}
-
-	public DailyPlayerInfo(Team fantasyTeam, Team mlbTeam, Date date, Position fantasyPosition, PlayerStatus fantasyStatus,
-						   PlayerStatus mlbStatus, List<Game> games) {
-		setFantasyTeam(fantasyTeam);
-		setMlbTeam(mlbTeam);
-		setDate(date);
-		setFantasyPosition(fantasyPosition);
-		setFantasyStatus(fantasyStatus);
-		setMlbStatus(mlbStatus);
-		setGames(games);
 	}
 
 	public DailyPlayerInfoKey getDailyPlayerInfoKey() {
@@ -79,11 +77,11 @@ public class DailyPlayerInfo {
 		this.getDailyPlayerInfoKey().setPlayer(player);
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.getDailyPlayerInfoKey().setDate(date);
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return this.getDailyPlayerInfoKey().getDate();
 	}
 
@@ -95,12 +93,15 @@ public class DailyPlayerInfo {
 		return fantasyPosition;
 	}
 
-	public void setGames(List<Game> games) {
-		this.games = games;
+	public void setStatsList(List<Stats> statsList) {
+		this.statsList = statsList;
 	}
 
-	public List<Game> getGames() {
-		return games;
+	public List<Stats> getStatsList() {
+		if(statsList == null) {
+			statsList = new ArrayList<Stats>();
+		}
+		return statsList;
 	}
 
 	public PlayerStatus getFantasyStatus() {
@@ -121,16 +122,17 @@ public class DailyPlayerInfo {
 
 	@Override
 	public String toString() {
-		return "DailyPlayer{" +
-				"player=" + getDailyPlayerInfoKey().toString() +
-				"fantasyTeam=" + fantasyTeam +
-				", mlbTeam=" + mlbTeam +
-				", date=" + getDailyPlayerInfoKey().getDate() +
-				", fantasyPosition=" + fantasyPosition +
-				", games=" + games +
-				", fantasyStatus=" + fantasyStatus +
-				", mlbStatus=" + mlbStatus +
-				'}';
+		StringBuilder sb = new StringBuilder();
+		sb.append("DailyPlayerInfo{");
+		sb.append("dailyPlayerInfoKey=" + dailyPlayerInfoKey);
+		sb.append(", fantasyTeam=" + fantasyTeam);
+		sb.append(", mlbTeam=" + mlbTeam);
+		sb.append(", fantasyPosition=" + fantasyPosition);
+		sb.append(", fantasyStatus=" + fantasyStatus);
+		sb.append(", mlbStatus=" + mlbStatus);
+		sb.append(", statsList=" + statsList);
+		sb.append("}");
+		return sb.toString();
 	}
 
 	@Override
@@ -141,11 +143,6 @@ public class DailyPlayerInfo {
 		DailyPlayerInfo that = (DailyPlayerInfo) o;
 
 		if (this.getDailyPlayerInfoKey() != that.getDailyPlayerInfoKey()) return false;
-		if (fantasyPosition != null ? !fantasyPosition.equals(that.fantasyPosition) : that.fantasyPosition != null)
-			return false;
-		if (fantasyTeam != null ? !fantasyTeam.equals(that.fantasyTeam) : that.fantasyTeam != null) return false;
-		if (games != null ? !games.equals(that.games) : that.games != null) return false;
-		if (mlbTeam != null ? !mlbTeam.equals(that.mlbTeam) : that.mlbTeam != null) return false;
 
 		return true;
 	}
@@ -156,7 +153,6 @@ public class DailyPlayerInfo {
 		result = 31 * result + getDailyPlayerInfoKey().hashCode();
 		result = 31 * result + (mlbTeam != null ? mlbTeam.hashCode() : 0);
 		result = 31 * result + (fantasyPosition != null ? fantasyPosition.hashCode() : 0);
-		result = 31 * result + (games != null ? games.hashCode() : 0);
 		return result;
 	}
 

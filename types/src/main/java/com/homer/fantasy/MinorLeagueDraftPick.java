@@ -1,6 +1,9 @@
 package com.homer.fantasy;
 
+import com.homer.util.LocalDateTimePersistenceConverter;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -28,16 +31,16 @@ public class MinorLeagueDraftPick {
     @OneToOne
     @JoinColumn(name="playerId", referencedColumnName="playerId")
     private Player player;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter=LocalDateTimePersistenceConverter.class)
     @Column(name="deadline")
-    private Date deadline;
+    private LocalDateTime deadline;
     @Column(name="skipped")
     private Boolean skipped;
 
     public MinorLeagueDraftPick() { }
 
     public MinorLeagueDraftPick(Team originalTeam, int season, int round, Team owningTeam, Integer overall,
-                                Player player, Date deadline, Boolean skipped) {
+                                Player player, LocalDateTime deadline, Boolean skipped) {
         this.originalTeam = originalTeam;
         this.season = season;
         this.round = round;
@@ -96,11 +99,11 @@ public class MinorLeagueDraftPick {
         this.player = player;
     }
 
-    public Date getDeadline() {
+    public LocalDateTime getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(LocalDateTime deadline) {
         this.deadline = deadline;
     }
 

@@ -1,9 +1,10 @@
 package com.homer.fantasy.key;
 
 import com.homer.fantasy.Player;
-import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
 import java.io.Serializable;
 
 /**
@@ -12,9 +13,8 @@ import java.io.Serializable;
 @Embeddable
 public class PlayerHistoryKey implements Serializable {
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="playerId", referencedColumnName="playerId")
-    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     private Player player;
     @Column(name="season")
     private int season;

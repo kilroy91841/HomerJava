@@ -1,6 +1,9 @@
 package com.homer.fantasy;
 
+import com.homer.util.LocalDateTimePersistenceConverter;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -28,19 +31,19 @@ public class Vulture {
     @OneToOne
     @JoinColumn(name="playerId", referencedColumnName="playerId")
     public Player player;
-    @Temporal(value=TemporalType.TIMESTAMP)
+    @Convert(converter=LocalDateTimePersistenceConverter.class)
     @Column(name="createdDate")
-    public Date createdDate;
-    @Temporal(value=TemporalType.TIMESTAMP)
+    public LocalDateTime createdDate;
+    @Convert(converter=LocalDateTimePersistenceConverter.class)
     @Column(name="deadline")
-    public Date deadline;
+    public LocalDateTime deadline;
     @Enumerated(EnumType.STRING)
     @Column(name="vultureStatus")
     public Status vultureStatus;
 
     public Vulture() { }
 
-    public Vulture(Team vulturingTeam, Team offendingTeam, Player player, Date deadline, Status vultureStatus) {
+    public Vulture(Team vulturingTeam, Team offendingTeam, Player player, LocalDateTime deadline, Status vultureStatus) {
         this.vulturingTeam = vulturingTeam;
         this.offendingTeam = offendingTeam;
         this.player = player;
@@ -72,19 +75,19 @@ public class Vulture {
         this.player = player;
     }
 
-    public Date getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 
-    public Date getDeadline() {
+    public LocalDateTime getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(LocalDateTime deadline) {
         this.deadline = deadline;
     }
 

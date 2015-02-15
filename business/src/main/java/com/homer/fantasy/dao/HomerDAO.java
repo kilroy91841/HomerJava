@@ -15,6 +15,7 @@ import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -61,7 +62,7 @@ public class HomerDAO {
     public void createPlayer(Player player) {
         DailyPlayerInfo info = new DailyPlayerInfo();
         info.setPlayer(player);
-        info.setDate(new Date());
+        info.setDate(LocalDate.now());
         info.setMlbStatus(PlayerStatus.ACTIVE);
         player.getDailyPlayerInfoList().add(info);
 

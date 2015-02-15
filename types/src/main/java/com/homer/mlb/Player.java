@@ -1,8 +1,7 @@
 package com.homer.mlb;
 
 import com.homer.fantasy.Position;
-import org.joda.time.DateTime;
-import org.json.JSONObject;
+import java.time.LocalDate;
 
 /**
  * Created by arigolub on 2/1/15.
@@ -12,7 +11,7 @@ public class Player {
     private String active_sw;
     private Integer age;
     private String bats;
-    private DateTime birth_date;
+    private LocalDate birth_date;
     private Integer jersey_number;
     private String name_display_first_last;
     private String name_display_first_last_html;
@@ -28,11 +27,11 @@ public class Player {
     private Integer primary_position;
     private String primary_position_txt;
     private String primary_stat_type;
-    private DateTime pro_debut_date;
-    private DateTime start_date;
+    private LocalDate pro_debut_date;
+    private LocalDate start_date;
     private String status;
     private String status_code;
-    private DateTime status_date;
+    private LocalDate status_date;
     private String team_abbrev;
     private String team_code;
     private Integer team_id;
@@ -76,10 +75,10 @@ public class Player {
             }
         }
         this.team_id = jsonObject.getInteger("team_id");
-        this.birth_date = jsonObject.getDateTime("birth_date");
-        this.pro_debut_date = jsonObject.getDateTime("pro_debut_date");
-        this.start_date = jsonObject.getDateTime("start_date");
-        this.status_date = jsonObject.getDateTime("status_date");
+        this.birth_date = jsonObject.getLocalDate("birth_date");
+        this.pro_debut_date = jsonObject.getLocalDate("pro_debut_date");
+        this.start_date = jsonObject.getLocalDate("start_date");
+        this.status_date = jsonObject.getLocalDate("status_date");
         this.player_id = jsonObject.getLongProtected("player_id");
         this.age = jsonObject.getInteger("age");
     }
@@ -108,11 +107,11 @@ public class Player {
         this.bats = bats;
     }
 
-    public DateTime getBirth_date() {
+    public LocalDate getBirth_date() {
         return birth_date;
     }
 
-    public void setBirth_date(DateTime birth_date) {
+    public void setBirth_date(LocalDate birth_date) {
         this.birth_date = birth_date;
     }
 
@@ -236,19 +235,19 @@ public class Player {
         this.primary_stat_type = primary_stat_type;
     }
 
-    public DateTime getPro_debut_date() {
+    public LocalDate getPro_debut_date() {
         return pro_debut_date;
     }
 
-    public void setPro_debut_date(DateTime pro_debut_date) {
+    public void setPro_debut_date(LocalDate pro_debut_date) {
         this.pro_debut_date = pro_debut_date;
     }
 
-    public DateTime getStart_date() {
+    public LocalDate getStart_date() {
         return start_date;
     }
 
-    public void setStart_date(DateTime start_date) {
+    public void setStart_date(LocalDate start_date) {
         this.start_date = start_date;
     }
 
@@ -268,11 +267,11 @@ public class Player {
         this.status_code = status_code;
     }
 
-    public DateTime getStatus_date() {
+    public LocalDate getStatus_date() {
         return status_date;
     }
 
-    public void setStatus_date(DateTime status_date) {
+    public void setStatus_date(LocalDate status_date) {
         this.status_date = status_date;
     }
 

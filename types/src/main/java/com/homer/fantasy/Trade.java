@@ -1,6 +1,9 @@
 package com.homer.fantasy;
 
+import com.homer.util.LocalDateTimePersistenceConverter;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,12 +32,12 @@ public class Trade {
     @OneToOne
     @JoinColumn(name="proposedToTeamId", referencedColumnName="teamId")
     private Team proposedToTeam;
-    @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter=LocalDateTimePersistenceConverter.class)
     @Column(name="createdDate")
-    private Date createdDate;
-    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime createdDate;
+    @Convert(converter=LocalDateTimePersistenceConverter.class)
     @Column(name="deadline")
-    private Date deadline;
+    private LocalDateTime deadline;
     @Enumerated(EnumType.STRING)
     @Column(name="tradeStatus")
     private Status tradeStatus;
@@ -46,7 +49,7 @@ public class Trade {
 
     public Trade() { }
 
-    public Trade(Team proposingTeam, Team proposedToTeam, Date createdDate, Date deadline,
+    public Trade(Team proposingTeam, Team proposedToTeam, LocalDateTime createdDate, LocalDateTime deadline,
                  List<TradeAsset> tradeAssets, Status tradeStatus) {
         this.proposingTeam = proposingTeam;
         this.proposedToTeam = proposedToTeam;
@@ -80,19 +83,19 @@ public class Trade {
         this.proposedToTeam = proposedToTeam;
     }
 
-    public Date getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate (LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 
-    public Date getDeadline() {
+    public LocalDateTime getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline (LocalDateTime deadline) {
         this.deadline = deadline;
     }
 

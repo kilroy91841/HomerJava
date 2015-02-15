@@ -2,7 +2,7 @@ package com.homer.fantasy;
 
 import com.homer.SportType;
 import com.homer.fantasy.dao.HomerDAO;
-import com.homer.mlb.MLBClientREST;
+import com.homer.mlb.client.MLBClientREST;
 import com.homer.mlb.MLBJSONObject;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;

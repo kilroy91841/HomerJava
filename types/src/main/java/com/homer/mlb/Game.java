@@ -1,30 +1,109 @@
 package com.homer.mlb;
 
 import com.homer.fantasy.Team;
+import com.homer.fantasy.Player;
+import com.homer.util.LocalDatePersistenceConverter;
+import com.homer.util.LocalDateTimePersistenceConverter;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
  * Created by MLB on 1/25/15.
  */
+@Entity
+@Table(name="MLBGAME")
 public class Game {
 
-    private int gameId;
+    @Id
+    @Column(name="gameId")
+    private long gameId;
+    @OneToOne
+    @JoinColumn(name="homeTeamId", referencedColumnName="teamId")
     private Team homeTeam;
+    @OneToOne
+    @JoinColumn(name="awayTeamId", referencedColumnName="teamId")
     private Team awayTeam;
-    private Date gameDate;
+    @Convert(converter=LocalDatePersistenceConverter.class)
+    @Column(name="gameDate")
+    private LocalDate gameDate;
+    @Column(name="awayScore")
     private int awayScore;
+    @Column(name="homeScore")
     private int homeScore;
+    @ManyToOne
+    @JoinColumn(name="awayProbablePitcherId", referencedColumnName="playerId")
     private Player awayProbablePitcher;
+    @ManyToOne
+    @JoinColumn(name="homeProbablePitcherId", referencedColumnName="playerId")
     private Player homeProbablePitcher;
-    private Date gameTime;
+    @Convert(converter=LocalDateTimePersistenceConverter.class)
+    @Column(name="gameTime")
+    private LocalDateTime gameTime;
+    @Column(name="status")
     private String status;
+    @Column(name="inning")
     private String inning;
+    @Column(name="inningState")
     private String inningState;
+    @Column(name="gamedayUrl")
     private String gamedayUrl;
+    @Column(name="amPm")
     private String amPm;
 
     public Game() { }
+
+    public Game(MLBJSONObject json) throws Exception {
+        gameId = json.getLongProtected("game_pk");
+        homeTeam = new Team();
+        homeTeam.setTeamId(json.getInteger("home_team_id"));
+        awayTeam = new Team();
+        awayTeam.setTeamId(json.getInteger("away_team_id"));
+
+        MLBJSONObject gameMedia = new MLBJSONObject(json.getJSONObject("game_media"));
+        if(gameMedia != null) {
+            JSONArray media = gameMedia.getJSONArray("media");
+            for(int i = 0; i < media.length(); i++) {
+                MLBJSONObject med = new MLBJSONObject((JSONObject)media.get(i));
+                if(med.has("start")) {
+                    gameDate = json.getLocalDate("start");
+                    gameTime = json.getLocalDateTime("start");
+                }
+            }
+        }
+
+        MLBJSONObject jsonStatus = new MLBJSONObject(json.getJSONObject("status"));
+        status = jsonStatus.getString("status");
+        inning = jsonStatus.getString("inning");
+        inningState = jsonStatus.getString("inning_state");
+        gamedayUrl = json.getString("gameday");
+        amPm =json.getString("ampm");
+
+        if(json.has("away_probabl_pitcher")) {
+            MLBJSONObject awayPitcher = new MLBJSONObject(json.getJSONObject("away_probable_pitcher"));
+            awayProbablePitcher = new Player();
+            awayProbablePitcher.setPlayerId(awayPitcher.getLongProtected("id"));
+        }
+
+        if(json.has("home_probable_pitcher")) {
+            MLBJSONObject homePitcher = new MLBJSONObject(json.getJSONObject("home_probable_pitcher"));
+            homeProbablePitcher = new Player();
+            homeProbablePitcher.setPlayerId(homePitcher.getLongProtected("id"));
+        }
+
+        if(json.has("linescore")) {
+            MLBJSONObject linescore = new MLBJSONObject(json.getJSONObject("linescore"));
+            MLBJSONObject runs = new MLBJSONObject(linescore.getJSONObject("r"));
+            if(runs != null) {
+                awayScore = runs.getInteger("away");
+                homeScore = runs.getInteger("home");
+            }
+        }
+    }
 
     public Team getHomeTeam() {
         return homeTeam;
@@ -42,19 +121,19 @@ public class Game {
         this.awayTeam = awayTeam;
     }
 
-    public Date getGameDate() {
+    public LocalDate getGameDate() {
         return gameDate;
     }
 
-    public void setGameDate(Date gameDate) {
+    public void setGameDate(LocalDate gameDate) {
         this.gameDate = gameDate;
     }
 
-    public int getGameId() {
+    public long getGameId() {
         return gameId;
     }
 
-    public void setGameId(int gameId) {
+    public void setGameId(long gameId) {
         this.gameId = gameId;
     }
 
@@ -90,11 +169,11 @@ public class Game {
         this.homeProbablePitcher = homeProbablePitcher;
     }
 
-    public Date getGameTime() {
+    public LocalDateTime getGameTime() {
         return gameTime;
     }
 
-    public void setGameTime(Date gameTime) {
+    public void setGameTime(LocalDateTime gameTime) {
         this.gameTime = gameTime;
     }
 
@@ -136,5 +215,42 @@ public class Game {
 
     public void setAmPm(String amPm) {
         this.amPm = amPm;
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "gameId=" + gameId +
+                ", homeTeam=" + homeTeam +
+                ", awayTeam=" + awayTeam +
+                ", gameDate=" + gameDate +
+                ", awayScore=" + awayScore +
+                ", homeScore=" + homeScore +
+                ", awayProbablePitcher=" + awayProbablePitcher +
+                ", homeProbablePitcher=" + homeProbablePitcher +
+                ", gameTime=" + gameTime +
+                ", status='" + status + '\'' +
+                ", inning='" + inning + '\'' +
+                ", inningState='" + inningState + '\'' +
+                ", gamedayUrl='" + gamedayUrl + '\'' +
+                ", amPm='" + amPm + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Game game = (Game) o;
+
+        if (gameId != game.gameId) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (gameId ^ (gameId >>> 32));
     }
 }
