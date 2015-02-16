@@ -5,6 +5,8 @@ import com.homer.fantasy.key.DailyPlayerInfoKey;
 import com.homer.mlb.Game;
 import com.homer.mlb.Stats;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -37,12 +39,13 @@ public class DailyPlayerInfo {
 	@OneToOne
 	@JoinColumn(name="mlbPlayerStatusCode", referencedColumnName="playerStatusCode")
 	private PlayerStatus mlbStatus;
-	@OneToMany(cascade=CascadeType.PERSIST)
+	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
 	@Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	@JoinColumns({
 			@JoinColumn(name = "playerId", referencedColumnName="playerId"),
 			@JoinColumn(name = "gameDate", referencedColumnName="gameDate")
 	})
+	@Fetch(FetchMode.SELECT)
 	private List<Stats> statsList;
 
 	public DailyPlayerInfo() {

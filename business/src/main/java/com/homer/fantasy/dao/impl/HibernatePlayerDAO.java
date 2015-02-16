@@ -19,19 +19,9 @@ public class HibernatePlayerDAO extends HomerDAO implements IPlayerDAO {
     @Override
     public Player createOrSave(Player player) {
         LOG.debug("BEGIN: createOrSave [player=" + player +"]");
-        Session session = null;
-        try {
-            session = openSession();
-            session.beginTransaction();
-            session.saveOrUpdate(player);
-            session.getTransaction().commit();
-            session.flush();
-        } catch (RuntimeException re) {
-            LOG.error("Error saving player", re);
-        } finally {
-            if(session != null) {
-                session.close();
-            }
+        boolean success = saveOrUpdate(player);
+        if(!success) {
+            player = null;
         }
         LOG.debug("END: createOrSave [player=" + player + "]");
         return player;
@@ -40,20 +30,13 @@ public class HibernatePlayerDAO extends HomerDAO implements IPlayerDAO {
     @Override
     public Player getPlayer(Player player) {
         LOG.debug("BEGIN: getPlayer [example=" + player + "]");
-        Player dbPlayer = null;
-        Session session = null;
-        try {
-            session = openSession();
-            session.beginTransaction();
-            Example example = Example.create(player);
-            dbPlayer = (Player) session.createCriteria(Player.class).add(example).uniqueResult();
-        } catch (RuntimeException re) {
-            LOG.error("Error getting player", re);
-        } finally {
-            if(session != null) {
-                session.close();
-            }
+        Player dbPlayer;
+        if(player.getPlayerId() != null) {
+            dbPlayer = findUniqueById(player.getPlayerId(), Player.class);
+        } else {
+            dbPlayer = findUniqueByExample(player, Player.class);
         }
+        LOG.debug("END: getPlayer [result=" + dbPlayer + "]");
         return dbPlayer;
     }
 }

@@ -3,8 +3,12 @@ package com.homer.mlb;
 import com.homer.util.LocalDatePersistenceConverter;
 
 import com.homer.fantasy.Player;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDate;
 
 /**
@@ -17,7 +21,7 @@ public class Stats {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="statsId")
-    private long statsId;
+    private Long statsId;
     @ManyToOne
     @JoinColumn(name="playerId", referencedColumnName="playerId")
     private Player player;
@@ -141,6 +145,14 @@ public class Stats {
         this.opp_team_display_full = jsonObject.getString("opp_team_display_full");
         this.opp_team_display_short = jsonObject.getString("opp_team_display_short");
         this.team_result = jsonObject.getString("team_result");
+    }
+
+    public Long getStatsId() {
+        return statsId;
+    }
+
+    public void setStatsId(long statsId) {
+        this.statsId = statsId;
     }
 
     public Player getPlayer() {
@@ -509,5 +521,37 @@ public class Stats {
         int result = player.hashCode();
         result = result * 31 * game.hashCode();
         return result;
+    }
+
+    public void copyNewStats(Stats newStats) {
+        this.ab = newStats.ab;
+        this.ao = newStats.ao;
+        this.bb = newStats.bb;
+        this.cs = newStats.cs;
+        this.d = newStats.d;
+        this.go = newStats.go;
+        this.h = newStats.h;
+        this.h2b = newStats.h2b;
+        this.h3b = newStats.h3b;
+        this.hbp = newStats.hbp;
+        this.hr = newStats.hr;
+        this.ibb = newStats.ibb;
+        this.lob = newStats.lob;
+        this.opp_score = newStats.opp_score;
+        this.r = newStats.r;
+        this.rbi = newStats.rbi;
+        this.sac = newStats.sac;
+        this.sb = newStats.sb;
+        this.sf = newStats.sf;
+        this.so = newStats.so;
+        this.t = newStats.t;
+        this.tb = newStats.tb;
+        this.team_score = newStats.team_score;
+        this.avg = newStats.avg;
+        this.go_ao = newStats.go_ao;
+        this.obp = newStats.obp;
+        this.ops = newStats.ops;
+        this.slg = newStats.slg;
+        this.team_result = newStats.team_result;
     }
 }

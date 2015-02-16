@@ -21,7 +21,7 @@ public class Game {
 
     @Id
     @Column(name="gameId")
-    private long gameId;
+    private Long gameId;
     @OneToOne
     @JoinColumn(name="homeTeamId", referencedColumnName="teamId")
     private Team homeTeam;
@@ -59,10 +59,8 @@ public class Game {
 
     public Game(MLBJSONObject json) throws Exception {
         gameId = json.getLongProtected("game_pk");
-        homeTeam = new Team();
-        homeTeam.setTeamId(json.getInteger("home_team_id"));
-        awayTeam = new Team();
-        awayTeam.setTeamId(json.getInteger("away_team_id"));
+        homeTeam = new Team(json.getInteger("home_team_id"));
+        awayTeam = new Team(json.getInteger("away_team_id"));
 
         MLBJSONObject gameMedia = new MLBJSONObject(json.getJSONObject("game_media"));
         if(gameMedia != null) {
@@ -129,7 +127,7 @@ public class Game {
         this.gameDate = gameDate;
     }
 
-    public long getGameId() {
+    public Long getGameId() {
         return gameId;
     }
 
@@ -244,7 +242,7 @@ public class Game {
 
         Game game = (Game) o;
 
-        if (gameId != game.gameId) return false;
+        if (!gameId.equals(game.gameId)) return false;
 
         return true;
     }

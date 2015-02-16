@@ -2,6 +2,7 @@ package com.homer.fantasy.facade;
 
 import com.homer.fantasy.facade.GameFacade;
 import com.homer.fantasy.facade.PlayerFacade;
+import com.homer.mlb.Game;
 import junit.framework.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -20,7 +21,7 @@ public class GameFacadeTest {
 
     @Test
     public void createOrUpdateGame() {
-        boolean retVal = facade.createOrUpdateGame(null);
-        Assert.assertTrue(retVal);
+        Game retVal = facade.createOrUpdateGame(new Game());
+        Assert.assertNotNull(retVal);
     }
 }

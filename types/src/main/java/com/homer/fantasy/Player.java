@@ -20,7 +20,7 @@ public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="playerId")
-    private long playerId;
+    private Long playerId;
     @Column(name="playerName")
     private String playerName;
     @OneToOne
@@ -36,15 +36,17 @@ public class Player {
     private Long mlbPlayerId;
     @Column(name="espnPlayerId")
     private Long espnPlayerId;
-    @OneToMany(cascade=CascadeType.PERSIST)
+    @OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
     @Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name="playerId", referencedColumnName="playerId")
     @OrderBy(clause = "gameDate desc")
+    @Fetch(FetchMode.SELECT)
     private List<DailyPlayerInfo> dailyPlayerInfoList;
-    @OneToMany(cascade=CascadeType.PERSIST)
+    @OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
     @Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name="playerId", referencedColumnName="playerId")
     @OrderBy(clause = "season desc")
+    @Fetch(FetchMode.SELECT)
     private List<PlayerHistory> playerHistoryList;
 
     public Player() { }
@@ -58,7 +60,11 @@ public class Player {
         setMlbPlayerId(mlbPlayer.getPlayer_id());
     }
 
-    public long getPlayerId() {
+    public Player(long playerId) {
+        setPlayerId(playerId);
+    }
+
+    public Long getPlayerId() {
         return playerId;
     }
 
@@ -167,8 +173,8 @@ public class Player {
 
         Player player = (Player) o;
 
-        if (playerId != player.playerId) return false;
-        if (mlbPlayerId != player.mlbPlayerId) return false;
+        if (mlbPlayerId != null ? !mlbPlayerId.equals(player.mlbPlayerId) : player.mlbPlayerId != null) return false;
+        if (playerId != null ? !playerId.equals(player.playerId) : player.playerId != null) return false;
 
         return true;
     }

@@ -15,6 +15,7 @@ import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -40,14 +41,15 @@ public class HomerDAO {
     }
 
     public boolean saveOrUpdate(Object o) {
+        LOG.debug("BEGIN: saveOrUpdate [object=" + o + "]");
         boolean success = false;
-        LOG.debug("Saving " + o);
         Session session = null;
         try {
             session = openSession();
             session.beginTransaction();
             session.saveOrUpdate(o);
             session.getTransaction().commit();
+            session.flush();
             LOG.debug("Save successful!");
             success = true;
         } catch(Exception e) {
@@ -57,37 +59,62 @@ public class HomerDAO {
                 session.close();
             }
         }
+        LOG.debug("END: saveOrUpdate [object=" + o + "]");
         return success;
     }
 
-    public void createPlayer(Player player) {
-        DailyPlayerInfo info = new DailyPlayerInfo();
-        info.setPlayer(player);
-        info.setDate(LocalDate.now());
-        info.setMlbStatus(PlayerStatus.ACTIVE);
-        player.getDailyPlayerInfoList().add(info);
-
-        PlayerHistory history = new PlayerHistory();
-        history.setPlayer(player);
-        history.setSeason(2015);
-        player.getPlayerHistoryList().add(history);
-
-        LOG.debug("Creating player: " + player);
-
+    public <T> T findUniqueByExample(Object obj, Class<T> clazz) {
+        T retVal = null;
         Session session = null;
         try {
             session = openSession();
             session.beginTransaction();
-            session.saveOrUpdate(player);
-            session.getTransaction().commit();
-            LOG.debug("Save succsesful!");
-        } catch(Exception e) {
-            LOG.error("Exception saving player", e);
+            Example example = Example.create(obj);
+            retVal = (T) session.createCriteria(clazz).add(example).uniqueResult();
+        } catch (RuntimeException re) {
+            LOG.error("Error getting object", re);
         } finally {
             if(session != null) {
                 session.close();
             }
         }
+        return retVal;
+    }
+
+    public <T> T findUniqueById(Object obj, Class<T> clazz) {
+        T retVal = null;
+        Session session = null;
+        try {
+            session = openSession();
+            session.beginTransaction();
+            Example example = Example.create(obj);
+            retVal = (T) session.get(clazz, (Serializable) obj);
+        } catch (RuntimeException re) {
+            LOG.error("Error getting object", re);
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+        return retVal;
+    }
+
+    public <T> List<T> findListByExample(Object obj, Class<T> clazz) {
+        List<T> retList = null;
+        Session session = null;
+        try {
+            session = openSession();
+            session.beginTransaction();
+            Example example = Example.create(obj);
+            retList = session.createCriteria(clazz).add(example).list();
+        } catch (RuntimeException re) {
+            LOG.error("Error getting object", re);
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+        return retList;
     }
 
     public List<Team> getTeams(SportType sportType) {

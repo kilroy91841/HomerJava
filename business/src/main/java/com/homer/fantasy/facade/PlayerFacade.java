@@ -62,12 +62,12 @@ public class PlayerFacade {
             newPlayer.addDailyPlayerInfo(dailyPlayerInfo);
 
             dbPlayer = createOrUpdatePlayer(newPlayer);
-
-
         } else {
             LOG.debug("Player already exists, update player information");
             Player existingPlayer = new Player(mlbPlayer);
             existingPlayer.setPlayerId(dbPlayer.getPlayerId());
+            existingPlayer.setDailyPlayerInfoList(dbPlayer.getDailyPlayerInfoList());
+            existingPlayer.setPlayerHistoryList(dbPlayer.getPlayerHistoryList());
             dbPlayer = createOrUpdatePlayer(existingPlayer);
         }
 

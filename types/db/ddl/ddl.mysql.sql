@@ -152,7 +152,7 @@ CREATE TABLE MLBGAME (
     homeScore INT,
     awayProbablePitcherId BIGINT,
     homeProbablePitcherId BIGINT,
-    gameTime TIMESTAMP,
+    gameTime TIMESTAMP(3),
     status VARCHAR(20),
     inning VARCHAR(20),
     inningState VARCHAR(20),
@@ -204,6 +204,7 @@ CREATE TABLE MLBSTATS (
     tb INT,
     teamResult VARCHAR(10),
     teamScore INT,
+    UNIQUE KEY (playerId, gameId),
     FOREIGN KEY (playerId) REFERENCES PLAYER (playerId),
     FOREIGN KEY (gameId) REFERENCES MLBGAME (gameId)
 );

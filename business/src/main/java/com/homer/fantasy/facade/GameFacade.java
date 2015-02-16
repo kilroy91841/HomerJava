@@ -1,5 +1,6 @@
 package com.homer.fantasy.facade;
 
+import com.homer.fantasy.dao.IGameDAO;
 import com.homer.mlb.Game;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,14 +11,18 @@ import org.slf4j.LoggerFactory;
 public class GameFacade {
 
     private static final Logger LOG = LoggerFactory.getLogger(GameFacade.class);
+    private IGameDAO dao;
 
-    public boolean createOrUpdateGame(Game game) {
+    public GameFacade() {
+        dao = IGameDAO.FACTORY.getInstance();
+    }
+
+    public Game createOrUpdateGame(Game game) {
         LOG.debug("BEGIN: createOrUpdateGame [game=" + game + "]");
-        boolean retVal = false;
 
+        Game dbGame = dao.createOrUpdate(game);
 
-
-        LOG.debug("END: createOrUpdateGame [retVal=" + retVal + "]");
-        return retVal;
+        LOG.debug("END: createOrUpdateGame [dbGame=" + dbGame + "]");
+        return dbGame;
     }
 }

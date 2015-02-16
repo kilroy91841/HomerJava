@@ -39,7 +39,16 @@ public class PlayerGetter {
         playerCount = new AtomicInteger(0);
 
         for(Team team : teams) {
-            client.get40ManRosterAsync(team.getTeamId(), callback);
+//            client.get40ManRosterAsync(team.getTeamId(), callback);
+            List<Player> players = client.get40ManRoster(team.getTeamId());
+
+            for(Player player : players) {
+                try {
+                    facade.createOrUpdatePlayer(player);
+                } catch (Exception e) {
+                    LOG.error("Unable to create player from obj " + player);
+                }
+            }
         }
     }
 

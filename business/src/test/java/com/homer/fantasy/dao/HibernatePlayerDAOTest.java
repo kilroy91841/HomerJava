@@ -11,6 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -18,17 +19,18 @@ import java.util.ArrayList;
  */
 public class HibernatePlayerDAOTest {
 
-    private static HibernatePlayerDAO playerDAO;
+    private static HibernatePlayerDAO playerDAO = new HibernatePlayerDAO();
+    private static String name;
 
     @BeforeClass
     public static void beforeClass() {
-        playerDAO = new HibernatePlayerDAO();
+        name = LocalDateTime.now().toString();
     }
 
     @Test
     public void createOrSavePlayer() {
         Player p = new Player();
-        p.setPlayerName("Yas Bulog");
+        p.setPlayerName(name);
         p.setNameLastFirst("Bulog, Ira");
         p.setFirstName("Ira");
         p.setLastName("Bulog");
@@ -67,7 +69,7 @@ public class HibernatePlayerDAOTest {
         Assert.assertNotNull(dbPlayer);
 
         example = new Player();
-        example.setPlayerName("Yas Bulog");
+        example.setPlayerName(name);
         dbPlayer = playerDAO.getPlayer(example);
         Assert.assertNotNull(dbPlayer);
     }
