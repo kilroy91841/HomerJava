@@ -57,19 +57,35 @@ public class Game {
 
     public Game() { }
 
+    public Game(long gameId) {
+        this.gameId = gameId;
+    }
+
     public Game(MLBJSONObject json) throws Exception {
+        if(!"R".equals(json.getString("game_type"))) {
+            throw new Exception("Game is not regular season, skipping");
+        }
         gameId = json.getLongProtected("game_pk");
         homeTeam = new Team(json.getInteger("home_team_id"));
         awayTeam = new Team(json.getInteger("away_team_id"));
 
         MLBJSONObject gameMedia = new MLBJSONObject(json.getJSONObject("game_media"));
         if(gameMedia != null) {
-            JSONArray media = gameMedia.getJSONArray("media");
+            JSONArray media = null;
+            try {
+                media = gameMedia.getJSONArray("media");
+            } catch(Exception e) {
+                JSONObject singleGameMedia = gameMedia.getJSONObject("media");
+                media = new JSONArray();
+                media.put(singleGameMedia);
+            }
             for(int i = 0; i < media.length(); i++) {
                 MLBJSONObject med = new MLBJSONObject((JSONObject)media.get(i));
                 if(med.has("start")) {
-                    gameDate = json.getLocalDate("start");
-                    gameTime = json.getLocalDateTime("start");
+                    String[] dateParts =med.getString("start").split("-");
+                    String localDate = dateParts[0] + "-" + dateParts[1] + "-" + dateParts[2];
+                    gameTime = LocalDateTime.parse(localDate);
+                    gameDate = gameTime.toLocalDate();
                 }
             }
         }

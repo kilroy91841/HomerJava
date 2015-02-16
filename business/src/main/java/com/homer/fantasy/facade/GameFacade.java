@@ -17,6 +17,13 @@ public class GameFacade {
         dao = IGameDAO.FACTORY.getInstance();
     }
 
+    public Game getGame(long gameId) {
+        LOG.debug("BEGIN: getGame, [gameId=" + gameId + "]");
+        Game game = dao.getGame(new Game(gameId));
+        LOG.debug("END: getGame, [game=" + game + "]");
+        return game;
+    }
+
     public Game createOrUpdateGame(Game game) {
         LOG.debug("BEGIN: createOrUpdateGame [game=" + game + "]");
 

@@ -2,7 +2,9 @@ package com.homer.fantasy;
 
 import com.homer.SportType;
 import com.homer.fantasy.dao.HomerDAO;
+import com.homer.fantasy.facade.GameFacade;
 import com.homer.fantasy.facade.PlayerFacade;
+import com.homer.mlb.Game;
 import com.homer.mlb.client.MLBClientREST;
 import com.homer.mlb.MLBJSONObject;
 import com.mashape.unirest.http.HttpResponse;
@@ -17,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import com.homer.mlb.Player;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -29,6 +32,7 @@ public class PlayerGetter {
 
     private static HomerDAO dao = new HomerDAO();
     private static final PlayerFacade facade = new PlayerFacade();
+    private static final GameFacade gameFacade = new GameFacade();
 
     private static AtomicInteger playerCount;
 
@@ -38,15 +42,30 @@ public class PlayerGetter {
         com.homer.fantasy.Player p = new com.homer.fantasy.Player();
         playerCount = new AtomicInteger(0);
 
-        for(Team team : teams) {
-//            client.get40ManRosterAsync(team.getTeamId(), callback);
-            List<Player> players = client.get40ManRoster(team.getTeamId());
+        if(false) {
+            for (Team team : teams) {
+                client.get40ManRosterAsync(team.getTeamId(), callback);
+//            List<Player> players = client.get40ManRoster(team.getTeamId());
+//
+//            for(Player player : players) {
+//                try {
+//                    facade.createOrUpdatePlayer(player);
+//                } catch (Exception e) {
+//                    LOG.error("Unable to create player from obj " + player);
+//                }
+//            }
+            }
+        }
 
-            for(Player player : players) {
-                try {
-                    facade.createOrUpdatePlayer(player);
-                } catch (Exception e) {
-                    LOG.error("Unable to create player from obj " + player);
+        if(true) {
+            LocalDate startDate = LocalDate.of(2014, 3, 15);
+            LocalDate endDate = LocalDate.of(2014, 10, 15);
+            for(LocalDate date = startDate; date.isBefore(endDate); date = date.plusDays(1)) {
+                List<Game> games = client.getSchedule(date);
+                if(games != null) {
+                    for (Game g : games) {
+                        gameFacade.createOrUpdateGame(g);
+                    }
                 }
             }
         }

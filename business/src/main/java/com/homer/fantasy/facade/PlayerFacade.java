@@ -23,6 +23,13 @@ public class PlayerFacade {
         dao = IPlayerDAO.FACTORY.getInstance();
     }
 
+    public Player getPlayer(long playerId) {
+        LOG.debug("BEGIN: getPlayer [playerId=" + playerId + "]");
+        Player player = dao.getPlayer(new Player(playerId));
+        LOG.debug("END: getPlayer [player=" + player + "]");
+        return player;
+    }
+
     public Player createOrUpdatePlayer(Player player) {
         LOG.debug("BEGIN: createOrUpdatePlayer [player=" + player + "]");
 

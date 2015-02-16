@@ -4,8 +4,10 @@ import com.homer.mlb.Game;
 import com.homer.mlb.MLBJSONObject;
 import com.homer.mlb.Player;
 import com.mashape.unirest.http.JsonNode;
+import org.slf4j.LoggerFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.List;
  * Created by arigolub on 2/14/15.
  */
 public class JSONScheduleParser {
+
+    private static final Logger LOG = LoggerFactory.getLogger(JSONScheduleParser.class);
 
     private static final String JSON_DATA   = "data";
     private static final String JSON_GAMES  = "games";
@@ -30,7 +34,11 @@ public class JSONScheduleParser {
             games = new ArrayList<Game>();
             for (int i = 0; i < array.length(); i++) {
                 JSONObject obj = (JSONObject)array.get(i);
-                games.add(new Game(new MLBJSONObject(obj)));
+                try {
+                    games.add(new Game(new MLBJSONObject(obj)));
+                } catch(Exception e) {
+                    LOG.error("Error parsing game [json=" + obj + "]", e);
+                }
             }
         }
         return games;

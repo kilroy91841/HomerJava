@@ -1,6 +1,8 @@
 package com.homer.fantasy.facade;
 
+import com.homer.fantasy.Player;
 import com.homer.fantasy.dao.IStatsDAO;
+import com.homer.mlb.Game;
 import com.homer.mlb.Stats;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +38,12 @@ public class StatsFacade {
         } else if(statsList.size() == 0) {
             LOG.debug("No stats found, creating");
             PlayerFacade playerFacade = new PlayerFacade();
+            Player player = playerFacade.getPlayer(stats.getPlayer().getPlayerId());
+            stats.setPlayer(player);
+            GameFacade gameFacade = new GameFacade();
+            Game game = gameFacade.getGame(stats.getGame().getGameId());
+            stats.setGame(game);
+            returnStats = dao.createOrSave(stats);
         } else {
             LOG.debug("How are there multiple stats for [game=" + stats.getGame() +
                     "], [player=" + stats.getPlayer() + "], " + "not updating any stats");
