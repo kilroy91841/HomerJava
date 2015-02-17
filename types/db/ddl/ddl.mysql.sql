@@ -167,6 +167,7 @@ CREATE TABLE MLBGAME (
 CREATE TABLE MLBSTATS (
     statsId BIGINT AUTO_INCREMENT PRIMARY KEY,
     playerId BIGINT NOT NULL,
+    mlbPlayerId BIGINT NOT NULL,
     gameId BIGINT NOT NULL,
     ab INT,
     ao INT,
@@ -202,9 +203,15 @@ CREATE TABLE MLBSTATS (
     so INT,
     t INT,
     tb INT,
+    w INT,
+    sv INT,
+    er INT,
+    hb INT,
+    ip DOUBLE,
     teamResult VARCHAR(10),
     teamScore INT,
     UNIQUE KEY (playerId, gameId),
     FOREIGN KEY (playerId) REFERENCES PLAYER (playerId),
+    FOREIGN KEY (mlbPlayerId) REFERENCES PLAYER (mlbPlayerId),
     FOREIGN KEY (gameId) REFERENCES MLBGAME (gameId)
 );

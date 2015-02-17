@@ -99,7 +99,7 @@ public class MLBClientRESTTest {
             JSONArray array = new JSONObject(jsonString).getJSONArray("row");
             stats = new ArrayList<Stats>();
             com.homer.fantasy.Player player = new com.homer.fantasy.Player();
-            player.setPlayerId(new Long(playerId));
+            player.setMlbPlayerId(new Long(playerId));
             for(int i = 0; i < array.length(); i++) {
                 stats.add(new Stats(player, new MLBJSONObject(array.getJSONObject(i))));
             }

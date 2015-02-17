@@ -25,6 +25,7 @@ public class StatsFacade {
         LOG.debug("BEGIN: createOrUpdateStats [stats=" + stats + "]");
         Stats example = new Stats();
         example.setPlayer(stats.getPlayer());
+        example.setMlbPlayerId(stats.getMlbPlayerId());
         example.setGame(stats.getGame());
         LOG.debug("Finding stats for [game=" + stats.getGame() +
                 "], [player=" + stats.getPlayer() + "]");
@@ -38,7 +39,7 @@ public class StatsFacade {
         } else if(statsList.size() == 0) {
             LOG.debug("No stats found, creating");
             PlayerFacade playerFacade = new PlayerFacade();
-            Player player = playerFacade.getPlayer(stats.getPlayer().getPlayerId());
+            Player player = playerFacade.getPlayerFromMLBPlayerId(stats.getPlayer().getMlbPlayerId());
             stats.setPlayer(player);
             GameFacade gameFacade = new GameFacade();
             Game game = gameFacade.getGame(stats.getGame().getGameId());

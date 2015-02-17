@@ -37,7 +37,7 @@ public class JSONStatsParser {
                 .getJSONArray(JSON_ROW);
         if(array.length() > 0) {
             Player player = new Player();
-            player.setPlayerId(playerId);
+            player.setMlbPlayerId(playerId);
             stats = new ArrayList<Stats>();
             for(int i = 0; i < array.length(); i++) {
                 JSONObject obj = (JSONObject)array.get(i);

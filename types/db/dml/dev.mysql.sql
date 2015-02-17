@@ -42,11 +42,15 @@ select 106, "SHORTSTOP", "FANTASY", "SS"
 union all
 select 107, "OUTFIELD", "FANTASY", "OF"
 union all
-select 108, "MIDDLEINFIELD", "FANTASY", "MI"
+select 108, "MIDDLEINFIELD", "FANTASY", "2B/SS"
 union all
-select 109, "CORNERINFIELD", "FANTASY", "CI"
+select 109, "CORNERINFIELD", "FANTASY", "1B/3B"
 union all
-select 110, "UTILITY", "FANTASY", "U";
+select 110, "UTILITY", "FANTASY", "UTIL"
+union all
+select 111, "BENCH", "FANTASY", "Bench"
+union all
+select 112, "DISABLEDLIST", "FANTASY", "DL";
 
 delete from TEAM;
 

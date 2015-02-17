@@ -18,14 +18,21 @@ public interface IGameDAO {
 
     public static class FACTORY {
 
+        private static IGameDAO instance = null;
+
         public static IGameDAO getInstance() {
-            IGameDAO dao = null;
-            try {
-                dao = Factory.getImplementation(IGameDAO.class);
-            } catch(Exception e) {
-                LOG.error("Exception getting instance of IGameDAO", e);
+            if(instance == null) {
+                synchronized (IGameDAO.class) {
+                    if(instance == null) {
+                        try {
+                            instance = Factory.getImplementation(IGameDAO.class);
+                        } catch(Exception e) {
+                            LOG.error("Exception getting instance of IGameDAO", e);
+                        }
+                    }
+                }
             }
-            return dao;
+            return instance;
         }
     }
 }

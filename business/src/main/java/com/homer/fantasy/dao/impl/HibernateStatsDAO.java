@@ -3,6 +3,8 @@ package com.homer.fantasy.dao.impl;
 import com.homer.fantasy.dao.HomerDAO;
 import com.homer.fantasy.dao.IStatsDAO;
 import com.homer.mlb.Stats;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,8 +31,22 @@ public class HibernateStatsDAO extends HomerDAO implements IStatsDAO {
     @Override
     public List<Stats> getStats(Stats example) {
         LOG.debug("BEGIN: getStats [example=" + example + "]");
-        List<Stats> statsList = findListByExample(example, Stats.class);
-        LOG.debug("END: getStats [stats=" + statsList + "]");
-        return statsList;
+        Session session = null;
+        List<Stats> stats = null;
+        try {
+            session = openSession();
+            stats = session.createCriteria(Stats.class)
+                    .add(Restrictions.like("mlbPlayerId", example.getMlbPlayerId()))
+                    .add(Restrictions.like("game.gameId", example.getGame().getGameId()))
+                    .list();
+        } catch(Exception e) {
+            LOG.error("Exception finding teams", e);
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+        LOG.debug("END: getStats [stats=" + stats + "]");
+        return stats;
     }
 }

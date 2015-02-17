@@ -18,14 +18,21 @@ public interface IPlayerDAO {
 
     public static class FACTORY {
 
+        private static IPlayerDAO instance = null;
+
         public static IPlayerDAO getInstance() {
-            IPlayerDAO dao = null;
-            try {
-                dao = Factory.getImplementation(IPlayerDAO.class);
-            } catch(Exception e) {
-                LOG.error("Exception getting instance of IPlayerDAO", e);
+            if(instance == null) {
+                synchronized (IPlayerDAO.class) {
+                    if(instance == null) {
+                        try {
+                            instance = Factory.getImplementation(IPlayerDAO.class);
+                        } catch(Exception e) {
+                            LOG.error("Exception getting instance of IPlayerDAO", e);
+                        }
+                    }
+                }
             }
-            return dao;
+            return instance;
         }
     }
 }

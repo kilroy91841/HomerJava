@@ -4,7 +4,9 @@ import com.homer.SportType;
 import com.homer.fantasy.dao.HomerDAO;
 import com.homer.fantasy.facade.GameFacade;
 import com.homer.fantasy.facade.PlayerFacade;
+import com.homer.fantasy.facade.StatsFacade;
 import com.homer.mlb.Game;
+import com.homer.mlb.Stats;
 import com.homer.mlb.client.MLBClientREST;
 import com.homer.mlb.MLBJSONObject;
 import com.mashape.unirest.http.HttpResponse;
@@ -33,6 +35,7 @@ public class PlayerGetter {
     private static HomerDAO dao = new HomerDAO();
     private static final PlayerFacade facade = new PlayerFacade();
     private static final GameFacade gameFacade = new GameFacade();
+    private static final StatsFacade statsFacade = new StatsFacade();
 
     private static AtomicInteger playerCount;
 
@@ -43,8 +46,7 @@ public class PlayerGetter {
         playerCount = new AtomicInteger(0);
 
         if(false) {
-            for (Team team : teams) {
-                client.get40ManRosterAsync(team.getTeamId(), callback);
+            for (Team team : teams) {client.get40ManRosterAsync(team.getTeamId(), callback);
 //            List<Player> players = client.get40ManRoster(team.getTeamId());
 //
 //            for(Player player : players) {
@@ -57,7 +59,7 @@ public class PlayerGetter {
             }
         }
 
-        if(true) {
+        if(false) {
             LocalDate startDate = LocalDate.of(2014, 3, 15);
             LocalDate endDate = LocalDate.of(2014, 10, 15);
             for(LocalDate date = startDate; date.isBefore(endDate); date = date.plusDays(1)) {
@@ -67,6 +69,14 @@ public class PlayerGetter {
                         gameFacade.createOrUpdateGame(g);
                     }
                 }
+            }
+        }
+
+        if(true) {
+            com.homer.fantasy.Player player = facade.getPlayer(152L);
+            List<Stats> stats = client.getStats(player.getMlbPlayerId(), true);
+            for(Stats s : stats) {
+                statsFacade.createOrUpdateStats(s);
             }
         }
     }

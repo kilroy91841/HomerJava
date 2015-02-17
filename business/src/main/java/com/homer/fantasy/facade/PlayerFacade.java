@@ -1,6 +1,8 @@
 package com.homer.fantasy.facade;
 
 import com.homer.PlayerStatus;
+import com.homer.exception.NoDailyPlayerInfoException;
+import com.homer.exception.PlayerNotFoundException;
 import com.homer.fantasy.DailyPlayerInfo;
 import com.homer.fantasy.Player;
 import com.homer.fantasy.PlayerHistory;
@@ -27,6 +29,61 @@ public class PlayerFacade {
         LOG.debug("BEGIN: getPlayer [playerId=" + playerId + "]");
         Player player = dao.getPlayer(new Player(playerId));
         LOG.debug("END: getPlayer [player=" + player + "]");
+        return player;
+    }
+
+    public Player getPlayerFromMLBPlayerId(long mlbPlayerId) {
+        LOG.debug("BEGIN: getPlayer [mlbPlayerId=" + mlbPlayerId + "]");
+        Player example = new Player();
+        example.setMlbPlayerId(mlbPlayerId);
+        LOG.debug("Using example player [example=" + example + "]");
+        Player player = dao.getPlayer(example);
+        LOG.debug("END: getPlayer [player=" + player + "]");
+        return player;
+    }
+
+    public Player updateESPNAttributes(com.homer.espn.Player espnPlayer) throws PlayerNotFoundException, NoDailyPlayerInfoException {
+        LOG.debug("BEGIN: updateESPNAttributes [espnPlayer=" + espnPlayer + "]");
+        Player returnPlayer = null;
+        Player player = findESPNPlayer(espnPlayer.getPlayerId(), espnPlayer.getPlayerName());
+        if(player != null) {
+            if(player.getDailyPlayerInfoList().size() > 0) {
+                DailyPlayerInfo dpi = player.getDailyPlayerInfoList().get(0);
+                dpi.setFantasyPosition(espnPlayer.getPosition());
+                dpi.setFantasyTeam(new Team(espnPlayer.getTeamId()));
+                if(player.getEspnPlayerId() == null) {
+                    player.setEspnPlayerId(espnPlayer.getPlayerId());
+                }
+                returnPlayer = createOrUpdatePlayer(player);
+            } else {
+                throw new NoDailyPlayerInfoException(player);
+            }
+        } else {
+            throw new PlayerNotFoundException("Missing player: " + espnPlayer);
+        }
+        LOG.debug("END: updateESPNAttributes");
+        return returnPlayer;
+    }
+
+    private Player findESPNPlayer(Long espnPlayerId, String playerName) {
+        LOG.debug("BEGIN: findESPNPlayer [espnPlayerId=" + espnPlayerId + ", playerName=" + playerName);
+        Player player = null;
+        Player example = new Player();
+        if(espnPlayerId != null) {
+            LOG.debug("Searching by espnPlayerId");
+            example.setEspnPlayerId(espnPlayerId);
+            player = dao.getPlayer(example);
+            LOG.debug("Found player: " + player);
+        }
+        if(player == null) {
+            LOG.debug("Searching by playerName");
+            example = new Player();
+            example.setPlayerName(playerName);
+            player = dao.getPlayer(example);
+            LOG.debug("Found player: " + player);
+        }
+
+        LOG.debug("END: findESPNPlayer [player=" + player + "]");
         return player;
     }
 

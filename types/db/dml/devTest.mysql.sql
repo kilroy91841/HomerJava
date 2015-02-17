@@ -65,7 +65,11 @@ select 108, "MIDDLEINFIELD", "FANTASY", "MI"
 union all
 select 109, "CORNERINFIELD", "FANTASY", "CI"
 union all
-select 110, "UTILITY", "FANTASY", "U";
+select 110, "UTILITY", "FANTASY", "UTIL"
+union all
+select 111, "BENCH", "FANTASY", "Bench"
+union all
+select 112, "DISABLEDLIST", "FANTASY", "DL";
 
 delete from TEAM;
 

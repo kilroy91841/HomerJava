@@ -20,14 +20,21 @@ public interface IStatsDAO {
 
     public static class FACTORY {
 
+        private static IStatsDAO instance = null;
+
         public static IStatsDAO getInstance() {
-            IStatsDAO dao = null;
-            try {
-                dao = Factory.getImplementation(IStatsDAO.class);
-            } catch(Exception e) {
-                LOG.error("Exception getting instance of IStatsDAO", e);
+            if(instance == null) {
+                synchronized (IStatsDAO.class) {
+                    if(instance == null) {
+                        try {
+                            instance = Factory.getImplementation(IStatsDAO.class);
+                        } catch(Exception e) {
+                            LOG.error("Exception getting instance of IStatsDAO", e);
+                        }
+                    }
+                }
             }
-            return dao;
+            return instance;
         }
     }
 }

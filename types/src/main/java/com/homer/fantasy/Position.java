@@ -24,18 +24,21 @@ public class Position {
     public static final Position RIGHTFIELD = new Position(9, "RIGHTFIELD", SportType.MLB, "RF");
     public static final Position DESIGNATEDHITTER = new Position(10, "DESIGNATEDHITTER", SportType.MLB, "DH");
     public static final Position RELIEFPITCHER = new Position(11, "RELIEFPITCHER", SportType.MLB, "RP");
-    public static final Position FANTASYUTILITY =  new Position(110, "UTILITY", SportType.FANTASY, "U");
+    public static final Position FANTASYPITCHER =  new Position(101, "PITCHER", SportType.FANTASY, "P");
     public static final Position FANTASYCATCHER =  new Position(102, "CATCHER", SportType.FANTASY, "C");
     public static final Position FANTASYFIRSTBASE =  new Position(103, "FIRSTBASE", SportType.FANTASY, "1B");
     public static final Position FANTASYSECONDBASE =  new Position(104, "SECONDBASE", SportType.FANTASY, "2B");
     public static final Position FANTASYTHIRDBASE =  new Position(105, "THIRDBASE", SportType.FANTASY, "3B");
     public static final Position FANTASYSHORTSTOP =  new Position(106, "SHORTSTOP", SportType.FANTASY, "SS");
     public static final Position FANTASYOUTFIELD =  new Position(107, "OUTFIELD", SportType.FANTASY, "OF");
-    public static final Position FANTASYMIDDLEINFIELD =  new Position(108, "MIDDLEINFIELD", SportType.FANTASY, "MI");
-    public static final Position FANTASYCORNERINFIELD =  new Position(109, "CORNERINFIELD", SportType.FANTASY, "CI");
-    public static final Position FANTASYPITCHER =  new Position(101, "PITCHER", SportType.FANTASY, "P");
+    public static final Position FANTASYMIDDLEINFIELD =  new Position(108, "MIDDLEINFIELD", SportType.FANTASY, "2B/SS");
+    public static final Position FANTASYCORNERINFIELD =  new Position(109, "CORNERINFIELD", SportType.FANTASY, "1B/3B");
+    public static final Position FANTASYUTILITY =  new Position(110, "UTILITY", SportType.FANTASY, "UTIL");
+    public static final Position FANTASYBENCH =  new Position(111, "BENCH", SportType.FANTASY, "Bench");
+    public static final Position FANTASYDISABLEDLIST =  new Position(112, "DISABLEDLIST", SportType.FANTASY, "DL");
 
     private static Map<Integer, Position> positionMap = new HashMap<Integer, Position>();
+    private static Map<String, Position> positionCodeMap = new HashMap<String, Position>();
 
     static {
         positionMap.put(STARTINGPITCHER.getPositionId(), STARTINGPITCHER);
@@ -59,6 +62,32 @@ public class Position {
         positionMap.put(FANTASYMIDDLEINFIELD.getPositionId(), FANTASYMIDDLEINFIELD);
         positionMap.put(FANTASYCORNERINFIELD.getPositionId(), FANTASYCORNERINFIELD);
         positionMap.put(FANTASYPITCHER.getPositionId(), FANTASYPITCHER);
+        positionMap.put(FANTASYBENCH.getPositionId(), FANTASYBENCH);
+        positionMap.put(FANTASYDISABLEDLIST.getPositionId(), FANTASYDISABLEDLIST);
+
+        positionCodeMap.put(STARTINGPITCHER.getPositionCode(), STARTINGPITCHER);
+        positionCodeMap.put(CATCHER.getPositionCode(), CATCHER);
+        positionCodeMap.put(FIRSTBASE.getPositionCode(), FIRSTBASE);
+        positionCodeMap.put(SECONDBASE.getPositionCode(), SECONDBASE);
+        positionCodeMap.put(THIRDBASE.getPositionCode(), THIRDBASE);
+        positionCodeMap.put(SHORTSTOP.getPositionCode(), SHORTSTOP);
+        positionCodeMap.put(LEFTFIELD.getPositionCode(), LEFTFIELD);
+        positionCodeMap.put(CENTERFIELD.getPositionCode(), CENTERFIELD);
+        positionCodeMap.put(RIGHTFIELD.getPositionCode(), RIGHTFIELD);
+        positionCodeMap.put(DESIGNATEDHITTER.getPositionCode(), DESIGNATEDHITTER);
+        positionCodeMap.put(RELIEFPITCHER.getPositionCode(), RELIEFPITCHER);
+        positionCodeMap.put(FANTASYUTILITY.getPositionCode(), FANTASYUTILITY);
+        positionCodeMap.put(FANTASYCATCHER.getPositionCode(), FANTASYCATCHER);
+        positionCodeMap.put(FANTASYFIRSTBASE.getPositionCode(), FANTASYFIRSTBASE);
+        positionCodeMap.put(FANTASYSECONDBASE.getPositionCode(), FANTASYSECONDBASE);
+        positionCodeMap.put(FANTASYTHIRDBASE.getPositionCode(), FANTASYTHIRDBASE);
+        positionCodeMap.put(FANTASYSHORTSTOP.getPositionCode(), FANTASYSHORTSTOP);
+        positionCodeMap.put(FANTASYOUTFIELD.getPositionCode(), FANTASYOUTFIELD);
+        positionCodeMap.put(FANTASYMIDDLEINFIELD.getPositionCode(), FANTASYMIDDLEINFIELD);
+        positionCodeMap.put(FANTASYCORNERINFIELD.getPositionCode(), FANTASYCORNERINFIELD);
+        positionCodeMap.put(FANTASYPITCHER.getPositionCode(), FANTASYPITCHER);
+        positionCodeMap.put(FANTASYBENCH.getPositionCode(), FANTASYBENCH);
+        positionCodeMap.put(FANTASYDISABLEDLIST.getPositionCode(), FANTASYDISABLEDLIST);
     }
 
     @Id
@@ -114,6 +143,8 @@ public class Position {
     public static Position get(Integer id) {
         return positionMap.get(id);
     }
+
+    public static Position get(String code) { return positionCodeMap.get(code); }
 
     public static Map<Integer, Position> getPositionMap() { return positionMap; }
 

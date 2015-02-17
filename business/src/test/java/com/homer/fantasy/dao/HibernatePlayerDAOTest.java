@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 
 /**
@@ -21,6 +22,7 @@ public class HibernatePlayerDAOTest {
 
     private static HibernatePlayerDAO playerDAO = new HibernatePlayerDAO();
     private static String name;
+    public static final long mlbPlayerId = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
 
     @BeforeClass
     public static void beforeClass() {
@@ -35,6 +37,7 @@ public class HibernatePlayerDAOTest {
         p.setFirstName("Ira");
         p.setLastName("Bulog");
         p.setPrimaryPosition(Position.CENTERFIELD);
+        p.setMlbPlayerId(mlbPlayerId);
         DailyPlayerInfo info = new DailyPlayerInfo();
         info.setMlbStatus(PlayerStatus.ACTIVE);
         info.setDate(LocalDate.now());

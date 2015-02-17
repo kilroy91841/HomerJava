@@ -25,6 +25,8 @@ public class Stats {
     @ManyToOne
     @JoinColumn(name="playerId", referencedColumnName="playerId")
     private Player player;
+    @Column(name="mlbPlayerId")
+    private Long mlbPlayerId;
     @ManyToOne
     @JoinColumn(name="gameId", referencedColumnName="gameId")
     private Game game;
@@ -101,14 +103,36 @@ public class Stats {
     private String team_result;
     @Column(name="teamScore")
     private Integer team_score;
+    @Column(name="er")
+    private Integer er;
+    @Column(name="w")
+    private Integer w;
+    @Column(name="sv")
+    private Integer sv;
+    @Column(name="ip")
+    private Double ip;
+    @Column(name="hb")
+    private Integer hb;
 
     public Stats() { }
 
     public Stats(Player player, MLBJSONObject jsonObject) throws Exception {
         this.setPlayer(player);
+        this.mlbPlayerId = player.getMlbPlayerId();
         Game game = new Game();
         game.setGameId(jsonObject.getLongProtected("game_pk"));
         this.setGame(game);
+        this.er = jsonObject.getInteger("er");
+        this.w = jsonObject.getInteger("w");
+        this.sv = jsonObject.getInteger("sv");
+        this.ip = jsonObject.getDoubleProtected("ip");
+        if(this.ip != null) {
+            int wholeIp = this.ip.intValue();
+            double fractional = this.ip - wholeIp;
+            fractional = (fractional * 10)/3;
+            this.ip = wholeIp + fractional;
+        }
+        this.hb = jsonObject.getInteger("hb");
         this.ab = jsonObject.getInteger("ab");
         this.ao = jsonObject.getInteger("ao");
         this.bb = jsonObject.getInteger("bb");
@@ -161,6 +185,14 @@ public class Stats {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public Long getMlbPlayerId() {
+        return mlbPlayerId;
+    }
+
+    public void setMlbPlayerId(Long mlbPlayerId) {
+        this.mlbPlayerId = mlbPlayerId;
     }
 
     public Game getGame() {
@@ -463,6 +495,7 @@ public class Stats {
     public String toString() {
         return "Stats{" +
                 " player=" + player.getPlayerId() +
+                ", mlbPlayerId=" + mlbPlayerId +
                 ", game=" + game +
                 ", ab=" + ab +
                 ", ao=" + ao +
@@ -498,6 +531,11 @@ public class Stats {
                 ", so=" + so +
                 ", t=" + t +
                 ", tb=" + tb +
+                ", er= " + er +
+                ", w=" + w +
+                ", sv=" + sv +
+                ", ip=" + ip +
+                ", hb=" + hb +
                 ", team_result='" + team_result + '\'' +
                 ", team_score=" + team_score +
                 '}';
@@ -552,6 +590,11 @@ public class Stats {
         this.obp = newStats.obp;
         this.ops = newStats.ops;
         this.slg = newStats.slg;
+        this.er = newStats.er;
+        this.w = newStats.w;
+        this.sv = newStats.sv;
+        this.ip = newStats.ip;
+        this.hb = newStats.hb;
         this.team_result = newStats.team_result;
     }
 }

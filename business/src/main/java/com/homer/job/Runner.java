@@ -23,18 +23,25 @@ public class Runner {
                 .withIdentity("job2")
                 .build();
 
+        JobDetail playerJob = JobBuilder.newJob(PlayerUpdateFromMLB40ManRoster.class)
+                .withIdentity("playerUpdateFromMLB40ManRoster")
+                .build();
+
         CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("crontrigger","crontriggergroup1")
-                .withSchedule(CronScheduleBuilder.cronSchedule("0 * 15 * * ?"))
+                .withSchedule(CronScheduleBuilder.cronSchedule("0 * * * * ?"))
                 .forJob(job)
                 .build();
 
         Trigger trigger = TriggerBuilder.newTrigger()
                 .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(30).repeatForever()).build();
+        Trigger updateRostersTrigger = TriggerBuilder.newTrigger()
+                .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(2).repeatForever()).build();
 
         SchedulerFactory schedulerFactory = new StdSchedulerFactory();
         Scheduler scheduler = schedulerFactory.getScheduler();
         scheduler.start();
-        scheduler.scheduleJob(job, cronTrigger);
-        scheduler.scheduleJob(job2, trigger);
+//        scheduler.scheduleJob(job, cronTrigger);
+//        scheduler.scheduleJob(job2, trigger);
+        scheduler.scheduleJob(playerJob, updateRostersTrigger);
     }
 }

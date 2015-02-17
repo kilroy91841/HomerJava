@@ -33,6 +33,7 @@ public class HibernateStatsDAOTest {
         Stats s = new Stats();
         s.setGame(game);
         s.setPlayer(new Player(1L));
+        s.setMlbPlayerId(HibernatePlayerDAOTest.mlbPlayerId);
         s.setAb(3);
         s.setAvg(.032);
 
@@ -52,26 +53,23 @@ public class HibernateStatsDAOTest {
         IGameDAO gameDao = new HibernateGameDAO();
         gameDao.createOrUpdate(game);
 
-        Stats s = new Stats();
-        s.setGame(game);
-        s.setPlayer(new Player(1L));
-        s.setAb(3);
-        dao.createOrSave(s);
-
         game = new Game();
         game.setGameId(LocalDateTime.now().toEpochSecond(ZoneOffset.ofHours(3)));
         game.setHomeTeam(new Team(147));
         game.setAwayTeam(new Team(147));
         gameDao.createOrUpdate(game);
 
-        s = new Stats();
+        Stats s = new Stats();
         s.setGame(game);
         s.setPlayer(new Player(2L));
+        s.setMlbPlayerId(HibernatePlayerDAOTest.mlbPlayerId);
         s.setAb(5);
         dao.createOrSave(s);
 
         Stats example = new Stats();
         example.setPlayer(new Player(1L));
+        example.setMlbPlayerId(HibernatePlayerDAOTest.mlbPlayerId);
+        example.setGame(game);
         List<Stats> statsList = dao.getStats(example);
         Assert.assertNotNull(statsList);
 
