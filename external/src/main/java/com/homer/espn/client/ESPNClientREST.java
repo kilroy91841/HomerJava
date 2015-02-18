@@ -60,7 +60,12 @@ public class ESPNClientREST implements ESPNClient {
 
     @Override
     public void getTransactions() {
-        getTransaction(1, Transaction.ADD);
+        List<Transaction> adds = getTransaction(1, Transaction.ADD);
+        List<Transaction> drops = getTransaction(1, Transaction.DROP);
+        adds.addAll(drops);
+        adds.sort((t1, t2) -> t1.getTime().compareTo(t2.getTime()));
+        System.out.println(adds);
+
     }
 
     private List<Transaction> getTransaction(int teamId, Transaction.Type tranType) {
@@ -71,7 +76,7 @@ public class ESPNClientREST implements ESPNClient {
         parameters.put("startDate", 20140701);
         parameters.put("endDate", 20140731);
         parameters.put("teamId", teamId);
-        parameters.put("tranType", tranType.typeId);
+        parameters.put("tranType", tranType.getTypeId());
         HttpResponse<InputStream> response = makeRequest(URL_TRANSACTIONS, parameters);
         List<Transaction> transactions = null;
         try {

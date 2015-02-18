@@ -6,12 +6,14 @@ import com.homer.fantasy.DailyPlayerInfo;
 import com.homer.fantasy.Player;
 import com.homer.fantasy.PlayerHistory;
 import com.homer.fantasy.Team;
+import org.hibernate.HibernateException;
 import org.hibernate.NonUniqueResultException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +42,7 @@ public class HomerDAO {
         return sessionFactory.openSession();
     }
 
-    public boolean saveOrUpdate(Object o) {
+    protected boolean saveOrUpdate(Object o) {
         LOG.debug("BEGIN: saveOrUpdate [object=" + o + "]");
         boolean success = false;
         Session session = null;
@@ -60,6 +62,32 @@ public class HomerDAO {
             }
         }
         LOG.debug("END: saveOrUpdate [object=" + o + "]");
+        return success;
+    }
+
+    protected boolean saveNoUpdate(Object o) {
+        LOG.debug("BEGIN: saveNoUpdate [object=" + o + "]");
+        boolean success = false;
+        Session session = null;
+        try {
+            session = openSession();
+            session.beginTransaction();
+            session.save(o);
+            session.getTransaction().commit();
+            session.flush();
+            LOG.debug("Save successful!");
+            success = true;
+        } catch(ConstraintViolationException e) {
+            LOG.error("Constraint violated!", e);
+            throw e;
+        } catch(Exception e) {
+            LOG.error("Exception saving object", e);
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
+        LOG.debug("END: saveNoUpdate [object=" + o + "]");
         return success;
     }
 

@@ -1,6 +1,7 @@
 package com.homer.fantasy.facade;
 
 import com.homer.PlayerStatus;
+import com.homer.espn.Transaction;
 import com.homer.exception.NoDailyPlayerInfoException;
 import com.homer.exception.PlayerNotFoundException;
 import com.homer.fantasy.DailyPlayerInfo;
@@ -64,6 +65,14 @@ public class PlayerFacade {
         }
         LOG.debug("END: updateESPNAttributes");
         return returnPlayer;
+    }
+
+    public boolean consumeTransaction(Transaction transaction) {
+        LOG.debug("BEGIN: consumeTransaction [transaction=" + transaction);
+        boolean saved = false;
+
+        LOG.debug("END: consumeTransaction [saved=" + saved + "]");
+        return saved;
     }
 
     private Player findESPNPlayer(Long espnPlayerId, String playerName) {

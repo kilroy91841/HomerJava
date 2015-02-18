@@ -24,7 +24,7 @@ public class TransactionsParser {
 
     private int teamId;
     private Transaction.Type tranType;
-    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy MMM dd h:mm a");
+    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy MMM d h:mm a");
 
     public TransactionsParser(int teamId, Transaction.Type tranType) {
         this.teamId = teamId;
@@ -48,10 +48,14 @@ public class TransactionsParser {
     }
 
     private Transaction parseTransaction(Node timeNode, Node playerNode) {
-        LOG.debug("hello");
+        LOG.debug("Parse transaction from nodes [timeNode=" + timeNode + ", playerNode=" + playerNode + "]");
+        String playerNodeText = ((Element)playerNode).text();
+        System.out.println(playerNodeText);
         String time = ((Element)timeNode).text();
         LocalDateTime dateTime = LocalDateTime.parse("2015" + time.split(",")[1], dateFormatter);
         String playerName = ((Element)playerNode.childNode(1)).text();
-        return null;
+        Transaction transaction = new Transaction(playerName, teamId, tranType, dateTime, playerNodeText);
+        LOG.debug("Transaction: " + transaction);
+        return transaction;
     }
 }

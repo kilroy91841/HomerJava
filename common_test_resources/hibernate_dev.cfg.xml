@@ -20,6 +20,7 @@
 
         <!-- List of XML mapping files -->
         <mapping class="com.homer.PlayerStatus" />
+        <mapping class="com.homer.espn.Transaction" />
         <mapping class="com.homer.fantasy.DailyPlayerInfo" />
         <mapping class="com.homer.fantasy.FreeAgentAuction" />
         <mapping class="com.homer.fantasy.MinorLeagueDraftPick" />
