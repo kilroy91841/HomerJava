@@ -10,4 +10,6 @@ import java.util.List;
 public interface ESPNClient {
 
     public List<Player> getRosterPage();
+
+    public void getTransactions();
 }

@@ -54,6 +54,7 @@ public class PlayerFacade {
                 if(player.getEspnPlayerId() == null) {
                     player.setEspnPlayerId(espnPlayer.getPlayerId());
                 }
+                LOG.debug("New DPI: " + dpi + ", ESPNPLAYERID: " + player.getEspnPlayerId());
                 returnPlayer = createOrUpdatePlayer(player);
             } else {
                 throw new NoDailyPlayerInfoException(player);

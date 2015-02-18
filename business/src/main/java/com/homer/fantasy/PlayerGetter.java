@@ -45,7 +45,7 @@ public class PlayerGetter {
         com.homer.fantasy.Player p = new com.homer.fantasy.Player();
         playerCount = new AtomicInteger(0);
 
-        if(false) {
+        if(true) {
             for (Team team : teams) {client.get40ManRosterAsync(team.getTeamId(), callback);
 //            List<Player> players = client.get40ManRoster(team.getTeamId());
 //
@@ -72,7 +72,7 @@ public class PlayerGetter {
             }
         }
 
-        if(true) {
+        if(false) {
             com.homer.fantasy.Player player = facade.getPlayer(152L);
             List<Stats> stats = client.getStats(player.getMlbPlayerId(), true);
             for(Stats s : stats) {
