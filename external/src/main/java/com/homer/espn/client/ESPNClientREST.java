@@ -64,7 +64,9 @@ public class ESPNClientREST implements ESPNClient {
         List<Transaction> drops = getTransaction(1, Transaction.DROP);
         adds.addAll(drops);
         adds.sort((t1, t2) -> t1.getTime().compareTo(t2.getTime()));
-        System.out.println(adds);
+        for(Transaction t : adds) {
+            System.out.println(t);
+        }
 
     }
 

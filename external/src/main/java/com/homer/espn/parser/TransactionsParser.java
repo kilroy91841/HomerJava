@@ -50,7 +50,6 @@ public class TransactionsParser {
     private Transaction parseTransaction(Node timeNode, Node playerNode) {
         LOG.debug("Parse transaction from nodes [timeNode=" + timeNode + ", playerNode=" + playerNode + "]");
         String playerNodeText = ((Element)playerNode).text();
-        System.out.println(playerNodeText);
         String time = ((Element)timeNode).text();
         LocalDateTime dateTime = LocalDateTime.parse("2015" + time.split(",")[1], dateFormatter);
         String playerName = ((Element)playerNode.childNode(1)).text();

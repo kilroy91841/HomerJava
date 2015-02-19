@@ -28,7 +28,7 @@ public class LeagueRosterParserTest {
         Assert.assertEquals(goldPlayerString, playerString);
     }
 
-    private static String getFile(String fileName, boolean includeNewline) throws IOException
+    public static String getFile(String fileName, boolean includeNewline) throws IOException
     {
         InputStream stream = LeagueRosterParserTest.class.getClassLoader().
                 getResourceAsStream(fileName);

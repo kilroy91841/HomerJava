@@ -1,0 +1,1128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>Mark Loretta's Scars Recent Activity - Free Fantasy Baseball -  ESPN</title>
+    <!-- N7-227:2295-->
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate, proxy-revalidate, maxage=0">
+    <meta http-equiv="Expires" content="-1">
+
+
+    <script type="text/javascript">
+		/* omniture ad tracking v0.1 24Jun08 */
+		var anAds;
+		anAds="";
+		function anPassAds(str) {
+			anAds=anAds?anAds+",ads;"+str+";;;event38=1":"ads;"+str+";;;event38=1";
+		}
+		</script>
+    <link rel="stylesheet" href="http://a.espncdn.com/combiner/c?css=fantasy_reset.r1.css,base.r234.css,modules.r422.css,global_header.r38.css,modules/global_nav.r52.css,modules/insider_enhanced.200910131831.css,registration/facebook.button.v2.css,modules/browser-alert.r7.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="http://a.espncdn.com/combiner/c?css=espn.teams.r3.css" type="text/css" media="screen" charset="utf-8">
+    <style type="text/css">
+        #content{width:990px !important;}
+        #header{width:990px !important;}
+        #nav-wrapper-container{width:990px !important;}
+        #nav-main ul.top li .wrapper{width:984px !important;}
+        #content.container { padding: 0; }
+    </style>
+    <style type="text/css">
+
+
+        .yesNoButton {
+        background: transparent url(http://games-ak.espn.go.com/s/flblm/08/images/yn.gif) no-repeat scroll 0% 50%;
+        cursor: pointer;
+        width: 18px;
+        height: 16px;
+        float: left;
+        margin: 0 1px 0 1px;
+        }
+
+        .yesInactive {
+        background-position: 0px 50%;
+        }
+
+        .noInactive {
+        background-position: -18px 50%;
+        }
+
+        .yesActive {
+        background-position: -36px 50%;
+        }
+
+        .noActive {
+        background-position: -54px 50%;
+        }
+
+        .interestCol {
+        text-align: center;
+        }
+
+        .interestContainer {
+        margin-left:auto;
+        margin-right:auto;
+        width:42px;
+        }
+
+        .floatRight {
+        float: right;
+        }
+
+        .floatLeft {
+        float: left;
+        }
+
+        .teamTradeBlock {
+        width: 300px;
+        margin: 6px 9px 25px 9px;
+        float: left;
+        }
+
+        .activeViewLink {
+        font-weight: bold;
+        cursor: default;
+        text-decoration: none;
+        }
+
+        .ownerLinks {
+        margin: 1px;
+        padding: 5px;
+        }
+        /*
+        .emptyBlockNotice {
+        background-color: #f4e9c9;
+        border: 1px solid #ffcc00;
+        padding: 0 20px 20px 20px;
+        }
+        */
+        .dealbreakerButton {
+        background: transparent url(http://games-ak.espn.go.com/s/flblm/08/images/donotenterstop.gif) no-repeat scroll 0% 50%;
+        cursor: pointer;
+        width: 18px;
+        height: 18px;
+        margin: 0 1px 0 1px;
+        margin-left: auto;
+        margin-right: auto;
+        }
+
+        .dealbreakerInactive {
+        background-position: -18px 50%;
+        }
+
+        .dealbreakerActive {
+        background-position: 0px 50%;
+        }
+
+        .tradeGrade {
+        /*border: #e7e7d5 solid 1px;
+        background-color: #f2f2e8; */
+
+        border: #dddddd solid 1px;
+        background-color: #efefef;
+        padding: 5px;
+        padding-left: 10px;
+        line-height: 180%;
+        margin-bottom: 10px;
+        }
+        .overallRating {
+        margin-top: 1px;
+        float: left;
+        }
+        .star {
+        cursor: pointer;
+        }
+        .starButton {
+        background: transparent url(http://games-ak.espn.go.com/s/flblm/08/images/donotenterstop.gif) no-repeat scroll 0% 50%;
+        cursor: pointer;
+        width: 18px;
+        height: 18px;
+        margin: 0 1px 0 1px;
+        float: left;
+        }
+
+        .starInactive {
+        background-position: -90px 50%;
+        }
+        .starActive {
+        background-position: -72px 50%;
+        }
+
+        #starComment {
+        font-style: italic;
+        }
+
+        .pncTopButton {
+        background:transparent url(http://games-ak.espn.go.com/s/fsrlm/08/images/clubhouse/bigPncButton2.gif) no-repeat scroll 0% 50%;
+        cursor:pointer;
+        height:25px;
+        text-align:center;
+        width:112px;
+        }
+        .pncTopButtonText {
+        color:#2F3C41;
+        font-family:Helvetica;
+        font-size:11px;
+        font-weight:bold;
+        line-height:26px;
+        text-transform:uppercase;
+        }
+        .pncTopButtonTextDisabled {
+        color:#999999;
+        cursor:default;
+        }
+        .pncTopButtonActive {
+        background:transparent url(http://games-ak.espn.go.com/s/fsrlm/08/images/clubhouse/bigPncButton2.gif) no-repeat scroll -112px 50%;
+        }
+
+        .untouchableLetter {
+        color: #ff0000;
+        font-weight: bold;
+        }
+
+        .onTheBlockLetter {
+        color: green;
+        font-weight: bold;
+        }</style>
+
+    <link rel="stylesheet" type="text/css" href="http://g.espncdn.com/flb/static/css/main?v=6843810271">
+    <script type="text/javascript" src="http://g.espncdn.com/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://g.espncdn.com/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://g.espncdn.com/libs/swfobject/2.2/swfobject.js"></script>
+    <script type="text/javascript" charset="iso-8859-1" src="http://a.espncdn.com/combiner/c/?js=plugins/json2.r3.js,plugins/teacrypt.js,plugins/jquery.metadata.js,plugins/jquery.bgiframe.r3.js,plugins/jquery.easing.1.3.js,plugins/jquery.hoverIntent.js,plugins/jquery.jcarousel.js,plugins/jquery.tinysort.r4.js,plugins/jquery.pubsub.r5.js,plugins/ba-debug-0.4.js,espn.l10n.r12.js,flashObjWrapper.r7.js,espn.core.duo.r54.js,stub.search.r9.js,espn.nav.mega.r33.js,espn.storage.r6.js,espn.p13n.r15.js,espn.video.r67.js,registration/staticLogin.r12.06102014.js,registration/espn.overlay.stub.r3-18.js,espn.insider.r5.js,espn.espn360.stub.r9.js,espn.myHeadlines.stub.r13.js,espn.gallery.0628.js,espn.geo.r1.js,avatar-uploader.js"></script>
+    <script type="text/javascript" src="http://g.espncdn.com/libs/prototype/1.6.0.2/prototype.js"></script>
+    <script type="text/javascript">
+
+com = { espn: {
+	env: {
+		av: navigator.appVersion,
+		ua: navigator.userAgent,
+		an: navigator.appName,
+		platform: navigator.platform,
+		IE: "Microsoft Internet Explorer",
+		NS: "Netscape",
+		MAC: "MacPPC",
+
+		host: "games.espn.go.com",
+		context: "recentactivity"
+	},
+	listeners: {},
+	games: {
+		gameRoot: "flb",
+		leagueId: 216011,
+		seasonId: 2014,
+		toTeamId: 1,
+		fromTeamId: -2147483648,
+		scoringPeriodId: 192,
+		currentScoringPeriodId: 192,
+		leagueType: 0
+	}
+}};
+
+com.espn.games.isLeagueManager = false;com.espn.games.isLeagueCreator = false;com.espn.games.isLeagueMember = false;com.espn.games.userLoggedIn = false;var GAMEROOT = "flb";var host = "games.espn.go.com";var gameRoot = "flb";var leagueId = 216011;var teamId = -2147483648;</script><script type="text/javascript" src="http://g.espncdn.com/flb/static/js/libraries?v=117525"></script>
+    <script type="text/javascript">
+    </script>
+    <script type="text/javascript"></script>
+
+    <script type="text/javascript">
+			/* Redirect to an alternate version of the page */
+			(function(){
+				if (!document.querySelectorAll || !window.matchMedia) return false;
+				var links = document.querySelectorAll('link[rel="alternate"][type="text/html"][media][href]');
+				for (var l=links.length-1; l>=0; --l) {
+					if (window.matchMedia(links[l].getAttribute('media')).matches) {
+						window.location = links[l].getAttribute('href');
+					}
+				}
+			})();
+		</script>
+</head><body class="trans-fantasy context-recentactivity games-ad-none">
+<!--[if IE 6]><div class="ie ie6"><![endif]-->
+<!--[if IE 7]><div class="ie ie7"><![endif]-->
+<!--[if IE 8]><div class="ie ie8"><![endif]-->
+<div class="bg-elements">
+    <table class="maincontainertbl" cellpadding="0" cellspacing="0"><tr><td class="maincontainertblcell" valign="top" id="maincontainertblcell"><div id="header" class="container">
+        <!-- ////////// start: Transitional Header ////////// --><div class="top-bar">
+        <!-- begin uni login -->
+        <script type="text/javascript">
+var returnURL = document.location.href;
+var anCV = "";
+var myEspnText = {'welcometext':'Welcome','register':'Register','signin':'Sign In','signout':'Sign Out','heliumdown':'Login Temporarily Unavailable','activateinsider':'Activate Insider'};
+</script>
+
+
+        <form id="form-memberarea">
+            <input type="hidden" name="language" id="language" value="en"/>
+            <input type="hidden" name="affiliateName" id="memberAreaAffiliateName" value="espn_fantgames"/>
+            <input type="hidden" name="regFormId" id="regFormId" value="espn_flb"/>
+        </form>
+        <div class="signin" id="signin"></div>
+        <script>espn.memberservices.welcome();</script><div class="nav-edition editions">
+        <label>EDITIONS:</label>
+        <ul class="main">
+            <li class="e-usa"><a href="http://espn.go.com/" name="&amp;lpos=editionsnav&amp;lid=usa">USA</a></li>
+            <li class="e-deportes"><a href="http://www.espn.com?country-view=us&lang-view=es" name="&amp;lpos=editionsnav&amp;lid=deportes" class="{langPref:'spanish'}">DEPORTES</a></li>
+            <li class="last dropdown">
+                <ul class="">
+                    <li class="selected">More</li>
+                    <li><a href="http://www.espn.com?country-view=ar&lang-view=es" name="&amp;lpos=editionsnav&amp;lid=argentina">Argentina</a></li>
+                    <li><a href="http://www.espn.com.au" name="&amp;lpos=editionsnav&amp;lid=australia">Australia</a></li>
+                    <li><a href="http://www.espn.com.br" name="&amp;lpos=editionsnav&amp;lid=brazil">Brazil</a></li>
+                    <li><a href="http://www.espn.com?country-view=co&lang-view=es" name="&amp;lpos=editionsnav&amp;lid=colombia">Colombia</a></li>
+                    <li><a href="http://www.espn.com?country-view=mx&lang-view=es" name="&amp;lpos=editionsnav&amp;lid=mexico">Mexico</a></li>
+                    <li><a href="http://www.espn.co.uk/" name="&amp;lpos=editionsnav&amp;lid=uk">United Kingdom</a></li>
+                    <li><a href="http://www.espn.com?country-view=ve&lang-view=es" name="&amp;lpos=editionsnav&amp;lid=venezuela">Venezuela</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+        <div class="nav-edition">
+            <label>CITIES:</label>
+            <ul class="main">
+                <li class="e-boston"><a href="http://espn.go.com/boston/" name="&amp;lpos=citynav&amp;lid=boston">BOSTON</a></li>
+                <li class="e-chicago"><a href="http://espn.go.com/chicago/" name="&amp;lpos=citynav&amp;lid=chicago">CHICAGO</a></li>
+                <li class="e-dallas"><a href="http://espn.go.com/dallas/" name="&amp;lpos=citynav&amp;lid=dallas">DALLAS</a></li>
+                <li class="e-losangeles"><a href="http://espn.go.com/los-angeles/" name="&amp;lpos=citynav&amp;lid=losangeles">LOS ANGELES</a></li>
+                <li class="last e-newyork"><a href="http://espn.go.com/new-york/" name="&amp;lpos=citynav&amp;lid=newyork">NEW YORK</a></li>
+            </ul>
+        </div></div>
+        <div class="espn-logo">
+            <h1>
+                <a href="http://espn.go.com" class="espn">ESPN</a>
+                <img src="http://g.espncdn.com/s/flblm/14/images/shell/bgHead_leaguemanager.png" height="69">
+            </h1>
+        </div>
+        <div class="presby">
+
+            <!-- begin ad tag (tile=1) -->
+            <script language="JavaScript" type="text/javascript">
+var adSegments = espn.core.ad_segments();
+var pipedAdSegments = adSegments.replace(/;/g, "|").substring(0,adSegments.length-1);
+var adURI = "espn.us.com.games/baseball" + ";pgn=MarkLoretta%27sScarsRecentActivity;pgtyp=recentactivity;lang=en;gm=flb;pos=SponsoredByLogoHeader;mnr=f;" + adSegments + pipedAdSegments + ";dcopt=ist;sz=150x45;tile=1;ord=5680092" + "?";
+document.write('<script language="JavaScript" src="http://ad.Doubleclick.net/adj/' + adURI + '" type="text/javascript"><\/script>');
+</script><noscript><a href="http://ad.doubleclick.net/jump/espn.us.com.games/baseball;pgn=MarkLoretta%27sScarsRecentActivity;pgtyp=recentactivity;lang=en;gm=flb;pos=SponsoredByLogoHeader;mnr=f;;dcopt=ist;sz=150x45;tile=1;ord=5680092" target="_blank"><img src="http://ad.doubleclick.net/ad/espn.us.com.games/baseball;pgn=MarkLoretta%27sScarsRecentActivity;pgtyp=recentactivity;lang=en;gm=flb;pos=SponsoredByLogoHeader;mnr=f;;dcopt=ist;sz=150x45;tile=1;ord=5680092" border="0" alt=""></a></noscript>
+            <!-- End ad tag -->
+
+        </div>	  <div id="shop">
+        <a class="shop-btn" href="http://espnshop.com/entry.point?target=Z&amp;source=ESPN_HPHEADERLINK:SHOPBUTTONHEADER:6_1_10" name="&lpos=sitenavdefault&lid=sitenav_shopbutton">Shop</a>
+    </div>
+        <div id="nav-main-search">
+            <form id="searchBox" name="searchBox" action="http://search.espn.go.com/results" method="get" accept-charset="utf-8" class="clearfix">
+                <div class="clearfix">
+                    <input autocomplete="off" class="text ui-autocomplete-input" type="text" placeholder="Search" name="searchString" id="searchString" role="textbox" aria-autocomplete="list" aria-haspopup="true"><input type="hidden" name="page" id="page" value="null">
+                    <input type="hidden" name="fromForm" value="true">
+                    <input class="submit" type="submit" value="">
+                </div>
+            </form>
+        </div>
+    </div>
+        <div id="subheader"><div id="content-wrapper">
+            <div id="content" class="container">
+                <div>
+
+                    <!--[if lte IE 6]>
+                    <div class="span-6" id="browser-alert-wrapper" style="display: none;">
+                        <div class="mod-container mod-no-header-footer browser-alert">
+                            <div class="mod-content">
+                                <div class="gradient-container">
+                                    <h1><span>Your Web Browser</span> is no longer supported</h1>
+                                    <p>To experience everything that ESPN.com has to offer, we recommend that you upgrade to a newer version of your web browser. Click the upgrade button to the right or <a href="http://espn.go.com/espn/news/story?id=5630562">learn more</a>.</p>
+                                    <ul>
+                                        <li><a class="btn-upgrade" href="https://www.google.com/chrome/browser/">Upgrade</a></li>
+                                        <li><a class="btn-faq" href="http://espn.go.com/espn/news/story?id=5630562">FAQs</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+	(function($) {
+		  setTimeout(function () {
+				var $alertWrapper = $('#browser-alert-wrapper'),
+				browserAlertOptOut = espn.cookie.get('browseralert');
+				if (browserAlertOptOut != 'true') {
+					  $("<a class=\"btn-close\" href=\"#\">Close</a>").bind('click', function (e) {
+							$alertWrapper.hide();
+							espn.cookie.set('browseralert','true',30);
+							return false;
+					  }).appendTo('.gradient-container',$alertWrapper);
+					  $alertWrapper.show();
+					  espn.cookie.set('browseralert','true');
+				}
+		  },100);
+	})(jQuery);
+</script>
+                    <![endif]-->
+                    <div id="lm-background-skin">
+
+                        <!-- begin ad tag (tile=2) -->
+                        <script language="JavaScript" type="text/javascript">
+var adSegments = espn.core.ad_segments();
+var pipedAdSegments = adSegments.replace(/;/g, "|").substring(0,adSegments.length-1);
+var adURI = "espn.us.com.games/baseball" + ";pgn=MarkLoretta%27sScarsRecentActivity;pgtyp=recentactivity;lang=en;gm=flb;pos=Background_Skin;mnr=f;" + adSegments + pipedAdSegments + ";dcopt=ist;sz=200x800,1x1;tile=2;ord=5680092" + "?";
+document.write('<script language="JavaScript" src="http://ad.Doubleclick.net/adj/' + adURI + '" type="text/javascript"><\/script>');
+</script><noscript><a href="http://ad.doubleclick.net/jump/espn.us.com.games/baseball;pgn=MarkLoretta%27sScarsRecentActivity;pgtyp=recentactivity;lang=en;gm=flb;pos=Background_Skin;mnr=f;;dcopt=ist;sz=200x800,1x1;tile=2;ord=5680092" target="_blank"><img src="http://ad.doubleclick.net/ad/espn.us.com.games/baseball;pgn=MarkLoretta%27sScarsRecentActivity;pgtyp=recentactivity;lang=en;gm=flb;pos=Background_Skin;mnr=f;;dcopt=ist;sz=200x800,1x1;tile=2;ord=5680092" border="0" alt=""></a></noscript>
+                        <!-- End ad tag -->
+
+                    </div><div class="header-ad"><div class="header-ad-wrapper" style="display:inline-block">
+
+                    <!-- begin ad tag (tile=3) -->
+                    <script language="JavaScript" type="text/javascript">
+var adSegments = espn.core.ad_segments();
+var pipedAdSegments = adSegments.replace(/;/g, "|").substring(0,adSegments.length-1);
+var adURI = "espn.us.com.games/baseball" + ";pgn=leaders;pgtyp=recentactivity;lang=en;gm=flb;pos=pencil_top;mnr=f;" + adSegments + pipedAdSegments + ";dcopt=ist;sz=970x66,924x50,728x90;tile=3;ord=5680092" + "?";
+document.write('<script language="JavaScript" src="http://ad.Doubleclick.net/adj/' + adURI + '" type="text/javascript"><\/script>');
+</script><noscript><a href="http://ad.doubleclick.net/jump/espn.us.com.games/baseball;pgn=leaders;pgtyp=recentactivity;lang=en;gm=flb;pos=pencil_top;mnr=f;;dcopt=ist;sz=970x66,924x50,728x90;tile=3;ord=5680092" target="_blank"><img src="http://ad.doubleclick.net/ad/espn.us.com.games/baseball;pgn=leaders;pgtyp=recentactivity;lang=en;gm=flb;pos=pencil_top;mnr=f;;dcopt=ist;sz=970x66,924x50,728x90;tile=3;ord=5680092" border="0" alt=""></a></noscript>
+                    <!-- End ad tag -->
+
+                </div></div><div class="nav-main-breadcrumbs-row" style="height: 28px;">
+                    <div class="nav-main-breadcrumbs">
+                        <a href="http://espn.go.com">ESPN</a> &raquo; <a href="http://games.espn.go.com/frontpage/baseball">Free Fantasy Baseball</a> &raquo; <a href="/flb/leagueoffice?leagueId=216011">Homer At The Bat</a></div>
+                    <div class="playerSearchDiv"><form class="playerSearchForm" name="playerSearch" id="playerSearch" action="/flb/freeagency" onsubmit="return playerSuggester.submitSelectedPlayer();" method="GET"><div><input type="hidden" name="leagueId" value="216011"><input type="hidden" name="avail" value="-1"><input type="hidden" name="slotCategoryGroup" value="-1">Find a Player: <input class="playerSearchNameInput" type="text" id="playerName" name="search" onkeyup="playerSuggester.handleKeyUp(event, this.value);" value="Last Name" style="color:#999;" onfocus="playerSuggester.focus();" onblur="playerSuggester.blur();"></div></form><div style="margin: 0px;"><div id="playerSuggestions" style="display: none;" onmouseover="playerSuggester.suggestDivOver();" onmouseout="playerSuggester.suggestDivOut();"></div></div></div><script type="text/javascript">playerSearchObj=new Object();playerSearchObj.varName = "playerSuggester";playerSearchObj.suggestDiv = "playerSuggestions";playerSearchObj.inputField = "playerName";playerSearchObj.cssPrefix = "";playerSearchObj.statId = null;playerSearchObj.chartSplitType = null;var playerSuggester = new PlayerSuggester(playerSearchObj);</script><div class="comparePlayersLinkDiv"><a id="comparePlayersLauncher" href="" instance="_comparePlayers" content="ajax#/flb/playertable/prebuilt/compareplayers?leagueId=216011&teamId=-2147483648&playerCompare=true" class="flexpop" modal="true" fpopStyle="modal">Compare Players</a> (<span id="comparePlayersCount">0</span>)</div><div class="clear"></div></div>
+                    <div class="games-nav"><ul id="games-tabs"><li class=" "><a href="/flb/leagueoffice?leagueId=216011&seasonId=2014">League</a></li><li class=" "><a href="/flb/freeagency?leagueId=216011&seasonId=2014">Players</a></li><li class=" "><a href="/flb/standings?leagueId=216011&seasonId=2014">Standings</a></li><li class=" games-teams-btn"><a aria-haspopup="true" href="#">Teams</a><div class="clear"></div><ul id="games-tabs1"><li><a href="/flb/clubhouse?leagueId=216011&amp;teamId=6&amp;seasonId=2014">McGlade PlugIns <span class="alt-info">(BMAC)</span></a></li><li><a href="/flb/clubhouse?leagueId=216011&amp;teamId=11&amp;seasonId=2014">Bay of Puigs <span class="alt-info">(PUIG)</span></a></li><li><a href="/flb/clubhouse?leagueId=216011&amp;teamId=1&amp;seasonId=2014">Mark Loretta's Scars <span class="alt-info">(MLS)</span></a></li><li><a href="/flb/clubhouse?leagueId=216011&amp;teamId=3&amp;seasonId=2014">Bull Doziers <span class="alt-info">(DOZE)</span></a></li><li><a href="/flb/clubhouse?leagueId=216011&amp;teamId=10&amp;seasonId=2014">Big Wheelie Style <span class="alt-info">(HIV+)</span></a></li><li><a href="/flb/clubhouse?leagueId=216011&amp;teamId=2&amp;seasonId=2014">BSnaxx CrackerJaxx <span class="alt-info">(SNXX)</span></a></li><li><a href="/flb/clubhouse?leagueId=216011&amp;teamId=4&amp;seasonId=2014">Mesoraco's Modern Life <span class="alt-info">(SIDO)</span></a></li><li><a href="/flb/clubhouse?leagueId=216011&amp;teamId=5&amp;seasonId=2014">Brooklyn No Sox <span class="alt-info">(MAD)</span></a></li><li><a href="/flb/clubhouse?leagueId=216011&amp;teamId=12&amp;seasonId=2014">50 Shades of Sonny Gray <span class="alt-info">(SEXY)</span></a></li><li><a href="/flb/clubhouse?leagueId=216011&amp;teamId=7&amp;seasonId=2014">Ron Paul Revolution <span class="alt-info">(GRAN)</span></a></li><li><a href="/flb/clubhouse?leagueId=216011&amp;teamId=9&amp;seasonId=2014">The Baghdad Daddy Bags <span class="alt-info">(DBAG)</span></a></li><li><a href="/flb/clubhouse?leagueId=216011&amp;teamId=8&amp;seasonId=2014">Las Vegas Isotopes <span class="alt-info">(LAZ)</span></a></li></ul></li></ul></div><div class="gamesmain container">
+                    <div class="games-innercol">
+                        <div class="games-innercol2">
+                            <div class="games-nav subnav"><ul id="games-subnav-links"><li><div>Loretta's Scars:</div></li><li class=""><a href="/flb/clubhouse?leagueId=216011&teamId=1" >Roster</a></li><li class=""><a href="/flb/trophycase?leagueId=216011&teamId=1" >Trophies</a></li><li class="games-on"><a href="/flb/recentactivity?leagueId=216011&teamId=1&activityType=2" >TranLog</a></li><li class=""><a href="/flb/activestats?leagueId=216011&teamId=1" >Roster Summary</a></li></ul></div><div class="games-fullcol games-fullcol-extramargin"><div class="games-alert-mod alert-mod2 games-beige-alert" style="width:;">You are currently viewing <a href="/flb/history?leagueId=216011"><b>league history</b></a> pages from the <b>2014</b> season. <a href="/flb/leagueoffice?leagueId=216011&seasonId=2015"><b>Click here to return to the 2015 League Office.</b></a></div><br /><div class="games-pageheader"><div style="float:left;"></div><div style="float:left;"><h1>Mark Loretta's Scars Recent Activity</h1></div><div class="clear"></div></div><div class="games-toolset" >
+                            <form name="recentActivityFilters" method="get" action="recentactivity" style="margin: 3px 0 3px 0;"><input type="hidden" name="leagueId" value="216011"><input type="hidden" name="seasonId" value="2014"><strong>Activity Type:</strong> <select class="select" name="activityType" onchange="var el=$('detailedTranLogFilters'); if (el && this.value==2) el.show(); else if (el) el.hide(); var el2=$('teamFilters'); if (el2 && this.value!=0 && this.value!=1) el2.show(); else if (el2) el2.hide();"><option value="-1" >All</option>
+                                <option value="0" >LM Actions</option>
+                                <option value="1" >LM Note</option>
+                                <option value="2"  selected="selected">Transactions</option>
+                                <option value="3" >Messages</option>
+                                <option value="4" >Trophies</option>
+                            </select>&nbsp;&nbsp;<strong>Start:</strong> <select class="select" name="startDate"><option value="20140206" >Feb. 6</option>
+                                <option value="20140207" >Feb. 7</option>
+                                <option value="20140208" >Feb. 8</option>
+                                <option value="20140209" >Feb. 9</option>
+                                <option value="20140210" >Feb. 10</option>
+                                <option value="20140211" >Feb. 11</option>
+                                <option value="20140212" >Feb. 12</option>
+                                <option value="20140213" >Feb. 13</option>
+                                <option value="20140214" >Feb. 14</option>
+                                <option value="20140215" >Feb. 15</option>
+                                <option value="20140216" >Feb. 16</option>
+                                <option value="20140217" >Feb. 17</option>
+                                <option value="20140218" >Feb. 18</option>
+                                <option value="20140219" >Feb. 19</option>
+                                <option value="20140220" >Feb. 20</option>
+                                <option value="20140221" >Feb. 21</option>
+                                <option value="20140222" >Feb. 22</option>
+                                <option value="20140223" >Feb. 23</option>
+                                <option value="20140224" >Feb. 24</option>
+                                <option value="20140225" >Feb. 25</option>
+                                <option value="20140226" >Feb. 26</option>
+                                <option value="20140227" >Feb. 27</option>
+                                <option value="20140228" >Feb. 28</option>
+                                <option value="20140301" >Mar. 1</option>
+                                <option value="20140302" >Mar. 2</option>
+                                <option value="20140303" >Mar. 3</option>
+                                <option value="20140304" >Mar. 4</option>
+                                <option value="20140305" >Mar. 5</option>
+                                <option value="20140306" >Mar. 6</option>
+                                <option value="20140307" >Mar. 7</option>
+                                <option value="20140308" >Mar. 8</option>
+                                <option value="20140309" >Mar. 9</option>
+                                <option value="20140310" >Mar. 10</option>
+                                <option value="20140311" >Mar. 11</option>
+                                <option value="20140312" >Mar. 12</option>
+                                <option value="20140313" >Mar. 13</option>
+                                <option value="20140314" >Mar. 14</option>
+                                <option value="20140315" >Mar. 15</option>
+                                <option value="20140316" >Mar. 16</option>
+                                <option value="20140317" >Mar. 17</option>
+                                <option value="20140318" >Mar. 18</option>
+                                <option value="20140319" >Mar. 19</option>
+                                <option value="20140320" >Mar. 20</option>
+                                <option value="20140321" >Mar. 21</option>
+                                <option value="20140322" >Mar. 22</option>
+                                <option value="20140323" >Mar. 23</option>
+                                <option value="20140324" >Mar. 24</option>
+                                <option value="20140325" >Mar. 25</option>
+                                <option value="20140326" >Mar. 26</option>
+                                <option value="20140327" >Mar. 27</option>
+                                <option value="20140328" >Mar. 28</option>
+                                <option value="20140329" >Mar. 29</option>
+                                <option value="20140330" >Mar. 30</option>
+                                <option value="20140331" >Mar. 31</option>
+                                <option value="20140401" >Apr. 1</option>
+                                <option value="20140402" >Apr. 2</option>
+                                <option value="20140403" >Apr. 3</option>
+                                <option value="20140404" >Apr. 4</option>
+                                <option value="20140405" >Apr. 5</option>
+                                <option value="20140406" >Apr. 6</option>
+                                <option value="20140407" >Apr. 7</option>
+                                <option value="20140408" >Apr. 8</option>
+                                <option value="20140409" >Apr. 9</option>
+                                <option value="20140410" >Apr. 10</option>
+                                <option value="20140411" >Apr. 11</option>
+                                <option value="20140412" >Apr. 12</option>
+                                <option value="20140413" >Apr. 13</option>
+                                <option value="20140414" >Apr. 14</option>
+                                <option value="20140415" >Apr. 15</option>
+                                <option value="20140416" >Apr. 16</option>
+                                <option value="20140417" >Apr. 17</option>
+                                <option value="20140418" >Apr. 18</option>
+                                <option value="20140419" >Apr. 19</option>
+                                <option value="20140420" >Apr. 20</option>
+                                <option value="20140421" >Apr. 21</option>
+                                <option value="20140422" >Apr. 22</option>
+                                <option value="20140423" >Apr. 23</option>
+                                <option value="20140424" >Apr. 24</option>
+                                <option value="20140425" >Apr. 25</option>
+                                <option value="20140426" >Apr. 26</option>
+                                <option value="20140427" >Apr. 27</option>
+                                <option value="20140428" >Apr. 28</option>
+                                <option value="20140429" >Apr. 29</option>
+                                <option value="20140430" >Apr. 30</option>
+                                <option value="20140501" >May. 1</option>
+                                <option value="20140502" >May. 2</option>
+                                <option value="20140503" >May. 3</option>
+                                <option value="20140504" >May. 4</option>
+                                <option value="20140505" >May. 5</option>
+                                <option value="20140506" >May. 6</option>
+                                <option value="20140507" >May. 7</option>
+                                <option value="20140508" >May. 8</option>
+                                <option value="20140509" >May. 9</option>
+                                <option value="20140510" >May. 10</option>
+                                <option value="20140511" >May. 11</option>
+                                <option value="20140512" >May. 12</option>
+                                <option value="20140513" >May. 13</option>
+                                <option value="20140514" >May. 14</option>
+                                <option value="20140515" >May. 15</option>
+                                <option value="20140516" >May. 16</option>
+                                <option value="20140517" >May. 17</option>
+                                <option value="20140518" >May. 18</option>
+                                <option value="20140519" >May. 19</option>
+                                <option value="20140520" >May. 20</option>
+                                <option value="20140521" >May. 21</option>
+                                <option value="20140522" >May. 22</option>
+                                <option value="20140523" >May. 23</option>
+                                <option value="20140524" >May. 24</option>
+                                <option value="20140525" >May. 25</option>
+                                <option value="20140526" >May. 26</option>
+                                <option value="20140527" >May. 27</option>
+                                <option value="20140528" >May. 28</option>
+                                <option value="20140529" >May. 29</option>
+                                <option value="20140530" >May. 30</option>
+                                <option value="20140531" >May. 31</option>
+                                <option value="20140601" >Jun. 1</option>
+                                <option value="20140602" >Jun. 2</option>
+                                <option value="20140603" >Jun. 3</option>
+                                <option value="20140604" >Jun. 4</option>
+                                <option value="20140605" >Jun. 5</option>
+                                <option value="20140606" >Jun. 6</option>
+                                <option value="20140607" >Jun. 7</option>
+                                <option value="20140608" >Jun. 8</option>
+                                <option value="20140609" >Jun. 9</option>
+                                <option value="20140610" >Jun. 10</option>
+                                <option value="20140611" >Jun. 11</option>
+                                <option value="20140612" >Jun. 12</option>
+                                <option value="20140613" >Jun. 13</option>
+                                <option value="20140614" >Jun. 14</option>
+                                <option value="20140615" >Jun. 15</option>
+                                <option value="20140616" >Jun. 16</option>
+                                <option value="20140617" >Jun. 17</option>
+                                <option value="20140618" >Jun. 18</option>
+                                <option value="20140619" >Jun. 19</option>
+                                <option value="20140620" >Jun. 20</option>
+                                <option value="20140621" >Jun. 21</option>
+                                <option value="20140622" >Jun. 22</option>
+                                <option value="20140623" >Jun. 23</option>
+                                <option value="20140624" >Jun. 24</option>
+                                <option value="20140625" >Jun. 25</option>
+                                <option value="20140626" >Jun. 26</option>
+                                <option value="20140627" >Jun. 27</option>
+                                <option value="20140628" >Jun. 28</option>
+                                <option value="20140629" >Jun. 29</option>
+                                <option value="20140630" >Jun. 30</option>
+                                <option value="20140701"  selected="selected">Jul. 1</option>
+                                <option value="20140702" >Jul. 2</option>
+                                <option value="20140703" >Jul. 3</option>
+                                <option value="20140704" >Jul. 4</option>
+                                <option value="20140705" >Jul. 5</option>
+                                <option value="20140706" >Jul. 6</option>
+                                <option value="20140707" >Jul. 7</option>
+                                <option value="20140708" >Jul. 8</option>
+                                <option value="20140709" >Jul. 9</option>
+                                <option value="20140710" >Jul. 10</option>
+                                <option value="20140711" >Jul. 11</option>
+                                <option value="20140712" >Jul. 12</option>
+                                <option value="20140713" >Jul. 13</option>
+                                <option value="20140714" >Jul. 14</option>
+                                <option value="20140715" >Jul. 15</option>
+                                <option value="20140716" >Jul. 16</option>
+                                <option value="20140717" >Jul. 17</option>
+                                <option value="20140718" >Jul. 18</option>
+                                <option value="20140719" >Jul. 19</option>
+                                <option value="20140720" >Jul. 20</option>
+                                <option value="20140721" >Jul. 21</option>
+                                <option value="20140722" >Jul. 22</option>
+                                <option value="20140723" >Jul. 23</option>
+                                <option value="20140724" >Jul. 24</option>
+                                <option value="20140725" >Jul. 25</option>
+                                <option value="20140726" >Jul. 26</option>
+                                <option value="20140727" >Jul. 27</option>
+                                <option value="20140728" >Jul. 28</option>
+                                <option value="20140729" >Jul. 29</option>
+                                <option value="20140730" >Jul. 30</option>
+                                <option value="20140731" >Jul. 31</option>
+                                <option value="20140801" >Aug. 1</option>
+                                <option value="20140802" >Aug. 2</option>
+                                <option value="20140803" >Aug. 3</option>
+                                <option value="20140804" >Aug. 4</option>
+                                <option value="20140805" >Aug. 5</option>
+                                <option value="20140806" >Aug. 6</option>
+                                <option value="20140807" >Aug. 7</option>
+                                <option value="20140808" >Aug. 8</option>
+                                <option value="20140809" >Aug. 9</option>
+                                <option value="20140810" >Aug. 10</option>
+                                <option value="20140811" >Aug. 11</option>
+                                <option value="20140812" >Aug. 12</option>
+                                <option value="20140813" >Aug. 13</option>
+                                <option value="20140814" >Aug. 14</option>
+                                <option value="20140815" >Aug. 15</option>
+                                <option value="20140816" >Aug. 16</option>
+                                <option value="20140817" >Aug. 17</option>
+                                <option value="20140818" >Aug. 18</option>
+                                <option value="20140819" >Aug. 19</option>
+                                <option value="20140820" >Aug. 20</option>
+                                <option value="20140821" >Aug. 21</option>
+                                <option value="20140822" >Aug. 22</option>
+                                <option value="20140823" >Aug. 23</option>
+                                <option value="20140824" >Aug. 24</option>
+                                <option value="20140825" >Aug. 25</option>
+                                <option value="20140826" >Aug. 26</option>
+                                <option value="20140827" >Aug. 27</option>
+                                <option value="20140828" >Aug. 28</option>
+                                <option value="20140829" >Aug. 29</option>
+                                <option value="20140830" >Aug. 30</option>
+                                <option value="20140831" >Aug. 31</option>
+                                <option value="20140901" >Sep. 1</option>
+                                <option value="20140902" >Sep. 2</option>
+                                <option value="20140903" >Sep. 3</option>
+                                <option value="20140904" >Sep. 4</option>
+                                <option value="20140905" >Sep. 5</option>
+                                <option value="20140906" >Sep. 6</option>
+                                <option value="20140907" >Sep. 7</option>
+                                <option value="20140908" >Sep. 8</option>
+                                <option value="20140909" >Sep. 9</option>
+                                <option value="20140910" >Sep. 10</option>
+                                <option value="20140911" >Sep. 11</option>
+                                <option value="20140912" >Sep. 12</option>
+                                <option value="20140913" >Sep. 13</option>
+                                <option value="20140914" >Sep. 14</option>
+                                <option value="20140915" >Sep. 15</option>
+                                <option value="20140916" >Sep. 16</option>
+                                <option value="20140917" >Sep. 17</option>
+                                <option value="20140918" >Sep. 18</option>
+                                <option value="20140919" >Sep. 19</option>
+                                <option value="20140920" >Sep. 20</option>
+                                <option value="20140921" >Sep. 21</option>
+                                <option value="20140922" >Sep. 22</option>
+                                <option value="20140923" >Sep. 23</option>
+                                <option value="20140924" >Sep. 24</option>
+                                <option value="20140925" >Sep. 25</option>
+                                <option value="20140926" >Sep. 26</option>
+                                <option value="20140927" >Sep. 27</option>
+                                <option value="20140928" >Sep. 28</option>
+                                <option value="20140929" >Sep. 29</option>
+                            </select>&nbsp;&nbsp;<strong>End:</strong> <select class="select" name="endDate"><option value="20140206" >Feb. 6</option>
+                                <option value="20140207" >Feb. 7</option>
+                                <option value="20140208" >Feb. 8</option>
+                                <option value="20140209" >Feb. 9</option>
+                                <option value="20140210" >Feb. 10</option>
+                                <option value="20140211" >Feb. 11</option>
+                                <option value="20140212" >Feb. 12</option>
+                                <option value="20140213" >Feb. 13</option>
+                                <option value="20140214" >Feb. 14</option>
+                                <option value="20140215" >Feb. 15</option>
+                                <option value="20140216" >Feb. 16</option>
+                                <option value="20140217" >Feb. 17</option>
+                                <option value="20140218" >Feb. 18</option>
+                                <option value="20140219" >Feb. 19</option>
+                                <option value="20140220" >Feb. 20</option>
+                                <option value="20140221" >Feb. 21</option>
+                                <option value="20140222" >Feb. 22</option>
+                                <option value="20140223" >Feb. 23</option>
+                                <option value="20140224" >Feb. 24</option>
+                                <option value="20140225" >Feb. 25</option>
+                                <option value="20140226" >Feb. 26</option>
+                                <option value="20140227" >Feb. 27</option>
+                                <option value="20140228" >Feb. 28</option>
+                                <option value="20140301" >Mar. 1</option>
+                                <option value="20140302" >Mar. 2</option>
+                                <option value="20140303" >Mar. 3</option>
+                                <option value="20140304" >Mar. 4</option>
+                                <option value="20140305" >Mar. 5</option>
+                                <option value="20140306" >Mar. 6</option>
+                                <option value="20140307" >Mar. 7</option>
+                                <option value="20140308" >Mar. 8</option>
+                                <option value="20140309" >Mar. 9</option>
+                                <option value="20140310" >Mar. 10</option>
+                                <option value="20140311" >Mar. 11</option>
+                                <option value="20140312" >Mar. 12</option>
+                                <option value="20140313" >Mar. 13</option>
+                                <option value="20140314" >Mar. 14</option>
+                                <option value="20140315" >Mar. 15</option>
+                                <option value="20140316" >Mar. 16</option>
+                                <option value="20140317" >Mar. 17</option>
+                                <option value="20140318" >Mar. 18</option>
+                                <option value="20140319" >Mar. 19</option>
+                                <option value="20140320" >Mar. 20</option>
+                                <option value="20140321" >Mar. 21</option>
+                                <option value="20140322" >Mar. 22</option>
+                                <option value="20140323" >Mar. 23</option>
+                                <option value="20140324" >Mar. 24</option>
+                                <option value="20140325" >Mar. 25</option>
+                                <option value="20140326" >Mar. 26</option>
+                                <option value="20140327" >Mar. 27</option>
+                                <option value="20140328" >Mar. 28</option>
+                                <option value="20140329" >Mar. 29</option>
+                                <option value="20140330" >Mar. 30</option>
+                                <option value="20140331" >Mar. 31</option>
+                                <option value="20140401" >Apr. 1</option>
+                                <option value="20140402" >Apr. 2</option>
+                                <option value="20140403" >Apr. 3</option>
+                                <option value="20140404" >Apr. 4</option>
+                                <option value="20140405" >Apr. 5</option>
+                                <option value="20140406" >Apr. 6</option>
+                                <option value="20140407" >Apr. 7</option>
+                                <option value="20140408" >Apr. 8</option>
+                                <option value="20140409" >Apr. 9</option>
+                                <option value="20140410" >Apr. 10</option>
+                                <option value="20140411" >Apr. 11</option>
+                                <option value="20140412" >Apr. 12</option>
+                                <option value="20140413" >Apr. 13</option>
+                                <option value="20140414" >Apr. 14</option>
+                                <option value="20140415" >Apr. 15</option>
+                                <option value="20140416" >Apr. 16</option>
+                                <option value="20140417" >Apr. 17</option>
+                                <option value="20140418" >Apr. 18</option>
+                                <option value="20140419" >Apr. 19</option>
+                                <option value="20140420" >Apr. 20</option>
+                                <option value="20140421" >Apr. 21</option>
+                                <option value="20140422" >Apr. 22</option>
+                                <option value="20140423" >Apr. 23</option>
+                                <option value="20140424" >Apr. 24</option>
+                                <option value="20140425" >Apr. 25</option>
+                                <option value="20140426" >Apr. 26</option>
+                                <option value="20140427" >Apr. 27</option>
+                                <option value="20140428" >Apr. 28</option>
+                                <option value="20140429" >Apr. 29</option>
+                                <option value="20140430" >Apr. 30</option>
+                                <option value="20140501" >May. 1</option>
+                                <option value="20140502" >May. 2</option>
+                                <option value="20140503" >May. 3</option>
+                                <option value="20140504" >May. 4</option>
+                                <option value="20140505" >May. 5</option>
+                                <option value="20140506" >May. 6</option>
+                                <option value="20140507" >May. 7</option>
+                                <option value="20140508" >May. 8</option>
+                                <option value="20140509" >May. 9</option>
+                                <option value="20140510" >May. 10</option>
+                                <option value="20140511" >May. 11</option>
+                                <option value="20140512" >May. 12</option>
+                                <option value="20140513" >May. 13</option>
+                                <option value="20140514" >May. 14</option>
+                                <option value="20140515" >May. 15</option>
+                                <option value="20140516" >May. 16</option>
+                                <option value="20140517" >May. 17</option>
+                                <option value="20140518" >May. 18</option>
+                                <option value="20140519" >May. 19</option>
+                                <option value="20140520" >May. 20</option>
+                                <option value="20140521" >May. 21</option>
+                                <option value="20140522" >May. 22</option>
+                                <option value="20140523" >May. 23</option>
+                                <option value="20140524" >May. 24</option>
+                                <option value="20140525" >May. 25</option>
+                                <option value="20140526" >May. 26</option>
+                                <option value="20140527" >May. 27</option>
+                                <option value="20140528" >May. 28</option>
+                                <option value="20140529" >May. 29</option>
+                                <option value="20140530" >May. 30</option>
+                                <option value="20140531" >May. 31</option>
+                                <option value="20140601" >Jun. 1</option>
+                                <option value="20140602" >Jun. 2</option>
+                                <option value="20140603" >Jun. 3</option>
+                                <option value="20140604" >Jun. 4</option>
+                                <option value="20140605" >Jun. 5</option>
+                                <option value="20140606" >Jun. 6</option>
+                                <option value="20140607" >Jun. 7</option>
+                                <option value="20140608" >Jun. 8</option>
+                                <option value="20140609" >Jun. 9</option>
+                                <option value="20140610" >Jun. 10</option>
+                                <option value="20140611" >Jun. 11</option>
+                                <option value="20140612" >Jun. 12</option>
+                                <option value="20140613" >Jun. 13</option>
+                                <option value="20140614" >Jun. 14</option>
+                                <option value="20140615" >Jun. 15</option>
+                                <option value="20140616" >Jun. 16</option>
+                                <option value="20140617" >Jun. 17</option>
+                                <option value="20140618" >Jun. 18</option>
+                                <option value="20140619" >Jun. 19</option>
+                                <option value="20140620" >Jun. 20</option>
+                                <option value="20140621" >Jun. 21</option>
+                                <option value="20140622" >Jun. 22</option>
+                                <option value="20140623" >Jun. 23</option>
+                                <option value="20140624" >Jun. 24</option>
+                                <option value="20140625" >Jun. 25</option>
+                                <option value="20140626" >Jun. 26</option>
+                                <option value="20140627" >Jun. 27</option>
+                                <option value="20140628" >Jun. 28</option>
+                                <option value="20140629" >Jun. 29</option>
+                                <option value="20140630" >Jun. 30</option>
+                                <option value="20140701" >Jul. 1</option>
+                                <option value="20140702" >Jul. 2</option>
+                                <option value="20140703" >Jul. 3</option>
+                                <option value="20140704" >Jul. 4</option>
+                                <option value="20140705" >Jul. 5</option>
+                                <option value="20140706" >Jul. 6</option>
+                                <option value="20140707" >Jul. 7</option>
+                                <option value="20140708" >Jul. 8</option>
+                                <option value="20140709" >Jul. 9</option>
+                                <option value="20140710" >Jul. 10</option>
+                                <option value="20140711" >Jul. 11</option>
+                                <option value="20140712" >Jul. 12</option>
+                                <option value="20140713" >Jul. 13</option>
+                                <option value="20140714" >Jul. 14</option>
+                                <option value="20140715" >Jul. 15</option>
+                                <option value="20140716" >Jul. 16</option>
+                                <option value="20140717" >Jul. 17</option>
+                                <option value="20140718" >Jul. 18</option>
+                                <option value="20140719" >Jul. 19</option>
+                                <option value="20140720" >Jul. 20</option>
+                                <option value="20140721" >Jul. 21</option>
+                                <option value="20140722" >Jul. 22</option>
+                                <option value="20140723" >Jul. 23</option>
+                                <option value="20140724" >Jul. 24</option>
+                                <option value="20140725" >Jul. 25</option>
+                                <option value="20140726" >Jul. 26</option>
+                                <option value="20140727" >Jul. 27</option>
+                                <option value="20140728" >Jul. 28</option>
+                                <option value="20140729" >Jul. 29</option>
+                                <option value="20140730" >Jul. 30</option>
+                                <option value="20140731"  selected="selected">Jul. 31</option>
+                                <option value="20140801" >Aug. 1</option>
+                                <option value="20140802" >Aug. 2</option>
+                                <option value="20140803" >Aug. 3</option>
+                                <option value="20140804" >Aug. 4</option>
+                                <option value="20140805" >Aug. 5</option>
+                                <option value="20140806" >Aug. 6</option>
+                                <option value="20140807" >Aug. 7</option>
+                                <option value="20140808" >Aug. 8</option>
+                                <option value="20140809" >Aug. 9</option>
+                                <option value="20140810" >Aug. 10</option>
+                                <option value="20140811" >Aug. 11</option>
+                                <option value="20140812" >Aug. 12</option>
+                                <option value="20140813" >Aug. 13</option>
+                                <option value="20140814" >Aug. 14</option>
+                                <option value="20140815" >Aug. 15</option>
+                                <option value="20140816" >Aug. 16</option>
+                                <option value="20140817" >Aug. 17</option>
+                                <option value="20140818" >Aug. 18</option>
+                                <option value="20140819" >Aug. 19</option>
+                                <option value="20140820" >Aug. 20</option>
+                                <option value="20140821" >Aug. 21</option>
+                                <option value="20140822" >Aug. 22</option>
+                                <option value="20140823" >Aug. 23</option>
+                                <option value="20140824" >Aug. 24</option>
+                                <option value="20140825" >Aug. 25</option>
+                                <option value="20140826" >Aug. 26</option>
+                                <option value="20140827" >Aug. 27</option>
+                                <option value="20140828" >Aug. 28</option>
+                                <option value="20140829" >Aug. 29</option>
+                                <option value="20140830" >Aug. 30</option>
+                                <option value="20140831" >Aug. 31</option>
+                                <option value="20140901" >Sep. 1</option>
+                                <option value="20140902" >Sep. 2</option>
+                                <option value="20140903" >Sep. 3</option>
+                                <option value="20140904" >Sep. 4</option>
+                                <option value="20140905" >Sep. 5</option>
+                                <option value="20140906" >Sep. 6</option>
+                                <option value="20140907" >Sep. 7</option>
+                                <option value="20140908" >Sep. 8</option>
+                                <option value="20140909" >Sep. 9</option>
+                                <option value="20140910" >Sep. 10</option>
+                                <option value="20140911" >Sep. 11</option>
+                                <option value="20140912" >Sep. 12</option>
+                                <option value="20140913" >Sep. 13</option>
+                                <option value="20140914" >Sep. 14</option>
+                                <option value="20140915" >Sep. 15</option>
+                                <option value="20140916" >Sep. 16</option>
+                                <option value="20140917" >Sep. 17</option>
+                                <option value="20140918" >Sep. 18</option>
+                                <option value="20140919" >Sep. 19</option>
+                                <option value="20140920" >Sep. 20</option>
+                                <option value="20140921" >Sep. 21</option>
+                                <option value="20140922" >Sep. 22</option>
+                                <option value="20140923" >Sep. 23</option>
+                                <option value="20140924" >Sep. 24</option>
+                                <option value="20140925" >Sep. 25</option>
+                                <option value="20140926" >Sep. 26</option>
+                                <option value="20140927" >Sep. 27</option>
+                                <option value="20140928" >Sep. 28</option>
+                                <option value="20140929" >Sep. 29</option>
+                                <option value="20150406">Offseason</option>
+                            </select>
+<span id="teamFilters" style="display:inline;">&nbsp;&nbsp;<strong>Team:</strong> <select class="select" name="teamId"><option value=-1 >All
+    <option value="6" >McGlade PlugIns
+    <option value="11" >Bay of Puigs
+    <option value="1"  selected="selected">Mark Loretta's Scars
+    <option value="3" >Bull Doziers
+    <option value="10" >Big Wheelie Style
+    <option value="2" >BSnaxx CrackerJaxx
+    <option value="4" >Mesoraco's Modern Life
+    <option value="5" >Brooklyn No Sox
+    <option value="12" >50 Shades of Sonny Gray
+    <option value="7" >Ron Paul Revolution
+    <option value="9" >The Baghdad Daddy Bags
+    <option value="8" >Las Vegas Isotopes
+</select>
+</span><span id="detailedTranLogFilters" style="display:inline;">&nbsp;&nbsp;<strong>Transactions:</strong> <select class="select" name="tranType"><option value="-2">All, Except Moved</option>
+                                    <option value="-1" >All</option>
+                                    <option value="1" >Moved</option>
+                                    <option value="2"  selected="selected">Added</option>
+                                    <option value="4" >Traded</option>
+                                    <option value="5" >Drafted</option>
+                                    <option value="3" >Dropped</option>
+                                </select>
+</span><input type=submit class="select" value="Search" style="width: 72px;" >
+                            </form>
+                        </div>
+                            <br />
+                            <table width="100%" border="0" cellpadding="2" cellspacing="1" class="tableBody" bgcolor="#ffffff" >
+                                <tr bgcolor="#13519f">
+                                    <td width="100%" align="center" colspan="4" class="tableHead">RECENT ACTIVITY</td>
+                                </tr>
+                                <tr bgcolor="#76a7ea" class="tableSubHead">
+                                    <td width="9%">DATE</td>
+                                    <td width="28%">TYPE</td>
+                                    <td width="48%">DETAIL</td>
+                                    <td width="15%">ACTION</td>
+                                </tr>
+                                <tr bgcolor="#f2f2e8"><td valign="top">Thu, Jul 31<br>3:16 PM</td><td valign="top"><img src="http://g.espncdn.com/s/flblm/14/images/icons/07/icon_add.gif" style="float: left; padding: 1px 8px 0 0;" /><b>Transaction</b>&nbsp;&nbsp;<span title="Share with your friends" class="gigyaShare_small" onclick='ESPNGigya.showShareUI({"title":"Transaction","description":"Add","linkBack":"http://games.espn.go.com/flb/leagueoffice?leagueId=216011&seasonId=2014"})'></span><br>Add</td><td valign="top">MLS added <b>Mike Aviles</b>, Cle 3B from Free Agency to Bench</td><td valign="top"><a href="/flb/clubhouse?leagueId=216011&teamId=1">MLS Roster</a></td></tr><tr bgcolor="#f8f8f2"><td valign="top">Wed, Jul 30<br>12:39 AM</td><td valign="top"><img src="http://g.espncdn.com/s/flblm/14/images/icons/07/icon_add.gif" style="float: left; padding: 1px 8px 0 0;" /><b>Transaction</b>&nbsp;&nbsp;<span title="Share with your friends" class="gigyaShare_small" onclick='ESPNGigya.showShareUI({"title":"Transaction","description":"Add","linkBack":"http://games.espn.go.com/flb/leagueoffice?leagueId=216011&seasonId=2014"})'></span><br>Add</td><td valign="top">MLS added <b>Francisco Liriano</b>, Pit SP from Free Agency to Bench</td><td valign="top"><a href="/flb/clubhouse?leagueId=216011&teamId=1">MLS Roster</a></td></tr><tr bgcolor="#f2f2e8"><td valign="top">Mon, Jul 28<br>11:40 PM</td><td valign="top"><img src="http://g.espncdn.com/s/flblm/14/images/icons/07/icon_add.gif" style="float: left; padding: 1px 8px 0 0;" /><b>Transaction</b>&nbsp;&nbsp;<span title="Share with your friends" class="gigyaShare_small" onclick='ESPNGigya.showShareUI({"title":"Transaction","description":"Add","linkBack":"http://games.espn.go.com/flb/leagueoffice?leagueId=216011&seasonId=2014"})'></span><br>Add</td><td valign="top">MLS added <b>Jorge De La Rosa</b>, Col SP from Free Agency to Bench</td><td valign="top"><a href="/flb/clubhouse?leagueId=216011&teamId=1">MLS Roster</a></td></tr><tr bgcolor="#f8f8f2"><td valign="top">Mon, Jul 28<br>10:04 AM</td><td valign="top"><img src="http://g.espncdn.com/s/flblm/14/images/icons/07/icon_add.gif" style="float: left; padding: 1px 8px 0 0;" /><b>Transaction</b>&nbsp;&nbsp;<span title="Share with your friends" class="gigyaShare_small" onclick='ESPNGigya.showShareUI({"title":"Transaction","description":"Add","linkBack":"http://games.espn.go.com/flb/leagueoffice?leagueId=216011&seasonId=2014"})'></span><br>Add</td><td valign="top">MLS added <b>Bartolo Colon</b>, NYM SP from Free Agency to Bench</td><td valign="top"><a href="/flb/clubhouse?leagueId=216011&teamId=1">MLS Roster</a></td></tr><tr bgcolor="#f2f2e8"><td valign="top">Wed, Jul 23<br>7:39 PM</td><td valign="top"><img src="http://g.espncdn.com/s/flblm/14/images/icons/07/icon_add.gif" style="float: left; padding: 1px 8px 0 0;" /><b>Transaction</b>&nbsp;&nbsp;<span title="Share with your friends" class="gigyaShare_small" onclick='ESPNGigya.showShareUI({"title":"Transaction","description":"Add","linkBack":"http://games.espn.go.com/flb/leagueoffice?leagueId=216011&seasonId=2014"})'></span><br>Add</td><td valign="top">MLS added <b>Brandon McCarthy</b>, NYY SP from Free Agency to Bench</td><td valign="top"><a href="/flb/clubhouse?leagueId=216011&teamId=1">MLS Roster</a></td></tr><tr bgcolor="#f8f8f2"><td valign="top">Sat, Jul 19<br>12:32 PM</td><td valign="top"><img src="http://g.espncdn.com/s/flblm/14/images/icons/07/icon_add.gif" style="float: left; padding: 1px 8px 0 0;" /><b>Transaction</b>&nbsp;&nbsp;<span title="Share with your friends" class="gigyaShare_small" onclick='ESPNGigya.showShareUI({"title":"Transaction","description":"Add","linkBack":"http://games.espn.go.com/flb/leagueoffice?leagueId=216011&seasonId=2014"})'></span><br>Add</td><td valign="top">MLS added <b>Phil Hughes</b>, Min SP from Free Agency to Bench</td><td valign="top"><a href="/flb/clubhouse?leagueId=216011&teamId=1">MLS Roster</a></td></tr><tr bgcolor="#f2f2e8"><td valign="top">Sun, Jul 13<br>12:39 PM</td><td valign="top"><img src="http://g.espncdn.com/s/flblm/14/images/icons/07/icon_add.gif" style="float: left; padding: 1px 8px 0 0;" /><b>Transaction</b>&nbsp;&nbsp;<span title="Share with your friends" class="gigyaShare_small" onclick='ESPNGigya.showShareUI({"title":"Transaction","description":"Add","linkBack":"http://games.espn.go.com/flb/leagueoffice?leagueId=216011&seasonId=2014"})'></span><br>Add</td><td valign="top">MLS added <b>Clay Buchholz</b>, Bos SP from Free Agency to Bench</td><td valign="top"><a href="/flb/clubhouse?leagueId=216011&teamId=1">MLS Roster</a></td></tr><tr bgcolor="#f8f8f2"><td valign="top">Thu, Jul 10<br>4:15 PM</td><td valign="top"><img src="http://g.espncdn.com/s/flblm/14/images/icons/07/icon_add.gif" style="float: left; padding: 1px 8px 0 0;" /><b>Transaction</b>&nbsp;&nbsp;<span title="Share with your friends" class="gigyaShare_small" onclick='ESPNGigya.showShareUI({"title":"Transaction","description":"Add","linkBack":"http://games.espn.go.com/flb/leagueoffice?leagueId=216011&seasonId=2014"})'></span><br>Add</td><td valign="top">MLS added <b>Jacob deGrom</b>, NYM SP from Free Agency to Bench</td><td valign="top"><a href="/flb/clubhouse?leagueId=216011&teamId=1">MLS Roster</a></td></tr><tr bgcolor="#f2f2e8"><td valign="top">Thu, Jul 10<br>11:24 AM</td><td valign="top"><img src="http://g.espncdn.com/s/flblm/14/images/icons/07/icon_add.gif" style="float: left; padding: 1px 8px 0 0;" /><b>Transaction</b>&nbsp;&nbsp;<span title="Share with your friends" class="gigyaShare_small" onclick='ESPNGigya.showShareUI({"title":"Transaction","description":"Add","linkBack":"http://games.espn.go.com/flb/leagueoffice?leagueId=216011&seasonId=2014"})'></span><br>Add</td><td valign="top">MLS added <b>Bartolo Colon</b>, NYM SP from Free Agency to Bench</td><td valign="top"><a href="/flb/clubhouse?leagueId=216011&teamId=1">MLS Roster</a></td></tr><tr bgcolor="#f8f8f2"><td valign="top">Mon, Jul 7<br>10:16 AM</td><td valign="top"><img src="http://g.espncdn.com/s/flblm/14/images/icons/07/icon_add.gif" style="float: left; padding: 1px 8px 0 0;" /><b>Transaction</b>&nbsp;&nbsp;<span title="Share with your friends" class="gigyaShare_small" onclick='ESPNGigya.showShareUI({"title":"Transaction","description":"Add","linkBack":"http://games.espn.go.com/flb/leagueoffice?leagueId=216011&seasonId=2014"})'></span><br>Add</td><td valign="top">MLS added <b>Clay Buchholz</b>, Bos SP from Free Agency to Bench</td><td valign="top"><a href="/flb/clubhouse?leagueId=216011&teamId=1">MLS Roster</a></td></tr><tr bgcolor="#f2f2e8"><td valign="top">Thu, Jul 3<br>10:02 AM</td><td valign="top"><img src="http://g.espncdn.com/s/flblm/14/images/icons/07/icon_add.gif" style="float: left; padding: 1px 8px 0 0;" /><b>Transaction</b>&nbsp;&nbsp;<span title="Share with your friends" class="gigyaShare_small" onclick='ESPNGigya.showShareUI({"title":"Transaction","description":"Add","linkBack":"http://games.espn.go.com/flb/leagueoffice?leagueId=216011&seasonId=2014"})'></span><br>Add</td><td valign="top">MLS added <b>Vance Worley</b>, Pit SP from Free Agency to Bench</td><td valign="top"><a href="/flb/clubhouse?leagueId=216011&teamId=1">MLS Roster</a></td></tr></table>
+                            <div class="games-footercol">
+                                <script type="text/javascript">
+function showHideFAQs() {
+	if (jQuery('#faq_qlinks').is(':visible')) {	
+		jQuery('#faq_qlinks').hide();
+		jQuery("#faqft_moreless_btn").html("Expand Help Topics +");
+	} else { 
+		jQuery('#faq_qlinks').show(); 
+		jQuery("#faqft_moreless_btn").html("Collapse Help Topics -");
+	}
+}
+</script><div class="OUTBRAIN" data-src="http://games.espn.go.com/flb/recentactivity?seasonId=2014&endDate=20140731&leagueId=216011&teamId=1&activityType=2&startDate=20140701&tranType=2" data-widget-id="AR_9" data-ob-template="espn" style="width:956px;"></div><script type="text/javascript" async="async" src="http://widgets.outbrain.com/outbrain.js"></script></div></div>
+                            <br><br>
+                        </div>
+                    </div>
+                </div>
+                    <!-- ////////// start: Transitional Footer ////////// -->
+                    <!--start transitional elements wrapper -->
+                    <div class="transitional-elements">
+                        <!--[if IE 6]><div class="ie6"><![endif]-->
+                        <!--[if IE 7]><div class="ie7"><![endif]-->
+                        <!--[if IE 8]><div class="ie8"><![endif]-->
+                        <div id="trans-footer" class="container">
+                            <p>
+                                <strong><a href="http://www.espn.com">ESPN.com</a></strong>  |  <a href="https://r.espn.go.com/espn/memberServices">Member Services</a> | <a href="http://games.espn.go.com/frontpage">Fantasy Games</a> | <a href="/flb/content?page=flbrulesindex2015">Help</a> | <a href="http://preferences.truste.com/2.0/?type=espn&affiliateId=148" onclick="window.open('http://preferences.truste.com/2.0/?type=espn&affiliateId=148','popup','width=986,height=878,scrollbars=yes,resizable=no,toolbar=no,directories=no,location=no,menubar=no,status=no,left=0,top=0'); return false">Interest-Based Ads</a> | <a href="/flb/feedback?leagueId=216011">Give Us Your Feedback</a> | <a href="http://espn.go.com/espn/news/story?page=patents">Patents</a>
+                            </p>
+
+                            <p>Call <strong>1-888-549-ESPN</strong> for help on all things Fantasy</p>
+
+                            <p>
+                                Copyright &copy;2015 ESPN Internet Ventures.  <a href="http://disneytermsofuse.com/">Terms of Use</a> and <a href="http://disney.go.com/corporate/privacy/pp_espn.html">Privacy Policy and Safety Information/Your California Privacy Rights</a> are applicable to this site.
+                            </p>
+
+                            <p>Major League Baseball trademarks and copyrights are used with permission of MLB.com. All rights reserved.</p>
+                            <p>&#169;2015 Major League Baseball Properties, Inc. All rights reserved. Major League Baseball trademarks and copyrights are use with permission of the applicable MLB entities. All rights reserved.</p></div>
+                        <!-- end transitional elements wrapper -->
+                        <!--[if lte IE 8]></div><![endif]-->
+                    </div>
+                    <!-- ////////// end: Transitional Footer ////////// -->
+                </div>
+                <div id="nav-wrapper" class="container">
+                    <div id="nav-wrapper-container">
+                        <div id="nav-main">
+                            <p><!-- begin site nav --></p>
+                            <ul class="top" id="nav-main-list"><!-- start: Menuitem :: MyTAB -->
+                                <li class="last myespn" id="menu-myespn"><a class="myespn" ref="#">MyESPN</a></li>
+                                <!-- start: Menuitem :: NFL -->
+                                <li class="sport-menu default t-nfl" data-sportid="28" id="menu-nfl"><a href="http://espn.go.com/nfl/" name="&amp;lpos=sitenavdefault&amp;lid=sitenav_nfl">NFL</a></li>
+                                <!-- start: Menuitem :: MLB -->
+                                <li class="sport-menu default t-mlb" data-sportid="10" id="menu-mlb"><a href="http://espn.go.com/mlb/" name="&amp;lpos=sitenavdefault&amp;lid=sitenav_mlb">MLB</a></li>
+                                <!-- start: Menuitem :: NBA -->
+                                <li class="sport-menu default t-nba" data-sportid="46" id="menu-nba"><a href="http://espn.go.com/nba/" name="&amp;lpos=sitenavdefault&amp;lid=sitenav_nba">NBA</a></li>
+                                <!-- start: Menuitem :: NHL -->
+                                <li class="sport-menu default t-nhl" data-sportid="90" id="menu-nhl"><a href="http://espn.go.com/nhl/" name="&amp;lpos=sitenavdefault&amp;lid=sitenav_nhl">NHL</a></li>
+                                <!-- start: Menuitem :: NCAA FB -->
+                                <li class="sport-menu default t-ncf" data-sportid="23" id="menu-ncf"><a href="http://espn.go.com/college-football/" name="&amp;lpos=sitenavdefault&amp;lid=sitenav_ncf">NCAAF</a></li>
+                                <!-- start: Menuitem :: NCAA BB -->
+                                <li class="sport-menu default t-ncb" data-sportid="41" id="menu-ncb"><a href="http://espn.go.com/mens-college-basketball/" name="&amp;lpos=sitenavdefault&amp;lid=sitenav_ncb">NCAAM</a></li>
+                                <!-- start: Menuitem :: NASCAR -->
+                                <li class="sport-menu default t-nascar" data-sportid="2020" id="menu-nascar"><a href="http://espn.go.com/racing/nascar/" name="&amp;lpos=sitenavdefault&amp;lid=sitenav_nascar">NASCAR</a></li>
+                                <!-- start: Menuitem :: SOCCER -->
+                                <li class="sport-menu default t-soccer" data-sportid="600" id="menu-soccer"><a href="http://espnfc.us/" name="&amp;lpos=sitenavdefault&amp;lid=sitenav_soccer">SOCCER</a></li>
+                                <!-- start: Menuitem :: GOLF -->
+                                <li class="sport-menu t-golf" data-sportid="1106" id="menu-golf" style="display: none;"><a href="http://espn.go.com/golf/" name="&amp;lpos=sitenavdefault&amp;lid=sitenav_golfl">GOLF</a></li>
+                                <!-- start: Menuitem :: TENNIS -->
+                                <li class="sport-menu t-tennis" data-sportid="850" id="menu-tennis" style="display: none;"><a href="http://espn.go.com/tennis/" name="&amp;lpos=sitenavdefault&amp;lid=sitenav_tennis">TENNIS</a></li>
+                                <!-- start: Menuitem :: BOXING-->
+                                <li class="sport-menu t-boxing" data-sportid="1000" id="menu-boxing" style="display: none;"><a href="http://espn.go.com/boxing/" name="&amp;lpos=sitenavdefault&amp;lid=sitenav_boxing">BOXING</a></li>
+                                <!-- start: Menuitem :: MMA -->
+                                <li class="sport-menu t-mma" data-sportid="3301" id="menu-mma" style="display: none;"><a href="http://espn.go.com/mma/" name="&amp;lpos=sitenavdefault&amp;lid=sitenav_mma">MMA</a></li>
+                                <!-- start: Menuitem :: ALL SPORTS -->
+                                <li class="nav-allsports t-allsports" id="menu-allsports"><a href="http://espn.go.com/sports/" name="&amp;lpos=sitenavdefault&amp;lid=sitenav_allsports">MORE SPORTS</a></li>
+                                <!-- start: Menuitem :: INSIDER -->
+                                <li class="sport-menu t-insider" id="menu-insider" style="display: none;"><a href="http://insider.espn.go.com/insider/index" name="&amp;lpos=sitenavdefault&amp;lid=sitenav_insider">INSIDER</a></li>
+                                <!-- start: Menuitem :: SPORTSNATION -->
+                                <li class="sport-menu t-sportsnation" id="menu-sportsnation" style="display: none;"><a href="http://espn.go.com/sportsnation/" name="&amp;lpos=sitenavdefault&amp;lid=sitenav_sportsnation">SN</a></li>
+                                <!-- start: Menuitem :: RADIO & MORE -->
+                                <li class="right-menu two-line last t-radio" id="menu-radio"><a href="http://espn.go.com/espnradio/" name="&amp;lpos=sitenavdefault&amp;lid=sitenav_radioandmore">RADIO<span>&amp; MORE</span></a></li>
+                                <!-- start: Menuitem :: espnW & PLAYBOOK -->
+                                <li class="right-menu two-line t-page2" id="menu-page2"><a href="http://espn.go.com/espnw/" name="&amp;lpos=sitenavdefault&amp;lid=sitenav_espnwandxgames" target="_blank">espnW<span>&amp; X GAMES</span></a></li>
+                                <!-- start: Menuitem :: FANTASY & GAMES -->
+                                <li class="right-menu two-line t-fantasy selected" id="menu-fantasy"><a href="http://games.espn.go.com/frontpage" name="&amp;lpos=sitenavdefault&amp;lid=sitenav_fantasy">FANTASY<span>&amp; GAMES</span></a></li>
+                                <!-- start: Menuitem :: WATCH -->
+                                <li class="right-menu t-watch" id="menu-watch"><a href="http://espn.go.com/video/" name="&amp;lpos=sitenavdefault&amp;lid=sitenav_watch">WATCH</a></li>
+                            </ul>
+                            <!-- end site nav --></div>
+                        <div class="nav-main-secondary">
+                            <ul>
+                                <div class="nav-main-secondary"><ul><li class="subnav-frontpage"><a href="http://games.espn.go.com/frontpage/baseball">Fantasy Baseball</a></li>
+                                    <li class="subnav-join"><a href="http://games.espn.go.com/flb/welcome">Create or Join a League</a></li>
+                                    <li class="subnav-lobby"><a href="http://games.espn.go.com/flb/livedraftlobby">Live Draft Lobby</a></li>
+                                    <li class="subnav-mock"><a href="http://games.espn.go.com/flb/mockdraftlobby">Mock Draft Lobby</a></li>
+                                    <li class="subnav-dk"><a href="http://games.espn.go.com/frontpage/flbdraftkit?addata=flb_subnav_draftkit">Draft Kit</a></li>
+                                    <li class="subnav-projections"><a href="http://games.espn.go.com/flb/tools/projections?leagueId=216011&display=alt">Projections</a></li>
+                                    <!--<li class="subnav-draftresults"><a href="http://games.espn.go.com/flb/livedraftresults">Live Draft Results</a></li>
+                                    <li class="subnav-playerrater"><a href="http://games.espn.go.com/flb/playerrater">Player Rater</a></li>
+                                    <li class="subnav-dailynotes"><a href="http://games.espn.go.com/frontpage/dailyNotesBaseball">Daily Notes</a></li>
+                                    <li class="subnav-dailyleaders"><a href="http://games.espn.go.com/flb/leaders?">Daily Leaders</a></li>-->
+                                    <li class="subnav-draftkit"><a href="http://sports.espn.go.com/fantasy/baseball/flb/story?page=REcloserorgchart&addata=flb_mainnav_closers">Closer Chart</a></li>
+                                    <!--<li class="subnav-resources-playernews"><a href="http://games.espn.go.com/flb/resources/playernews">Player News</a></li>
+                                    <li class="subnav-addeddropped"><a href="http://games.espn.go.com/flb/addeddropped?addata=flb_mainnav_adddrop">Most Added/Dropped</a></li>
+                                    <li class="subnav-tools-undroppables"><a href="http://games.espn.go.com/flb/resources/leaderboard?leagueId=216011">Leaderboards</a></li>-->
+                                    <li class="subnav-tools-undroppables"><a href="http://games.espn.go.com/flb/tools/undroppables?addata=flb_subnav_undroppables">Undroppables</a></li>
+                                    <li class="subnav-faq"><a href="http://games.espn.go.com/flb/content?page=flbrulesfaq2015">FAQ</a></li>
+                                    <li class="expandable"><a href="javascript:void(0);"><span>More</span></a>
+                                        <div>
+                                            <dl style="border:none;">
+                                                <dd><a href="http://games.espn.go.com/flb/resources/playernews">Player News</a></dd>
+                                                <!--<dd><a href="http://games.espn.go.com/flb/playerrater">Player Rater</a></dd>
+                                                <dd><a href="http://games.espn.go.com/flb/leaders?">Daily Leaders</a></dd>-->
+                                                <!--<dd><a href="http://games.espn.go.com/flb/resources/leaderboard?leaderboardGroupId=30">Leaderboards</a></dd>-->
+                                                <!--<dd><a href="http://games.espn.go.com/flb/livedraftlobby">Live Draft Lobby</a></dd> -->
+                                                <dd><a href="http://games.espn.go.com/flb/mockdraftlobby">Mock Draft Lobby</a></dd>
+                                                <!--<dd><a href="http://games.espn.go.com/flb/tools/undroppables?addata=flb_subnav_undroppables">Undroppables</a></dd>
+                                                <dd><a href="http://games.espn.go.com/frontpage/flbdraftkit?addata=flb_subnav_draftkit">Draft Kit</a></dd>-->
+                                                <dd><a href="http://games.espn.go.com/flb/livedraftresults?addata=flb_subnav_adp">Live Draft Results</a></dd>
+                                                <dd><a href="http://games.espn.go.com/flb/tools/projections?leagueId=216011&display=alt">Projections</a></dd>
+                                                <dd><a href="http://insider.espn.go.com/insider/fantasy/baseball/valuecalculator/">Custom Roto Values <img width="8" height="9" style="margin-left:3px;" alt="Insider" src="http://a.espncdn.com/i/design07/mast/tinyin.gif" /></a></dd>
+                                                <dd><a href="http://games.espn.go.com/flb/tools/statcorrections">Stat Corrections</a></dd>
+                                                <dd><a href="http://games.espn.go.com/flb/content?page=flbrulesindex2015">Rules</a></dd>
+                                                <dd><a href="http://games.espn.go.com/frontpage/forums#!/category/1313608968-996-531">Forums</a></dd>
+                                            </dl>
+                                        </div>
+                                    </li></ul></div></ul>
+                        </div>
+                        <script>espn.core.init.nav();</script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </td></tr></table>
+</div>
+
+
+<!-- SiteCatalyst code version: H.21.3 Copyright 1997-2010 Omniture, Inc. http://www.omniture.com -->
+<script type="text/javascript">
+	var undef = 'undefined'
+	,s_account="wdgespfantasy"
+	,omniPageName = "fantasy:baseball:flb:recentactivity"
+	
+	,insiderStatus = ""
+	,anGen = ""
+	,anYear = ""
+	,anDateString = ""
+	,anLoginStatus = ""
+	,callOmniture = function(){
+		/*-- core story s_omni properties --*/
+		if (typeof anCV != "undefined"){anParseLoginBarInfo(anCV);}
+		s_omni.pageName="baseball:flb:recentactivity";
+		s_omni.server = window.location.host; // Server from the Host
+		s_omni.channel = "baseball";
+		s_omni.prop1 = "fantasy";
+		s_omni.prop4 = "game-lm-gen";
+		s_omni.prop5 = "baseball:flb";
+		s_omni.prop11 = (insiderStatus !== null) ? insiderStatus + ":premium-no" : "premium-no";
+		s_omni.prop17 = "en";
+		s_omni.prop21 = anDateString;
+		s_omni.prop22 = anGen;
+		s_omni.prop25 = "baseball";
+		s_omni.prop29 = anLoginStatus;
+		s_omni.prop30 = "n";
+		s_omni.hier1 = "baseball:flb:recentactivity";
+		s_omni.eVar7 = anYear + ":" + anGen + ":" + anLoginStatus + ":" + s_omni.prop11 + ":";
+		s_omni.eVar9 = "en";
+		s_omni.eVar13 = "baseball:flb:recentactivity";
+		s_omni.eVar19 = "baseball";
+		
+		if (s_omni.prop11=="anonymous:premium-yes" || s_omni.prop11=="insider-no:premium-yes" && typeof s_omni.prop4!="undefined" &&
+			(s_omni.prop4=="story" || s_omni.prop4=="blog")) {
+			if (typeof s_omni.events != "undefined" && s_omni.events!="") {
+				s_omni.events = s_omni.events+",event8" }
+			else { s_omni.events="event8" }
+		}
+		anDebugCase = "ver_15Feb11_0_";
+		/************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+		
+		var s_code = s_omni.t();
+		if(s_code) {
+			var sci = new Image(1,1);
+			sci.onload = function() {console.log("loaded no append")};
+			sci.src = s_code;
+		}
+		
+	};
+	
+
+
+	if (typeof(s_omni) === 'undefined') {
+		jQuery(function($) {
+			// we want to load the analytics files from the cache if possible - so, let's use full $.ajax() calls
+			$.ajax({
+				type:'GET',
+				url: 'http://a.espncdn.com/combiner/c?js=analytics/sOmni.js,analytics/analytics.js,analytics/externalnielsen.js',
+				dataType: 'script',
+				cache: true,
+				success: function() {
+					var lgSrc;
+					if(typeof anCV !== undef && anCV === '' && document.getElementById('form-memberarea') != null) {
+						lgSrc = 'https://r.espn.go.com/members/util/getUserInfo?cb=runOmnitureIndependently';
+						$.getScript(lgSrc); // we don't want this to be cached - so we'll use the $.getScript() method
+					} else {
+						callOmniture();
+					}
+				}
+			});
+		});
+	}
+
+
+</script>
+<!-- End SiteCatalyst code version: H.21. -->
+
+<!-- Begin comScore Tag -->
+<script type="text/javascript">
+	jQuery(function($) {
+		if(typeof window._comscore === 'undefined') {
+			window._comscore = window._comscore || [];
+			window._comscore.push({ c1: "2", c2: "3000005" });
+			jQuery.getScript((document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js");
+		}
+	});
+</script>
+<!-- End comScore Tag --></body>
+</html>

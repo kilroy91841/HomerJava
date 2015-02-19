@@ -1,0 +1,22 @@
+Transaction{playerName='Vance Worley', teamId=1, move=Type{typeId=2, typeName='ADD'}, time=2015-07-03T10:02, nodeText=MLS added Vance Worley, Pit SP from Free Agency to Bench, alreadySeen=false}
+Transaction{playerName='Dellin Betances', teamId=1, move=Type{typeId=3, typeName='DROP'}, time=2015-07-03T10:02, nodeText=MLS dropped Dellin Betances, NYY RP to Free Agency, alreadySeen=false}
+Transaction{playerName='Clay Buchholz', teamId=1, move=Type{typeId=2, typeName='ADD'}, time=2015-07-07T10:16, nodeText=MLS added Clay Buchholz, Bos SP from Free Agency to Bench, alreadySeen=false}
+Transaction{playerName='Bartolo Colon', teamId=1, move=Type{typeId=2, typeName='ADD'}, time=2015-07-10T11:24, nodeText=MLS added Bartolo Colon, NYM SP from Free Agency to Bench, alreadySeen=false}
+Transaction{playerName='Vance Worley', teamId=1, move=Type{typeId=3, typeName='DROP'}, time=2015-07-10T11:24, nodeText=MLS dropped Vance Worley, Pit SP to Free Agency, alreadySeen=false}
+Transaction{playerName='Jacob deGrom', teamId=1, move=Type{typeId=2, typeName='ADD'}, time=2015-07-10T16:15, nodeText=MLS added Jacob deGrom, NYM SP from Free Agency to Bench, alreadySeen=false}
+Transaction{playerName='Clay Buchholz', teamId=1, move=Type{typeId=3, typeName='DROP'}, time=2015-07-10T16:15, nodeText=MLS dropped Clay Buchholz, Bos SP to Free Agency, alreadySeen=false}
+Transaction{playerName='Clay Buchholz', teamId=1, move=Type{typeId=2, typeName='ADD'}, time=2015-07-13T12:39, nodeText=MLS added Clay Buchholz, Bos SP from Free Agency to Bench, alreadySeen=false}
+Transaction{playerName='Phil Hughes', teamId=1, move=Type{typeId=2, typeName='ADD'}, time=2015-07-19T12:32, nodeText=MLS added Phil Hughes, Min SP from Free Agency to Bench, alreadySeen=false}
+Transaction{playerName='Bartolo Colon', teamId=1, move=Type{typeId=3, typeName='DROP'}, time=2015-07-19T12:32, nodeText=MLS dropped Bartolo Colon, NYM SP to Free Agency, alreadySeen=false}
+Transaction{playerName='Phil Hughes', teamId=1, move=Type{typeId=3, typeName='DROP'}, time=2015-07-20T20:11, nodeText=MLS dropped Phil Hughes, Min SP to Free Agency, alreadySeen=false}
+Transaction{playerName='Brandon McCarthy', teamId=1, move=Type{typeId=2, typeName='ADD'}, time=2015-07-23T19:39, nodeText=MLS added Brandon McCarthy, NYY SP from Free Agency to Bench, alreadySeen=false}
+Transaction{playerName='Clay Buchholz', teamId=1, move=Type{typeId=3, typeName='DROP'}, time=2015-07-23T19:39, nodeText=MLS dropped Clay Buchholz, Bos SP to Free Agency, alreadySeen=false}
+Transaction{playerName='Jonathon Niese', teamId=1, move=Type{typeId=3, typeName='DROP'}, time=2015-07-26T23:36, nodeText=MLS dropped Jonathon Niese, NYM SP to Free Agency, alreadySeen=false}
+Transaction{playerName='Bartolo Colon', teamId=1, move=Type{typeId=2, typeName='ADD'}, time=2015-07-28T10:04, nodeText=MLS added Bartolo Colon, NYM SP from Free Agency to Bench, alreadySeen=false}
+Transaction{playerName='Brandon McCarthy', teamId=1, move=Type{typeId=3, typeName='DROP'}, time=2015-07-28T10:04, nodeText=MLS dropped Brandon McCarthy, NYY SP to Free Agency, alreadySeen=false}
+Transaction{playerName='Jorge De La Rosa', teamId=1, move=Type{typeId=2, typeName='ADD'}, time=2015-07-28T23:40, nodeText=MLS added Jorge De La Rosa, Col SP from Free Agency to Bench, alreadySeen=false}
+Transaction{playerName='Bartolo Colon', teamId=1, move=Type{typeId=3, typeName='DROP'}, time=2015-07-28T23:40, nodeText=MLS dropped Bartolo Colon, NYM SP to Free Agency, alreadySeen=false}
+Transaction{playerName='Francisco Liriano', teamId=1, move=Type{typeId=2, typeName='ADD'}, time=2015-07-30T00:39, nodeText=MLS added Francisco Liriano, Pit SP from Free Agency to Bench, alreadySeen=false}
+Transaction{playerName='Jorge De La Rosa', teamId=1, move=Type{typeId=3, typeName='DROP'}, time=2015-07-30T00:39, nodeText=MLS dropped Jorge De La Rosa, Col SP to Free Agency, alreadySeen=false}
+Transaction{playerName='Mike Aviles', teamId=1, move=Type{typeId=2, typeName='ADD'}, time=2015-07-31T15:16, nodeText=MLS added Mike Aviles, Cle 3B from Free Agency to Bench, alreadySeen=false}
+Transaction{playerName='J.J. Hardy', teamId=1, move=Type{typeId=3, typeName='DROP'}, time=2015-07-31T15:16, nodeText=MLS dropped J.J. Hardy, Bal SS to Free Agency, alreadySeen=false}
