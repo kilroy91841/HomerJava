@@ -30,4 +30,17 @@ public class TransactionsParserTest {
         String goldTransactionsString = LeagueRosterParserTest.getFile("espnTransactionsAddDrop.txt", true);
         Assert.assertEquals(goldTransactionsString, transactionString);
     }
+
+    @Test
+    public void parseTrades() throws IOException {
+        String html = LeagueRosterParserTest.getFile("espnTransactionsTrade.html", false);
+        TransactionsParser parser = new TransactionsParser(12, Transaction.TRADE);
+        List<Transaction> trades = parser.parse(html);
+        String transactionString = "";
+        for(Transaction t : trades) {
+            transactionString += t + "\n";
+        }
+        String goldTransactionsString = LeagueRosterParserTest.getFile("espnTransactionsTrade.txt", true);
+        Assert.assertEquals(goldTransactionsString, transactionString);
+    }
 }

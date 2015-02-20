@@ -60,13 +60,14 @@ public class ESPNClientREST implements ESPNClient {
 
     @Override
     public void getTransactions() {
-        List<Transaction> adds = getTransaction(1, Transaction.ADD);
-        List<Transaction> drops = getTransaction(1, Transaction.DROP);
-        adds.addAll(drops);
-        adds.sort((t1, t2) -> t1.getTime().compareTo(t2.getTime()));
-        for(Transaction t : adds) {
-            System.out.println(t);
-        }
+//        List<Transaction> adds = getTransaction(1, Transaction.ADD);
+//        List<Transaction> drops = getTransaction(1, Transaction.DROP);
+//        adds.addAll(drops);
+//        adds.sort((t1, t2) -> t1.getTime().compareTo(t2.getTime()));
+//        for(Transaction t : adds) {
+//            System.out.println(t);
+//        }
+        List<Transaction> trades = getTransaction(12, Transaction.TRADE);
 
     }
 
@@ -75,8 +76,8 @@ public class ESPNClientREST implements ESPNClient {
         parameters.put(PARAM_LEAGUEID, VALUE_LEAGUEID);
         parameters.put("seasonId", 2014);
         parameters.put("activityType", 2);
-        parameters.put("startDate", 20140701);
-        parameters.put("endDate", 20140731);
+        parameters.put("startDate", 20140401);
+        parameters.put("endDate", 20140931);
         parameters.put("teamId", teamId);
         parameters.put("tranType", tranType.getTypeId());
         HttpResponse<InputStream> response = makeRequest(URL_TRANSACTIONS, parameters);
@@ -85,6 +86,9 @@ public class ESPNClientREST implements ESPNClient {
             String html = IOUtils.toString(response.getBody());
             TransactionsParser parser = new TransactionsParser(teamId, tranType);
             transactions = parser.parse(html);
+            for(Transaction t : transactions) {
+                System.out.println(t);
+            }
         } catch (IOException e) {
             LOG.error("IO exceptoin", e);
         }

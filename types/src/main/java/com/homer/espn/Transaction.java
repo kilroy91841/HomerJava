@@ -15,7 +15,7 @@ public class Transaction {
 
     public static final Type ADD = new Type(2, "ADD");
     public static final Type DROP = new Type(3, "DROP");
-    public static final Type TRADE = new Type(4, "TRADE");
+    public static final Type TRADE = new Type(4, "TRADE_ACQ");
 
     public static Type getTypeByName(String name) {
         switch(name) {
@@ -53,6 +53,23 @@ public class Transaction {
                     "typeId=" + typeId +
                     ", typeName='" + typeName + '\'' +
                     '}';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Type type = (Type) o;
+
+            if (typeId != type.typeId) return false;
+
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            return typeId;
         }
     }
 
