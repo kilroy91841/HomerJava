@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Created by arigolub on 2/18/15.
@@ -57,5 +58,16 @@ public class HibernateExternalDAO extends HomerDAO implements IExternalDAO {
 
         LOG.debug("END: saveTransaction [transaction=" + transaction + "]");
         return transaction;
+    }
+
+    @Override
+    public List<Transaction> getPlayerTransactions(String playerName) {
+        LOG.debug("BEGIN: getPlayerTransactions [playerName=" + playerName + "]");
+        Transaction example = new Transaction();
+        example.setPlayerName(playerName);
+        List<Transaction> transactions = findListByExample(example, Transaction.class);
+        transactions.sort((t1, t2) -> t2.getTime().compareTo(t1.getTime()));
+        LOG.debug("END: getPlayerTransactions [transactions=" + transactions + "]");
+        return transactions;
     }
 }

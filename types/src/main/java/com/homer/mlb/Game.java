@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -18,6 +19,8 @@ import java.util.Date;
 @Entity
 @Table(name="MLBGAME")
 public class Game {
+
+    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd h:mm a");
 
     @Id
     @Column(name="gameId")
@@ -69,26 +72,9 @@ public class Game {
         homeTeam = new Team(json.getInteger("home_team_id"));
         awayTeam = new Team(json.getInteger("away_team_id"));
 
-        MLBJSONObject gameMedia = new MLBJSONObject(json.getJSONObject("game_media"));
-        if(gameMedia != null) {
-            JSONArray media = null;
-            try {
-                media = gameMedia.getJSONArray("media");
-            } catch(Exception e) {
-                JSONObject singleGameMedia = gameMedia.getJSONObject("media");
-                media = new JSONArray();
-                media.put(singleGameMedia);
-            }
-            for(int i = 0; i < media.length(); i++) {
-                MLBJSONObject med = new MLBJSONObject((JSONObject)media.get(i));
-                if(med.has("start")) {
-                    String[] dateParts =med.getString("start").split("-");
-                    String localDate = dateParts[0] + "-" + dateParts[1] + "-" + dateParts[2];
-                    gameTime = LocalDateTime.parse(localDate);
-                    gameDate = gameTime.toLocalDate();
-                }
-            }
-        }
+        String dateTime = json.getString("time_date") + " " + json.getString("ampm");
+        gameTime = LocalDateTime.parse(dateTime, dateFormatter);
+        gameDate = gameTime.toLocalDate();
 
         MLBJSONObject jsonStatus = new MLBJSONObject(json.getJSONObject("status"));
         status = jsonStatus.getString("status");
@@ -97,16 +83,22 @@ public class Game {
         gamedayUrl = json.getString("gameday");
         amPm =json.getString("ampm");
 
-        if(json.has("away_probabl_pitcher")) {
+        if(json.has("away_probable_pitcher")) {
             MLBJSONObject awayPitcher = new MLBJSONObject(json.getJSONObject("away_probable_pitcher"));
-            awayProbablePitcher = new Player();
-            awayProbablePitcher.setPlayerId(awayPitcher.getLongProtected("id"));
+            Long playerId = awayPitcher.getLongProtected("id");
+            if(playerId != null) {
+                awayProbablePitcher = new Player();
+                awayProbablePitcher.setPlayerId(playerId);
+            }
         }
 
         if(json.has("home_probable_pitcher")) {
             MLBJSONObject homePitcher = new MLBJSONObject(json.getJSONObject("home_probable_pitcher"));
-            homeProbablePitcher = new Player();
-            homeProbablePitcher.setPlayerId(homePitcher.getLongProtected("id"));
+            Long playerId = homePitcher.getLongProtected("id");
+            if(playerId != null) {
+                homeProbablePitcher = new Player();
+                homeProbablePitcher.setPlayerId(playerId);
+            }
         }
 
         if(json.has("linescore")) {

@@ -24,13 +24,20 @@ public class ESPNClientREST implements ESPNClient {
 
     private static final Logger LOG = LoggerFactory.getLogger(ESPNClientREST.class);
 
+    private static final int SEASON = 2015;
+
     private static final String URL_LEAGUEROSTERS   = "http://games.espn.go.com/flb/leaguerosters";
     private static final String URL_TRANSACTIONS    = "http://games.espn.go.com/flb/recentactivity";
 
     private static final String PARAM_LEAGUEID      = "leagueId";
     private static final String VALUE_LEAGUEID      = "216011";
 
-    //Example URL: http://games.espn.go.com/flb/leaguerosters?leagueId=216011
+
+    /**
+     * Download and parse roster page into list of players, positions, teams
+     * @return list of players
+     * Example URL: http://games.espn.go.com/flb/leaguerosters?leagueId=216011
+     */
     @Override
     public List<Player> getRosterPage() {
         LOG.debug("BEGIN: getRosterPage");
@@ -53,31 +60,23 @@ public class ESPNClientREST implements ESPNClient {
         return players;
     }
 
-    public static void main(String[] args) {
-        ESPNClientREST client = new ESPNClientREST();
-        client.getTransactions();
-    }
-
+    /**
+     * Download and parse transactions from ESPN's Recent Activity page
+     * Example URL: http://games.espn.go.com/flb/recentactivity?leagueId=216011&seasonId=2014&activityType=2&startDate=20140701&endDate=20140731&teamId=6&tranType=4
+     * @param teamId teamId you are searching for
+     * @param tranType transaction type you are searching for
+     * @param startDate the date of the first transaction, format: yyyymmdd
+     * @param endDate the date of the first transaction, format: yyyymmdd
+     * @return list of transactions
+     */
     @Override
-    public void getTransactions() {
-//        List<Transaction> adds = getTransaction(1, Transaction.ADD);
-//        List<Transaction> drops = getTransaction(1, Transaction.DROP);
-//        adds.addAll(drops);
-//        adds.sort((t1, t2) -> t1.getTime().compareTo(t2.getTime()));
-//        for(Transaction t : adds) {
-//            System.out.println(t);
-//        }
-        List<Transaction> trades = getTransaction(12, Transaction.TRADE);
-
-    }
-
-    private List<Transaction> getTransaction(int teamId, Transaction.Type tranType) {
+    public List<Transaction> getTransactions(int teamId, Transaction.Type tranType, String startDate, String endDate) {
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put(PARAM_LEAGUEID, VALUE_LEAGUEID);
-        parameters.put("seasonId", 2014);
+        parameters.put("seasonId", SEASON);
         parameters.put("activityType", 2);
-        parameters.put("startDate", 20140401);
-        parameters.put("endDate", 20140931);
+        parameters.put("startDate", startDate);
+        parameters.put("endDate", endDate);
         parameters.put("teamId", teamId);
         parameters.put("tranType", tranType.getTypeId());
         HttpResponse<InputStream> response = makeRequest(URL_TRANSACTIONS, parameters);
@@ -86,11 +85,11 @@ public class ESPNClientREST implements ESPNClient {
             String html = IOUtils.toString(response.getBody());
             TransactionsParser parser = new TransactionsParser(teamId, tranType);
             transactions = parser.parse(html);
-            for(Transaction t : transactions) {
-                System.out.println(t);
-            }
+//            for(Transaction t : transactions) {
+//                System.out.println(t);
+//            }
         } catch (IOException e) {
-            LOG.error("IO exceptoin", e);
+            LOG.error("IO exception", e);
         }
         return transactions;
     }

@@ -7,6 +7,9 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.homer.PlayerStatus;
+import com.homer.SportType;
+import com.homer.exception.NoDailyPlayerInfoException;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.OrderBy;
 
@@ -36,6 +39,8 @@ public class Player {
     private Long mlbPlayerId;
     @Column(name="espnPlayerId")
     private Long espnPlayerId;
+    @Column(name="espnPlayerName")
+    private String espnPlayerName;
     @OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
     @Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name="playerId", referencedColumnName="playerId")
@@ -128,6 +133,14 @@ public class Player {
         this.espnPlayerId = espnPlayerId;
     }
 
+    public String getEspnPlayerName() {
+        return espnPlayerName;
+    }
+
+    public void setEspnPlayerName(String espnPlayerName) {
+        this.espnPlayerName = espnPlayerName;
+    }
+
     public List<DailyPlayerInfo> getDailyPlayerInfoList() {
         if(dailyPlayerInfoList == null) {
             dailyPlayerInfoList = new ArrayList<DailyPlayerInfo>();
@@ -158,12 +171,32 @@ public class Player {
         getPlayerHistoryList().add(playerHistory);
     }
 
-    public Team getCurrentFantasyTeam() throws Exception {
+    public Team getCurrentFantasyTeam() throws NoDailyPlayerInfoException {
         if(dailyPlayerInfoList.size() == 0) {
-            throw new Exception("Player does not have any daily info");
+            throw new NoDailyPlayerInfoException(this);
         }
         DailyPlayerInfo latestDailyPlayerInfo = dailyPlayerInfoList.get(0);
         return latestDailyPlayerInfo.getFantasyTeam();
+    }
+
+    public PlayerStatus getMostRecentFantasyStatus() throws NoDailyPlayerInfoException {
+        return getMostRecentStatus(SportType.FANTASY);
+    }
+
+    public PlayerStatus getMostRecentMLBStatus() throws NoDailyPlayerInfoException {
+        return getMostRecentStatus(SportType.MLB);
+    }
+
+    private PlayerStatus getMostRecentStatus(SportType sportType) throws NoDailyPlayerInfoException {
+        if(dailyPlayerInfoList.size() == 0) {
+            throw new NoDailyPlayerInfoException(this);
+        }
+        DailyPlayerInfo latestDailyPlayerInfo = dailyPlayerInfoList.get(0);
+        if(SportType.FANTASY.equals(sportType)) {
+            return latestDailyPlayerInfo.getFantasyStatus();
+        } else {
+            return latestDailyPlayerInfo.getMlbStatus();
+        }
     }
 
     @Override
@@ -197,8 +230,7 @@ public class Player {
                 ", nameLastFirst='" + nameLastFirst + '\'' +
                 ", mlbPlayerId=" + mlbPlayerId +
                 ", espnPlayerId=" + espnPlayerId +
-                ", dailyPlayerInfoList=" + dailyPlayerInfoList +
-                ", playerHistoryList=" + playerHistoryList +
+                ", espnPlayerName=" + espnPlayerName +
                 '}';
     }
 }

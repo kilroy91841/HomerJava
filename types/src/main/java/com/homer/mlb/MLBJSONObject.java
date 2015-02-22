@@ -82,7 +82,12 @@ public class MLBJSONObject extends JSONObject {
 
     public Long getLongProtected(String key) {
         if(!parent.has(key)) return null;
-        return parent.getLong(key);
+        try {
+            return parent.getLong(key);
+        } catch(Exception e) {
+            LOG.error("Could not get long from property that is there and should be long", e);
+            return null;
+        }
     }
 
     public Double getDoubleProtected(String key) {

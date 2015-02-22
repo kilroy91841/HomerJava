@@ -32,6 +32,7 @@ CREATE TABLE PLAYER (
     primaryPositionId INT,
     mlbPlayerId BIGINT NULL UNIQUE,
     espnPlayerId BIGINT NULL UNIQUE,
+    espnPlayerName VARCHAR(50),
     FOREIGN KEY (primaryPositionId) REFERENCES POSITION (positionId)
 );
 
@@ -123,12 +124,14 @@ CREATE TABLE VULTURE (
 	vulturingTeamId INT NOT NULL,
 	offendingTeamId INT NOT NULL,
 	playerId BIGINT NOT NULL,
+	droppingPlayerId BIGINT NULL,
 	createdDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	deadline TIMESTAMP DEFAULT 0,
 	vultureStatus VARCHAR(10) NOT NULL,
 	FOREIGN KEY (vulturingTeamId) REFERENCES TEAM (teamId),
 	FOREIGN KEY (offendingTeamId) REFERENCES TEAM (teamId),
-	FOREIGN KEY (playerId) REFERENCES PLAYER (playerId)
+	FOREIGN KEY (playerId) REFERENCES PLAYER (playerId),
+	FOREIGN KEY (droppingPlayerId) REFERENCES PLAYER (playerId)
 );
 
 CREATE TABLE FREEAGENTAUCTION (

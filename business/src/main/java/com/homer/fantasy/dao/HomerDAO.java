@@ -115,7 +115,6 @@ public class HomerDAO {
         try {
             session = openSession();
             session.beginTransaction();
-            Example example = Example.create(obj);
             retVal = (T) session.get(clazz, (Serializable) obj);
         } catch (RuntimeException re) {
             LOG.error("Error getting object", re);
@@ -199,4 +198,5 @@ public class HomerDAO {
         }
         return player;
     }
+
 }

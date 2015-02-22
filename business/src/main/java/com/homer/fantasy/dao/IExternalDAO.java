@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Created by arigolub on 2/18/15.
@@ -16,6 +17,8 @@ public interface IExternalDAO {
     public Transaction getTransaction(String nodeText, LocalDateTime time);
 
     public Transaction saveTransaction(Transaction transaction);
+
+    public List<Transaction> getPlayerTransactions(String playerName);
 
     public static class FACTORY {
 

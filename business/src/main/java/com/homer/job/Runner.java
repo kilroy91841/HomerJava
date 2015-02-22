@@ -14,34 +14,58 @@ public class Runner {
 
     private static final Logger LOG = LoggerFactory.getLogger(Runner.class);
 
+    private static Scheduler scheduler;
+
+    public static Scheduler getScheduler() {
+        return scheduler;
+    }
+
+    private static Trigger mlbUpdatePlayersTrigger = TriggerBuilder.newTrigger()
+            .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(4).repeatForever()).build();
+    private static Trigger espnUpdatePositionsTrigger = TriggerBuilder.newTrigger()
+            .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(4).repeatForever()).build();
+    private static Trigger mlbGameFetchTrigger = TriggerBuilder.newTrigger()
+            .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(5).repeatForever()).build();
+    private static Trigger dailyPlayerInfoTrigger = TriggerBuilder.newTrigger()
+            .withIdentity("dailyPlayerInfoTrigger").build();
+
+    private static SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+
+    static {
+        try {
+            scheduler = schedulerFactory.getScheduler();
+            scheduler.start();
+        } catch (SchedulerException e) {
+            LOG.error("Unable to schedule", e);
+        }
+    }
+
     public static void main(String[] args) throws ParseException, SchedulerException {
-        JobDetail job = JobBuilder.newJob(TestJob.class)
-                .withIdentity("job1")
-                .build();
 
-        JobDetail job2 = JobBuilder.newJob(TestJob2.class)
-                .withIdentity("job2")
-                .build();
-
-        JobDetail playerJob = JobBuilder.newJob(PlayerUpdateFromMLB40ManRoster.class)
+        JobDetail mlbUpdatePlayersJob = JobBuilder.newJob(PlayerUpdateFromMLB40ManRoster.class)
                 .withIdentity("playerUpdateFromMLB40ManRoster")
                 .build();
-
-        CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("crontrigger","crontriggergroup1")
-                .withSchedule(CronScheduleBuilder.cronSchedule("0 * * * * ?"))
-                .forJob(job)
+        JobDetail espnUpdatePositionsJob = JobBuilder.newJob(PlayerUpdateFromESPNLeagueRosterPage.class)
+                .withIdentity("playerUpdateFromESPNLeagueRosterPage")
+                .build();
+        JobDetail mlbGameFetchJob = JobBuilder.newJob(MLBGameFetch.class)
+                .withIdentity("mlbGameFetch")
                 .build();
 
-        Trigger trigger = TriggerBuilder.newTrigger()
-                .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(30).repeatForever()).build();
-        Trigger updateRostersTrigger = TriggerBuilder.newTrigger()
-                .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(2).repeatForever()).build();
+//        scheduler.scheduleJob(espnUpdatePositionsJob, espnUpdatePositionsTrigger);
+//        scheduler.scheduleJob(mlbUpdatePlayersJob, mlbUpdatePlayersTrigger);
+        scheduler.scheduleJob(mlbGameFetchJob, mlbGameFetchTrigger);
+    }
 
-        SchedulerFactory schedulerFactory = new StdSchedulerFactory();
-        Scheduler scheduler = schedulerFactory.getScheduler();
-        scheduler.start();
-//        scheduler.scheduleJob(job, cronTrigger);
-//        scheduler.scheduleJob(job2, trigger);
-        scheduler.scheduleJob(playerJob, updateRostersTrigger);
+    private static JobDetail dailyPlayerInfoJob = JobBuilder.newJob(DailyPlayerInfoJob.class)
+            .withIdentity("dailyPlayerInfoJob")
+            .build();
+
+    public static JobDetail getDailyPlayerInfoJob() {
+        return dailyPlayerInfoJob;
+    }
+
+    public static Trigger getDailyPlayerInfoTrigger() {
+        return dailyPlayerInfoTrigger;
     }
 }

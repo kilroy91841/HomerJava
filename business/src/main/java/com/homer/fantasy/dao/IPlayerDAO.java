@@ -5,6 +5,8 @@ import com.homer.util.Factory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 /**
  * Created by arigolub on 2/15/15.
  */
@@ -15,6 +17,8 @@ public interface IPlayerDAO {
     public Player createOrSave(Player player);
 
     public Player getPlayer(Player example);
+
+    public List<Player> getPlayersByYear(int season);
 
     public static class FACTORY {
 

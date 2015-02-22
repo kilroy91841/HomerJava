@@ -2,6 +2,8 @@ package com.homer.job;
 
 import com.homer.espn.Player;
 import com.homer.espn.client.ESPNClientREST;
+import com.homer.exception.NoDailyPlayerInfoException;
+import com.homer.exception.PlayerNotFoundException;
 import com.homer.fantasy.dao.HomerDAO;
 import com.homer.fantasy.facade.PlayerFacade;
 import org.quartz.Job;
@@ -29,8 +31,10 @@ public class PlayerUpdateFromESPNLeagueRosterPage implements Job {
         List<Player> players = client.getRosterPage();
         for(Player p : players) {
             try {
-                //playerFacade.updateESPNAttributes(p);
-            } catch(Exception e) {
+                playerFacade.updateESPNAttributes(p);
+            } catch (NoDailyPlayerInfoException e) {
+                LOG.error(e.getMessage(), e);
+            } catch (PlayerNotFoundException e) {
                 LOG.error(e.getMessage(), e);
             }
         }

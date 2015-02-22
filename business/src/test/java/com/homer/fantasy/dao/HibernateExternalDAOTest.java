@@ -6,6 +6,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Created by arigolub on 2/18/15.
@@ -14,15 +15,14 @@ public class HibernateExternalDAOTest {
 
     public static HibernateExternalDAO dao = new HibernateExternalDAO();
     private static LocalDateTime theTime = LocalDateTime.now();
-    private static String nodeText = "MLS added Phil Hughes, Min SP from Free Agency to Bench";
+    private static final String nodeText = "MLS added Phil Hughes, Min SP from Free Agency to Bench";
+    private static final String PLAYER_NAME = "Phil Hughes";
 
     @Test
     public void saveAndFind() {
-        String playerName = "Phil Hughes";
         int teamId = 1;
-        LocalDateTime time = LocalDateTime.now();
         Transaction.Type moveType = Transaction.ADD;
-        Transaction transaction = new Transaction(playerName, teamId, moveType, time, nodeText);
+        Transaction transaction = new Transaction(PLAYER_NAME, teamId, moveType, theTime, nodeText);
         Transaction dbTransaction = dao.saveTransaction(transaction);
         Assert.assertNotNull(dbTransaction);
 
@@ -32,8 +32,17 @@ public class HibernateExternalDAOTest {
 
         dbTransaction = dao.getTransaction(nodeText, theTime);
         Assert.assertNotNull(dbTransaction);
-        Assert.assertEquals(playerName, dbTransaction.getPlayerName());
+        Assert.assertEquals(PLAYER_NAME, dbTransaction.getPlayerName());
         Assert.assertEquals(theTime.minusNanos(theTime.getNano()), dbTransaction.getTime());
         Assert.assertEquals(nodeText, dbTransaction.getNodeText());
+    }
+
+    @Test
+    public void getPlayerTransactions() {
+        List<Transaction> transactions = dao.getPlayerTransactions(PLAYER_NAME);
+        Assert.assertNotNull(transactions);
+
+        transactions = dao.getPlayerTransactions("ARI");
+        Assert.assertEquals(0, transactions.size());
     }
 }

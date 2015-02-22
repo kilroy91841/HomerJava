@@ -1,5 +1,6 @@
 package com.homer.fantasy;
 
+import com.homer.PlayerStatus;
 import com.homer.SportType;
 
 import javax.persistence.*;
@@ -39,6 +40,7 @@ public class Position {
 
     private static Map<Integer, Position> positionMap = new HashMap<Integer, Position>();
     private static Map<String, Position> positionCodeMap = new HashMap<String, Position>();
+    private static Map<Position, PlayerStatus> fantasyPositionToStatusMap = new HashMap<Position, PlayerStatus>();
 
     static {
         positionMap.put(STARTINGPITCHER.getPositionId(), STARTINGPITCHER);
@@ -88,6 +90,19 @@ public class Position {
         positionCodeMap.put(FANTASYPITCHER.getPositionCode(), FANTASYPITCHER);
         positionCodeMap.put(FANTASYBENCH.getPositionCode(), FANTASYBENCH);
         positionCodeMap.put(FANTASYDISABLEDLIST.getPositionCode(), FANTASYDISABLEDLIST);
+
+        fantasyPositionToStatusMap.put(FANTASYUTILITY, PlayerStatus.ACTIVE);
+        fantasyPositionToStatusMap.put(FANTASYCATCHER, PlayerStatus.ACTIVE);
+        fantasyPositionToStatusMap.put(FANTASYFIRSTBASE, PlayerStatus.ACTIVE);
+        fantasyPositionToStatusMap.put(FANTASYSECONDBASE, PlayerStatus.ACTIVE);
+        fantasyPositionToStatusMap.put(FANTASYTHIRDBASE, PlayerStatus.ACTIVE);
+        fantasyPositionToStatusMap.put(FANTASYSHORTSTOP, PlayerStatus.ACTIVE);
+        fantasyPositionToStatusMap.put(FANTASYOUTFIELD, PlayerStatus.ACTIVE);
+        fantasyPositionToStatusMap.put(FANTASYMIDDLEINFIELD, PlayerStatus.ACTIVE);
+        fantasyPositionToStatusMap.put(FANTASYCORNERINFIELD, PlayerStatus.ACTIVE);
+        fantasyPositionToStatusMap.put(FANTASYPITCHER, PlayerStatus.ACTIVE);
+        fantasyPositionToStatusMap.put(FANTASYBENCH, PlayerStatus.INACTIVE);
+        fantasyPositionToStatusMap.put(FANTASYDISABLEDLIST, PlayerStatus.DISABLEDLIST);
     }
 
     @Id
@@ -145,6 +160,10 @@ public class Position {
     }
 
     public static Position get(String code) { return positionCodeMap.get(code); }
+
+    public static PlayerStatus getStatusFromPosition(Position position) {
+        return fantasyPositionToStatusMap.get(position);
+    }
 
     public static Map<Integer, Position> getPositionMap() { return positionMap; }
 

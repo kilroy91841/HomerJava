@@ -75,7 +75,11 @@ public class PlayerHistory {
 		this.minorLeaguer = minorLeaguer;
 	}
 
+	//Used to denote the player was kept from the previous season as a minor leaguer
 	public Boolean isMinorLeaguer() {
+		if(minorLeaguer == null) {
+			minorLeaguer = false;
+		}
 		return minorLeaguer;
 	}
 
@@ -95,7 +99,12 @@ public class PlayerHistory {
 		return keeperTeam;
 	}
 
+	//Used to denote whether the player is still allowed to be a minor leaguer, i.e. has not passed
+	//ip or ab threshhold and/or has not been called up to fantasy majors yet
 	public Boolean hasRookieStatus() {
+		if(rookieStatus == null) {
+			rookieStatus = false;
+		}
 		return rookieStatus;
 	}
 

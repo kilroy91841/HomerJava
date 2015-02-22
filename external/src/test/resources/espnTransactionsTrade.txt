@@ -1,55 +1,55 @@
-Transaction{playerName='Jake Arrieta', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-22T11:20, nodeText=null, alreadySeen=false}
-Transaction{playerName='Corey Dickerson', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-22T11:20, nodeText=null, alreadySeen=false}
-Transaction{playerName='Alex Rios', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-22T11:20, nodeText=null, alreadySeen=false}
-Transaction{playerName='Torii Hunter', teamId=3, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-19T10:34, nodeText=null, alreadySeen=false}
-Transaction{playerName='Michael Morse', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-04T22:43, nodeText=null, alreadySeen=false}
-Transaction{playerName='Ian Kinsler', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-04T22:43, nodeText=null, alreadySeen=false}
-Transaction{playerName='Marcell Ozuna', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-04T22:43, nodeText=null, alreadySeen=false}
-Transaction{playerName='Adam Wainwright', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-04T22:43, nodeText=null, alreadySeen=false}
-Transaction{playerName='Dustin Pedroia', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-04T22:43, nodeText=null, alreadySeen=false}
-Transaction{playerName='Mark Reynolds', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-04T22:43, nodeText=null, alreadySeen=false}
-Transaction{playerName='Anthony Gose', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-04T22:43, nodeText=null, alreadySeen=false}
-Transaction{playerName='Paul Goldschmidt', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-04T22:43, nodeText=null, alreadySeen=false}
-Transaction{playerName='Jake McGee', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-04T22:43, nodeText=null, alreadySeen=false}
-Transaction{playerName='Justin Morneau', teamId=6, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-01T09:55, nodeText=null, alreadySeen=false}
-Transaction{playerName='Lonnie Chisenhall', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-01T09:55, nodeText=null, alreadySeen=false}
-Transaction{playerName='Jurickson Profar', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-01T09:55, nodeText=null, alreadySeen=false}
-Transaction{playerName='Starlin Castro', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-07-22T11:59, nodeText=null, alreadySeen=false}
-Transaction{playerName='Jed Lowrie', teamId=7, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-07-22T11:59, nodeText=null, alreadySeen=false}
-Transaction{playerName='Ian Kennedy', teamId=7, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-07-22T11:59, nodeText=null, alreadySeen=false}
-Transaction{playerName='Drew Pomeranz', teamId=7, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-07-22T11:59, nodeText=null, alreadySeen=false}
-Transaction{playerName='Adam Eaton', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-30T17:35, nodeText=null, alreadySeen=false}
-Transaction{playerName='Adrian Beltre', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-19T10:44, nodeText=null, alreadySeen=false}
-Transaction{playerName='Josh Willingham', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-19T10:44, nodeText=null, alreadySeen=false}
-Transaction{playerName='Adam LaRoche', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-19T10:44, nodeText=null, alreadySeen=false}
-Transaction{playerName='Homer Bailey', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-19T10:44, nodeText=null, alreadySeen=false}
-Transaction{playerName='Madison Bumgarner', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-19T10:44, nodeText=null, alreadySeen=false}
-Transaction{playerName='Alex Gordon', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-19T10:44, nodeText=null, alreadySeen=false}
-Transaction{playerName='Justin Morneau', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-19T10:44, nodeText=null, alreadySeen=false}
-Transaction{playerName='Sonny Gray', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-19T10:44, nodeText=null, alreadySeen=false}
-Transaction{playerName='Ian Kennedy', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-19T10:44, nodeText=null, alreadySeen=false}
-Transaction{playerName='Matt Harvey', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-19T10:44, nodeText=null, alreadySeen=false}
-Transaction{playerName='Madison Bumgarner', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-13T15:21, nodeText=null, alreadySeen=false}
-Transaction{playerName='Wil Myers', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-13T15:21, nodeText=null, alreadySeen=false}
-Transaction{playerName='Clayton Kershaw', teamId=6, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-13T15:21, nodeText=null, alreadySeen=false}
-Transaction{playerName='Rajai Davis', teamId=4, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-06T08:12, nodeText=null, alreadySeen=false}
-Transaction{playerName='Carlos Santana', teamId=4, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-06T08:12, nodeText=null, alreadySeen=false}
-Transaction{playerName='Homer Bailey', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-06T08:12, nodeText=null, alreadySeen=false}
-Transaction{playerName='Jed Lowrie', teamId=5, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-29T12:55, nodeText=null, alreadySeen=false}
-Transaction{playerName='Marlon Byrd', teamId=5, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-29T12:55, nodeText=null, alreadySeen=false}
-Transaction{playerName='Shelby Miller', teamId=5, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-29T12:55, nodeText=null, alreadySeen=false}
-Transaction{playerName='Ian Kinsler', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-29T12:55, nodeText=null, alreadySeen=false}
-Transaction{playerName='Drew Pomeranz', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-29T12:55, nodeText=null, alreadySeen=false}
-Transaction{playerName='Jacoby Ellsbury', teamId=7, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-18T18:25, nodeText=null, alreadySeen=false}
-Transaction{playerName='Eric Young Jr.', teamId=7, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-18T18:25, nodeText=null, alreadySeen=false}
-Transaction{playerName='Carlos Beltran', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-18T18:25, nodeText=null, alreadySeen=false}
-Transaction{playerName='Justin Verlander', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-18T18:25, nodeText=null, alreadySeen=false}
-Transaction{playerName='Carlos Santana', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-18T18:25, nodeText=null, alreadySeen=false}
-Transaction{playerName='Cliff Lee', teamId=10, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-18T00:51, nodeText=null, alreadySeen=false}
-Transaction{playerName='Yoenis Cespedes', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-18T00:51, nodeText=null, alreadySeen=false}
-Transaction{playerName='Marcell Ozuna', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-18T00:51, nodeText=null, alreadySeen=false}
-Transaction{playerName='Alexei Ramirez', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-04-24T20:38, nodeText=null, alreadySeen=false}
-Transaction{playerName='Adam Dunn', teamId=9, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-04-24T20:38, nodeText=null, alreadySeen=false}
-Transaction{playerName='Billy Butler', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-04-22T14:06, nodeText=null, alreadySeen=false}
-Transaction{playerName='Jose Quintana', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-04-22T14:06, nodeText=null, alreadySeen=false}
-Transaction{playerName='Yovani Gallardo', teamId=9, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-04-22T14:06, nodeText=null, alreadySeen=false}
+Transaction{playerName='Jake Arrieta', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-22T11:20, nodeText=SEXY traded Jake Arrieta, ChC SP to PUIG, alreadySeen=null}
+Transaction{playerName='Corey Dickerson', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-22T11:20, nodeText=SEXY traded Corey Dickerson, Col OF to PUIG, alreadySeen=null}
+Transaction{playerName='Alex Rios', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-22T11:20, nodeText=PUIG traded Alex Rios, Tex OF to SEXY, alreadySeen=null}
+Transaction{playerName='Torii Hunter', teamId=3, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-19T10:34, nodeText=SEXY traded Torii Hunter, Det OF to DOZE, alreadySeen=null}
+Transaction{playerName='Michael Morse', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-04T22:43, nodeText=SEXY traded Michael Morse, SF OF to PUIG, alreadySeen=null}
+Transaction{playerName='Ian Kinsler', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-04T22:43, nodeText=SEXY traded Ian Kinsler, Det 2B to PUIG, alreadySeen=null}
+Transaction{playerName='Marcell Ozuna', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-04T22:43, nodeText=SEXY traded Marcell Ozuna, Mia OF to PUIG, alreadySeen=null}
+Transaction{playerName='Adam Wainwright', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-04T22:43, nodeText=SEXY traded Adam Wainwright, StL SP to PUIG, alreadySeen=null}
+Transaction{playerName='Dustin Pedroia', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-04T22:43, nodeText=PUIG traded Dustin Pedroia, Bos 2B to SEXY, alreadySeen=null}
+Transaction{playerName='Mark Reynolds', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-04T22:43, nodeText=PUIG traded Mark Reynolds, Mil 1B to SEXY, alreadySeen=null}
+Transaction{playerName='Anthony Gose', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-04T22:43, nodeText=PUIG traded Anthony Gose, Det OF to SEXY, alreadySeen=null}
+Transaction{playerName='Paul Goldschmidt', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-04T22:43, nodeText=PUIG traded Paul Goldschmidt, Ari 1B to SEXY, alreadySeen=null}
+Transaction{playerName='Jake McGee', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-04T22:43, nodeText=PUIG traded Jake McGee, TB RP to SEXY, alreadySeen=null}
+Transaction{playerName='Justin Morneau', teamId=6, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-01T09:55, nodeText=SEXY traded Justin Morneau, Col 1B to BMAC, alreadySeen=null}
+Transaction{playerName='Lonnie Chisenhall', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-01T09:55, nodeText=BMAC traded Lonnie Chisenhall, Cle 3B to SEXY, alreadySeen=null}
+Transaction{playerName='Jurickson Profar', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-08-01T09:55, nodeText=BMAC traded Jurickson Profar, Tex 2B to SEXY, alreadySeen=null}
+Transaction{playerName='Starlin Castro', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-07-22T11:59, nodeText=GRAN traded Starlin Castro, ChC SS to SEXY, alreadySeen=null}
+Transaction{playerName='Jed Lowrie', teamId=7, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-07-22T11:59, nodeText=SEXY traded Jed Lowrie, Oak SS to GRAN, alreadySeen=null}
+Transaction{playerName='Ian Kennedy', teamId=7, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-07-22T11:59, nodeText=SEXY traded Ian Kennedy, SD SP to GRAN, alreadySeen=null}
+Transaction{playerName='Drew Pomeranz', teamId=7, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-07-22T11:59, nodeText=SEXY traded Drew Pomeranz, Oak SP to GRAN, alreadySeen=null}
+Transaction{playerName='Adam Eaton', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-30T17:35, nodeText=SIDO traded Adam Eaton, CWS OF to SEXY, alreadySeen=null}
+Transaction{playerName='Adrian Beltre', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-19T10:44, nodeText=SEXY traded Adrian Beltre, Tex 3B to PUIG, alreadySeen=null}
+Transaction{playerName='Josh Willingham', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-19T10:44, nodeText=SEXY traded Josh Willingham, KC OF to PUIG, alreadySeen=null}
+Transaction{playerName='Adam LaRoche', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-19T10:44, nodeText=SEXY traded Adam LaRoche, CWS 1B to PUIG, alreadySeen=null}
+Transaction{playerName='Homer Bailey', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-19T10:44, nodeText=SEXY traded Homer Bailey, Cin SP to PUIG, alreadySeen=null}
+Transaction{playerName='Madison Bumgarner', teamId=11, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-19T10:44, nodeText=SEXY traded Madison Bumgarner, SF SP to PUIG, alreadySeen=null}
+Transaction{playerName='Alex Gordon', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-19T10:44, nodeText=PUIG traded Alex Gordon, KC OF to SEXY, alreadySeen=null}
+Transaction{playerName='Justin Morneau', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-19T10:44, nodeText=PUIG traded Justin Morneau, Col 1B to SEXY, alreadySeen=null}
+Transaction{playerName='Sonny Gray', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-19T10:44, nodeText=PUIG traded Sonny Gray, Oak SP to SEXY, alreadySeen=null}
+Transaction{playerName='Ian Kennedy', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-19T10:44, nodeText=PUIG traded Ian Kennedy, SD SP to SEXY, alreadySeen=null}
+Transaction{playerName='Matt Harvey', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-19T10:44, nodeText=PUIG traded Matt Harvey, NYM SP to SEXY, alreadySeen=null}
+Transaction{playerName='Madison Bumgarner', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-13T15:21, nodeText=BMAC traded Madison Bumgarner, SF SP to SEXY, alreadySeen=null}
+Transaction{playerName='Wil Myers', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-13T15:21, nodeText=BMAC traded Wil Myers, TB OF to SEXY, alreadySeen=null}
+Transaction{playerName='Clayton Kershaw', teamId=6, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-13T15:21, nodeText=SEXY traded Clayton Kershaw, LAD SP to BMAC, alreadySeen=null}
+Transaction{playerName='Rajai Davis', teamId=4, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-06T08:12, nodeText=SEXY traded Rajai Davis, Det OF to SIDO, alreadySeen=null}
+Transaction{playerName='Carlos Santana', teamId=4, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-06T08:12, nodeText=SEXY traded Carlos Santana, Cle C to SIDO, alreadySeen=null}
+Transaction{playerName='Homer Bailey', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-06-06T08:12, nodeText=SIDO traded Homer Bailey, Cin SP to SEXY, alreadySeen=null}
+Transaction{playerName='Jed Lowrie', teamId=5, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-29T12:55, nodeText=SEXY traded Jed Lowrie, Oak SS to MAD, alreadySeen=null}
+Transaction{playerName='Marlon Byrd', teamId=5, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-29T12:55, nodeText=SEXY traded Marlon Byrd, Phi OF to MAD, alreadySeen=null}
+Transaction{playerName='Shelby Miller', teamId=5, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-29T12:55, nodeText=SEXY traded Shelby Miller, Atl SP to MAD, alreadySeen=null}
+Transaction{playerName='Ian Kinsler', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-29T12:55, nodeText=MAD traded Ian Kinsler, Det 2B to SEXY, alreadySeen=null}
+Transaction{playerName='Drew Pomeranz', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-29T12:55, nodeText=MAD traded Drew Pomeranz, Oak SP to SEXY, alreadySeen=null}
+Transaction{playerName='Jacoby Ellsbury', teamId=7, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-18T18:25, nodeText=SEXY traded Jacoby Ellsbury, NYY OF to GRAN, alreadySeen=null}
+Transaction{playerName='Eric Young Jr.', teamId=7, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-18T18:25, nodeText=SEXY traded Eric Young Jr., NYM OF to GRAN, alreadySeen=null}
+Transaction{playerName='Carlos Beltran', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-18T18:25, nodeText=GRAN traded Carlos Beltran, NYY OF to SEXY, alreadySeen=null}
+Transaction{playerName='Justin Verlander', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-18T18:25, nodeText=GRAN traded Justin Verlander, Det SP to SEXY, alreadySeen=null}
+Transaction{playerName='Carlos Santana', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-18T18:25, nodeText=GRAN traded Carlos Santana, Cle C to SEXY, alreadySeen=null}
+Transaction{playerName='Cliff Lee', teamId=10, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-18T00:51, nodeText=SEXY traded Cliff Lee, Phi SP to HIV+, alreadySeen=null}
+Transaction{playerName='Yoenis Cespedes', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-18T00:51, nodeText=HIV+ traded Yoenis Cespedes, Bos OF to SEXY, alreadySeen=null}
+Transaction{playerName='Marcell Ozuna', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-05-18T00:51, nodeText=HIV+ traded Marcell Ozuna, Mia OF to SEXY, alreadySeen=null}
+Transaction{playerName='Alexei Ramirez', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-04-24T20:38, nodeText=DBAG traded Alexei Ramirez, CWS SS to SEXY, alreadySeen=null}
+Transaction{playerName='Adam Dunn', teamId=9, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-04-24T20:38, nodeText=SEXY traded Adam Dunn, Oak 1B to DBAG, alreadySeen=null}
+Transaction{playerName='Billy Butler', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-04-22T14:06, nodeText=DBAG traded Billy Butler, Oak DH to SEXY, alreadySeen=null}
+Transaction{playerName='Jose Quintana', teamId=12, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-04-22T14:06, nodeText=DBAG traded Jose Quintana, CWS SP to SEXY, alreadySeen=null}
+Transaction{playerName='Yovani Gallardo', teamId=9, move=Type{typeId=4, typeName='TRADE_ACQ'}, time=2015-04-22T14:06, nodeText=SEXY traded Yovani Gallardo, Mil SP to DBAG, alreadySeen=null}

@@ -219,13 +219,18 @@ public class MLBClientREST implements MLBClient {
         return parameters;
     }
 
+    /**
+     * Make request to get all the games for the specified date
+     * Example URL: http://gd2.mlb.com/components/game/mlb/year_2014/month_08/day_09/master_scoreboard.json
+     * @param date The date in question
+     * @return {@link List<com.homer.mlb.Game>}
+     */
     @Override
     public List<Game> getSchedule(LocalDate date) {
         List<Game> games = null;
 
         String urlDatePart = getURLDatePart(date);
         try {
-            //String url = "http://gd2.mlb.com/components/game/mlb/year_2014/month_08/day_09/master_scoreboard.json";
             String url = URL_SCHEDULEPART1 + urlDatePart + URL_SCHEDULEPART2;
             HttpResponse<JsonNode> response = Unirest
                     .get(url)

@@ -2,17 +2,16 @@ package com.homer.fantasy.facade;
 
 import com.homer.PlayerStatus;
 import com.homer.espn.Transaction;
+import com.homer.exception.DisallowedTransactionException;
 import com.homer.exception.NoDailyPlayerInfoException;
 import com.homer.exception.PlayerNotFoundException;
-import com.homer.fantasy.DailyPlayerInfo;
-import com.homer.fantasy.Player;
-import com.homer.fantasy.PlayerHistory;
-import com.homer.fantasy.Team;
+import com.homer.fantasy.*;
 import com.homer.fantasy.dao.IPlayerDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Created by arigolub on 2/15/15.
@@ -20,7 +19,8 @@ import java.time.LocalDate;
 public class PlayerFacade {
 
     private static final Logger LOG = LoggerFactory.getLogger(PlayerFacade.class);
-    private IPlayerDAO dao;
+    private static final int SEASON = 2015;
+    private static IPlayerDAO dao;
 
     public PlayerFacade() {
         dao = IPlayerDAO.FACTORY.getInstance();
@@ -43,6 +43,16 @@ public class PlayerFacade {
         return player;
     }
 
+    public Player getPlayerByName(String playerName) {
+        LOG.debug("BEGIN: getPlayer [playerName=" + playerName + "]");
+        Player example = new Player();
+        example.setPlayerName(playerName);
+        LOG.debug("Using example player [example=" + example + "]");
+        Player player = dao.getPlayer(example);
+        LOG.debug("END: getPlayer [player=" + player + "]");
+        return player;
+    }
+
     public Player updateESPNAttributes(com.homer.espn.Player espnPlayer) throws PlayerNotFoundException, NoDailyPlayerInfoException {
         LOG.debug("BEGIN: updateESPNAttributes [espnPlayer=" + espnPlayer + "]");
         Player returnPlayer = null;
@@ -51,7 +61,7 @@ public class PlayerFacade {
             if(player.getDailyPlayerInfoList().size() > 0) {
                 DailyPlayerInfo dpi = player.getDailyPlayerInfoList().get(0);
                 dpi.setFantasyPosition(espnPlayer.getPosition());
-                dpi.setFantasyTeam(new Team(espnPlayer.getTeamId()));
+                dpi.setFantasyStatus(Position.getStatusFromPosition(espnPlayer.getPosition()));
                 if(player.getEspnPlayerId() == null) {
                     player.setEspnPlayerId(espnPlayer.getPlayerId());
                 }
@@ -67,12 +77,12 @@ public class PlayerFacade {
         return returnPlayer;
     }
 
-    public boolean consumeTransaction(Transaction transaction) {
-        LOG.debug("BEGIN: consumeTransaction [transaction=" + transaction);
-        boolean saved = false;
-
-        LOG.debug("END: consumeTransaction [saved=" + saved + "]");
-        return saved;
+    public Player transferPlayer(Player player, Team oldTeam, Team newTeam) throws NoDailyPlayerInfoException, DisallowedTransactionException {
+        LOG.debug("BEGIN: transferPlayer [player=" + player + ", oldTeam=" + oldTeam + ", newTeam=" + newTeam + "]");
+        player.getDailyPlayerInfoList().get(0).setFantasyTeam(newTeam);
+        player = dao.createOrSave(player);
+        LOG.debug("END: transferPlayer [player=" + player + "]");
+        return player;
     }
 
     private Player findESPNPlayer(Long espnPlayerId, String playerName) {
@@ -89,6 +99,13 @@ public class PlayerFacade {
             LOG.debug("Searching by playerName");
             example = new Player();
             example.setPlayerName(playerName);
+            player = dao.getPlayer(example);
+            LOG.debug("Found player: " + player);
+        }
+        if(player == null) {
+            LOG.debug("Searching by espnPlayerName");
+            example = new Player();
+            example.setEspnPlayerName(playerName);
             player = dao.getPlayer(example);
             LOG.debug("Found player: " + player);
         }
@@ -142,10 +159,38 @@ public class PlayerFacade {
             existingPlayer.setPlayerId(dbPlayer.getPlayerId());
             existingPlayer.setDailyPlayerInfoList(dbPlayer.getDailyPlayerInfoList());
             existingPlayer.setPlayerHistoryList(dbPlayer.getPlayerHistoryList());
+
+            try {
+                existingPlayer.getDailyPlayerInfoList().get(0).setMlbStatus(PlayerStatus.get(mlbPlayer.getStatus_code()));
+            } catch (Exception e) {
+                LOG.error("Unknwon player status: " + mlbPlayer.getStatus() + ", setting status to " + PlayerStatus.UNKNOWN, e);
+                existingPlayer.getDailyPlayerInfoList().get(0).setMlbStatus(PlayerStatus.UNKNOWN);
+            }
+
             dbPlayer = createOrUpdatePlayer(existingPlayer);
         }
 
         LOG.debug("END: createOrUpdatePlayer [mlbPlayer=" + mlbPlayer + "]");
         return dbPlayer;
+    }
+
+    public boolean createNewDailyPlayerInfoForAll() {
+        LOG.debug("BEGIN: createNewDailyPlayerInfoForAll");
+        boolean success = true;
+
+        List<Player> players = dao.getPlayersByYear(SEASON);
+        for(Player p : players) {
+            DailyPlayerInfo latestDailyPlayerInfo = p.getDailyPlayerInfoList().get(0);
+            DailyPlayerInfo newDailyPlayerInfo = latestDailyPlayerInfo.copyAndIncrementDay();
+            LOG.debug("New DailyPlayerInfo: " + newDailyPlayerInfo);
+            p.getDailyPlayerInfoList().add(0, newDailyPlayerInfo);
+            p = dao.createOrSave(p);
+            if(p == null) {
+                success = false;
+            }
+        }
+
+        LOG.debug("END: createNewDailyPlayerInfoForAll");
+        return success;
     }
 }

@@ -3,8 +3,6 @@ package com.homer.mlb;
 import com.homer.util.LocalDatePersistenceConverter;
 
 import com.homer.fantasy.Player;
-import org.hibernate.annotations.*;
-import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import javax.persistence.Entity;

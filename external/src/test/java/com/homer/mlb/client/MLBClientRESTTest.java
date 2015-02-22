@@ -1,5 +1,6 @@
 package com.homer.mlb.client;
 
+import com.homer.espn.parser.LeagueRosterParserTest;
 import com.homer.mlb.Game;
 import com.homer.mlb.MLBJSONObject;
 import com.homer.mlb.Player;
@@ -67,15 +68,21 @@ public class MLBClientRESTTest {
     }
 
     @Test
-    public void doScheduleTest() {
+    public void doScheduleTest() throws IOException {
         MLBClientREST client = new MLBClientREST();
         LocalDate date = LocalDate.of(2014, 8, 9);
         List<Game> schedule = client.getSchedule(date);
         Assert.assertNotNull(schedule);
         Assert.assertEquals(15, schedule.size());
 
+        String goldGameString = LeagueRosterParserTest.getFile("games.txt", true);
+
         List<Game> jsonSchedule = getScheduleFromFile();
-        Assert.assertEquals(jsonSchedule, schedule);
+        String gameString = "";
+        for(Game g : jsonSchedule) {
+            gameString += g + "\n";
+        }
+        Assert.assertEquals(goldGameString, gameString);
     }
 
     private Player getPlayerFromFile() {

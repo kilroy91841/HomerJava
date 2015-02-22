@@ -4,6 +4,7 @@ import com.homer.mlb.Game;
 import com.homer.mlb.MLBJSONObject;
 import com.homer.mlb.Player;
 import com.mashape.unirest.http.JsonNode;
+import org.json.JSONException;
 import org.slf4j.LoggerFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -24,12 +25,19 @@ public class JSONScheduleParser {
     private static final String JSON_GAME   = "game";
 
     public static List<Game> parseSchedule(JsonNode node) throws Exception {
-        List<Game> games = null;
-        JSONArray array = node
+        List<Game> games = new ArrayList<Game>();
+        JSONObject jsonGames = node
                 .getObject()
                 .getJSONObject(JSON_DATA)
-                .getJSONObject(JSON_GAMES)
-                .getJSONArray(JSON_GAME);
+                .getJSONObject(JSON_GAMES);
+        JSONArray array = new JSONArray();
+        try {
+            array = jsonGames.getJSONArray(JSON_GAME);
+        } catch(JSONException e) {
+            LOG.debug("JSON Exception getting games, maybe there is only one game");
+            JSONObject obj = jsonGames.getJSONObject(JSON_GAME);
+            array.put(obj);
+        }
         if(array.length() > 0) {
             games = new ArrayList<Game>();
             for (int i = 0; i < array.length(); i++) {

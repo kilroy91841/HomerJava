@@ -1,6 +1,7 @@
 package com.homer.fantasy;
 
 import com.homer.util.LocalDateTimePersistenceConverter;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -20,35 +21,39 @@ public class Vulture {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="vultureId")
-    public int vultureId;
+    private int vultureId;
     @OneToOne
     @JoinColumn(name="vulturingTeamId", referencedColumnName="teamId")
-    public Team vulturingTeam;
+    private Team vulturingTeam;
     @OneToOne
     @JoinColumn(name="offendingTeamId", referencedColumnName="teamId")
-    public Team offendingTeam;
+    private Team offendingTeam;
     @OneToOne
     @JoinColumn(name="playerId", referencedColumnName="playerId")
-    public Player player;
+    private Player player;
+    @OneToOne
+    @JoinColumn(name="droppingPlayerId", referencedColumnName="playerId")
+    private Player droppingPlayer;
     @Convert(converter=LocalDateTimePersistenceConverter.class)
     @Column(name="createdDate")
-    public LocalDateTime createdDate;
+    private LocalDateTime createdDate;
     @Convert(converter=LocalDateTimePersistenceConverter.class)
     @Column(name="deadline")
-    public LocalDateTime deadline;
+    private LocalDateTime deadline;
     @Enumerated(EnumType.STRING)
     @Column(name="vultureStatus")
-    public Status vultureStatus;
+    private Status vultureStatus;
 
     public Vulture() { }
 
-    public Vulture(Team vulturingTeam, Team offendingTeam, Player player, LocalDateTime deadline, Status vultureStatus) {
-        this.vulturingTeam = vulturingTeam;
-        this.offendingTeam = offendingTeam;
-        this.player = player;
-        this.deadline = deadline;
-        this.vultureStatus = vultureStatus;
+    public int getVultureId() {
+        return vultureId;
+    }
+
+    public void setVultureId(int vultureId) {
+        this.vultureId = vultureId;
     }
 
     public Team getVulturingTeam() {
@@ -99,6 +104,14 @@ public class Vulture {
         this.vultureStatus = vultureStatus;
     }
 
+    public Player getDroppingPlayer() {
+        return droppingPlayer;
+    }
+
+    public void setDroppingPlayer(Player droppingPlayer) {
+        this.droppingPlayer = droppingPlayer;
+    }
+
     @Override
     public String toString() {
         return "Vulture{" +
@@ -106,6 +119,7 @@ public class Vulture {
                 ", vulturingTeam=" + vulturingTeam +
                 ", offendingTeam=" + offendingTeam +
                 ", player=" + player +
+                ", droppingPlayer=" + droppingPlayer +
                 ", createdDate=" + createdDate +
                 ", deadline=" + deadline +
                 ", vultureStatus=" + vultureStatus +

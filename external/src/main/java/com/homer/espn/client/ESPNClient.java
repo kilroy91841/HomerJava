@@ -1,6 +1,7 @@
 package com.homer.espn.client;
 
 import com.homer.espn.Player;
+import com.homer.espn.Transaction;
 
 import java.util.List;
 
@@ -11,5 +12,5 @@ public interface ESPNClient {
 
     public List<Player> getRosterPage();
 
-    public void getTransactions();
+    public List<Transaction> getTransactions(int teamId, Transaction.Type tranType, String startDate, String endDate);
 }

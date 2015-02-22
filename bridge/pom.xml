@@ -52,6 +52,10 @@
                                                 <include>macosx-universal-64</include>
                                             </includes>
                                             <configuration>
+                                                <property>
+                                                    <name>wrapper.java.detect_debug_jvm</name>
+                                                    <value>TRUE</value>
+                                                </property>
                                             </configuration>
                                         </generatorConfiguration>
                                     </generatorConfigurations>
@@ -62,6 +66,7 @@
                                         <systemProperties>
                                             <systemProperty>env=dev</systemProperty>
                                             <systemProperty>log4j.configuration=log4j_properties_dev.properties</systemProperty>
+                                            <systemProperty>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=4000</systemProperty>
                                         </systemProperties>
                                     </jvmSettings>
                                 </daemon>

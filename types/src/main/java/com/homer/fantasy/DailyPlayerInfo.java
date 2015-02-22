@@ -159,5 +159,19 @@ public class DailyPlayerInfo {
 		return result;
 	}
 
+	public DailyPlayerInfo copyAndIncrementDay() {
+		DailyPlayerInfo copy = new DailyPlayerInfo();
+		copy.setFantasyTeam(this.fantasyTeam);
+		copy.setMlbTeam(this.mlbTeam);
+		copy.setFantasyPosition(this.fantasyPosition);
+		copy.setFantasyStatus(this.fantasyStatus);
+		copy.setMlbStatus(this.mlbStatus);
+		DailyPlayerInfoKey key = new DailyPlayerInfoKey();
+		key.setPlayer(this.getDailyPlayerInfoKey().getPlayer());
+		key.setDate(this.getDailyPlayerInfoKey().getDate().plusDays(1));
+		copy.setDailyPlayerInfoKey(key);
+		return copy;
+	}
+
 }
 

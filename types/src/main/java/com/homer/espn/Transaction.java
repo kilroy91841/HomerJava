@@ -79,7 +79,7 @@ public class Transaction {
     @Column
     private String playerName;
     @Column
-    private int teamId;
+    private Integer teamId;
     @Column
     @Convert(converter= ESPNTransactionTypePersistenceConverter.class)
     private Type move;
@@ -89,7 +89,7 @@ public class Transaction {
     @Column
     private String nodeText;
     @Transient
-    private boolean alreadySeen;
+    private Boolean alreadySeen;
 
     public Transaction() { }
 
@@ -122,11 +122,11 @@ public class Transaction {
         this.playerName = playerName;
     }
 
-    public int getTeamId() {
+    public Integer getTeamId() {
         return teamId;
     }
 
-    public void setTeamId(int teamId) {
+    public void setTeamId(Integer teamId) {
         this.teamId = teamId;
     }
 
@@ -154,11 +154,11 @@ public class Transaction {
         this.nodeText = nodeText;
     }
 
-    public boolean isAlreadySeen() {
+    public Boolean isAlreadySeen() {
         return alreadySeen;
     }
 
-    public void setAlreadySeen(boolean alreadySeen) {
+    public void setAlreadySeen(Boolean alreadySeen) {
         this.alreadySeen = alreadySeen;
     }
 

@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by arigolub on 2/15/15.
@@ -75,5 +76,16 @@ public class HibernatePlayerDAOTest {
         example.setPlayerName(name);
         dbPlayer = playerDAO.getPlayer(example);
         Assert.assertNotNull(dbPlayer);
+    }
+
+    @Test
+    public void getPlayerListBySeason() {
+        List<Player> players = playerDAO.getPlayersByYear(2015);
+        Assert.assertNotNull(players);
+        Assert.assertTrue(players.size() > 0);
+
+        players = playerDAO.getPlayersByYear(2018);
+        Assert.assertNotNull(players);
+        Assert.assertTrue(players.size() == 0);
     }
 }
