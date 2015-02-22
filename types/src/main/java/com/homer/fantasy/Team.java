@@ -16,6 +16,7 @@ public class Team {
     public static final int FANTASY_FREE_AGENT_TEAM = 0;
 
     @Id
+    @Column(name="teamId")
     private Integer teamId;
     @Column(name="teamName")
     private String teamName;

@@ -20,6 +20,7 @@ public class PlayerStatus {
     public static final PlayerStatus MINORS = new PlayerStatus("MINORS", "MIN");
     public static final PlayerStatus FREEAGENT = new PlayerStatus("FREEAGENT", "FA");
     public static final PlayerStatus RESTRICTED = new PlayerStatus("RESTRICTED", "RST");
+    public static final PlayerStatus SUSPENDED = new PlayerStatus("SUSPENDED", "SUSP");
     public static final PlayerStatus UNKNOWN = new PlayerStatus("UNKNOWN", "UNK");
 
     protected static final Map<String, PlayerStatus> map = new HashMap<String, PlayerStatus>();
@@ -31,6 +32,7 @@ public class PlayerStatus {
         map.put(MINORS.getCode(), MINORS);
         map.put(FREEAGENT.getCode(), FREEAGENT);
         map.put(RESTRICTED.getCode(), RESTRICTED);
+        map.put(SUSPENDED.getCode(), SUSPENDED);
         map.put(UNKNOWN.getCode(), UNKNOWN);
     }
 

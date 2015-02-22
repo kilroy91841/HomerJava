@@ -4,7 +4,9 @@ import com.homer.PlayerStatus;
 import com.homer.exception.IllegalVultureException;
 import com.homer.exception.NoDailyPlayerInfoException;
 import com.homer.fantasy.*;
+import com.homer.fantasy.dao.IPlayerDAO;
 import com.homer.fantasy.dao.impl.MockPlayerDAO;
+import com.homer.fantasy.dao.impl.MockVultureDAO;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,6 +34,12 @@ public class VultureFacadeTest {
     private static Player hasRookieStatus;
 
     private static Player playerToDrop;
+
+    private static Player beingVultured;
+    private static Player wasVulturedNowFixed;
+
+    private static Vulture existingVulture;
+    private static Vulture fixedVulture;
 
     private VultureFacade facade = new VultureFacade();
 
@@ -159,6 +167,48 @@ public class VultureFacadeTest {
         history.setRookieStatus(true);
         hasRookieStatus.getPlayerHistoryList().add(history);
         MockPlayerDAO.addPlayerToMapUsingId(hasRookieStatus);
+
+        beingVultured = new Player();
+        beingVultured.setPlayerId(13);
+        beingVultured.setPlayerName("Being Vultured");
+        dpi = new DailyPlayerInfo();
+        dpi.setFantasyStatus(PlayerStatus.ACTIVE);
+        dpi.setMlbStatus(PlayerStatus.DISABLEDLIST);
+        dpi.setFantasyTeam(new Team(2));
+        beingVultured.getDailyPlayerInfoList().add(dpi);
+        history = new PlayerHistory();
+        history.setRookieStatus(false);
+        beingVultured.getPlayerHistoryList().add(history);
+        MockPlayerDAO.addPlayerToMapUsingId(beingVultured);
+
+        wasVulturedNowFixed = new Player();
+        wasVulturedNowFixed.setPlayerId(14);
+        wasVulturedNowFixed.setPlayerName("Was Vultured Now Fixed");
+        dpi = new DailyPlayerInfo();
+        dpi.setFantasyStatus(PlayerStatus.ACTIVE);
+        dpi.setMlbStatus(PlayerStatus.ACTIVE);
+        dpi.setFantasyTeam(new Team(2));
+        wasVulturedNowFixed.getDailyPlayerInfoList().add(dpi);
+        history = new PlayerHistory();
+        history.setRookieStatus(false);
+        wasVulturedNowFixed.getPlayerHistoryList().add(history);
+        MockPlayerDAO.addPlayerToMapUsingId(wasVulturedNowFixed);
+
+        existingVulture = new Vulture();
+        existingVulture.setVultureStatus(Vulture.Status.ACTIVE);
+        existingVulture.setDroppingPlayer(hasRookieStatus);
+        existingVulture.setPlayer(beingVultured);
+        existingVulture.setOffendingTeam(new Team(2));
+        existingVulture.setVulturingTeam(new Team(1));
+        MockVultureDAO.addVultureToMap(existingVulture);
+
+        fixedVulture = new Vulture();
+        fixedVulture.setVultureStatus(Vulture.Status.ACTIVE);
+        fixedVulture.setDroppingPlayer(hasRookieStatus);
+        fixedVulture.setPlayer(wasVulturedNowFixed);
+        fixedVulture.setOffendingTeam(new Team(2));
+        fixedVulture.setVulturingTeam(new Team(1));
+        MockVultureDAO.addVultureToMap(existingVulture);
     }
 
     @Test
@@ -247,5 +297,27 @@ public class VultureFacadeTest {
             Assert.fail();
         }
         Assert.assertNotNull(vulture);
+    }
+
+    @Test
+    public void resolveVulture() throws NoDailyPlayerInfoException {
+        Vulture resolvedVulture = facade.resolveVulture(existingVulture);
+        Assert.assertEquals(Vulture.Status.GRANTED, resolvedVulture.getVultureStatus());
+
+        Player vulturedPlayer = IPlayerDAO.FACTORY.getInstance().getPlayer(resolvedVulture.getPlayer());
+        Player droppedPlayer = IPlayerDAO.FACTORY.getInstance().getPlayer(resolvedVulture.getDroppingPlayer());
+        Assert.assertEquals(1, (int)vulturedPlayer.getCurrentFantasyTeam().getTeamId());
+        Assert.assertEquals(0, (int)droppedPlayer.getCurrentFantasyTeam().getTeamId());
+    }
+
+    @Test
+    public void resolveVulture_Fixed() throws NoDailyPlayerInfoException {
+        Vulture resolvedVulture = facade.resolveVulture(fixedVulture);
+        Assert.assertEquals(Vulture.Status.RESOLVED, resolvedVulture.getVultureStatus());
+
+        Player vulturedPlayer = IPlayerDAO.FACTORY.getInstance().getPlayer(resolvedVulture.getPlayer());
+        Player droppedPlayer = IPlayerDAO.FACTORY.getInstance().getPlayer(resolvedVulture.getDroppingPlayer());
+        Assert.assertEquals(2, (int)vulturedPlayer.getCurrentFantasyTeam().getTeamId());
+        Assert.assertEquals(1, (int)droppedPlayer.getCurrentFantasyTeam().getTeamId());
     }
 }

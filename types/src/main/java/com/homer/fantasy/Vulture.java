@@ -17,7 +17,8 @@ public class Vulture {
     public enum Status {
         ACTIVE,
         RESOLVED,
-        GRANTED
+        GRANTED,
+        ERROR
     }
 
     @Id

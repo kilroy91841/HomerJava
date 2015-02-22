@@ -1,6 +1,7 @@
 package com.homer.fantasy.facade;
 
 import com.homer.PlayerStatus;
+import com.homer.exception.DisallowedTransactionException;
 import com.homer.exception.IllegalVultureException;
 import com.homer.exception.NoDailyPlayerInfoException;
 import com.homer.fantasy.PlayerHistory;
@@ -8,7 +9,6 @@ import com.homer.fantasy.Team;
 import com.homer.fantasy.Vulture;
 import com.homer.fantasy.dao.IVultureDAO;
 import com.homer.fantasy.Player;
-import com.homer.mlb.client.MLBClientREST;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -82,6 +82,49 @@ public class VultureFacade {
         vulture.setDeadline(LocalDateTime.now().plusDays(1));
 
         LOG.debug("END: createVulture [vulture=" + vulture + "]");
+        return vulture;
+    }
+
+    public Vulture resolveVulture(Vulture vulture) {
+        LOG.debug("BEGIN: resolveVulture [vulture=" + vulture + "]");
+
+        Player vulturedPlayer = vulture.getPlayer();
+        try {
+            //Player was dropped, vulture is no longer valid
+            if(Team.FANTASY_FREE_AGENT_TEAM == vulturedPlayer.getCurrentFantasyTeam().getTeamId()) {
+                LOG.debug("Player was dropped, vulture is resolved");
+                vulture.setVultureStatus(Vulture.Status.RESOLVED);
+            }
+
+            if(playerIsVulturable(vulturedPlayer)) {
+                LOG.debug("Player is still vulturable, granting vulture");
+
+                //Move vultured player to new team
+                PlayerFacade playerFacade = new PlayerFacade();
+                playerFacade.transferPlayer(vulturedPlayer, vulture.getOffendingTeam(), vulture.getVulturingTeam());
+
+                //Move dropped player to free agency
+                Player droppingPlayer = vulture.getDroppingPlayer();
+                if(droppingPlayer != null) {
+                    playerFacade.transferPlayer(droppingPlayer, vulture.getOffendingTeam(), new Team(Team.FANTASY_FREE_AGENT_TEAM));
+                }
+
+                vulture.setVultureStatus(Vulture.Status.GRANTED);
+            } else {
+                LOG.debug("Player is no longer vulturable, marking as resolved");
+                vulture.setVultureStatus(Vulture.Status.RESOLVED);
+            }
+        } catch (NoDailyPlayerInfoException e) {
+            LOG.error("Player did not have latest team, marking as error", e);
+            vulture.setVultureStatus(Vulture.Status.ERROR);
+        } catch (DisallowedTransactionException e) {
+            LOG.error("Attempt to transfer players for granted vulture failed, setting vulture status to error", e);
+            vulture.setVultureStatus(Vulture.Status.ERROR);
+        }
+
+        vulture = dao.saveVulture(vulture);
+
+        LOG.debug("END: resolveVulture [vulture=" + vulture + "]");
         return vulture;
     }
 
