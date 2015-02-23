@@ -15,8 +15,9 @@ public class Money {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="moneyId")
-    private long moneyId;
+    private Long moneyId;
     @OneToOne
     @JoinColumn(name="teamId", referencedColumnName="teamId")
     private Team team;
@@ -26,7 +27,7 @@ public class Money {
     @Column(name="moneyType")
     private MoneyType moneyType;
     @Column(name="amount")
-    private int amount;
+    private Integer amount;
 
     public Money() { }
 
@@ -35,6 +36,14 @@ public class Money {
         setSeason(season);
         setMoneyType(moneyType);
         setAmount(amount);
+    }
+
+    public Long getMoneyId() {
+        return moneyId;
+    }
+
+    public void setMoneyId(Long moneyId) {
+        this.moneyId = moneyId;
     }
 
     public Team getTeam() {
@@ -61,11 +70,11 @@ public class Money {
         this.moneyType = moneyType;
     }
 
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
@@ -87,13 +96,17 @@ public class Money {
 
         Money money = (Money) o;
 
-        if (moneyId != money.moneyId) return false;
+        if (season != money.season) return false;
+        if (!moneyId.equals(money.moneyId)) return false;
+        if (moneyType != money.moneyType) return false;
+        if (team != null ? !team.equals(money.team) : money.team != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return (int) (moneyId ^ (moneyId >>> 32));
+        long hashMoneyId = moneyId != null ? (long)moneyId : 0;
+        return (int) (hashMoneyId ^ (hashMoneyId >>> 32));
     }
 }

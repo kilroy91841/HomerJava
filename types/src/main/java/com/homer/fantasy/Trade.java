@@ -1,12 +1,13 @@
 package com.homer.fantasy;
 
 import com.homer.util.LocalDateTimePersistenceConverter;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by arigolub on 1/31/15.
@@ -24,6 +25,7 @@ public class Trade {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="tradeId")
     private int tradeId;
     @OneToOne
@@ -42,15 +44,17 @@ public class Trade {
     @Column(name="tradeStatus")
     private Status tradeStatus;
     @OneToMany
+    @Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @Fetch(FetchMode.SELECT)
     @JoinColumns({
             @JoinColumn(name="tradeId", referencedColumnName="tradeId")
     })
-    private List<TradeAsset> tradeAssets;
+    private Set<TradeAsset> tradeAssets;
 
     public Trade() { }
 
     public Trade(Team proposingTeam, Team proposedToTeam, LocalDateTime createdDate, LocalDateTime deadline,
-                 List<TradeAsset> tradeAssets, Status tradeStatus) {
+                 Set<TradeAsset> tradeAssets, Status tradeStatus) {
         this.proposingTeam = proposingTeam;
         this.proposedToTeam = proposedToTeam;
         this.createdDate = createdDate;
@@ -99,11 +103,14 @@ public class Trade {
         this.deadline = deadline;
     }
 
-    public List<TradeAsset> getTradeAssets() {
+    public Set<TradeAsset> getTradeAssets() {
+        if(tradeAssets == null) {
+            tradeAssets = new HashSet<TradeAsset>();
+        }
         return tradeAssets;
     }
 
-    public void setTradeAssets(List<TradeAsset> tradeAssets) {
+    public void setTradeAssets(Set<TradeAsset> tradeAssets) {
         this.tradeAssets = tradeAssets;
     }
 
@@ -122,9 +129,24 @@ public class Trade {
                 ", proposedToTeam=" + proposedToTeam +
                 ", createdDate=" + createdDate +
                 ", deadline=" + deadline +
-                ", tradeAssets=" + tradeAssets +
                 ", tradeStatus=" + tradeStatus +
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Trade trade = (Trade) o;
+
+        if (tradeId != trade.tradeId) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return tradeId;
+    }
 }

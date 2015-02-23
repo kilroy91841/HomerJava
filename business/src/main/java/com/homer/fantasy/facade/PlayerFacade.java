@@ -77,7 +77,7 @@ public class PlayerFacade {
         return returnPlayer;
     }
 
-    public Player transferPlayer(Player player, Team oldTeam, Team newTeam) throws NoDailyPlayerInfoException, DisallowedTransactionException {
+    public Player transferPlayer(Player player, Team oldTeam, Team newTeam) {
         LOG.debug("BEGIN: transferPlayer [player=" + player + ", oldTeam=" + oldTeam + ", newTeam=" + newTeam + "]");
         player.getDailyPlayerInfoList().get(0).setFantasyTeam(newTeam);
         player = dao.createOrSave(player);

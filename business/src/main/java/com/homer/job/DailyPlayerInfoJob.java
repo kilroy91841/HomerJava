@@ -22,13 +22,11 @@ public class DailyPlayerInfoJob implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         LOG.debug("BEGIN: execute");
-
         LOG.debug("Running at " + LocalDateTime.now());
 
         boolean success = facade.createNewDailyPlayerInfoForAll();
 
         LOG.debug("Done creating new daily player info for all, success=" + success);
-
         LOG.debug("DONE: execute");
     }
 }

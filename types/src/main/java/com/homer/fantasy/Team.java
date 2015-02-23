@@ -80,10 +80,7 @@ public class Team {
 
         Team team = (Team) o;
 
-        if (teamCode != null ? !teamCode.equals(team.teamCode) : team.teamCode != null) return false;
         if (teamId != null ? !teamId.equals(team.teamId) : team.teamId != null) return false;
-        if (teamName != null ? !teamName.equals(team.teamName) : team.teamName != null) return false;
-        if (teamType != null ? !teamType.equals(team.teamType) : team.teamType != null) return false;
 
         return true;
     }
@@ -91,9 +88,6 @@ public class Team {
     @Override
     public int hashCode() {
         int result = teamId != null ? teamId.hashCode() : 0;
-        result = 31 * result + (teamName != null ? teamName.hashCode() : 0);
-        result = 31 * result + (teamType != null ? teamType.hashCode() : 0);
-        result = 31 * result + (teamCode != null ? teamCode.hashCode() : 0);
         return result;
     }
 

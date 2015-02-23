@@ -10,10 +10,12 @@ import javax.persistence.*;
 public class TradeAsset {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="tradeAssetId")
     private long tradeAssetId;
-    @Column(name="tradeId")
-    private int tradeId;
+    @ManyToOne
+    @JoinColumn(name="tradeId", referencedColumnName="tradeId")
+    private Trade trade;
     @OneToOne
     @JoinColumn(name="teamId",referencedColumnName="teamId")
     private Team team;
@@ -29,12 +31,28 @@ public class TradeAsset {
 
     public TradeAsset() { }
 
+    public long getTradeAssetId() {
+        return tradeAssetId;
+    }
+
+    public void setTradeAssetId(long tradeAssetId) {
+        this.tradeAssetId = tradeAssetId;
+    }
+
     public Team getTeam() {
         return team;
     }
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public Trade getTrade() {
+        return trade;
+    }
+
+    public void setTrade(Trade trade) {
+        this.trade = trade;
     }
 
     public Player getPlayer() {
@@ -65,7 +83,7 @@ public class TradeAsset {
     public String toString() {
         return "TradeAsset{" +
                 "tradeAssetId=" + tradeAssetId +
-                ", tradeId=" + tradeId +
+                ", trade=" + trade +
                 ", team=" + team +
                 ", player=" + player +
                 ", money=" + money +
@@ -81,7 +99,7 @@ public class TradeAsset {
         TradeAsset that = (TradeAsset) o;
 
         if (tradeAssetId != that.tradeAssetId) return false;
-        if (tradeId != that.tradeId) return false;
+        if (trade != that.trade) return false;
 
         return true;
     }
@@ -89,7 +107,11 @@ public class TradeAsset {
     @Override
     public int hashCode() {
         int result = (int) (tradeAssetId ^ (tradeAssetId >>> 32));
-        result = 31 * result + tradeId;
+        result = 31 * result + (trade != null ? trade.hashCode() : 0);
+        result = 31 * result + team.hashCode();
+        result = 31 * result + (player != null ? player.hashCode() : 0);
+        result = 31 * result + (money != null ? money.hashCode() : 0);
+        result = 31 * result + (minorLeagueDraftPick != null ? minorLeagueDraftPick.hashCode() : 0);
         return result;
     }
 }

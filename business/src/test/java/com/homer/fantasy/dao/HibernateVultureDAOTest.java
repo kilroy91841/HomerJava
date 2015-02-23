@@ -26,7 +26,7 @@ public class HibernateVultureDAOTest {
 
     @Before
     public void setup() {
-        MockPlayerDAO.clearMap();
+
     }
 
     @Test

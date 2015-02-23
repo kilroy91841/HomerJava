@@ -117,9 +117,6 @@ public class VultureFacade {
         } catch (NoDailyPlayerInfoException e) {
             LOG.error("Player did not have latest team, marking as error", e);
             vulture.setVultureStatus(Vulture.Status.ERROR);
-        } catch (DisallowedTransactionException e) {
-            LOG.error("Attempt to transfer players for granted vulture failed, setting vulture status to error", e);
-            vulture.setVultureStatus(Vulture.Status.ERROR);
         }
 
         vulture = dao.saveVulture(vulture);

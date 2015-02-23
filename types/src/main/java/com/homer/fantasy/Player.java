@@ -215,7 +215,6 @@ public class Player {
     @Override
     public int hashCode() {
         int result = (int) (playerId ^ (playerId >>> 32));
-        result = 31 * result + (int) (mlbPlayerId ^ (mlbPlayerId >>> 32));
         return result;
     }
 
