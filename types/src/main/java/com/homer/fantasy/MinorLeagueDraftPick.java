@@ -14,6 +14,7 @@ import java.util.Date;
 public class MinorLeagueDraftPick {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="minorLeagueDraftPickId")
     private long minorLeagueDraftPickId;
     @OneToOne
@@ -49,6 +50,14 @@ public class MinorLeagueDraftPick {
         this.player = player;
         this.deadline = deadline;
         this.skipped = skipped;
+    }
+
+    public long getMinorLeagueDraftPickId() {
+        return minorLeagueDraftPickId;
+    }
+
+    public void setMinorLeagueDraftPickId(long minorLeagueDraftPickId) {
+        this.minorLeagueDraftPickId = minorLeagueDraftPickId;
     }
 
     public Team getOriginalTeam() {

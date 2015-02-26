@@ -97,16 +97,17 @@ public class Money {
         Money money = (Money) o;
 
         if (season != money.season) return false;
-        if (!moneyId.equals(money.moneyId)) return false;
         if (moneyType != money.moneyType) return false;
-        if (team != null ? !team.equals(money.team) : money.team != null) return false;
+        if (!team.equals(money.team)) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        long hashMoneyId = moneyId != null ? (long)moneyId : 0;
-        return (int) (hashMoneyId ^ (hashMoneyId >>> 32));
+        int result = team.hashCode();
+        result = 31 * result + season;
+        result = 31 * result + moneyType.hashCode();
+        return result;
     }
 }

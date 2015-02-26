@@ -15,7 +15,7 @@ public class MockMoneyDAO implements IMoneyDAO {
 
     @Override
     public Money saveMoney(Money money) {
-        moneyMap.put(money.getMoneyId().toString(), money);
+        addMoney(money);
         return money;
     }
 

@@ -18,6 +18,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
+import java.util.Random;
 
 /**
  * Created by arigolub on 2/21/15.
@@ -25,6 +26,14 @@ import java.time.LocalDateTime;
 public class TransactionFacadeTest {
 
     private TransactionFacade facade = new TransactionFacade();
+
+    private static Player minorLeaguer;
+    private static String minorLeaguerPlayerName = "Minor Leaguer";
+    private static long minorLeaguerPlayerId;
+
+    private static Player suspended;
+    private static String suspendedPlayerName = "Suspended";
+    private static long suspendedPlayerId;
 
     @Before
     public void setup() {
@@ -58,6 +67,40 @@ public class TransactionFacadeTest {
         history.setKeeperSeason(3);
         p.getPlayerHistoryList().add(history);
         MockPlayerDAO.addPlayerToMap(p);
+
+        Random rand = new Random();
+        minorLeaguer = new Player();
+        minorLeaguer.setPlayerName(minorLeaguerPlayerName);
+        minorLeaguerPlayerId = rand.nextInt((1000 - 0) + 1) + 0;
+        minorLeaguer.setPlayerId(minorLeaguerPlayerId);
+        dpi = new DailyPlayerInfo();
+        dpi.setFantasyStatus(PlayerStatus.MINORS);
+        key = new DailyPlayerInfoKey();
+        key.setPlayer(p);
+        dpi.setDailyPlayerInfoKey(key);
+        dpi.setFantasyTeam(new Team(1));
+        minorLeaguer.getDailyPlayerInfoList().add(dpi);
+        history = new PlayerHistory();
+        history.setKeeperSeason(3);
+        minorLeaguer.getPlayerHistoryList().add(history);
+        MockPlayerDAO.addPlayerToMap(minorLeaguer);
+
+        rand = new Random();
+        suspended = new Player();
+        suspended.setPlayerName(suspendedPlayerName);
+        suspendedPlayerId = rand.nextInt((1000 - 0) + 1) + 0;
+        suspended.setPlayerId(suspendedPlayerId);
+        dpi = new DailyPlayerInfo();
+        dpi.setFantasyStatus(PlayerStatus.SUSPENDED);
+        key = new DailyPlayerInfoKey();
+        key.setPlayer(p);
+        dpi.setDailyPlayerInfoKey(key);
+        dpi.setFantasyTeam(new Team(1));
+        suspended.getDailyPlayerInfoList().add(dpi);
+        history = new PlayerHistory();
+        history.setKeeperSeason(3);
+        suspended.getPlayerHistoryList().add(history);
+        MockPlayerDAO.addPlayerToMap(suspended);
     }
 
     @Test
@@ -144,7 +187,7 @@ public class TransactionFacadeTest {
             Assert.assertTrue(false);
         }
 
-        Player dbPlayer = getPlayer("Free Agent");
+        Player dbPlayer = getPlayer("Not Free Agent");
         Assert.assertEquals(PlayerStatus.FREEAGENT, dbPlayer.getMostRecentFantasyStatus());
     }
 
@@ -248,6 +291,47 @@ public class TransactionFacadeTest {
         Assert.assertEquals(0, dbPlayer.getPlayerHistoryList().get(0).getKeeperSeason());
         Assert.assertEquals(PlayerStatus.ACTIVE, dbPlayer.getMostRecentFantasyStatus());
     }
+
+    @Test
+    public void addMinorLeaguerOnCorrectTeam() {
+        Transaction addMinorLeaguer = new Transaction();
+        addMinorLeaguer.setPlayerName(minorLeaguerPlayerName);
+        addMinorLeaguer.setMove(Transaction.ADD);
+        addMinorLeaguer.setTeamId(1);
+        addMinorLeaguer.setNodeText("dummy text");
+        addMinorLeaguer.setTime(LocalDateTime.now());
+
+        try {
+            boolean success = facade.consumeTransaction(addMinorLeaguer);
+            Assert.assertTrue(success);
+
+            Player dbPlayer = getPlayer(minorLeaguerPlayerName);
+            Assert.assertEquals(minorLeaguerPlayerId, (long)dbPlayer.getPlayerId());
+            Assert.assertEquals(PlayerStatus.ACTIVE, dbPlayer.getMostRecentFantasyStatus());
+        } catch (NoDailyPlayerInfoException e) {
+            Assert.fail();
+        } catch (DisallowedTransactionException e) {
+            Assert.fail();
+        }
+    }
+
+    @Test
+    public void addMinorLeaguerOnSomeoneElsesTeam() {
+
+    }
+
+    @Test
+    public void addSuspendedPlayerOnCorrectTeam() {
+
+    }
+
+    @Test
+    public void addSuspendedPlayerOnSomeoneElsesTeam() {
+
+    }
+
+    //TODO consume add of [minor leaguer, suspended player] on [correct team, someone else's team] test
+    //TODO consume drop of [player being demoted, added to suspended list] test
 
     private Player getPlayer(String name) {
         IPlayerDAO dao = IPlayerDAO.FACTORY.getInstance();

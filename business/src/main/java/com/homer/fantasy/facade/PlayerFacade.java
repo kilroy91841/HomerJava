@@ -193,4 +193,57 @@ public class PlayerFacade {
         LOG.debug("END: createNewDailyPlayerInfoForAll");
         return success;
     }
+
+    public Player demoteToMinorLeagues(Player player) throws PlayerNotFoundException, NoDailyPlayerInfoException {
+        LOG.debug("BEGIN: demoteToMinorLeagues [player=" + player + "]");
+
+        Player dbPlayer = getPlayer(player.getPlayerId());
+        validatePlayerLists(dbPlayer);
+
+        dbPlayer.getDailyPlayerInfoList().get(0).setFantasyStatus(PlayerStatus.MINORS);
+
+        dbPlayer = createOrUpdatePlayer(dbPlayer);
+
+        LOG.debug("END: demoteToMinorLeagues [player=" + dbPlayer + "]");
+        return dbPlayer;
+    }
+
+    public Player promoteToMajorLeagues(Player player) throws PlayerNotFoundException, NoDailyPlayerInfoException {
+        LOG.debug("BEGIN: promoteToMajorLeagues [player=" + player + "]");
+
+        Player dbPlayer = getPlayer(player.getPlayerId());
+        validatePlayerLists(dbPlayer);
+
+        dbPlayer.getDailyPlayerInfoList().get(0).setFantasyStatus(PlayerStatus.ACTIVE);
+        dbPlayer.getPlayerHistoryList().get(0).setRookieStatus(false);
+
+        dbPlayer = createOrUpdatePlayer(dbPlayer);
+
+        LOG.debug("END: promoteToMajorLeagues [player=" + dbPlayer + "]");
+        return dbPlayer;
+    }
+
+    public Player addToSuspendedList(Player player) throws PlayerNotFoundException, NoDailyPlayerInfoException {
+        LOG.debug("BEGIN: addToSuspendedList [player=" + player + "]");
+
+        Player dbPlayer = getPlayer(player.getPlayerId());
+        validatePlayerLists(dbPlayer);
+
+        dbPlayer.getDailyPlayerInfoList().get(0).setFantasyStatus(PlayerStatus.SUSPENDED);
+
+        dbPlayer = createOrUpdatePlayer(dbPlayer);
+
+        LOG.debug("END: addToSuspendedList [player=" + dbPlayer + "]");
+        return dbPlayer;
+    }
+
+    private void validatePlayerLists(Player player) throws PlayerNotFoundException, NoDailyPlayerInfoException {
+        if(player == null) {
+            throw new PlayerNotFoundException("Could not find player with id: " + player.getPlayerId());
+        }
+
+        if(player.getDailyPlayerInfoList().get(0) == null) {
+            throw new NoDailyPlayerInfoException(player);
+        }
+    }
 }

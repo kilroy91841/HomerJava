@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class MoneyFacade {
 
-    private static final int MAJOR_LEAGUE_DRAFT_MINIMUM = 220;
+    public static final int MAJOR_LEAGUE_DRAFT_MINIMUM = 220;
 
     private static final Logger LOG = LoggerFactory.getLogger(MoneyFacade.class);
     private static IMoneyDAO dao;

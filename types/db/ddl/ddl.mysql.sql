@@ -83,7 +83,7 @@ CREATE TABLE MINORLEAGUEDRAFTPICK (
     originalTeamId INT NOT NULL,
     season INT NOT NULL,
     round INT NOT NULL,
-    owningTeamId INT,
+    owningTeamId INT NOT NULL,
     overall INT,
     playerId BIGINT,
     deadline TIMESTAMP NULL,

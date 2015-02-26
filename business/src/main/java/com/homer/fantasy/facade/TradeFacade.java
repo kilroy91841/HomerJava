@@ -21,11 +21,13 @@ public class TradeFacade {
     private static PlayerFacade playerFacade;
     private static MoneyFacade moneyFacade;
     private static RosterFacade rosterFacade;
+    private static MinorLeagueDraftPickFacade minorLeagueDraftPickFacade;
 
     public TradeFacade() {
         dao = ITradeDAO.FACTORY.getInstance();
         playerFacade = new PlayerFacade();
         moneyFacade = new MoneyFacade();
+        minorLeagueDraftPickFacade = new MinorLeagueDraftPickFacade();
     }
 
     public Trade createTrade(Team proposingTeam, Team proposedToTeam,
@@ -138,7 +140,7 @@ public class TradeFacade {
         trade.setTradeStatus(Trade.Status.ACCEPTED);
 
         boolean allSuccessful = true;
-        //Transfer players to new teams
+
         for(Player p : proposingTeamPlayers) {
             Player tempPlayer = playerFacade.transferPlayer(p, proposingTeam, proposedToTeam);
             if(tempPlayer == null) {
@@ -152,8 +154,41 @@ public class TradeFacade {
             }
         }
 
-        //TODO transfer draft picks
-        //TODO transfer money
+        for(MinorLeagueDraftPick minorLeagueDraftPick : proposingTeamDraftPicks) {
+            MinorLeagueDraftPick tempMinorLeagueDraftPick = minorLeagueDraftPickFacade.transferMinorLeagueDraftPick(minorLeagueDraftPick, proposedToTeam);
+            if(tempMinorLeagueDraftPick == null) {
+                allSuccessful = false;
+            }
+        }
+        for(MinorLeagueDraftPick minorLeagueDraftPick : proposedToTeamDraftPicks) {
+            MinorLeagueDraftPick tempMinorLeagueDraftPick = minorLeagueDraftPickFacade.transferMinorLeagueDraftPick(minorLeagueDraftPick, proposingTeam);
+            if(tempMinorLeagueDraftPick == null) {
+                allSuccessful = false;
+            }
+        }
+
+        for(Money money : proposingTeamMoney) {
+            try {
+                Money tempMoney = moneyFacade.transferMoney(money, proposedToTeam);
+                if(tempMoney == null) {
+                    allSuccessful = false;
+                }
+            } catch (DisallowedTransactionException e) {
+                LOG.error("Disallowed transaction exception", e);
+                allSuccessful = false;
+            }
+        }
+        for(Money money : proposedToTeamMoney) {
+            try {
+                Money tempMoney = moneyFacade.transferMoney(money, proposingTeam);
+                if(tempMoney == null) {
+                    allSuccessful = false;
+                }
+            } catch (DisallowedTransactionException e) {
+                LOG.error("Disallowed transaction exception", e);
+                allSuccessful = false;
+            }
+        }
 
         trade = dao.saveTrade(trade);
 
@@ -204,39 +239,34 @@ public class TradeFacade {
                               List<Player> proposingTeamPlayers, List<Player> proposedToTeamPlayers) throws DisallowedTradeException {
         LOG.debug("BEGIN: verifyPlayers");
         Set<TradeAsset> playerAssets = new HashSet<TradeAsset>();
-        try {
-            LOG.debug("Verify players on team: " + proposingTeam);
-            for (Player p : proposingTeamPlayers) {
-                LOG.debug("Verifying player id: " + p.getPlayerId());
-                p = playerFacade.getPlayer(p.getPlayerId());
-                if (p.getCurrentFantasyTeam().getTeamId() != proposingTeam.getTeamId()) {
-                    LOG.debug("Player does not have daily player info");
-                    throw new DisallowedTradeException("Player " + p.getPlayerId() + " is not owned by team " + proposingTeam.getTeamId());
-                }
-                playerAssets.add(createTradeAsset(proposingTeam, p, null, null));
-            }
 
-            //TODO implement roster verification: wouldn't go over 10 minor leaguers
-
-            LOG.debug("Verify players on team: " + proposedToTeam);
-            for (Player p : proposedToTeamPlayers) {
-                LOG.debug("Verifying player id: " + p.getPlayerId());
-                p = playerFacade.getPlayer(p.getPlayerId());
-                if (p.getCurrentFantasyTeam().getTeamId() != proposedToTeam.getTeamId()) {
-                    LOG.debug("Player is not on team");
-                    throw new DisallowedTradeException("Player " + p.getPlayerId() + " is not owned by team " + proposedToTeam.getTeamId());
-                }
-                playerAssets.add(createTradeAsset(proposedToTeam, p, null, null));
-            }
-
-            //TODO implement roster verification: wouldn't go over 10 minor leaguers
-        } catch (NoDailyPlayerInfoException e) {
-            LOG.error("No daily info found for player", e);
-            throw new DisallowedTradeException("A player in the trade was in an invalid state");
-        }
+        playerAssets.addAll(verifyPlayerHelper(proposingTeam, proposingTeamPlayers));
+        //TODO implement roster verification: wouldn't go over 10 minor leaguers
+        playerAssets.addAll(verifyPlayerHelper(proposedToTeam, proposedToTeamPlayers));
+        //TODO implement roster verification: wouldn't go over 10 minor leaguers
 
         LOG.debug("Verification was successful, trade can continue");
         LOG.debug("END: verifyPlayers");
+        return playerAssets;
+    }
+
+    private Set<TradeAsset> verifyPlayerHelper(Team team, List<Player> players) throws DisallowedTradeException {
+        Set<TradeAsset> playerAssets = new HashSet<TradeAsset>();
+        LOG.debug("Verify players on team: " + team);
+        for (Player p : players) {
+            LOG.debug("Verifying player id: " + p.getPlayerId());
+            p = playerFacade.getPlayer(p.getPlayerId());
+            try {
+                if (p.getCurrentFantasyTeam().getTeamId() != team.getTeamId()) {
+                    LOG.debug("Player does not have daily player info");
+                    throw new DisallowedTradeException("Player " + p.getPlayerId() + " is not owned by team " + team.getTeamId());
+                }
+            } catch (NoDailyPlayerInfoException e) {
+                LOG.error("No daily info found for player", e);
+                throw new DisallowedTradeException("A player in the trade was in an invalid state");
+            }
+            playerAssets.add(createTradeAsset(team, p, null, null));
+        }
         return playerAssets;
     }
 
@@ -244,21 +274,63 @@ public class TradeFacade {
                             List<Money> proposingTeamMoney, List<Money> proposedToTeamMoney) throws DisallowedTradeException {
         LOG.debug("BEGIN: verifyMoney");
         Set<TradeAsset> moneyAssets = new HashSet<TradeAsset>();
-        try {
-            LOG.debug("Verify money for team " + proposingTeam);
-            for(Money m : proposingTeamMoney) {
-                
+        moneyAssets.addAll(verifyMoneyHelper(proposingTeam, proposingTeamMoney));
+        moneyAssets.addAll(verifyMoneyHelper(proposedToTeam, proposedToTeamMoney));
+        LOG.debug("END: verifyMoney");
+        return moneyAssets;
+    }
+
+    private Set<TradeAsset> verifyMoneyHelper(Team team, List<Money> moneyList) throws DisallowedTradeException {
+        Set<TradeAsset> moneyAssets = new HashSet<TradeAsset>();
+        LOG.debug("Verify money for team " + team);
+        List<Money> teamDBMoneys = moneyFacade.getMoneyForTeam(team);
+        for(Money m : moneyList) {
+            LOG.debug("Verifying money: " + m);
+            for(Money dbMoney : teamDBMoneys) {
+                if(dbMoney.equals(m)) {
+                    int proposedAmount = m.getAmount();
+                    int hasAmount = dbMoney.getAmount();
+                    int possibleAmount = hasAmount - proposedAmount;
+                    if(Money.MoneyType.MAJORLEAGUEDRAFT.equals(dbMoney.getMoneyType()) && possibleAmount <
+                            MoneyFacade.MAJOR_LEAGUE_DRAFT_MINIMUM) {
+                        throw new DisallowedTradeException("Proposed money transfer would put team below MLB limit");
+                    } else if (proposedAmount < 0) {
+                        throw new DisallowedTradeException("Proposd money transfer would give team negative dollars");
+                    }
+                    moneyAssets.add(createTradeAsset(team, null, m, null));
+                }
             }
         }
-        LOG.debug("END: verifyMoney");
-        return new HashSet<TradeAsset>();
+        return moneyAssets;
     }
 
     private Set<TradeAsset> verifyDraftPicks(Team proposingTeam, Team proposedToTeam,
                              List<MinorLeagueDraftPick> proposingTeamDraftPicks, List<MinorLeagueDraftPick> proposedToTeamDraftPicks)
             throws DisallowedTradeException {
-        //TODO implement verify draft picks
-        return new HashSet<TradeAsset>();
+        LOG.debug("BEGIN: verifyDraftPicks");
+        Set<TradeAsset> pickAssets = new HashSet<TradeAsset>();
+        pickAssets.addAll(verifyDraftPicksHelper(proposingTeam, proposingTeamDraftPicks));
+        pickAssets.addAll(verifyDraftPicksHelper(proposedToTeam, proposedToTeamDraftPicks));
+        LOG.debug("END: verifyDraftPicks");
+        return pickAssets;
+    }
+
+    private Set<TradeAsset> verifyDraftPicksHelper(Team team, List<MinorLeagueDraftPick> minorLeagueDraftPicks) throws DisallowedTradeException {
+        Set<TradeAsset> pickAssets = new HashSet<TradeAsset>();
+        LOG.debug("Verify draft picks for team " + team);
+        List<MinorLeagueDraftPick> dbDraftPicks = minorLeagueDraftPickFacade.getMinorLeagueDraftPicksForTeam(team);
+        for(MinorLeagueDraftPick minorLeagueDraftPick : minorLeagueDraftPicks) {
+            LOG.debug("Verifying draft pick: " + minorLeagueDraftPick);
+            for(MinorLeagueDraftPick dbPick : dbDraftPicks) {
+                if(dbPick.equals(minorLeagueDraftPick)) {
+                    pickAssets.add(createTradeAsset(team, null, null, minorLeagueDraftPick));
+                }
+            }
+        }
+        if(minorLeagueDraftPicks.size() != pickAssets.size()) {
+            throw new DisallowedTradeException("One or more of the picks involved in this trade was missing or not owned by the team in question");
+        }
+        return pickAssets;
     }
 
     private TradeAsset createTradeAsset(Team team, Player player, Money money, MinorLeagueDraftPick draftPick) {

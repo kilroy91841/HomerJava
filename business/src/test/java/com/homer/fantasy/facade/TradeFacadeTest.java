@@ -3,8 +3,12 @@ package com.homer.fantasy.facade;
 import com.homer.exception.DisallowedTradeException;
 import com.homer.exception.NoDailyPlayerInfoException;
 import com.homer.fantasy.*;
+import com.homer.fantasy.dao.IMinorLeagueDraftPickDAO;
+import com.homer.fantasy.dao.IMoneyDAO;
 import com.homer.fantasy.dao.IPlayerDAO;
 import com.homer.fantasy.dao.ITradeDAO;
+import com.homer.fantasy.dao.impl.MockMinorLeagueDraftPickDAO;
+import com.homer.fantasy.dao.impl.MockMoneyDAO;
 import com.homer.fantasy.dao.impl.MockPlayerDAO;
 import com.homer.fantasy.dao.impl.MockTradeDAO;
 import junit.framework.Assert;
@@ -30,7 +34,8 @@ public class TradeFacadeTest {
     private static List<Player> team1Players;
     private static List<Player> team2Players;
     private static List<Money> team1Moneys;
-    private static List<Money> team2Moneys;
+    private static List<Money> team2MoneysInsufficientFunds;
+    private static List<Money> team2MoneysSufficientFunds;
     private static List<MinorLeagueDraftPick> team1DraftPicks;
     private static List<MinorLeagueDraftPick> team2DraftPicks;
     private static TradeAsset asset1;
@@ -40,6 +45,7 @@ public class TradeFacadeTest {
     private static TradeAsset asset5;
     private static MinorLeagueDraftPick draftPick;
     private static Money money;
+    private static Money lotOfMoney;
 
     private static final TradeFacade facade = new TradeFacade();
 
@@ -47,12 +53,28 @@ public class TradeFacadeTest {
     public void setup() {
         MockTradeDAO.clearMap();
         MockPlayerDAO.clearMap();
+        MockMoneyDAO.clearMap();
+        MockMinorLeagueDraftPickDAO.clearMap();
 
         team1 = new Team();
         team1.setTeamId(1);
 
         team2 = new Team();
         team2.setTeamId(2);
+
+        Money dbMoney = new Money();
+        dbMoney.setTeam(team2);
+        dbMoney.setMoneyType(Money.MoneyType.MAJORLEAGUEDRAFT);
+        dbMoney.setSeason(2015);
+        dbMoney.setAmount(225);
+        MockMoneyDAO.addMoney(dbMoney);
+
+        Money dbMoney2 = new Money();
+        dbMoney2.setTeam(team1);
+        dbMoney2.setMoneyType(Money.MoneyType.MAJORLEAGUEDRAFT);
+        dbMoney2.setSeason(2015);
+        dbMoney2.setAmount(260);
+        MockMoneyDAO.addMoney(dbMoney2);
 
         player1Team1 = initializePlayer(team1);
         player2Team1 = initializePlayer(team1);
@@ -65,10 +87,19 @@ public class TradeFacadeTest {
         money.setSeason(2015);
         money.setAmount(5);
 
+        lotOfMoney = new Money();
+        lotOfMoney.setTeam(team2);
+        lotOfMoney.setMoneyType(Money.MoneyType.MAJORLEAGUEDRAFT);
+        lotOfMoney.setSeason(2015);
+        lotOfMoney.setAmount(50);
+
         draftPick = new MinorLeagueDraftPick();
         draftPick.setOriginalTeam(team1);
         draftPick.setRound(1);
         draftPick.setSeason(2015);
+        draftPick.setOwningTeam(team1);
+
+        MockMinorLeagueDraftPickDAO.addMinorLeagueDraftPick(draftPick);
 
         MockPlayerDAO.addPlayerToMapUsingId(player1Team1);
         MockPlayerDAO.addPlayerToMapUsingId(player1Team2);
@@ -82,8 +113,11 @@ public class TradeFacadeTest {
         team2Players.add(player1Team2);
         team2Players.add(player2Team2);
         team1Moneys = new ArrayList<Money>();
-        team2Moneys = new ArrayList<Money>();
-        team2Moneys.add(money);
+
+        team2MoneysInsufficientFunds = new ArrayList<Money>();
+        team2MoneysInsufficientFunds.add(lotOfMoney);
+        team2MoneysSufficientFunds = new ArrayList<Money>();
+        team2MoneysSufficientFunds.add(money);
         team1DraftPicks = new ArrayList<MinorLeagueDraftPick>();
         team1DraftPicks.add(draftPick);
         team2DraftPicks = new ArrayList<MinorLeagueDraftPick>();
@@ -134,7 +168,7 @@ public class TradeFacadeTest {
     public void createTrade() {
         Trade trade = null;
         try {
-            trade = facade.createTrade(team1, team2, team1Players, team2Players, team1Moneys, team2Moneys, team1DraftPicks, team2DraftPicks);
+            trade = facade.createTrade(team1, team2, team1Players, team2Players, team1Moneys, team2MoneysSufficientFunds, team1DraftPicks, team2DraftPicks);
             Assert.assertNotNull(trade);
             Assert.assertEquals(Trade.Status.PROPOSED, trade.getTradeStatus());
         } catch (DisallowedTradeException e) {
@@ -143,9 +177,20 @@ public class TradeFacadeTest {
     }
 
     @Test
+    public void createTradeOverdraft() {
+        Trade trade = null;
+        try {
+            trade = facade.createTrade(team1, team2, team1Players, team2Players, team1Moneys, team2MoneysInsufficientFunds, team1DraftPicks, team2DraftPicks);
+            Assert.fail();
+        } catch (DisallowedTradeException e) {
+            Assert.assertTrue(true);
+        }
+    }
+
+    @Test
     public void createDraft() {
         try {
-            Trade trade = facade.saveDraft(team1, team2, team1Players, team2Players, team1Moneys, team2Moneys, team1DraftPicks, team2DraftPicks);
+            Trade trade = facade.saveDraft(team1, team2, team1Players, team2Players, team1Moneys, team2MoneysSufficientFunds, team1DraftPicks, team2DraftPicks);
             Assert.assertNotNull(trade);
             Assert.assertEquals(Trade.Status.DRAFT, trade.getTradeStatus());
         } catch (DisallowedTradeException e) {
@@ -173,6 +218,17 @@ public class TradeFacadeTest {
             Assert.assertEquals(team2.getTeamId(), dbPlayer2Team1.getCurrentFantasyTeam().getTeamId());
             Player dbPlayer1Team2 = playerDAO.getPlayer(player1Team2);
             Assert.assertEquals(team1.getTeamId(), dbPlayer1Team2.getCurrentFantasyTeam().getTeamId());
+
+            IMinorLeagueDraftPickDAO minorLeagueDraftPickDAO = IMinorLeagueDraftPickDAO.FACTORY.getInstance();
+            MinorLeagueDraftPick dbPick = minorLeagueDraftPickDAO.getDraftPick(draftPick.getOriginalTeam(), draftPick.getSeason(), draftPick.getRound());
+            Assert.assertEquals(2, (int)dbPick.getOwningTeam().getTeamId());
+
+            IMoneyDAO moneyDao = IMoneyDAO.FACTORY.getInstance();
+            Money dbMoney = moneyDao.getMoney(2, 2015, Money.MoneyType.MAJORLEAGUEDRAFT);
+            Assert.assertEquals(220, (int)dbMoney.getAmount());
+            dbMoney = moneyDao.getMoney(1, 2015, Money.MoneyType.MAJORLEAGUEDRAFT);
+            Assert.assertEquals(265, (int)dbMoney.getAmount());
+
         } catch (DisallowedTradeException e) {
             Assert.fail();
         }
@@ -201,7 +257,7 @@ public class TradeFacadeTest {
         try {
             ITradeDAO dao = ITradeDAO.FACTORY.getInstance();
             Trade trade = dao.getTradeById(1);
-            Trade newTrade = facade.counterTrade(trade, team2Players, team1Players, team2Moneys, team1Moneys, team2DraftPicks, team1DraftPicks);
+            Trade newTrade = facade.counterTrade(trade, team2Players, team1Players, team2MoneysSufficientFunds, team1Moneys, team2DraftPicks, team1DraftPicks);
             trade = dao.getTradeById(1);
             Assert.assertNotNull(newTrade);
             Assert.assertTrue(trade.getTradeId() != newTrade.getTradeId());

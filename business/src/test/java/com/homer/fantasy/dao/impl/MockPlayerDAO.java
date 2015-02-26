@@ -17,7 +17,11 @@ public class MockPlayerDAO implements IPlayerDAO {
 
     @Override
     public Player createOrSave(Player player) {
-        playerMap.put(player.getPlayerName(), player);
+        if(player.getPlayerId() != null) {
+            addPlayerToMapUsingId(player);
+        } else {
+            addPlayerToMap(player);
+        }
         return player;
     }
 

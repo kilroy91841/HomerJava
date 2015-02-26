@@ -79,10 +79,10 @@ public class TransactionFacade {
         boolean success = false;
         LOG.debug("Adding player to new team");
 
-        //Confirm current player is a free agent OR is a minor leaguer of that team
+        //Confirm current player is a free agent OR is a minor leaguer of that team OR on the suspended list of that team
         Team currentTeam = player.getCurrentFantasyTeam();
-        if(currentTeam != null && currentTeam.getTeamId() != null &&
-                Team.FANTASY_FREE_AGENT_TEAM != currentTeam.getTeamId()) {
+        if(currentTeam != null && (Team.FANTASY_FREE_AGENT_TEAM != currentTeam.getTeamId() &&
+            actingTeam.getTeamId() != currentTeam.getTeamId())) {
             throw new DisallowedTransactionException("Attempted to add a player who was not a free agent-- transaction: " + transaction);
         }
 
@@ -99,6 +99,10 @@ public class TransactionFacade {
             }
         }
 
+        if(PlayerStatus.ACTIVE.equals(player.getMostRecentFantasyStatus())) {
+            throw new DisallowedTransactionException("Attempted to add a player who was already active-- transaction: " + transaction);
+        }
+
         //Change player status to ACTIVE
         player.getDailyPlayerInfoList().get(0).setFantasyStatus(PlayerStatus.ACTIVE);
 
@@ -107,8 +111,13 @@ public class TransactionFacade {
             player.getPlayerHistoryList().get(0).setRookieStatus(false);
         }
 
-        //Transfer player
-        player = playerFacade.transferPlayer(player, FREE_AGENT_TEAM, actingTeam);
+        //Transfer player if the player was a free agent. Otherwise, just update.
+        if(Team.FANTASY_FREE_AGENT_TEAM == currentTeam.getTeamId()) {
+            player = playerFacade.transferPlayer(player, FREE_AGENT_TEAM, actingTeam);
+        } else {
+            player = playerFacade.createOrUpdatePlayer(player);
+        }
+
         if(player != null) {
             success = true;
         }
@@ -136,15 +145,24 @@ public class TransactionFacade {
             throw new DisallowedTransactionException("A team that did not own a player attempted to drop that player-- transaction: " + transaction);
         }
 
-        //Change player status to FREEAGENT
-        player.getDailyPlayerInfoList().get(0).setFantasyStatus(PlayerStatus.FREEAGENT);
+        PlayerStatus status = player.getMostRecentFantasyStatus();
+        if (PlayerStatus.SUSPENDED.equals(status) || PlayerStatus.MINORS.equals(status)) {
+            //Player was marked as being moved to a separate list, so this drop is not a drop from the team.
+            //No need to do anything, status was already handled.
+            LOG.debug("Not dropping the player, they are on a different list already");
+        } else {
+            //Player was not demoted or suspended, so this is a real drop
+            //Transfer player, remove fantasy position
+            LOG.debug("Dropping player");
+            player.getDailyPlayerInfoList().get(0).setFantasyStatus(PlayerStatus.FREEAGENT);
+            player.getDailyPlayerInfoList().get(0).setFantasyPosition(null);
+            player = playerFacade.transferPlayer(player, oldTeam, FREE_AGENT_TEAM);
+        }
 
-        //Transfer player, remove fantasy position
-        player.getDailyPlayerInfoList().get(0).setFantasyPosition(null);
-        player = playerFacade.transferPlayer(player, oldTeam, FREE_AGENT_TEAM);
         if(player != null) {
             success = true;
         }
+
         LOG.debug("Done dropping player");
         return success;
     }
