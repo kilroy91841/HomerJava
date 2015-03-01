@@ -241,9 +241,7 @@ public class TradeFacade {
         Set<TradeAsset> playerAssets = new HashSet<TradeAsset>();
 
         playerAssets.addAll(verifyPlayerHelper(proposingTeam, proposingTeamPlayers));
-        //TODO implement roster verification: wouldn't go over 10 minor leaguers
         playerAssets.addAll(verifyPlayerHelper(proposedToTeam, proposedToTeamPlayers));
-        //TODO implement roster verification: wouldn't go over 10 minor leaguers
 
         LOG.debug("Verification was successful, trade can continue");
         LOG.debug("END: verifyPlayers");

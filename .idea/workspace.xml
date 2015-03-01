@@ -2,22 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="01acde00-abe5-4ee8-905b-f149465ee3eb" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/types/src/main/java/com/homer/fantasy/FreeAgentAuction.java" afterPath="$PROJECT_DIR$/types/src/main/java/com/homer/fantasy/FreeAgentAuction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/dao/impl/HibernatePlayerDAO.java" afterPath="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/dao/impl/HibernatePlayerDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/HibernatePlayerDAOTest.java" afterPath="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/HibernatePlayerDAOTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/dao/IPlayerDAO.java" afterPath="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/dao/IPlayerDAO.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/impl/MockPlayerDAO.java" afterPath="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/impl/MockPlayerDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/MoneyFacade.java" afterPath="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/MoneyFacade.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/PlayerFacade.java" afterPath="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/PlayerFacade.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/facade/PlayerFacadeTest.java" afterPath="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/facade/PlayerFacadeTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business/src/main/java/com/homer/job/PlayerUpdateFromESPNLeagueRosterPage.java" afterPath="$PROJECT_DIR$/business/src/main/java/com/homer/job/PlayerUpdateFromESPNLeagueRosterPage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/TransactionFacade.java" afterPath="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/TransactionFacade.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/facade/TransactionFacadeTest.java" afterPath="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/facade/TransactionFacadeTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/types/db/ddl/ddl.mysql.sql" afterPath="$PROJECT_DIR$/types/db/ddl/ddl.mysql.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common_resources/factory-config.properties" afterPath="$PROJECT_DIR$/common_resources/factory-config.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common_test_resources/factory-config.properties" afterPath="$PROJECT_DIR$/common_test_resources/factory-config.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/src/main/resources/hibernate.cfg.xml" afterPath="$PROJECT_DIR$/scripts/src/main/resources/hibernate.cfg.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common_resources/hibernate_dev.cfg.xml" afterPath="$PROJECT_DIR$/common_resources/hibernate_dev.cfg.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common_test_resources/hibernate_dev.cfg.xml" afterPath="$PROJECT_DIR$/common_test_resources/hibernate_dev.cfg.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common_test_resources/hibernate_devTest.cfg.xml" afterPath="$PROJECT_DIR$/common_test_resources/hibernate_devTest.cfg.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/RosterFacade.java" afterPath="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/RosterFacade.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/facade/RosterFacadeTest.java" afterPath="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/facade/RosterFacadeTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/TradeFacade.java" afterPath="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/TradeFacade.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="HomerJava.iws" />
@@ -54,11 +44,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FreeAgentAuctionFacadeTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/facade/FreeAgentAuctionFacadeTest.java">
+      <file leaf-file-name="HibernatePlayerDAOTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/HibernatePlayerDAOTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4418" max-vertical-offset="5491">
-              <caret line="248" column="0" selection-start-line="248" selection-start-column="0" selection-end-line="248" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1101" max-vertical-offset="2299">
+              <caret line="111" column="92" selection-start-line="111" selection-start-column="92" selection-end-line="111" selection-end-column="92" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RosterFacadeTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/facade/RosterFacadeTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="326" max-vertical-offset="1584">
+              <caret line="33" column="40" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -66,11 +66,61 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FreeAgentAuctionBidKey.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/fantasy/key/FreeAgentAuctionBidKey.java">
+      <file leaf-file-name="TradeFacade.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/TradeFacade.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8567134" vertical-offset="0" max-vertical-offset="1292">
-              <caret line="53" column="14" selection-start-line="53" selection-start-column="14" selection-end-line="53" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3546" max-vertical-offset="5520">
+              <caret line="243" column="87" selection-start-line="243" selection-start-column="87" selection-end-line="243" selection-end-column="87" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Roster.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/fantasy/Roster.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="333" max-vertical-offset="2603">
+              <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HibernateTradeDAOTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/HibernateTradeDAOTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1" max-vertical-offset="1482">
+              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HibernateStatsDAOTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/HibernateStatsDAOTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1349">
+              <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HibernateMoneyDAOTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/HibernateMoneyDAOTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1767">
+              <caret line="29" column="54" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RosterFacade.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/RosterFacade.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.4972973" vertical-offset="0" max-vertical-offset="740">
+              <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -78,91 +128,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FreeAgentAuction.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/fantasy/FreeAgentAuction.java">
+      <file leaf-file-name="MockPlayerDAO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/impl/MockPlayerDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2793">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="58" max-vertical-offset="1168">
+              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2335#2336#0" expanded="true" />
-                <element signature="e#2395#2396#0" expanded="true" />
-                <element signature="e#2614#2615#0" expanded="true" />
-                <element signature="e#2643#2644#0" expanded="true" />
-                <element signature="e#3375#3376#0" expanded="true" />
-                <element signature="e#3411#3412#0" expanded="true" />
+                <element signature="e#1496#1504#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FreeAgentAuctionFacade.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/FreeAgentAuctionFacade.java">
+      <file leaf-file-name="HibernatePlayerDAO.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/dao/impl/HibernatePlayerDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2659" max-vertical-offset="3952">
-              <caret line="194" column="26" selection-start-line="194" selection-start-column="26" selection-end-line="194" selection-end-column="26" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerFacade.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/PlayerFacade.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="998" max-vertical-offset="4674">
-              <caret line="84" column="77" selection-start-line="84" selection-start-column="77" selection-end-line="84" selection-end-column="77" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MoneyFacade.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/MoneyFacade.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1149" max-vertical-offset="2147">
-              <caret line="37" column="95" selection-start-line="37" selection-start-column="95" selection-end-line="37" selection-end-column="95" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Money.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/fantasy/Money.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1881">
-              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MockMoneyDAO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/impl/MockMoneyDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1216">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IMoneyDAO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/dao/IMoneyDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="855">
-              <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BiddingTiedException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/exception/BiddingTiedException.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="247">
-              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="884" max-vertical-offset="1862">
+              <caret line="78" column="24" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -176,10 +158,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/RosterFacade.java" />
-        <option value="$PROJECT_DIR$/types/src/main/java/com/homer/fantasy/Player.java" />
-        <option value="$PROJECT_DIR$/types/src/main/java/com/homer/fantasy/TradeAsset.java" />
-        <option value="$PROJECT_DIR$/types/src/main/java/com/homer/fantasy/Team.java" />
         <option value="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/VultureFacade.java" />
         <option value="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/impl/MockTradeDAO.java" />
         <option value="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/dao/impl/HibernateMoneyDAO.java" />
@@ -194,14 +172,12 @@
         <option value="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/impl/MockMinorLeagueDraftPickDAO.java" />
         <option value="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/facade/MinorLeagueDraftPickFacadeTest.java" />
         <option value="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/MinorLeagueDraftPickFacade.java" />
-        <option value="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/TradeFacade.java" />
         <option value="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/facade/TradeFacadeTest.java" />
         <option value="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/impl/MockMoneyDAO.java" />
         <option value="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/TransactionFacade.java" />
         <option value="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/facade/TransactionFacadeTest.java" />
         <option value="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/PlayerFacade.java" />
         <option value="$PROJECT_DIR$/business/src/main/java/com/homer/job/PlayerUpdateFromESPNLeagueRosterPage.java" />
-        <option value="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/impl/MockPlayerDAO.java" />
         <option value="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/facade/PlayerFacadeTest.java" />
         <option value="$PROJECT_DIR$/types/src/main/java/com/homer/fantasy/key/FreeAgentAuctionBidKey.java" />
         <option value="$PROJECT_DIR$/types/db/ddl/ddl.mysql.sql" />
@@ -227,6 +203,12 @@
         <option value="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/facade/FreeAgentAuctionFacadeTest.java" />
         <option value="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/MoneyFacade.java" />
         <option value="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/FreeAgentAuctionFacade.java" />
+        <option value="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/dao/IPlayerDAO.java" />
+        <option value="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/RosterFacade.java" />
+        <option value="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/impl/MockPlayerDAO.java" />
+        <option value="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/HibernatePlayerDAOTest.java" />
+        <option value="$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/TradeFacade.java" />
+        <option value="$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/facade/RosterFacadeTest.java" />
       </list>
     </option>
   </component>
@@ -242,8 +224,8 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
-    <option name="width" value="2560" />
-    <option name="height" value="1413" />
+    <option name="width" value="1440" />
+    <option name="height" value="873" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -1863,6 +1845,98 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HomerJava" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bridge" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HomerJava" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bridge" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HomerJava" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bridge" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parent" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="HomerJava" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bridge" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="homer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bridge" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
         <option name="show-excluded-files" value="false" />
       </pane>
@@ -1893,7 +1967,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
-    <property name="SearchEverywhereHistoryKey" value="updateespnat&#9;PSI&#9;JAVA://com.homer.fantasy.facade.PlayerFacade#updateESPNAttributes&#10;espnclie&#9;PSI&#9;JAVA://com.homer.espn.client.ESPNClient&#10;updateespnatt&#9;PSI&#9;JAVA://com.homer.fantasy.facade.PlayerFacade#updateESPNAttributes" />
+    <property name="SearchEverywhereHistoryKey" value="roster&#9;FILE&#9;file:///Users/arigolub/Programming/HomerJava/business/src/test/java/com/homer/fantasy/facade/RosterFacadeTest.java&#10;updateespnat&#9;PSI&#9;JAVA://com.homer.fantasy.facade.PlayerFacade#updateESPNAttributes&#10;espnclie&#9;PSI&#9;JAVA://com.homer.espn.client.ESPNClient&#10;updateespnatt&#9;PSI&#9;JAVA://com.homer.fantasy.facade.PlayerFacade#updateESPNAttributes" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -1919,41 +1993,7 @@
       <recent name="com.homer" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.FreeAgentAuctionFacadeTest">
-    <configuration default="false" name="PlayerFacadeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.homer.fantasy.facade.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="business" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="PACKAGE_NAME" value="com.homer.fantasy.facade" />
-      <option name="MAIN_CLASS_NAME" value="com.homer.fantasy.facade.PlayerFacadeTest" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea -Denv=devTest" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JUnit.RosterFacadeTest">
     <configuration default="false" name="HibernateFreeAgentAuctionDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -2068,6 +2108,40 @@
       <option name="ALTERNATIVE_JRE_PATH" value="" />
       <option name="PACKAGE_NAME" value="com.homer.fantasy.facade" />
       <option name="MAIN_CLASS_NAME" value="com.homer.fantasy.facade.FreeAgentAuctionFacadeTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea -Denv=devTest" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="RosterFacadeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.homer.fantasy.facade.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="business" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="PACKAGE_NAME" value="com.homer.fantasy.facade" />
+      <option name="MAIN_CLASS_NAME" value="com.homer.fantasy.facade.RosterFacadeTest" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea -Denv=devTest" />
@@ -2427,19 +2501,19 @@
       <item index="4" class="java.lang.String" itemvalue="JUnit.MODULE:Types" />
       <item index="5" class="java.lang.String" itemvalue="JUnit.MODULE:Business" />
       <item index="6" class="java.lang.String" itemvalue="Remote.Bridge Local" />
-      <item index="7" class="java.lang.String" itemvalue="JUnit.PlayerFacadeTest" />
-      <item index="8" class="java.lang.String" itemvalue="JUnit.HibernateFreeAgentAuctionDAOTest" />
-      <item index="9" class="java.lang.String" itemvalue="JUnit.HibernateVultureDAOTest" />
-      <item index="10" class="java.lang.String" itemvalue="JUnit.HibernatePlayerDAOTest" />
-      <item index="11" class="java.lang.String" itemvalue="JUnit.FreeAgentAuctionFacadeTest" />
+      <item index="7" class="java.lang.String" itemvalue="JUnit.HibernateFreeAgentAuctionDAOTest" />
+      <item index="8" class="java.lang.String" itemvalue="JUnit.HibernateVultureDAOTest" />
+      <item index="9" class="java.lang.String" itemvalue="JUnit.HibernatePlayerDAOTest" />
+      <item index="10" class="java.lang.String" itemvalue="JUnit.FreeAgentAuctionFacadeTest" />
+      <item index="11" class="java.lang.String" itemvalue="JUnit.RosterFacadeTest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.FreeAgentAuctionFacadeTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.HibernateFreeAgentAuctionDAOTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.HibernateVultureDAOTest" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.HibernatePlayerDAOTest" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.PlayerFacadeTest" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.RosterFacadeTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.HibernatePlayerDAOTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.FreeAgentAuctionFacadeTest" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.HibernateFreeAgentAuctionDAOTest" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.HibernateVultureDAOTest" />
       </list>
     </recent_temporary>
   </component>
@@ -2482,7 +2556,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="2560" height="1413" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="873" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2491,22 +2565,22 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329296" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31945497" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30961394" sideWeight="0.8907317" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30857876" sideWeight="0.8907317" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3151515" sideWeight="0.10878049" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31566995" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3277849" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3149808" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32650447" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297568" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21961874" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22331567" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22103004" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37772086" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32010242" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
@@ -2597,12 +2671,6 @@
           <option name="timeStamp" value="363" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/HibernatePlayerDAOTest.java</url>
-          <line>34</line>
-          <properties />
-          <option name="timeStamp" value="365" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/HibernateExternalDAOTest.java</url>
           <line>41</line>
           <properties />
@@ -2626,8 +2694,32 @@
           <properties />
           <option name="timeStamp" value="386" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/HibernatePlayerDAOTest.java</url>
+          <line>101</line>
+          <properties />
+          <option name="timeStamp" value="390" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/facade/RosterFacadeTest.java</url>
+          <line>33</line>
+          <properties />
+          <option name="timeStamp" value="391" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/HibernatePlayerDAOTest.java</url>
+          <line>116</line>
+          <properties />
+          <option name="timeStamp" value="392" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/facade/RosterFacadeTest.java</url>
+          <line>73</line>
+          <properties />
+          <option name="timeStamp" value="396" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="388" />
+      <option name="time" value="397" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
@@ -2643,222 +2735,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/src.zip!/java/util/regex/Pattern.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="72342" max-vertical-offset="91408">
-          <caret line="4655" column="0" selection-start-line="4655" selection-start-column="0" selection-end-line="4655" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#220073#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#48487#48488#0" expanded="false" />
-            <element signature="e#48531#48532#0" expanded="false" />
-            <element signature="e#49482#49483#0" expanded="false" />
-            <element signature="e#49530#49531#0" expanded="false" />
-            <element signature="e#49703#49704#0" expanded="false" />
-            <element signature="e#49733#49734#0" expanded="false" />
-            <element signature="e#50012#50013#0" expanded="false" />
-            <element signature="e#50042#50043#0" expanded="false" />
-            <element signature="e#50700#50701#0" expanded="false" />
-            <element signature="e#50728#50729#0" expanded="false" />
-            <element signature="e#57959#57960#0" expanded="false" />
-            <element signature="e#57997#57998#0" expanded="false" />
-            <element signature="e#68318#68319#0" expanded="false" />
-            <element signature="e#68381#68382#0" expanded="false" />
-            <element signature="e#75891#75892#0" expanded="false" />
-            <element signature="e#75922#75923#0" expanded="false" />
-            <element signature="e#76422#76423#0" expanded="false" />
-            <element signature="e#76461#76462#0" expanded="false" />
-            <element signature="e#76875#76876#0" expanded="false" />
-            <element signature="e#76914#76915#0" expanded="false" />
-            <element signature="e#79893#79894#0" expanded="false" />
-            <element signature="e#79917#79918#0" expanded="false" />
-            <element signature="e#122682#122683#0" expanded="false" />
-            <element signature="e#122711#122712#0" expanded="false" />
-            <element signature="e#122750#122751#0" expanded="false" />
-            <element signature="e#122778#122779#0" expanded="false" />
-            <element signature="e#126231#126232#0" expanded="false" />
-            <element signature="e#126282#126283#0" expanded="false" />
-            <element signature="e#128644#128645#0" expanded="false" />
-            <element signature="e#128689#128690#0" expanded="false" />
-            <element signature="e#131342#131343#0" expanded="false" />
-            <element signature="e#131377#131378#0" expanded="false" />
-            <element signature="e#136722#136723#0" expanded="false" />
-            <element signature="e#136761#136762#0" expanded="false" />
-            <element signature="e#139122#139123#0" expanded="false" />
-            <element signature="e#139161#139162#0" expanded="false" />
-            <element signature="e#143211#143212#0" expanded="false" />
-            <element signature="e#143249#143250#0" expanded="false" />
-            <element signature="e#143480#143481#0" expanded="false" />
-            <element signature="e#143518#143519#0" expanded="false" />
-            <element signature="e#143856#143857#0" expanded="false" />
-            <element signature="e#143913#143914#0" expanded="false" />
-            <element signature="e#144110#144111#0" expanded="false" />
-            <element signature="e#144152#144153#0" expanded="false" />
-            <element signature="e#144524#144525#0" expanded="false" />
-            <element signature="e#144566#144567#0" expanded="false" />
-            <element signature="e#144606#144607#0" expanded="false" />
-            <element signature="e#144675#144676#0" expanded="false" />
-            <element signature="e#144894#144895#0" expanded="false" />
-            <element signature="e#144938#144939#0" expanded="false" />
-            <element signature="e#144978#144979#0" expanded="false" />
-            <element signature="e#145049#145050#0" expanded="false" />
-            <element signature="e#145307#145308#0" expanded="false" />
-            <element signature="e#145384#145385#0" expanded="false" />
-            <element signature="e#145637#145638#0" expanded="false" />
-            <element signature="e#145680#145681#0" expanded="false" />
-            <element signature="e#145917#145918#0" expanded="false" />
-            <element signature="e#145983#145984#0" expanded="false" />
-            <element signature="e#146856#146857#0" expanded="false" />
-            <element signature="e#146892#146893#0" expanded="false" />
-            <element signature="e#147254#147255#0" expanded="false" />
-            <element signature="e#147288#147289#0" expanded="false" />
-            <element signature="e#147939#147940#0" expanded="false" />
-            <element signature="e#147973#147974#0" expanded="false" />
-            <element signature="e#148742#148743#0" expanded="false" />
-            <element signature="e#148776#148777#0" expanded="false" />
-            <element signature="e#149565#149566#0" expanded="false" />
-            <element signature="e#149599#149600#0" expanded="false" />
-            <element signature="e#150489#150490#0" expanded="false" />
-            <element signature="e#150523#150524#0" expanded="false" />
-            <element signature="e#150552#150553#0" expanded="false" />
-            <element signature="e#150599#150600#0" expanded="false" />
-            <element signature="e#151509#151510#0" expanded="false" />
-            <element signature="e#151543#151544#0" expanded="false" />
-            <element signature="e#151572#151573#0" expanded="false" />
-            <element signature="e#151650#151651#0" expanded="false" />
-            <element signature="e#151724#151725#0" expanded="false" />
-            <element signature="e#151773#151774#0" expanded="false" />
-            <element signature="e#153329#153330#0" expanded="false" />
-            <element signature="e#153364#153365#0" expanded="false" />
-            <element signature="e#153908#153909#0" expanded="false" />
-            <element signature="e#153949#153950#0" expanded="false" />
-            <element signature="e#167918#167919#0" expanded="false" />
-            <element signature="e#167976#167977#0" expanded="false" />
-            <element signature="e#168015#168016#0" expanded="false" />
-            <element signature="e#168064#168065#0" expanded="false" />
-            <element signature="e#170643#170644#0" expanded="false" />
-            <element signature="e#170690#170691#0" expanded="false" />
-            <element signature="e#171592#171593#0" expanded="false" />
-            <element signature="e#171632#171633#0" expanded="false" />
-            <element signature="e#173773#173774#0" expanded="false" />
-            <element signature="e#173813#173814#0" expanded="false" />
-            <element signature="e#173879#173880#0" expanded="false" />
-            <element signature="e#173941#173942#0" expanded="false" />
-            <element signature="e#173980#173981#0" expanded="false" />
-            <element signature="e#174027#174028#0" expanded="false" />
-            <element signature="e#177368#177369#0" expanded="false" />
-            <element signature="e#177421#177422#0" expanded="false" />
-            <element signature="e#183068#183069#0" expanded="false" />
-            <element signature="e#183122#183123#0" expanded="false" />
-            <element signature="e#185260#185261#0" expanded="false" />
-            <element signature="e#185300#185301#0" expanded="false" />
-            <element signature="e#186043#186044#0" expanded="false" />
-            <element signature="e#186083#186084#0" expanded="false" />
-            <element signature="e#187233#187234#0" expanded="false" />
-            <element signature="e#187289#187290#0" expanded="false" />
-            <element signature="e#188699#188700#0" expanded="false" />
-            <element signature="e#188746#188747#0" expanded="false" />
-            <element signature="e#191265#191266#0" expanded="false" />
-            <element signature="e#191312#191313#0" expanded="false" />
-            <element signature="e#215964#215965#0" expanded="false" />
-            <element signature="e#216009#216010#0" expanded="false" />
-            <element signature="e#218047#218048#0" expanded="false" />
-            <element signature="e#218108#218109#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.11/junit-4.11.jar!/org/junit/runners/model/FrameworkMethod.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1957">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/HibernateExternalDAOTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="28" max-vertical-offset="912">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/HibernatePlayerDAOTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="542" max-vertical-offset="1577">
-          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-          <folding>
-            <element signature="e#802#803#0" expanded="true" />
-            <element signature="e#855#856#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/4.3.8.Final/hibernate-core-4.3.8.Final.jar!/org/hibernate/Session.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.76" vertical-offset="979" max-vertical-offset="3876">
-          <caret line="92" column="9" selection-start-line="92" selection-start-column="9" selection-end-line="92" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/HibernateVultureDAOTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="189" max-vertical-offset="1482">
-          <caret line="34" column="28" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/dao/HomerDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1226" max-vertical-offset="3534">
-          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/4.3.8.Final/hibernate-core-4.3.8.Final.jar!/org/hibernate/collection/internal/PersistentSet.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.76" vertical-offset="1834" max-vertical-offset="6574">
-          <caret line="142" column="19" selection-start-line="142" selection-start-column="19" selection-end-line="142" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/src.zip!/java/util/Set.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3525" max-vertical-offset="7486">
-          <caret line="224" column="12" selection-start-line="224" selection-start-column="12" selection-end-line="224" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/4.3.8.Final/hibernate-core-4.3.8.Final-sources.jar!/org/hibernate/collection/internal/AbstractPersistentCollection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5862" max-vertical-offset="19627">
-          <caret line="408" column="0" selection-start-line="408" selection-start-column="0" selection-end-line="408" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/4.3.8.Final/hibernate-core-4.3.8.Final-sources.jar!/org/hibernate/engine/loading/internal/CollectionLoadContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3624" max-vertical-offset="6726">
-          <caret line="256" column="0" selection-start-line="256" selection-start-column="0" selection-end-line="256" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/4.3.8.Final/hibernate-core-4.3.8.Final-sources.jar!/org/hibernate/collection/internal/PersistentSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2765" max-vertical-offset="8645">
-          <caret line="207" column="0" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/fantasy/Team.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7715431" vertical-offset="484" max-vertical-offset="1482">
@@ -2899,14 +2775,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/TradeFacade.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6593">
-          <caret line="56" column="27" selection-start-line="56" selection-start-column="27" selection-end-line="56" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/fantasy/FreeAgentAuctionBid.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1596">
@@ -2942,17 +2810,6 @@
         <state vertical-scroll-proportion="0.38076153" vertical-offset="0" max-vertical-offset="998">
           <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/dao/impl/HibernatePlayerDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.80961925" vertical-offset="902" max-vertical-offset="1900">
-          <caret line="104" column="43" selection-start-line="104" selection-start-column="41" selection-end-line="104" selection-end-column="43" />
-          <folding>
-            <element signature="e#736#737#0" expanded="false" />
-            <element signature="e#759#760#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3015,14 +2872,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/dao/IPlayerDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="817">
-          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/exception/PlayerNotFoundException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323">
@@ -3039,17 +2888,6 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1748" max-vertical-offset="3936">
           <caret line="125" column="10" selection-start-line="125" selection-start-column="10" selection-end-line="125" selection-end-column="10" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/impl/MockPlayerDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="143" max-vertical-offset="1140">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding>
-            <element signature="e#1300#1301#0" expanded="true" />
-            <element signature="e#1361#1362#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3084,7 +2922,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="950">
           <caret line="18" column="28" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3165,22 +3003,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/MoneyFacade.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="371" max-vertical-offset="2147">
-          <caret line="37" column="95" selection-start-line="37" selection-start-column="95" selection-end-line="37" selection-end-column="95" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/PlayerFacade.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="998" max-vertical-offset="4674">
-          <caret line="84" column="77" selection-start-line="84" selection-start-column="77" selection-end-line="84" selection-end-column="77" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/FreeAgentAuctionFacade.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2659" max-vertical-offset="3952">
@@ -3203,8 +3025,158 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/fantasy/key/FreeAgentAuctionBidKey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8567134" vertical-offset="0" max-vertical-offset="1292">
-          <caret line="53" column="14" selection-start-line="53" selection-start-column="14" selection-end-line="53" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.41883767" vertical-offset="0" max-vertical-offset="1292">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/PlayerFacade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="998" max-vertical-offset="4674">
+          <caret line="84" column="77" selection-start-line="84" selection-start-column="77" selection-end-line="84" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/TransactionFacade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="417" max-vertical-offset="3686">
+          <caret line="49" column="10" selection-start-line="49" selection-start-column="10" selection-end-line="49" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bridge/src/main/java/com/homer/bridge/Runner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="437">
+          <caret line="27" column="35" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/dao/IPlayerDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="855">
+          <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/MoneyFacade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="371" max-vertical-offset="2147">
+          <caret line="37" column="95" selection-start-line="37" selection-start-column="95" selection-end-line="37" selection-end-column="95" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/fantasy/DailyPlayerInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2641">
+          <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/fantasy/Position.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2479" max-vertical-offset="3363">
+          <caret line="170" column="18" selection-start-line="170" selection-start-column="18" selection-end-line="170" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/dao/HomerDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="276" max-vertical-offset="3534">
+          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/HibernateTradeDAOTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1482">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/HibernateStatsDAOTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1349">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/HibernateMoneyDAOTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1767">
+          <caret line="29" column="54" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/dao/impl/HibernatePlayerDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="846" max-vertical-offset="1862">
+          <caret line="78" column="24" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/src/main/java/com/homer/fantasy/Roster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="333" max-vertical-offset="2603">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/HibernatePlayerDAOTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1101" max-vertical-offset="2299">
+          <caret line="111" column="92" selection-start-line="111" selection-start-column="92" selection-end-line="111" selection-end-column="92" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/dao/impl/MockPlayerDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="58" max-vertical-offset="1168">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="e#1496#1504#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/TradeFacade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3546" max-vertical-offset="5520">
+          <caret line="243" column="87" selection-start-line="243" selection-start-column="87" selection-end-line="243" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business/src/test/java/com/homer/fantasy/facade/RosterFacadeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="326" max-vertical-offset="1584">
+          <caret line="33" column="40" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/business/src/main/java/com/homer/fantasy/facade/RosterFacade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4972973" vertical-offset="0" max-vertical-offset="740">
+          <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

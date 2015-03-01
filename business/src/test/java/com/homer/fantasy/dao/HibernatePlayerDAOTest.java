@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by arigolub on 2/15/15.
@@ -23,11 +24,14 @@ public class HibernatePlayerDAOTest {
 
     private static HibernatePlayerDAO playerDAO = new HibernatePlayerDAO();
     private static String name;
+    private static int days;
     public static final long mlbPlayerId = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
+    private static final Random rand = new Random();
 
     @BeforeClass
     public static void beforeClass() {
         name = LocalDateTime.now().toString();
+        days = rand.nextInt((10000 - 0) + 1) + 0;
     }
 
     @Test
@@ -87,5 +91,40 @@ public class HibernatePlayerDAOTest {
         players = playerDAO.getPlayersByYear(2018);
         Assert.assertNotNull(players);
         Assert.assertTrue(players.size() == 0);
+    }
+
+    @Test
+    public void getPlayersOnTeamForDate() {
+        createFantasyTeam(1);
+
+        List<Player> players = playerDAO.getPlayersOnTeamForDate(new Team(1), LocalDate.now().plusDays(days));
+
+        Assert.assertEquals(23, players.size());
+    }
+
+    private void createFantasyTeam(int teamId) {
+        Team fantasyTeam = new Team(teamId);
+        Position[] positions = { Position.FANTASYCATCHER, Position.FANTASYCATCHER, Position.FANTASYFIRSTBASE,
+                Position.FANTASYSECONDBASE, Position.FANTASYTHIRDBASE, Position.FANTASYSHORTSTOP, Position.FANTASYCORNERINFIELD,
+                Position.FANTASYMIDDLEINFIELD, Position.FANTASYOUTFIELD, Position.FANTASYOUTFIELD, Position.FANTASYOUTFIELD,
+                Position.FANTASYOUTFIELD, Position.FANTASYOUTFIELD, Position.FANTASYUTILITY, Position.FANTASYPITCHER,
+                Position.FANTASYPITCHER, Position.FANTASYPITCHER, Position.FANTASYPITCHER, Position.FANTASYPITCHER, Position.FANTASYPITCHER,
+                Position.FANTASYPITCHER, Position.FANTASYPITCHER, Position.FANTASYPITCHER };
+        for(Position p : positions) {
+            Player player = new Player();
+            player.setPlayerName(p.getPositionName());
+            player.addDailyPlayerInfo(getDailyPlayerInfo(player, p, fantasyTeam));
+            playerDAO.createOrSave(player);
+        }
+    }
+
+    private DailyPlayerInfo getDailyPlayerInfo(Player player, Position position, Team team) {
+        DailyPlayerInfo dpi = new DailyPlayerInfo();
+        dpi.setPlayer(player);
+        dpi.setFantasyPosition(position);
+        dpi.setFantasyStatus(PlayerStatus.ACTIVE);
+        dpi.setDate(LocalDate.now().plusDays(days));
+        dpi.setFantasyTeam(team);
+        return dpi;
     }
 }

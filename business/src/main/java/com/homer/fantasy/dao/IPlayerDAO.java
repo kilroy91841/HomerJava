@@ -1,10 +1,12 @@
 package com.homer.fantasy.dao;
 
 import com.homer.fantasy.Player;
+import com.homer.fantasy.Team;
 import com.homer.util.Factory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -19,6 +21,8 @@ public interface IPlayerDAO {
     public Player getPlayer(Player example);
 
     public List<Player> getPlayersByYear(int season);
+
+    public List<Player> getPlayersOnTeamForDate(Team team, LocalDate date);
 
     public static class FACTORY {
 

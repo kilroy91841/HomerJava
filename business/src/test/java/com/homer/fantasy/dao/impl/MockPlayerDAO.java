@@ -1,8 +1,11 @@
 package com.homer.fantasy.dao.impl;
 
+import com.homer.exception.NoDailyPlayerInfoException;
 import com.homer.fantasy.Player;
+import com.homer.fantasy.Team;
 import com.homer.fantasy.dao.IPlayerDAO;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +43,21 @@ public class MockPlayerDAO implements IPlayerDAO {
 
     public List<Player> getPlayersByYear(int season) {
         return new ArrayList<Player>();
+    }
+
+    @Override
+    public List<Player> getPlayersOnTeamForDate(Team team, LocalDate date) {
+        List<Player> players = new ArrayList<Player>();
+        for(Player p : playerMap.values()) {
+            try {
+                if(team.getTeamId() == p.getCurrentFantasyTeam().getTeamId() && date.equals(p.getDailyPlayerInfoList().get(0).getDate())) {
+                    players.add(p);
+                }
+            } catch (NoDailyPlayerInfoException e) {
+                e.printStackTrace();
+            }
+        }
+        return players;
     }
 
     public static void addPlayerToMap(Player player) {
