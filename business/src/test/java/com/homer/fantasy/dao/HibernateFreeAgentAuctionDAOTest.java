@@ -94,7 +94,7 @@ public class HibernateFreeAgentAuctionDAOTest {
         Assert.assertNotNull(requestedList);
 
         Assert.assertTrue(activeList.size() > 0 );
-        Assert.assertTrue(requestedList.size() > 0);
+        Assert.assertTrue(requestedList.size() == 0);
         Assert.assertTrue(activeList.size() != requestedList.size());
     }
 

@@ -1,3 +1,6 @@
+Stormpath tenant:
+ruddy-field
+
 What users can do:
 	Add an amateur player
 	Trade a player

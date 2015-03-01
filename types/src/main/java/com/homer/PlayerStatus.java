@@ -17,7 +17,7 @@ public class PlayerStatus {
     public static final PlayerStatus ACTIVE = new PlayerStatus("ACTIVE", "A");
     public static final PlayerStatus INACTIVE = new PlayerStatus("INACTIVE", "I");
     public static final PlayerStatus DISABLEDLIST = new PlayerStatus("DISABLED LIST", "DL");
-    public static final PlayerStatus MINORS = new PlayerStatus("MINORS", "MIN");
+    public static final PlayerStatus MINORS = new PlayerStatus("MINOR LEAGUES", "MIN");
     public static final PlayerStatus FREEAGENT = new PlayerStatus("FREEAGENT", "FA");
     public static final PlayerStatus RESTRICTED = new PlayerStatus("RESTRICTED", "RST");
     public static final PlayerStatus SUSPENDED = new PlayerStatus("SUSPENDED", "SUSP");
@@ -67,5 +67,25 @@ public class PlayerStatus {
                 "name='" + name + '\'' +
                 ", code='" + code + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PlayerStatus that = (PlayerStatus) o;
+
+        if (!code.equals(that.code)) return false;
+        if (!name.equals(that.name)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = code.hashCode();
+        result = 31 * result + name.hashCode();
+        return result;
     }
 }

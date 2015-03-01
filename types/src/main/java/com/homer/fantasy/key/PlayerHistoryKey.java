@@ -1,5 +1,6 @@
 package com.homer.fantasy.key;
 
+import com.homer.JsonIgnore;
 import com.homer.fantasy.Player;
 import org.hibernate.annotations.*;
 
@@ -15,6 +16,7 @@ public class PlayerHistoryKey implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="playerId", referencedColumnName="playerId")
+    @JsonIgnore
     private Player player;
     @Column(name="season")
     private int season;

@@ -1,5 +1,6 @@
 package com.homer.mlb;
 
+import com.homer.JsonIgnore;
 import com.homer.fantasy.Team;
 import com.homer.fantasy.Player;
 import com.homer.util.LocalDatePersistenceConverter;
@@ -39,10 +40,12 @@ public class Game {
     @Column(name="homeScore")
     private int homeScore;
     @ManyToOne
-    @JoinColumn(name="awayProbablePitcherId", referencedColumnName="playerId")
+    @JoinColumn(name="awayProbablePitcherId", referencedColumnName="mlbPlayerId")
+    @JsonIgnore
     private Player awayProbablePitcher;
     @ManyToOne
-    @JoinColumn(name="homeProbablePitcherId", referencedColumnName="playerId")
+    @JoinColumn(name="homeProbablePitcherId", referencedColumnName="mlbPlayerId")
+    @JsonIgnore
     private Player homeProbablePitcher;
     @Convert(converter=LocalDateTimePersistenceConverter.class)
     @Column(name="gameTime")

@@ -1,5 +1,6 @@
 package com.homer.mlb;
 
+import com.homer.JsonIgnore;
 import com.homer.util.LocalDatePersistenceConverter;
 
 import com.homer.fantasy.Player;
@@ -22,6 +23,7 @@ public class Stats {
     private Long statsId;
     @ManyToOne
     @JoinColumn(name="playerId", referencedColumnName="playerId")
+    @JsonIgnore
     private Player player;
     @Column(name="mlbPlayerId")
     private Long mlbPlayerId;

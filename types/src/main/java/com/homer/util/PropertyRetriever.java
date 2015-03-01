@@ -27,11 +27,19 @@ public class PropertyRetriever {
         return retriever;
     }
 
+    public String getPropertyNotEnvironmentalized(String fileName, String propertyName) {
+        return getProperty(fileName, propertyName, false);
+    }
+
     public String getProperty(String fileName, String propertyName) {
+        return getProperty(fileName, propertyName, true);
+    }
+
+    private String getProperty(String fileName, String propertyName, boolean addEnv) {
         String property = null;
         try {
             Properties p = new Properties();
-            URL url = getPropFileStream(fileName);
+            URL url = getPropFileStream(fileName, addEnv);
             InputStream propFile = url.openStream();
             p.load(propFile);
             property = p.getProperty(propertyName);
@@ -41,12 +49,15 @@ public class PropertyRetriever {
         return property;
     }
 
-    private URL getPropFileStream(String propertiesFileName) {
+    private URL getPropFileStream(String propertiesFileName, boolean addEnv) {
         int dot = propertiesFileName.lastIndexOf(".");
-        String environmentalizedName = propertiesFileName.substring(0, dot) + "_" + env + "." + propertiesFileName.substring(dot + 1);
-        URL url = PropertyRetriever.class.getClassLoader().getResource(environmentalizedName);
+        String fileName = propertiesFileName;
+        if(addEnv) {
+            fileName = propertiesFileName.substring(0, dot) + "_" + env + "." + propertiesFileName.substring(dot + 1);
+        }
+        URL url = PropertyRetriever.class.getClassLoader().getResource(fileName);
         if(url == null) {
-            url = this.getClass().getResource(environmentalizedName);
+            url = this.getClass().getResource(fileName);
         }
 
         if(url != null) {

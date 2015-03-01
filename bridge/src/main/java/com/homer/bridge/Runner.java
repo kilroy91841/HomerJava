@@ -27,10 +27,7 @@ public class Runner {
 //        HibernatePlayerDAO dao = new HibernatePlayerDAO();
 //        List<Player> players = dao.getPlayersOnTeamForDate(new Team(1), LocalDate.of(2015, 2, 22));
 //        Roster roster = new Roster(players);
-<<<<<<< HEAD
-=======
         PlayerUpdateFromMLB40ManRoster job = new PlayerUpdateFromMLB40ManRoster();
         job.execute(null);
->>>>>>> 8d8a699555c081622e51c13f356fcc6fe6826dc2
     }
 }

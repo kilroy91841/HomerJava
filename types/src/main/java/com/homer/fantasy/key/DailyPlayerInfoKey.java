@@ -1,5 +1,6 @@
 package com.homer.fantasy.key;
 
+import com.homer.JsonIgnore;
 import com.homer.fantasy.Player;
 import com.homer.util.LocalDatePersistenceConverter;
 import org.hibernate.annotations.*;
@@ -17,6 +18,7 @@ import java.util.Date;
 public class DailyPlayerInfoKey implements Serializable {
     @ManyToOne
     @JoinColumn(name="playerId", referencedColumnName="playerId")
+    @JsonIgnore
     private Player player;
     @Convert(converter=LocalDatePersistenceConverter.class)
     @Column(name="gameDate")
