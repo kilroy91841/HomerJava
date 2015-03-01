@@ -1,8 +1,12 @@
 package com.homer.scripts;
 
+import com.homer.PlayerStatus;
 import com.homer.fantasy.Player;
+import com.homer.fantasy.Position;
 import com.homer.fantasy.Team;
 import com.homer.fantasy.dao.HomerDAO;
+import com.homer.fantasy.dao.IPlayerDAO;
+import com.homer.fantasy.dao.impl.HibernatePlayerDAO;
 import com.homer.fantasy.mongo.types.MongoPlayer;
 import com.homer.fantasy.mongo.types.MongoPlayerHistory;
 import com.mongodb.*;
@@ -21,6 +25,7 @@ public class PlayerHistory {
 
     public static void main(String[] args) {
         HomerDAO dao = new HomerDAO();
+        IPlayerDAO playerDao = new HibernatePlayerDAO();
         try {
             Mongo mongo = new Mongo("localhost", 27017);
             DB db = mongo.getDB("app18596138");
@@ -39,7 +44,13 @@ public class PlayerHistory {
                     } catch(ClassCastException e) {
                         mongoPlayer.setPlayer_id((int)(double)o.get("player_id"));
                     }
+                    try {
+                        if (o.get("espn_player_id") != null) mongoPlayer.setEspn_player_id((int) o.get("espn_player_id"));
+                    } catch(ClassCastException e) {
+                        mongoPlayer.setEspn_player_id((int) (double) o.get("espn_player_id"));
+                    }
                     mongoPlayer.setName_display_first_last(playerName);
+                    if (o.get("espn_player_name") != null) mongoPlayer.setEspn_player_name((String)o.get("espn_player_name"));
                     mongoPlayer.setName_first((String) o.get("name_first"));
                     mongoPlayer.setName_last((String) o.get("name_last"));
                     try {
@@ -87,17 +98,23 @@ public class PlayerHistory {
                             history.setSalary((int)h.get("salary"));
                         }
                         if(h.get("year") != null) history.setYear((int) h.get("year"));
+                        if(h.get("fantasy_position") != null) history.setFantasy_position((String)h.get("fantasy_position"));
                         mongoPlayer.getMongoPlayerHistoryList().add(history);
                     }
 
-                    Player player = null;
-                    try {
-                        player = dao.findPlayerByName(mongoPlayer.getName_display_first_last());
-                    } catch(NonUniqueResultException e) {
-                        player = dao.findPlayerByMLBPlayerId(mongoPlayer.getPlayer_id());
+                    Player example = new Player();
+                    example.setPlayerName(mongoPlayer.getName_display_first_last());
+                    Player player = playerDao.getPlayer(example);
+                    if(player == null) {
+                        example = new Player();
+                        example.setMlbPlayerId((long)mongoPlayer.getPlayer_id());
+                        player = playerDao.getPlayer(example);
+                        LOG.debug("Backed up to mlbPlayerId, got player=" + player);
                     }
                     if(player != null) {
                         if(player.getMlbPlayerId() == mongoPlayer.getPlayer_id()) {
+                            player.setEspnPlayerId((long)mongoPlayer.getEspn_player_id());
+                            player.setEspnPlayerName(mongoPlayer.getEspn_player_name());
                             for(MongoPlayerHistory history : mongoPlayer.getMongoPlayerHistoryList()) {
                                 com.homer.fantasy.PlayerHistory fantasyHistory = new com.homer.fantasy.PlayerHistory();
                                 fantasyHistory.setSalary(history.getSalary());
@@ -111,13 +128,23 @@ public class PlayerHistory {
                                 Team keeperTeam = new Team();
                                 keeperTeam.setTeamId(history.getKeeper_team());
                                 fantasyHistory.setKeeperTeam(keeperTeam);
-                                //fantasyHistory.setRookieStatus(history.is);
+                                fantasyHistory.setRookieStatus(history.isMinor_leaguer());
                                 player.getPlayerHistoryList().add(fantasyHistory);
-                            }
-                            //dao.saveOrUpdate(player);
-                        }
-                    } else {
+                                if(history.getYear() == 2014) {
+                                    Position fantasyPosition = Position.get(history.getFantasy_position());
+                                    PlayerStatus status = PlayerStatus.ACTIVE;
+                                    if(history.getFantasy_position().equals("Minors")) {
+                                        status = PlayerStatus.MINORS;
+                                    }
 
+                                    player.getDailyPlayerInfoList().get(0).setFantasyTeam(new Team(history.getFantasy_team()));
+                                    player.getDailyPlayerInfoList().get(0).setFantasyPosition(fantasyPosition);
+                                    player.getDailyPlayerInfoList().get(0).setFantasyStatus(status);
+
+                                }
+                            }
+                            playerDao.createOrSave(player);
+                        }
                     }
                 } catch(Exception e) {
                     LOG.error("Error with player- " + playerName, e);

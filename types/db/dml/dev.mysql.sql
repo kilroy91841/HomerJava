@@ -152,8 +152,12 @@ select 'DL', 'DISABLED LIST'
 union all
 select 'B', 'BENCH'
 union all
-select 'ML', 'MINOR LEAGUES'
+select 'MIN', 'MINOR LEAGUES'
 union all
 select 'SUSP', 'SUSPENDED'
 union all
-select 'U', 'UNKNOWN';
+select 'RST', 'RESTRICTED'
+union all
+select 'UNK', 'UNKNOWN'
+union all
+select 'FA', 'FREEAGENT';
