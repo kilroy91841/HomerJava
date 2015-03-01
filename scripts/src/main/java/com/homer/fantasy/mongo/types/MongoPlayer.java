@@ -9,6 +9,8 @@ import java.util.List;
 public class MongoPlayer {
 
     private int player_id;
+    private int espn_player_id;
+    private String espn_player_name;
     private String name_display_first_last;
     private String name_first;
     private String name_last;
@@ -25,6 +27,22 @@ public class MongoPlayer {
 
     public void setPlayer_id(int player_id) {
         this.player_id = player_id;
+    }
+
+    public int getEspn_player_id() {
+        return espn_player_id;
+    }
+
+    public void setEspn_player_id(int espn_player_id) {
+        this.espn_player_id = espn_player_id;
+    }
+
+    public String getEspn_player_name() {
+        return espn_player_name;
+    }
+
+    public void setEspn_player_name(String espn_player_name) {
+        this.espn_player_name = espn_player_name;
     }
 
     public String getName_display_first_last() {

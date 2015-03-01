@@ -13,6 +13,7 @@ public class MongoPlayerHistory {
     private boolean locked_up;
     private boolean minor_leaguer;
     private int contract_year;
+    private String fantasy_position;
 
     public MongoPlayerHistory() { }
 
@@ -78,5 +79,13 @@ public class MongoPlayerHistory {
 
     public void setContract_year(int contract_year) {
         this.contract_year = contract_year;
+    }
+
+    public String getFantasy_position() {
+        return fantasy_position;
+    }
+
+    public void setFantasy_position(String fantasy_position) {
+        this.fantasy_position = fantasy_position;
     }
 }

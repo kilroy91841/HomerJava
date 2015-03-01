@@ -24,8 +24,10 @@ public class Runner {
     public static void main(String[] args) throws Exception {
         //PlayerUpdateFromESPNLeagueRosterPage job = new PlayerUpdateFromESPNLeagueRosterPage();
         //job.execute(null);
-        HibernatePlayerDAO dao = new HibernatePlayerDAO();
-        List<Player> players = dao.getPlayersOnTeamForDate(new Team(1), LocalDate.of(2015, 2, 22));
-        Roster roster = new Roster(players);
+//        HibernatePlayerDAO dao = new HibernatePlayerDAO();
+//        List<Player> players = dao.getPlayersOnTeamForDate(new Team(1), LocalDate.of(2015, 2, 22));
+//        Roster roster = new Roster(players);
+        PlayerUpdateFromMLB40ManRoster job = new PlayerUpdateFromMLB40ManRoster();
+        job.execute(null);
     }
 }

@@ -100,7 +100,7 @@ public class HomerDAO {
             Example example = Example.create(obj);
             retVal = (T) session.createCriteria(clazz).add(example).uniqueResult();
         } catch (RuntimeException re) {
-            LOG.error("Error getting object", re);
+            LOG.error("Error getting object, [clazz=" + clazz + ", obj=" + obj + "]", re);
         } finally {
             if(session != null) {
                 session.close();
@@ -117,7 +117,7 @@ public class HomerDAO {
             session.beginTransaction();
             retVal = (T) session.get(clazz, (Serializable) obj);
         } catch (RuntimeException re) {
-            LOG.error("Error getting object", re);
+            LOG.error("Error getting object, [clazz=" + clazz + ", obj=" + obj + "]", re);
         } finally {
             if(session != null) {
                 session.close();
@@ -159,44 +159,6 @@ public class HomerDAO {
             }
         }
         return teams;
-    }
-
-    public Player findPlayerByName(String name) {
-        LOG.debug("Finding player by name: " + name);
-        Player player = null;
-        Session session = null;
-        try {
-            session = openSession();
-            player = (Player) session.createCriteria(Player.class).add(Restrictions.like("playerName", name)).uniqueResult();
-            LOG.debug("Found player: " + player);
-        } catch(NonUniqueResultException e) {
-            throw e;
-        } catch(Exception e) {
-            LOG.error("Error finding player " + name, e);
-        } finally {
-            if(session != null) {
-                session.close();
-            }
-        }
-        return player;
-    }
-
-    public Player findPlayerByMLBPlayerId(long playerId) {
-        LOG.debug("Finding player by mlb playerid: " + playerId);
-        Player player = null;
-        Session session = null;
-        try {
-            session = openSession();
-            player = (Player) session.createCriteria(Player.class).add(Restrictions.like("mlbPlayerId", playerId)).uniqueResult();
-            LOG.debug("Found player: " + player);
-        } catch(Exception e) {
-            LOG.error("Error finding player with mlb playerid" + playerId, e);
-        } finally {
-            if(session != null) {
-                session.close();
-            }
-        }
-        return player;
     }
 
 }
