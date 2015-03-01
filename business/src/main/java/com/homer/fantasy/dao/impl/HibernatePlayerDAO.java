@@ -23,6 +23,10 @@ public class HibernatePlayerDAO extends HomerDAO implements IPlayerDAO {
 
     private static final Logger LOG = LoggerFactory.getLogger(HibernatePlayerDAO.class);
 
+    public HibernatePlayerDAO() {
+        super();
+    }
+
     @Override
     public Player createOrSave(Player player) {
         LOG.debug("BEGIN: createOrSave [player=" + player +"]");

@@ -1,6 +1,7 @@
 package com.homer.fantasy.facade;
 
 import com.homer.exception.DisallowedTransactionException;
+import com.homer.exception.NotEnoughFundsException;
 import com.homer.fantasy.Money;
 import com.homer.fantasy.Team;
 import com.homer.fantasy.dao.IMoneyDAO;
@@ -31,6 +32,31 @@ public class MoneyFacade {
 
         LOG.debug("END: getMoneyForTeam [moneys=" + moneyList + "]");
         return moneyList;
+    }
+
+    public Money getMoney(int teamId, int season, Money.MoneyType moneyType) {
+        LOG.debug("BEGIN: getMoney [teamId=" + teamId + ", season=" + season + ", moneyType=" + moneyType + "]");
+
+        Money money = dao.getMoney(teamId, season, moneyType);
+
+        LOG.debug("END: getMoney [money=" + money + "]");
+        return money;
+    }
+
+    public Money deductMoney(int amount, int teamId, int season, Money.MoneyType moneyType) throws NotEnoughFundsException {
+        LOG.debug("BEGIN: deductMoney [teamId=" + teamId + ", season=" + season + ", moneyType=" + moneyType + ", amount=" + amount + "]");
+
+        Money money = getMoney(teamId, season, moneyType);
+        if(money != null) {
+            money.setAmount(money.getAmount() - amount);
+            if (money.getAmount() < 0) {
+                throw new NotEnoughFundsException();
+            }
+            money = dao.saveMoney(money);
+        }
+
+        LOG.debug("END: deductMoney [money=" + money + "]");
+        return money;
     }
 
     public Money transferMoney(Money transferMoney, Team newTeam) throws DisallowedTransactionException {

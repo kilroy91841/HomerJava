@@ -29,6 +29,10 @@ public class MockPlayerDAO implements IPlayerDAO {
     public Player getPlayer(Player example) {
         if(example.getPlayerId() != null) {
             return playerMap.get(example.getPlayerId().toString());
+        } else if (example.getEspnPlayerId() != null) {
+            return playerMap.get(example.getEspnPlayerId().toString());
+        } else if (example.getEspnPlayerName() != null) {
+            return playerMap.get(example.getEspnPlayerName());
         } else {
             return playerMap.get(example.getPlayerName());
         }
@@ -44,6 +48,14 @@ public class MockPlayerDAO implements IPlayerDAO {
 
     public static void addPlayerToMapUsingId(Player player) {
         playerMap.put(String.valueOf(player.getPlayerId()), player);
+    }
+
+    public static void addPlayerToMapUsingESPNPlayerName(Player player) {
+        playerMap.put(player.getEspnPlayerName(), player);
+    }
+
+    public static void addPlayerToMapUsingESPNPlayerId(Player player) {
+        playerMap.put(String.valueOf(player.getEspnPlayerId()), player);
     }
 
     public static void clearMap() {

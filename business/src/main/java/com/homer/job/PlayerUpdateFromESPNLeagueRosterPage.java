@@ -2,6 +2,7 @@ package com.homer.job;
 
 import com.homer.espn.Player;
 import com.homer.espn.client.ESPNClientREST;
+import com.homer.exception.DisallowedTransactionException;
 import com.homer.exception.NoDailyPlayerInfoException;
 import com.homer.exception.PlayerNotFoundException;
 import com.homer.fantasy.dao.HomerDAO;
@@ -35,6 +36,8 @@ public class PlayerUpdateFromESPNLeagueRosterPage implements Job {
             } catch (NoDailyPlayerInfoException e) {
                 LOG.error(e.getMessage(), e);
             } catch (PlayerNotFoundException e) {
+                LOG.error(e.getMessage(), e);
+            } catch (DisallowedTransactionException e) {
                 LOG.error(e.getMessage(), e);
             }
         }

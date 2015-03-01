@@ -95,7 +95,7 @@ public class TransactionFacadeTest {
         key = new DailyPlayerInfoKey();
         key.setPlayer(p);
         dpi.setDailyPlayerInfoKey(key);
-        dpi.setFantasyTeam(new Team(1));
+        dpi.setFantasyTeam(new Team(2));
         suspended.getDailyPlayerInfoList().add(dpi);
         history = new PlayerHistory();
         history.setKeeperSeason(3);
@@ -316,22 +316,123 @@ public class TransactionFacadeTest {
     }
 
     @Test
-    public void addMinorLeaguerOnSomeoneElsesTeam() {
+    public void addMinorLeaguerOnSomeoneElsesTeam() throws NoDailyPlayerInfoException {
+        Transaction addMinorLeaguer = new Transaction();
+        addMinorLeaguer.setPlayerName(minorLeaguerPlayerName);
+        addMinorLeaguer.setMove(Transaction.ADD);
+        addMinorLeaguer.setTeamId(2);
+        addMinorLeaguer.setNodeText("dummy text");
+        addMinorLeaguer.setTime(LocalDateTime.now());
 
+        try {
+            facade.consumeTransaction(addMinorLeaguer);
+            Assert.fail();
+        } catch (NoDailyPlayerInfoException e) {
+            Assert.fail();
+        } catch (DisallowedTransactionException e) {
+            Assert.assertTrue(true);
+        }
+
+        Player dbPlayer = getPlayer(minorLeaguerPlayerName);
+        Assert.assertEquals(minorLeaguerPlayerId, (long)dbPlayer.getPlayerId());
+        Assert.assertEquals(PlayerStatus.MINORS, dbPlayer.getMostRecentFantasyStatus());
+        Assert.assertEquals(1, (int)dbPlayer.getCurrentFantasyTeam().getTeamId());
     }
 
     @Test
     public void addSuspendedPlayerOnCorrectTeam() {
+        Transaction addMinorLeaguer = new Transaction();
+        addMinorLeaguer.setPlayerName(suspendedPlayerName);
+        addMinorLeaguer.setMove(Transaction.ADD);
+        addMinorLeaguer.setTeamId(2);
+        addMinorLeaguer.setNodeText("dummy text");
+        addMinorLeaguer.setTime(LocalDateTime.now());
 
+        try {
+            boolean success = facade.consumeTransaction(addMinorLeaguer);
+            Assert.assertTrue(success);
+
+            Player dbPlayer = getPlayer(suspendedPlayerName);
+            Assert.assertEquals(suspendedPlayerId, (long)dbPlayer.getPlayerId());
+            Assert.assertEquals(PlayerStatus.ACTIVE, dbPlayer.getMostRecentFantasyStatus());
+        } catch (NoDailyPlayerInfoException e) {
+            Assert.fail();
+        } catch (DisallowedTransactionException e) {
+            Assert.fail();
+        }
     }
 
     @Test
-    public void addSuspendedPlayerOnSomeoneElsesTeam() {
+    public void addSuspendedPlayerOnSomeoneElsesTeam() throws NoDailyPlayerInfoException {
+        Transaction addMinorLeaguer = new Transaction();
+        addMinorLeaguer.setPlayerName(suspendedPlayerName);
+        addMinorLeaguer.setMove(Transaction.ADD);
+        addMinorLeaguer.setTeamId(1);
+        addMinorLeaguer.setNodeText("dummy text");
+        addMinorLeaguer.setTime(LocalDateTime.now());
 
+        try {
+            facade.consumeTransaction(addMinorLeaguer);
+            Assert.fail();
+        } catch (NoDailyPlayerInfoException e) {
+            Assert.fail();
+        } catch (DisallowedTransactionException e) {
+            Assert.assertTrue(true);
+        }
+
+        Player dbPlayer = getPlayer(suspendedPlayerName);
+        Assert.assertEquals(suspendedPlayerId, (long)dbPlayer.getPlayerId());
+        Assert.assertEquals(PlayerStatus.SUSPENDED, dbPlayer.getMostRecentFantasyStatus());
+        Assert.assertEquals(2, (int)dbPlayer.getCurrentFantasyTeam().getTeamId());
     }
 
-    //TODO consume add of [minor leaguer, suspended player] on [correct team, someone else's team] test
-    //TODO consume drop of [player being demoted, added to suspended list] test
+    @Test
+    public void dropDemotedPlayer() {
+        Transaction tran = new Transaction();
+        tran.setPlayerName(minorLeaguerPlayerName);
+        tran.setMove(Transaction.DROP);
+        tran.setTeamId(1);
+        tran.setNodeText("dummy text");
+        tran.setTime(LocalDateTime.now());
+
+        try {
+            boolean success = facade.consumeTransaction(tran);
+            Assert.assertTrue(success);
+
+            Player dbPlayer = getPlayer(minorLeaguerPlayerName);
+            Assert.assertEquals(minorLeaguerPlayerId, (long)dbPlayer.getPlayerId());
+            Assert.assertEquals(PlayerStatus.MINORS, dbPlayer.getMostRecentFantasyStatus());
+            Assert.assertEquals(1, (int)dbPlayer.getCurrentFantasyTeam().getTeamId());
+        } catch (DisallowedTransactionException e) {
+            Assert.fail();
+        } catch (NoDailyPlayerInfoException e) {
+            Assert.fail();
+        }
+    }
+
+    @Test
+    public void dropSuspendedPlayer() {
+        Transaction tran = new Transaction();
+        tran.setPlayerName(suspendedPlayerName);
+        tran.setMove(Transaction.DROP);
+        tran.setTeamId(2);
+        tran.setNodeText("dummy text");
+        tran.setTime(LocalDateTime.now());
+
+        try {
+            boolean success = facade.consumeTransaction(tran);
+            Assert.assertTrue(success);
+
+            Player dbPlayer = getPlayer(suspendedPlayerName);
+            Assert.assertEquals(suspendedPlayerId, (long)dbPlayer.getPlayerId());
+            Assert.assertEquals(PlayerStatus.SUSPENDED, dbPlayer.getMostRecentFantasyStatus());
+            Assert.assertEquals(2, (int)dbPlayer.getCurrentFantasyTeam().getTeamId());
+        } catch (DisallowedTransactionException e) {
+            Assert.fail();
+        } catch (NoDailyPlayerInfoException e) {
+            Assert.fail();
+        }
+    }
 
     private Player getPlayer(String name) {
         IPlayerDAO dao = IPlayerDAO.FACTORY.getInstance();

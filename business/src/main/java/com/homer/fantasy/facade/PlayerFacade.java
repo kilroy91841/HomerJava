@@ -53,22 +53,26 @@ public class PlayerFacade {
         return player;
     }
 
-    public Player updateESPNAttributes(com.homer.espn.Player espnPlayer) throws PlayerNotFoundException, NoDailyPlayerInfoException {
+    public Player updateESPNAttributes(com.homer.espn.Player espnPlayer) throws PlayerNotFoundException, NoDailyPlayerInfoException, DisallowedTransactionException {
         LOG.debug("BEGIN: updateESPNAttributes [espnPlayer=" + espnPlayer + "]");
         Player returnPlayer = null;
         Player player = findESPNPlayer(espnPlayer.getPlayerId(), espnPlayer.getPlayerName());
         if(player != null) {
-            if(player.getDailyPlayerInfoList().size() > 0) {
-                DailyPlayerInfo dpi = player.getDailyPlayerInfoList().get(0);
-                dpi.setFantasyPosition(espnPlayer.getPosition());
-                dpi.setFantasyStatus(Position.getStatusFromPosition(espnPlayer.getPosition()));
-                if(player.getEspnPlayerId() == null) {
-                    player.setEspnPlayerId(espnPlayer.getPlayerId());
+            if(player.getCurrentFantasyTeam().getTeamId() == espnPlayer.getTeamId()) {
+                if (player.getDailyPlayerInfoList().size() > 0) {
+                    DailyPlayerInfo dpi = player.getDailyPlayerInfoList().get(0);
+                    dpi.setFantasyPosition(espnPlayer.getPosition());
+                    if (player.getEspnPlayerId() == null) {
+                        player.setEspnPlayerId(espnPlayer.getPlayerId());
+                    }
+                    LOG.debug("New DPI: " + dpi + ", ESPNPLAYERID: " + player.getEspnPlayerId());
+                    returnPlayer = createOrUpdatePlayer(player);
+                } else {
+                    throw new NoDailyPlayerInfoException(player);
                 }
-                LOG.debug("New DPI: " + dpi + ", ESPNPLAYERID: " + player.getEspnPlayerId());
-                returnPlayer = createOrUpdatePlayer(player);
             } else {
-                throw new NoDailyPlayerInfoException(player);
+                throw new DisallowedTransactionException("An attempt to update the ESPN properties of a player that was found on a different " +
+                        "team than transactions specify [player=" + espnPlayer + ", knownFantasyTeam=" + player.getCurrentFantasyTeam());
             }
         } else {
             throw new PlayerNotFoundException("Missing player: " + espnPlayer);
@@ -194,10 +198,10 @@ public class PlayerFacade {
         return success;
     }
 
-    public Player demoteToMinorLeagues(Player player) throws PlayerNotFoundException, NoDailyPlayerInfoException {
-        LOG.debug("BEGIN: demoteToMinorLeagues [player=" + player + "]");
+    public Player demoteToMinorLeagues(Player dbPlayer) throws PlayerNotFoundException, NoDailyPlayerInfoException {
+        LOG.debug("BEGIN: demoteToMinorLeagues [player=" + dbPlayer + "]");
 
-        Player dbPlayer = getPlayer(player.getPlayerId());
+        dbPlayer = getPlayer(dbPlayer.getPlayerId());
         validatePlayerLists(dbPlayer);
 
         dbPlayer.getDailyPlayerInfoList().get(0).setFantasyStatus(PlayerStatus.MINORS);
@@ -208,10 +212,10 @@ public class PlayerFacade {
         return dbPlayer;
     }
 
-    public Player promoteToMajorLeagues(Player player) throws PlayerNotFoundException, NoDailyPlayerInfoException {
-        LOG.debug("BEGIN: promoteToMajorLeagues [player=" + player + "]");
+    public Player promoteToMajorLeagues(Player dbPlayer) throws PlayerNotFoundException, NoDailyPlayerInfoException {
+        LOG.debug("BEGIN: promoteToMajorLeagues [player=" + dbPlayer + "]");
 
-        Player dbPlayer = getPlayer(player.getPlayerId());
+        dbPlayer = getPlayer(dbPlayer.getPlayerId());
         validatePlayerLists(dbPlayer);
 
         dbPlayer.getDailyPlayerInfoList().get(0).setFantasyStatus(PlayerStatus.ACTIVE);
@@ -238,11 +242,11 @@ public class PlayerFacade {
     }
 
     private void validatePlayerLists(Player player) throws PlayerNotFoundException, NoDailyPlayerInfoException {
-        if(player == null) {
-            throw new PlayerNotFoundException("Could not find player with id: " + player.getPlayerId());
+        if(player == null || player.getPlayerId() == null) {
+            throw new PlayerNotFoundException("Could not find player");
         }
 
-        if(player.getDailyPlayerInfoList().get(0) == null) {
+        if(player.getDailyPlayerInfoList().size() == 0 || player.getDailyPlayerInfoList().get(0) == null) {
             throw new NoDailyPlayerInfoException(player);
         }
     }

@@ -1,12 +1,14 @@
 package com.homer.fantasy;
 
 import com.homer.util.LocalDateTimePersistenceConverter;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by arigolub on 2/1/15.
@@ -24,8 +26,9 @@ public class FreeAgentAuction {
     }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="freeAgentAuctionId")
-    private long freeAgentAuctionId;
+    private int freeAgentAuctionId;
     @OneToOne
     @JoinColumn(name="requestingTeamId", referencedColumnName="teamId")
     private Team requestingTeam;
@@ -44,6 +47,12 @@ public class FreeAgentAuction {
     @Enumerated(EnumType.STRING)
     @Column(name="status")
     private Status status;
+    @OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
+    @Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinColumn(name="freeAgentAuctionId", referencedColumnName="freeAgentAuctionId")
+    @org.hibernate.annotations.OrderBy(clause = "amount desc")
+    @Fetch(FetchMode.SELECT)
+    private Set<FreeAgentAuctionBid> freeAgentAuctionBids;
 
     public FreeAgentAuction() { }
 
@@ -54,6 +63,14 @@ public class FreeAgentAuction {
         this.modifiedDate = modifiedDate;
         this.deadline = deadline;
         this.status = status;
+    }
+
+    public int getFreeAgentAuctionId() {
+        return freeAgentAuctionId;
+    }
+
+    public void setFreeAgentAuctionId(int freeAgentAuctionId) {
+        this.freeAgentAuctionId = freeAgentAuctionId;
     }
 
     public Team getRequestingTeam() {
@@ -104,6 +121,17 @@ public class FreeAgentAuction {
         this.status = status;
     }
 
+    public Set<FreeAgentAuctionBid> getFreeAgentAuctionBids() {
+        if(freeAgentAuctionBids == null) {
+            freeAgentAuctionBids = new HashSet<FreeAgentAuctionBid>();
+        }
+        return freeAgentAuctionBids;
+    }
+
+    public void setFreeAgentAuctionBids(Set<FreeAgentAuctionBid> freeAgentAuctionBids) {
+        this.freeAgentAuctionBids = freeAgentAuctionBids;
+    }
+
     @Override
     public String toString() {
         return "FreeAgentAuction{" +
@@ -114,6 +142,7 @@ public class FreeAgentAuction {
                 ", modifiedDate=" + modifiedDate +
                 ", deadline=" + deadline +
                 ", vultureStatus=" + status +
+                ", freeAgentAuctionBidCount=" + getFreeAgentAuctionBids().size() +
                 '}';
     }
 
@@ -131,6 +160,6 @@ public class FreeAgentAuction {
 
     @Override
     public int hashCode() {
-        return (int) (freeAgentAuctionId ^ (freeAgentAuctionId >>> 32));
+        return freeAgentAuctionId;
     }
 }

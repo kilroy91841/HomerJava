@@ -4,6 +4,7 @@ import com.homer.PlayerStatus;
 import com.homer.espn.Transaction;
 import com.homer.exception.DisallowedTransactionException;
 import com.homer.exception.NoDailyPlayerInfoException;
+import com.homer.exception.PlayerNotFoundException;
 import com.homer.fantasy.Player;
 import com.homer.fantasy.Team;
 import com.homer.fantasy.dao.IExternalDAO;
@@ -101,20 +102,26 @@ public class TransactionFacade {
 
         if(PlayerStatus.ACTIVE.equals(player.getMostRecentFantasyStatus())) {
             throw new DisallowedTransactionException("Attempted to add a player who was already active-- transaction: " + transaction);
-        }
-
-        //Change player status to ACTIVE
-        player.getDailyPlayerInfoList().get(0).setFantasyStatus(PlayerStatus.ACTIVE);
-
-        //Change player's rookie status if necessary
-        if(player.getPlayerHistoryList().get(0).hasRookieStatus()) {
-            player.getPlayerHistoryList().get(0).setRookieStatus(false);
+        } else {
+            player.getDailyPlayerInfoList().get(0).setFantasyStatus(PlayerStatus.ACTIVE);
         }
 
         //Transfer player if the player was a free agent. Otherwise, just update.
         if(Team.FANTASY_FREE_AGENT_TEAM == currentTeam.getTeamId()) {
             player = playerFacade.transferPlayer(player, FREE_AGENT_TEAM, actingTeam);
+        } else if (PlayerStatus.MINORS.equals(player.getMostRecentFantasyStatus())) {
+            try {
+                player = playerFacade.promoteToMajorLeagues(player);
+            } catch (PlayerNotFoundException e) {
+                LOG.error("Could not promote player", e);
+                player = null;
+            }
         } else {
+            //Change player's rookie status if necessary
+            if(player.getPlayerHistoryList().get(0).hasRookieStatus()) {
+                player.getPlayerHistoryList().get(0).setRookieStatus(false);
+            }
+
             player = playerFacade.createOrUpdatePlayer(player);
         }
 

@@ -16,6 +16,7 @@
         <mapping class="com.homer.espn.Transaction" />
         <mapping class="com.homer.fantasy.DailyPlayerInfo" />
         <mapping class="com.homer.fantasy.FreeAgentAuction" />
+        <mapping class="com.homer.fantasy.FreeAgentAuctionBid" />
         <mapping class="com.homer.fantasy.MinorLeagueDraftPick" />
         <mapping class="com.homer.fantasy.Money" />
         <mapping class="com.homer.fantasy.Player" />

@@ -1,10 +1,12 @@
 package com.homer.fantasy.facade;
 
 import com.homer.PlayerStatus;
+import com.homer.espn.*;
 import com.homer.exception.DisallowedTransactionException;
 import com.homer.exception.NoDailyPlayerInfoException;
 import com.homer.exception.PlayerNotFoundException;
 import com.homer.fantasy.*;
+import com.homer.fantasy.Player;
 import com.homer.fantasy.dao.impl.MockPlayerDAO;
 import com.homer.fantasy.facade.PlayerFacade;
 import com.homer.fantasy.key.DailyPlayerInfoKey;
@@ -25,10 +27,12 @@ public class PlayerFacadeTest {
     private static PlayerFacade facade;
 
     private static String minorLeaguerPlayerName = "Minor Leaguer";
+    private static String minorLeaguerESPNPlayerName = "Minor Leaguer ESPN";
     private static long minorLeaguerPlayerId;
     private static String majorLeaguerToDemotePlayerName = "Major Leaguer";
     private static long majorLeaguerPlayerId;
     private static String suspendedPlayerName = "Suspended";
+    private static long suspendedPlayerESPNId = 100L;
     private static long suspendedPlayerId;
     private static Player minorLeaguer;
     private static Player majorLeaguerToDemote;
@@ -48,11 +52,15 @@ public class PlayerFacadeTest {
         DailyPlayerInfo dpi = new DailyPlayerInfo();
         dpi.setFantasyTeam(new Team(1));
         dpi.setFantasyStatus(PlayerStatus.MINORS);
+        dpi.setFantasyPosition(Position.FANTASYBENCH);
+        dpi.setPlayer(minorLeaguer);
         PlayerHistory history = new PlayerHistory();
         history.setRookieStatus(true);
         minorLeaguer.getPlayerHistoryList().add(history);
         minorLeaguer.getDailyPlayerInfoList().add(dpi);
+        minorLeaguer.setEspnPlayerName(minorLeaguerESPNPlayerName);
         MockPlayerDAO.addPlayerToMapUsingId(minorLeaguer);
+        MockPlayerDAO.addPlayerToMapUsingESPNPlayerName(minorLeaguer);
 
         rand = new Random();
         majorLeaguerToDemote = new Player();
@@ -62,11 +70,14 @@ public class PlayerFacadeTest {
         dpi = new DailyPlayerInfo();
         dpi.setFantasyTeam(new Team(1));
         dpi.setFantasyStatus(PlayerStatus.ACTIVE);
+        dpi.setFantasyPosition(Position.FANTASYBENCH);
+        dpi.setPlayer(majorLeaguerToDemote);
         history = new PlayerHistory();
         history.setRookieStatus(false);
         majorLeaguerToDemote.getPlayerHistoryList().add(history);
         majorLeaguerToDemote.getDailyPlayerInfoList().add(dpi);
         MockPlayerDAO.addPlayerToMapUsingId(majorLeaguerToDemote);
+        MockPlayerDAO.addPlayerToMap(majorLeaguerToDemote);
 
         rand = new Random();
         suspendedPlayer = new Player();
@@ -76,11 +87,15 @@ public class PlayerFacadeTest {
         dpi = new DailyPlayerInfo();
         dpi.setFantasyTeam(new Team(1));
         dpi.setFantasyStatus(PlayerStatus.ACTIVE);
+        dpi.setFantasyPosition(Position.FANTASYBENCH);
+        dpi.setPlayer(suspendedPlayer);
         history = new PlayerHistory();
         history.setRookieStatus(false);
         suspendedPlayer.getPlayerHistoryList().add(history);
         suspendedPlayer.getDailyPlayerInfoList().add(dpi);
+        suspendedPlayer.setEspnPlayerId(suspendedPlayerESPNId);
         MockPlayerDAO.addPlayerToMapUsingId(suspendedPlayer);
+        MockPlayerDAO.addPlayerToMapUsingESPNPlayerId(suspendedPlayer);
     }
 
     @Test
@@ -145,5 +160,86 @@ public class PlayerFacadeTest {
         Assert.assertEquals(1, (long)dbPlayer.getCurrentFantasyTeam().getTeamId());
     }
 
-    //TODO updateESPNAttributes
+    @Test
+    public void updateESPNAttributesByESPNPlayerId() {
+        com.homer.espn.Player espnPlayer = new com.homer.espn.Player();
+        espnPlayer.setPlayerId(suspendedPlayerESPNId);
+        espnPlayer.setPosition(Position.FANTASYCORNERINFIELD);
+        espnPlayer.setTeamId(1);
+
+        Player dbPlayer = null;
+        try {
+            dbPlayer = facade.updateESPNAttributes(espnPlayer);
+            Assert.assertEquals(suspendedPlayerId, (long)dbPlayer.getPlayerId());
+            Assert.assertEquals(Position.FANTASYCORNERINFIELD, dbPlayer.getDailyPlayerInfoList().get(0).getFantasyPosition());
+        } catch (PlayerNotFoundException e) {
+            Assert.fail();
+        } catch (NoDailyPlayerInfoException e) {
+            Assert.fail();
+        } catch (DisallowedTransactionException e) {
+            Assert.fail();
+        }
+    }
+
+    @Test
+    public void updateESPNAttributesByESPNPlayerName() {
+        com.homer.espn.Player espnPlayer = new com.homer.espn.Player();
+        espnPlayer.setPlayerName(minorLeaguerESPNPlayerName);
+        espnPlayer.setPosition(Position.FANTASYCORNERINFIELD);
+        espnPlayer.setTeamId(1);
+
+        Player dbPlayer = null;
+        try {
+            dbPlayer = facade.updateESPNAttributes(espnPlayer);
+            Assert.assertEquals(minorLeaguerPlayerId, (long)dbPlayer.getPlayerId());
+            Assert.assertEquals(Position.FANTASYCORNERINFIELD, dbPlayer.getDailyPlayerInfoList().get(0).getFantasyPosition());
+        } catch (PlayerNotFoundException e) {
+            Assert.fail();
+        } catch (NoDailyPlayerInfoException e) {
+            Assert.fail();
+        } catch (DisallowedTransactionException e) {
+            Assert.fail();
+        }
+    }
+
+    @Test
+    public void updateESPNAttributesByPlayerName() {
+        com.homer.espn.Player espnPlayer = new com.homer.espn.Player();
+        espnPlayer.setPlayerName(majorLeaguerToDemotePlayerName);
+        espnPlayer.setPosition(Position.FANTASYCORNERINFIELD);
+        espnPlayer.setTeamId(1);
+
+        Player dbPlayer = null;
+        try {
+            dbPlayer = facade.updateESPNAttributes(espnPlayer);
+            Assert.assertEquals(majorLeaguerPlayerId, (long)dbPlayer.getPlayerId());
+            Assert.assertEquals(Position.FANTASYCORNERINFIELD, dbPlayer.getDailyPlayerInfoList().get(0).getFantasyPosition());
+        } catch (PlayerNotFoundException e) {
+            Assert.fail();
+        } catch (NoDailyPlayerInfoException e) {
+            Assert.fail();
+        } catch (DisallowedTransactionException e) {
+            Assert.fail();
+        }
+    }
+
+    @Test
+    public void updateESPNAttributesPlayerOnWrongTeam() {
+        com.homer.espn.Player espnPlayer = new com.homer.espn.Player();
+        espnPlayer.setPlayerName(majorLeaguerToDemotePlayerName);
+        espnPlayer.setPosition(Position.FANTASYCORNERINFIELD);
+        espnPlayer.setTeamId(2);
+
+        Player dbPlayer = null;
+        try {
+            dbPlayer = facade.updateESPNAttributes(espnPlayer);
+            Assert.fail();
+        } catch (PlayerNotFoundException e) {
+            Assert.fail();
+        } catch (NoDailyPlayerInfoException e) {
+            Assert.fail();
+        } catch (DisallowedTransactionException e) {
+            Assert.assertTrue(true);
+        }
+    }
 }
