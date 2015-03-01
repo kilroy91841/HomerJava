@@ -156,6 +156,13 @@
                 <version>2.1</version>
             </dependency>
 
+            <!-- Google GSON [uses: json] -->
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>2.2.2</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
     <build>

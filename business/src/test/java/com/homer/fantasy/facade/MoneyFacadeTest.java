@@ -29,6 +29,7 @@ public class MoneyFacadeTest {
 
     @BeforeClass
     public static void setup() {
+        MockMoneyDAO.clearMap();
         facade = new MoneyFacade();
 
         team1 = new Team(1);
