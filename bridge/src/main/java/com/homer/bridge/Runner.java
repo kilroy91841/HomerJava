@@ -7,10 +7,7 @@ import com.homer.fantasy.Roster;
 import com.homer.fantasy.Team;
 import com.homer.fantasy.dao.impl.HibernatePlayerDAO;
 import com.homer.fantasy.facade.PlayerFacade;
-import com.homer.job.MLBGameFetch;
-import com.homer.job.PlayerUpdateFromESPNLeagueRosterPage;
-import com.homer.job.PlayerUpdateFromESPNTransactions;
-import com.homer.job.PlayerUpdateFromMLB40ManRoster;
+import com.homer.job.*;
 import org.quartz.JobExecutionException;
 
 import java.time.LocalDate;
@@ -27,7 +24,8 @@ public class Runner {
 //        HibernatePlayerDAO dao = new HibernatePlayerDAO();
 //        List<Player> players = dao.getPlayersOnTeamForDate(new Team(1), LocalDate.of(2015, 2, 22));
 //        Roster roster = new Roster(players);
-        PlayerUpdateFromMLB40ManRoster job = new PlayerUpdateFromMLB40ManRoster();
+//        PlayerUpdateFromMLB40ManRoster job = new PlayerUpdateFromMLB40ManRoster();
+        DailyPlayerInfoJob job = new DailyPlayerInfoJob();
         job.execute(null);
     }
 }
