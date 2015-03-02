@@ -3,6 +3,7 @@ package com.homer.job;
 import com.homer.SportType;
 import com.homer.fantasy.Team;
 import com.homer.fantasy.dao.HomerDAO;
+import com.homer.fantasy.dao.ITeamDAO;
 import com.homer.fantasy.facade.PlayerFacade;
 import com.homer.mlb.Player;
 import com.homer.mlb.client.MLBClientREST;
@@ -24,7 +25,7 @@ import java.util.List;
  */
 public class PlayerUpdateFromMLB40ManRoster implements Job {
 
-    private static final HomerDAO homerDAO = new HomerDAO();
+    private static final ITeamDAO teamDao = ITeamDAO.FACTORY.getInstance();
     private static final Logger LOG = LoggerFactory.getLogger(PlayerUpdateFromMLB40ManRoster.class);
     private static final MLBClientREST client = new MLBClientREST();
     private static final PlayerFacade playerFacade = new PlayerFacade();
@@ -32,7 +33,7 @@ public class PlayerUpdateFromMLB40ManRoster implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         LOG.debug("BEGIN: execute");
-        List<Team> teams = homerDAO.getTeams(SportType.MLB);
+        List<Team> teams = teamDao.getTeams(SportType.MLB);
         for(Team t: teams) {
             LOG.debug("Retrieving roster for [team=" + t + "]");
             client.get40ManRosterAsync(t.getTeamId(), callback);

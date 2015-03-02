@@ -144,21 +144,4 @@ public class HomerDAO {
         return retList;
     }
 
-    public List<Team> getTeams(SportType sportType) {
-        LOG.debug("Getting all teams for type " + sportType);
-        Session session = null;
-        List<Team> teams = null;
-        try {
-            session = openSession();
-            teams = session.createCriteria(Team.class).add(Restrictions.like("teamType", sportType)).list();
-        } catch(Exception e) {
-            LOG.error("Exception finding teams", e);
-        } finally {
-            if(session != null) {
-                session.close();
-            }
-        }
-        return teams;
-    }
-
 }

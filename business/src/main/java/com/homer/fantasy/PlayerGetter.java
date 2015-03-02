@@ -2,6 +2,7 @@ package com.homer.fantasy;
 
 import com.homer.SportType;
 import com.homer.fantasy.dao.HomerDAO;
+import com.homer.fantasy.dao.ITeamDAO;
 import com.homer.fantasy.facade.GameFacade;
 import com.homer.fantasy.facade.PlayerFacade;
 import com.homer.fantasy.facade.StatsFacade;
@@ -32,7 +33,7 @@ public class PlayerGetter {
 
     private static final Logger LOG = LoggerFactory.getLogger(PlayerGetter.class);
 
-    private static HomerDAO dao = new HomerDAO();
+    private static final ITeamDAO teamDao = ITeamDAO.FACTORY.getInstance();
     private static final PlayerFacade facade = new PlayerFacade();
     private static final GameFacade gameFacade = new GameFacade();
     private static final StatsFacade statsFacade = new StatsFacade();
@@ -40,7 +41,7 @@ public class PlayerGetter {
     private static AtomicInteger playerCount;
 
     public static void main(String[] args) throws SQLException {
-        List<Team> teams = dao.getTeams(SportType.MLB);
+        List<Team> teams = teamDao.getTeams(SportType.MLB);
         MLBClientREST client = new MLBClientREST();
         com.homer.fantasy.Player p = new com.homer.fantasy.Player();
         playerCount = new AtomicInteger(0);

@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  div(class="container")
+    div(class="row")
+      div(class="com-sm-3 col-md-2 sidebar")
+        ul(class="nav nav-sidebar")
+          li
+            table(class="table table-hover")
+              tbody
+                for player in roster.catchers
+                  tr
+                    td= "C"
+                    td= player.playerName
+                tr
+                  td= "1B"
+                  td= roster.firstBase.playerName

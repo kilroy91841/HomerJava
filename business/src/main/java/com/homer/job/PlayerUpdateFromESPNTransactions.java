@@ -9,6 +9,7 @@ import com.homer.exception.NoDailyPlayerInfoException;
 import com.homer.exception.PlayerNotFoundException;
 import com.homer.fantasy.Team;
 import com.homer.fantasy.dao.HomerDAO;
+import com.homer.fantasy.dao.ITeamDAO;
 import com.homer.fantasy.facade.PlayerFacade;
 import com.homer.fantasy.facade.TransactionFacade;
 import org.quartz.Job;
@@ -31,7 +32,7 @@ public class PlayerUpdateFromESPNTransactions implements Job {
 
     private static final Logger LOG = LoggerFactory.getLogger(PlayerUpdateFromESPNTransactions.class);
 
-    private static final HomerDAO homerDAO = new HomerDAO();
+    private static final ITeamDAO teamDao = ITeamDAO.FACTORY.getInstance();
     private static final ESPNClientREST client = new ESPNClientREST();
     private static final TransactionFacade transactionFacade = new TransactionFacade();
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
@@ -45,7 +46,7 @@ public class PlayerUpdateFromESPNTransactions implements Job {
         String dateString = date.format(dateFormatter);
         LOG.debug("DateString: " + dateString);
 
-        List<Team> teams = homerDAO.getTeams(SportType.FANTASY);
+        List<Team> teams = teamDao.getTeams(SportType.FANTASY);
         List<Transaction> masterTransactionList = new ArrayList<Transaction>();
         for(Team t: teams) {
             if(t.getTeamId() == Team.FANTASY_FREE_AGENT_TEAM) {
