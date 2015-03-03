@@ -239,3 +239,23 @@ CREATE TABLE ESPNTRANSACTION (
     nodeText VARCHAR(150) NOT NULL,
     UNIQUE (nodeText, time)
 );
+
+CREATE TABLE STANDINGSCATEGORY (
+    standingsCategoryId INT PRIMARY KEY,
+    standingsCategoryName VARCHAR(15),
+    isHitting BOOLEAN,
+    isDescending BOOLEAN DEFAULT TRUE,
+	UNIQUE KEY (standingsCategoryName)
+);
+
+CREATE TABLE TEAMSTANDINGSCATEGORY (
+    teamStandingsCategoryId BIGINT AUTO_INCREMENT PRIMARY KEY,
+    teamId INT NOT NULL,
+    date DATE NOT NULL,
+    standingsCategoryName VARCHAR(15) NOT NULL,
+    categoryAmount DOUBLE,
+    categoryPoints DOUBLE,
+    UNIQUE KEY (teamId, date, standingsCategoryName),
+    FOREIGN KEY (teamId) REFERENCES TEAM (teamId),
+	FOREIGN KEY (standingsCategoryName) REFERENCES STANDINGSCATEGORY (standingsCategoryName)
+);

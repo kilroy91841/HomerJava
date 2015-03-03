@@ -161,3 +161,25 @@ union all
 select 'UNK', 'UNKNOWN'
 union all
 select 'FA', 'FREEAGENT';
+
+
+insert into STANDINGSCATEGORY (standingsCategoryName, isHitting, isDescending)
+values ("RUNS", true, true);
+insert into STANDINGSCATEGORY (standingsCategoryName, isHitting, isDescending)
+values ("RBI", true, true);
+insert into STANDINGSCATEGORY (standingsCategoryName, isHitting, isDescending)
+values ("HR", true, true);
+insert into STANDINGSCATEGORY (standingsCategoryName, isHitting, isDescending)
+values ("SB", true, true);
+insert into STANDINGSCATEGORY (standingsCategoryName, isHitting, isDescending)
+values ("OBP", true, true);
+insert into STANDINGSCATEGORY (standingsCategoryName, isHitting, isDescending)
+values ("WINS", false, true);
+insert into STANDINGSCATEGORY (standingsCategoryName, isHitting, isDescending)
+values ("SV", false, true);
+insert into STANDINGSCATEGORY (standingsCategoryName, isHitting, isDescending)
+values ("K", false, true);
+insert into STANDINGSCATEGORY (standingsCategoryName, isHitting, isDescending)
+values ("ERA", false, false);
+insert into STANDINGSCATEGORY (standingsCategoryName, isHitting, isDescending)
+values ("WHIP", false, false);

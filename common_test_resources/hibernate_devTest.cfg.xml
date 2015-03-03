@@ -21,7 +21,6 @@
         <!-- List of XML mapping files -->
         <mapping class="com.homer.PlayerStatus" />
         <mapping class="com.homer.espn.Transaction" />
-        <mapping class="com.homer.espn.Transaction" />
         <mapping class="com.homer.fantasy.DailyPlayerInfo" />
         <mapping class="com.homer.fantasy.FreeAgentAuction" />
         <mapping class="com.homer.fantasy.FreeAgentAuctionBid" />
@@ -34,6 +33,8 @@
         <mapping class="com.homer.fantasy.Trade" />
         <mapping class="com.homer.fantasy.TradeAsset" />
         <mapping class="com.homer.fantasy.Vulture" />
+        <mapping class="com.homer.fantasy.standings.StandingsCategory" />
+        <mapping class="com.homer.fantasy.standings.TeamStandingsCategory" />
         <mapping class="com.homer.mlb.Game" />
         <mapping class="com.homer.mlb.Stats" />
 
