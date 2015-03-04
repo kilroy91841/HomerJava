@@ -45,8 +45,7 @@ public class StandingsTest {
 
         listOfTeamStandingsCategories.add(runs);
 
-        Standings standings = new Standings(listOfTeamStandingsCategories);
-        List<TeamStandings> standingsTeamList = standings.calculate();
+        List<TeamStandings> standingsTeamList = Standings.calculate(listOfTeamStandingsCategories);
 
         Assert.assertEquals(6, standingsTeamList.size());
         Assert.assertEquals(1, (int)standingsTeamList.get(0).getTeam().getTeamId());
@@ -84,9 +83,58 @@ public class StandingsTest {
 
         listOfTeamStandingsCategories2.add(runs2);
 
-        standings = new Standings(listOfTeamStandingsCategories2);
-        List<TeamStandings> standingsDay2 = standings.calculate();
+        List<TeamStandings> standingsDay2 = Standings.calculate(listOfTeamStandingsCategories2);
 
-        standings.calculateDifference(standingsTeamList.get(0), standingsDay2.get(0));
+        Standings.calculateDifference(standingsTeamList, standingsDay2);
+
+        listOfTeamStandingsCategories = new ArrayList<List<TeamStandingsCategory>>();
+
+        wins = new ArrayList<TeamStandingsCategory>();
+        wins.add(new TeamStandingsCategory(team1, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(6.0));
+        wins.add(new TeamStandingsCategory(team2, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(6.0));
+        wins.add(new TeamStandingsCategory(team3, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(6.0));
+        wins.add(new TeamStandingsCategory(team4, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(3.0));
+        wins.add(new TeamStandingsCategory(team5, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(2.0));
+        wins.add(new TeamStandingsCategory(team6, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(1.0));
+
+        listOfTeamStandingsCategories.add(wins);
+
+        runs = new ArrayList<TeamStandingsCategory>();
+        runs.add(new TeamStandingsCategory(team1, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
+        runs.add(new TeamStandingsCategory(team2, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
+        runs.add(new TeamStandingsCategory(team3, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
+        runs.add(new TeamStandingsCategory(team4, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
+        runs.add(new TeamStandingsCategory(team5, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
+        runs.add(new TeamStandingsCategory(team6, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
+
+        listOfTeamStandingsCategories.add(runs);
+
+        standingsTeamList = Standings.calculate(listOfTeamStandingsCategories);
+
+        Assert.assertEquals(6, standingsTeamList.size());
+        Assert.assertEquals(1, (int)standingsTeamList.get(0).getTeam().getTeamId());
+        Assert.assertEquals(1, (int)standingsTeamList.get(0).getPlace());
+        Assert.assertTrue(standingsTeamList.get(0).isTied());
+        Assert.assertEquals(8.5, standingsTeamList.get(0).getTotalPoints());
+        Assert.assertEquals(2, (int)standingsTeamList.get(1).getTeam().getTeamId());
+        Assert.assertEquals(1, (int)standingsTeamList.get(1).getPlace());
+        Assert.assertTrue(standingsTeamList.get(1).isTied());
+        Assert.assertEquals(8.5, standingsTeamList.get(1).getTotalPoints());
+        Assert.assertEquals(3, (int)standingsTeamList.get(2).getTeam().getTeamId());
+        Assert.assertEquals(1, (int)standingsTeamList.get(2).getPlace());
+        Assert.assertTrue(standingsTeamList.get(2).isTied());
+        Assert.assertEquals(8.5, standingsTeamList.get(2).getTotalPoints());
+        Assert.assertEquals(4, (int)standingsTeamList.get(3).getTeam().getTeamId());
+        Assert.assertEquals(4, (int)standingsTeamList.get(3).getPlace());
+        Assert.assertNull(standingsTeamList.get(3).isTied());
+        Assert.assertEquals(6.5, standingsTeamList.get(3).getTotalPoints());
+        Assert.assertEquals(5, (int)standingsTeamList.get(4).getTeam().getTeamId());
+        Assert.assertEquals(5, (int)standingsTeamList.get(4).getPlace());
+        Assert.assertNull(standingsTeamList.get(4).isTied());
+        Assert.assertEquals(5.5, standingsTeamList.get(4).getTotalPoints());
+        Assert.assertEquals(6, (int)standingsTeamList.get(5).getTeam().getTeamId());
+        Assert.assertEquals(6, (int)standingsTeamList.get(5).getPlace());
+        Assert.assertNull(standingsTeamList.get(5).isTied());
+        Assert.assertEquals(4.5, standingsTeamList.get(5).getTotalPoints());
     }
 }

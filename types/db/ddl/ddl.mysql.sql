@@ -241,11 +241,9 @@ CREATE TABLE ESPNTRANSACTION (
 );
 
 CREATE TABLE STANDINGSCATEGORY (
-    standingsCategoryId INT PRIMARY KEY,
-    standingsCategoryName VARCHAR(15),
+    standingsCategoryName VARCHAR(15) PRIMARY KEY,
     isHitting BOOLEAN,
-    isDescending BOOLEAN DEFAULT TRUE,
-	UNIQUE KEY (standingsCategoryName)
+    isDescending BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE TEAMSTANDINGSCATEGORY (
@@ -258,4 +256,14 @@ CREATE TABLE TEAMSTANDINGSCATEGORY (
     UNIQUE KEY (teamId, date, standingsCategoryName),
     FOREIGN KEY (teamId) REFERENCES TEAM (teamId),
 	FOREIGN KEY (standingsCategoryName) REFERENCES STANDINGSCATEGORY (standingsCategoryName)
+);
+
+CREATE TABLE TEAMSTANDINGS (
+    teamStandingsId BIGINT AUTO_INCREMENT PRIMARY KEY,
+    teamId INT NOT NULL,
+    date DATE NOT NULL,
+    place INT,
+    tied BOOLEAN DEFAULT FALSE,
+    UNIQUE KEY (teamId, date),
+    FOREIGN KEY (teamId) REFERENCES TEAM (teamId)
 );

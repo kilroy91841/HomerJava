@@ -1,5 +1,6 @@
 package com.homer.fantasy.dao.impl;
 
+import com.homer.fantasy.Team;
 import com.homer.fantasy.dao.HomerDAO;
 import com.homer.fantasy.standings.Standings;
 import com.homer.fantasy.standings.StandingsCategory;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -28,7 +30,7 @@ public class HibernateStandingsDAO extends HomerDAO {
     }
 
     public List<TeamStandingsCategory> getTeamStandingsCategories(LocalDate date) {
-        LOG.debug("BEGIN: getTeamStandings [date=" + date + "]");
+        LOG.debug("BEGIN: getTeamStandingsCategories [date=" + date + "]");
 
         TeamStandingsCategory example = new TeamStandingsCategory(null, date, null);
         example.setDate(date);
@@ -36,16 +38,29 @@ public class HibernateStandingsDAO extends HomerDAO {
 
         return teamStandingsList;
     }
+    public List<TeamStandings> getTeamStandings(LocalDate date) {
+        LOG.debug("BEGIN: getTeamStandings [date=" + date + "]");
+
+        TeamStandings example = new TeamStandings();
+        example.setDate(date);
+        List<TeamStandings> teamStandingsList = findListByExample(example, TeamStandings.class);
+
+        return teamStandingsList;
+    }
 
     public static void main(String[] args) {
         HibernateStandingsDAO dao = new HibernateStandingsDAO();
-        List<TeamStandingsCategory> teamStandingsList = dao.getTeamStandingsCategories(LocalDate.now());
-        Map<StandingsCategory, List<TeamStandingsCategory>> map
-                = teamStandingsList.stream()
-                .collect(Collectors.groupingBy(TeamStandingsCategory::getStandingsCategory));
-        List<List<TeamStandingsCategory>> outerList = map.values().stream().collect(Collectors.toList());
+        List<TeamStandings> teamStandingses = dao.getTeamStandings(LocalDate.now());
+        List<List<TeamStandingsCategory>> outerList1  =
+                teamStandingses
+                        .stream()
+                        .flatMap((teamStandings) -> teamStandings.getTeamStandingsCategoryList().stream())
+                        .collect(Collectors.groupingBy(TeamStandingsCategory::getStandingsCategory))
+                        .values().stream().collect(Collectors.toList());
 
-        Standings standings = new Standings(outerList);
-        standings.calculate();
+        List<TeamStandings> teamStandingsList = Standings.calculate(outerList1);
+        for(TeamStandings s : teamStandingsList) {
+            System.out.println(s.getTotalPoints() + ", " + s.getPlace() + ", " + s.isTied());
+        }
     }
 }

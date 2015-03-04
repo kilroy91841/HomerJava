@@ -32,7 +32,7 @@ public class TeamStandingsCategory implements Comparable {
     private Double categoryAmount;
     @Column(name="categoryPoints")
     private Double categoryPoints;
-
+    @Transient
     private Double difference;
 
     public TeamStandingsCategory() { }
@@ -127,4 +127,6 @@ public class TeamStandingsCategory implements Comparable {
                 this.getCategoryAmount() > other.getCategoryAmount() ? -1 : 1 :
                 this.getCategoryAmount() < other.getCategoryAmount() ? 1 : -1;
     }
+
+
 }

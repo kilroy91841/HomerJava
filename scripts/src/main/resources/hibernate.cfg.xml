@@ -27,6 +27,7 @@
         <mapping class="com.homer.fantasy.TradeAsset" />
         <mapping class="com.homer.fantasy.Vulture" />
         <mapping class="com.homer.fantasy.standings.StandingsCategory" />
+        <mapping class="com.homer.fantasy.standings.TeamStandings" />
         <mapping class="com.homer.fantasy.standings.TeamStandingsCategory" />
         <mapping class="com.homer.PlayerStatus" />
 
