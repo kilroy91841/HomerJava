@@ -39,14 +39,14 @@ public class DailyPlayerInfo {
 	@OneToOne
 	@JoinColumn(name="mlbPlayerStatusCode", referencedColumnName="playerStatusCode")
 	private PlayerStatus mlbStatus;
-	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
-	@Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-	@JoinColumns({
-			@JoinColumn(name = "playerId", referencedColumnName="playerId"),
-			@JoinColumn(name = "gameDate", referencedColumnName="gameDate")
-	})
-	@Fetch(FetchMode.SELECT)
-	private List<Stats> statsList;
+//	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
+//	@Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+//	@JoinColumns({
+//			@JoinColumn(name = "playerId", referencedColumnName="playerId"),
+//			@JoinColumn(name = "gameDate", referencedColumnName="gameDate")
+//	})
+//	@Fetch(FetchMode.SELECT)
+//	private List<Stats> statsList;
 
 	public DailyPlayerInfo() {
 		this.dailyPlayerInfoKey = new DailyPlayerInfoKey();
@@ -96,16 +96,16 @@ public class DailyPlayerInfo {
 		return fantasyPosition;
 	}
 
-	public void setStatsList(List<Stats> statsList) {
-		this.statsList = statsList;
-	}
-
-	public List<Stats> getStatsList() {
-		if(statsList == null) {
-			statsList = new ArrayList<Stats>();
-		}
-		return statsList;
-	}
+//	public void setStatsList(List<Stats> statsList) {
+//		this.statsList = statsList;
+//	}
+//
+//	public List<Stats> getStatsList() {
+//		if(statsList == null) {
+//			statsList = new ArrayList<Stats>();
+//		}
+//		return statsList;
+//	}
 
 	public PlayerStatus getFantasyStatus() {
 		return fantasyStatus;
@@ -133,7 +133,7 @@ public class DailyPlayerInfo {
 		sb.append(", fantasyPosition=" + fantasyPosition);
 		sb.append(", fantasyStatus=" + fantasyStatus);
 		sb.append(", mlbStatus=" + mlbStatus);
-		sb.append(", statsList=" + statsList);
+//		sb.append(", statsList=" + statsList);
 		sb.append("}");
 		return sb.toString();
 	}
