@@ -36,13 +36,11 @@ public class TeamStandings implements Comparable, Serializable{
     @Convert(converter=LocalDatePersistenceConverter.class)
     @Column(name="date")
     private LocalDate date;
-    @OneToMany( fetch=FetchType.EAGER, mappedBy = "owner", cascade = CascadeType.ALL)
+//    @OneToMany( fetch=FetchType.EAGER, mappedBy = "owner", cascade = CascadeType.ALL)
+    @OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-//    @JoinColumns({
-//            @JoinColumn(name = "date", referencedColumnName="date"),
-//            @JoinColumn(name = "teamId", referencedColumnName="teamId")
-//    })
-//    @Fetch(FetchMode.SELECT)
+    @JoinColumn(name="teamStandingsId", referencedColumnName="teamStandingsId")
+    @Fetch(FetchMode.SELECT)
     private List<TeamStandingsCategory> teamStandingsCategoryList;
     @Transient
     private Map<StandingsCategory, TeamStandingsCategory> categoryToTeamAmount;

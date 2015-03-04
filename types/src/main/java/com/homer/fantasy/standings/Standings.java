@@ -43,8 +43,8 @@ public class Standings {
                 points--;
             }
             listOfTeamStandingsCategory.forEach(teamStandingsCategory -> {
-                int teamId = teamStandingsCategory.getTeam().getTeamId();
-                TeamStandings standingsTeam = teamMap.getOrDefault(teamId, new TeamStandings(teamStandingsCategory.getTeam(), teamStandingsCategory.getDate()));
+                int teamId = teamStandingsCategory.getTeamStandings().getTeam().getTeamId();
+                TeamStandings standingsTeam = teamMap.getOrDefault(teamId, new TeamStandings(teamStandingsCategory.getTeamStandings().getTeam(), teamStandingsCategory.getTeamStandings().getDate()));
                 standingsTeam.getCategoryToTeamAmount().put(teamStandingsCategory.getStandingsCategory(), teamStandingsCategory);
                 teamMap.put(teamId, standingsTeam);
             });
@@ -94,7 +94,7 @@ public class Standings {
             );
         }
         after.getCategoryToTeamAmount().values().forEach(tsc ->
-                System.out.println("Team: " + tsc.getTeam() + ", Category: " + tsc.getStandingsCategory().getStandingsCategoryName() + ", Difference: " + tsc.getDifference())
+                System.out.println("Team: " + tsc.getTeamStandings().getTeam() + ", Category: " + tsc.getStandingsCategory().getStandingsCategoryName() + ", Difference: " + tsc.getDifference())
         );
     }
 }

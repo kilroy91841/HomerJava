@@ -1,5 +1,6 @@
 package com.homer.fantasy.dao.impl;
 
+import com.homer.fantasy.Player;
 import com.homer.fantasy.Team;
 import com.homer.fantasy.dao.HomerDAO;
 import com.homer.fantasy.standings.Standings;
@@ -31,15 +32,16 @@ public class HibernateStandingsDAO extends HomerDAO {
         super();
     }
 
-    public List<TeamStandingsCategory> getTeamStandingsCategories(LocalDate date) {
-        LOG.debug("BEGIN: getTeamStandingsCategories [date=" + date + "]");
+//    public List<TeamStandingsCategory> getTeamStandingsCategories(LocalDate date) {
+//        LOG.debug("BEGIN: getTeamStandingsCategories [date=" + date + "]");
+//
+//        TeamStandingsCategory example = new TeamStandingsCategory(null, date, null);
+//        example.setDate(date);
+//        List<TeamStandingsCategory> teamStandingsList = findListByExample(example, TeamStandingsCategory.class);
+//
+//        return teamStandingsList;
+//    }
 
-        TeamStandingsCategory example = new TeamStandingsCategory(null, date, null);
-        example.setDate(date);
-        List<TeamStandingsCategory> teamStandingsList = findListByExample(example, TeamStandingsCategory.class);
-
-        return teamStandingsList;
-    }
     public List<TeamStandings> getTeamStandings(LocalDate date) {
         LOG.debug("BEGIN: getTeamStandings [date=" + date + "]");
 
@@ -100,6 +102,10 @@ public class HibernateStandingsDAO extends HomerDAO {
 //        ts.setTeamStandingsCategoryList(tsclist);
 //
 //        dao.save(ts);
+//        TeamStandings s = dao.getTeamStandings(new Team(1), LocalDate.now());
+//        System.out.println(s);
+//        s.getTeamStandingsCategoryList().get(0).setCategoryPoints(100.0);
+//        dao.save(s);
 
         List<TeamStandings> teamStandingses = dao.getTeamStandings(LocalDate.now());
         List<List<TeamStandingsCategory>> outerList1  =
@@ -113,6 +119,11 @@ public class HibernateStandingsDAO extends HomerDAO {
         for(TeamStandings s : teamStandingsList) {
             System.out.println(s.getTotalPoints() + ", " + s.getPlace() + ", " + s.isTied());
         }
-        dao.save(teamStandingsList.get(0));
+        teamStandingsList.forEach(ts -> dao.save(ts));
+//        dao.save(teamStandingsList.get(0));
+
+//        HibernatePlayerDAO playerDAO = new HibernatePlayerDAO();
+//        Player player = playerDAO.getPlayer(new Player(1));
+//        System.out.println(player);
     }
 }

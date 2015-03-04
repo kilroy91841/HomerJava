@@ -259,13 +259,9 @@ CREATE TABLE TEAMSTANDINGS (
 CREATE TABLE TEAMSTANDINGSCATEGORY (
     teamStandingsCategoryId BIGINT AUTO_INCREMENT PRIMARY KEY,
     teamStandingsId BIGINT,
-    teamId INT NOT NULL,
-
     standingsCategoryName VARCHAR(15) NOT NULL,
     categoryAmount DOUBLE,
     categoryPoints DOUBLE,
-
     UNIQUE KEY (teamStandingsId, standingsCategoryName),
-    FOREIGN KEY (teamId) REFERENCES TEAM (teamId),
 	FOREIGN KEY (standingsCategoryName) REFERENCES STANDINGSCATEGORY (standingsCategoryName)
 );

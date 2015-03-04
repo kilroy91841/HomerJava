@@ -19,16 +19,16 @@ public class TeamStandingsCategory implements Comparable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="teamStandingsCategoryId")
     private long teamStandingsCategoryId;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="teamStandingsId")
-    private TeamStandings owner;
-    @OneToOne
-    @JoinColumn(name="teamId", referencedColumnName="teamId")
-    private Team team;
+    @ManyToOne
+    @JoinColumn(name="teamStandingsId", referencedColumnName="teamStandingsId")
+    private TeamStandings teamStandings;
+//    @OneToOne
+//    @JoinColumn(name="teamId", referencedColumnName="teamId")
+//    private Team team;
 //    @Convert(converter=LocalDatePersistenceConverter.class)
 //    @Column(name="date")
-    @Transient
-    private LocalDate date;
+//    @Transient
+//    private LocalDate date;
     @OneToOne
     @JoinColumn(name="standingsCategoryName", referencedColumnName="standingsCategoryName")
     private StandingsCategory standingsCategory;
@@ -42,8 +42,8 @@ public class TeamStandingsCategory implements Comparable {
     public TeamStandingsCategory() { }
 
     public TeamStandingsCategory(Team team, LocalDate date, StandingsCategory standingsCategory) {
-        this.team = team;
-        this.date = date;
+//        this.team = team;
+//        this.date = date;
         this.standingsCategory = standingsCategory;
     }
 
@@ -52,12 +52,12 @@ public class TeamStandingsCategory implements Comparable {
         return this;
     }
 
-    public TeamStandings getOwner() {
-        return owner;
+    public TeamStandings getTeamStandings() {
+        return teamStandings;
     }
 
-    public void setOwner(TeamStandings owner) {
-        this.owner = owner;
+    public void setTeamStandings(TeamStandings teamStandings) {
+        this.teamStandings = teamStandings;
     }
 
     public long getTeamStandingsId() {
@@ -68,21 +68,21 @@ public class TeamStandingsCategory implements Comparable {
         this.teamStandingsCategoryId = teamStandingsId;
     }
 
-    public Team getTeam() {
-        return team;
-    }
+//    public Team getTeam() {
+//        return team;
+//    }
+//
+//    public void setTeam(Team team) {
+//        this.team = team;
+//    }
 
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
+//    public LocalDate getDate() {
+//        return date;
+//    }
+//
+//    public void setDate(LocalDate date) {
+//        this.date = date;
+//    }
 
     public StandingsCategory getStandingsCategory() {
         return standingsCategory;
@@ -121,8 +121,8 @@ public class TeamStandingsCategory implements Comparable {
     public String toString() {
         return "TeamStandings{" +
                 "teamStandingsId=" + teamStandingsCategoryId +
-                ", team=" + team +
-                ", date=" + date +
+//                ", team=" + team +
+//                ", date=" + date +
                 ", standingsCategory=" + standingsCategory +
                 ", categoryAmount=" + categoryAmount +
                 ", categoryPoints=" + categoryPoints +
@@ -138,27 +138,5 @@ public class TeamStandingsCategory implements Comparable {
         return this.getStandingsCategory().isDescending() ?
                 this.getCategoryAmount() > other.getCategoryAmount() ? -1 : 1 :
                 this.getCategoryAmount() < other.getCategoryAmount() ? 1 : -1;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TeamStandingsCategory that = (TeamStandingsCategory) o;
-
-        if (!date.equals(that.date)) return false;
-        if (!standingsCategory.equals(that.standingsCategory)) return false;
-        if (!team.equals(that.team)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = team.hashCode();
-        result = 31 * result + date.hashCode();
-        result = 31 * result + standingsCategory.hashCode();
-        return result;
     }
 }
