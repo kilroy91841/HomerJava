@@ -19,11 +19,15 @@ public class TeamStandingsCategory implements Comparable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="teamStandingsCategoryId")
     private long teamStandingsCategoryId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="teamStandingsId")
+    private TeamStandings owner;
     @OneToOne
     @JoinColumn(name="teamId", referencedColumnName="teamId")
     private Team team;
-    @Convert(converter=LocalDatePersistenceConverter.class)
-    @Column(name="date")
+//    @Convert(converter=LocalDatePersistenceConverter.class)
+//    @Column(name="date")
+    @Transient
     private LocalDate date;
     @OneToOne
     @JoinColumn(name="standingsCategoryName", referencedColumnName="standingsCategoryName")
@@ -46,6 +50,14 @@ public class TeamStandingsCategory implements Comparable {
     public TeamStandingsCategory withCategoryAmount(Double categoryAmount) {
         this.categoryAmount = categoryAmount;
         return this;
+    }
+
+    public TeamStandings getOwner() {
+        return owner;
+    }
+
+    public void setOwner(TeamStandings owner) {
+        this.owner = owner;
     }
 
     public long getTeamStandingsId() {
@@ -128,5 +140,25 @@ public class TeamStandingsCategory implements Comparable {
                 this.getCategoryAmount() < other.getCategoryAmount() ? 1 : -1;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        TeamStandingsCategory that = (TeamStandingsCategory) o;
+
+        if (!date.equals(that.date)) return false;
+        if (!standingsCategory.equals(that.standingsCategory)) return false;
+        if (!team.equals(that.team)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = team.hashCode();
+        result = 31 * result + date.hashCode();
+        result = 31 * result + standingsCategory.hashCode();
+        return result;
+    }
 }

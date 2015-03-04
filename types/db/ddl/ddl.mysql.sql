@@ -246,18 +246,6 @@ CREATE TABLE STANDINGSCATEGORY (
     isDescending BOOLEAN DEFAULT TRUE
 );
 
-CREATE TABLE TEAMSTANDINGSCATEGORY (
-    teamStandingsCategoryId BIGINT AUTO_INCREMENT PRIMARY KEY,
-    teamId INT NOT NULL,
-    date DATE NOT NULL,
-    standingsCategoryName VARCHAR(15) NOT NULL,
-    categoryAmount DOUBLE,
-    categoryPoints DOUBLE,
-    UNIQUE KEY (teamId, date, standingsCategoryName),
-    FOREIGN KEY (teamId) REFERENCES TEAM (teamId),
-	FOREIGN KEY (standingsCategoryName) REFERENCES STANDINGSCATEGORY (standingsCategoryName)
-);
-
 CREATE TABLE TEAMSTANDINGS (
     teamStandingsId BIGINT AUTO_INCREMENT PRIMARY KEY,
     teamId INT NOT NULL,
@@ -266,4 +254,18 @@ CREATE TABLE TEAMSTANDINGS (
     tied BOOLEAN DEFAULT FALSE,
     UNIQUE KEY (teamId, date),
     FOREIGN KEY (teamId) REFERENCES TEAM (teamId)
+);
+
+CREATE TABLE TEAMSTANDINGSCATEGORY (
+    teamStandingsCategoryId BIGINT AUTO_INCREMENT PRIMARY KEY,
+    teamStandingsId BIGINT,
+    teamId INT NOT NULL,
+
+    standingsCategoryName VARCHAR(15) NOT NULL,
+    categoryAmount DOUBLE,
+    categoryPoints DOUBLE,
+
+    UNIQUE KEY (teamStandingsId, standingsCategoryName),
+    FOREIGN KEY (teamId) REFERENCES TEAM (teamId),
+	FOREIGN KEY (standingsCategoryName) REFERENCES STANDINGSCATEGORY (standingsCategoryName)
 );

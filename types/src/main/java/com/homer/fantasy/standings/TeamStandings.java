@@ -2,11 +2,12 @@ package com.homer.fantasy.standings;
 
 import com.homer.fantasy.Team;
 import com.homer.util.LocalDatePersistenceConverter;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -35,13 +36,13 @@ public class TeamStandings implements Comparable, Serializable{
     @Convert(converter=LocalDatePersistenceConverter.class)
     @Column(name="date")
     private LocalDate date;
-    @OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
-    @Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @JoinColumns({
-            @JoinColumn(name = "date", referencedColumnName="date"),
-            @JoinColumn(name = "teamId", referencedColumnName="teamId")
-    })
-    @Fetch(FetchMode.SELECT)
+    @OneToMany( fetch=FetchType.EAGER, mappedBy = "owner", cascade = CascadeType.ALL)
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+//    @JoinColumns({
+//            @JoinColumn(name = "date", referencedColumnName="date"),
+//            @JoinColumn(name = "teamId", referencedColumnName="teamId")
+//    })
+//    @Fetch(FetchMode.SELECT)
     private List<TeamStandingsCategory> teamStandingsCategoryList;
     @Transient
     private Map<StandingsCategory, TeamStandingsCategory> categoryToTeamAmount;
@@ -52,6 +53,12 @@ public class TeamStandings implements Comparable, Serializable{
 
     public TeamStandings(Team team) {
         this.team = team;
+        this.categoryToTeamAmount = new HashMap<StandingsCategory, TeamStandingsCategory>();
+    }
+
+    public TeamStandings(Team team, LocalDate date) {
+        this.team = team;
+        this.date = date;
         this.categoryToTeamAmount = new HashMap<StandingsCategory, TeamStandingsCategory>();
     }
 
@@ -108,6 +115,9 @@ public class TeamStandings implements Comparable, Serializable{
     }
 
     public void setTeamStandingsCategoryList(List<TeamStandingsCategory> teamStandingsCategoryList) {
+        if(this.teamStandingsCategoryList == null) {
+            this.teamStandingsCategoryList = new ArrayList<TeamStandingsCategory>();
+        }
         this.teamStandingsCategoryList = teamStandingsCategoryList;
     }
 
@@ -135,5 +145,26 @@ public class TeamStandings implements Comparable, Serializable{
         if(!this.getClass().equals(o.getClass())) throw new RuntimeException("Comparing wrong classes");
         TeamStandings other = (TeamStandings) o;
         return this.getTotalPoints() > other.getTotalPoints() ? -1 : 1;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TeamStandings that = (TeamStandings) o;
+
+        if (!date.equals(that.date)) return false;
+        if (!team.equals(that.team)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (teamStandingsId ^ (teamStandingsId >>> 32));
+        result = 31 * result + team.hashCode();
+        result = 31 * result + date.hashCode();
+        return result;
     }
 }

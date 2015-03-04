@@ -44,7 +44,7 @@ public class Standings {
             }
             listOfTeamStandingsCategory.forEach(teamStandingsCategory -> {
                 int teamId = teamStandingsCategory.getTeam().getTeamId();
-                TeamStandings standingsTeam = teamMap.getOrDefault(teamId, new TeamStandings(teamStandingsCategory.getTeam()));
+                TeamStandings standingsTeam = teamMap.getOrDefault(teamId, new TeamStandings(teamStandingsCategory.getTeam(), teamStandingsCategory.getDate()));
                 standingsTeam.getCategoryToTeamAmount().put(teamStandingsCategory.getStandingsCategory(), teamStandingsCategory);
                 teamMap.put(teamId, standingsTeam);
             });
@@ -69,6 +69,7 @@ public class Standings {
             }
             i++;
         }
+        standingsTeamList.forEach(s -> s.setTeamStandingsCategoryList(s.getCategoryToTeamAmount().values().stream().collect(Collectors.toList())));
         return standingsTeamList;
     }
 

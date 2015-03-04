@@ -162,7 +162,6 @@ select 'UNK', 'UNKNOWN'
 union all
 select 'FA', 'FREEAGENT';
 
-
 insert into STANDINGSCATEGORY (standingsCategoryName, isHitting, isDescending)
 values ("RUNS", true, true);
 insert into STANDINGSCATEGORY (standingsCategoryName, isHitting, isDescending)
