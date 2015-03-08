@@ -37,6 +37,7 @@ CREATE TABLE PLAYER (
 );
 
 CREATE TABLE PLAYERTOTEAM (
+    playerToTeamId BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     playerId BIGINT NOT NULL,
     gameDate DATE NOT NULL,
     fantasyTeamId INT,
@@ -44,7 +45,7 @@ CREATE TABLE PLAYERTOTEAM (
     fantasyPlayerStatusCode VARCHAR(10),
     mlbPlayerStatusCode VARCHAR(10),
     fantasyPositionId INT,
-    PRIMARY KEY (playerId, gameDate),
+    UNIQUE KEY (playerId, gameDate),
     FOREIGN KEY (playerId) REFERENCES PLAYER (playerId),
     FOREIGN KEY (fantasyTeamId) REFERENCES TEAM (teamId),
     FOREIGN KEY (mlbTeamId) REFERENCES TEAM (teamId),
@@ -62,6 +63,7 @@ CREATE TABLE PLAYERHISTORY (
     keeperTeamId INT,
     minorLeaguer BOOLEAN,
     rookieStatus BOOLEAN,
+    lockedUp BOOLEAN,
     PRIMARY KEY (playerId, season),
     FOREIGN KEY (playerId) REFERENCES PLAYER (playerId),
     FOREIGN KEY (draftTeamId) REFERENCES TEAM (teamId),
@@ -180,8 +182,7 @@ CREATE TABLE MLBGAME (
 
 CREATE TABLE MLBSTATS (
     statsId BIGINT AUTO_INCREMENT PRIMARY KEY,
-    playerId BIGINT NOT NULL,
-    mlbPlayerId BIGINT NOT NULL,
+    playerToTeamId BIGINT NOT NULL,
     gameId BIGINT NOT NULL,
     ab INT,
     ao INT,
@@ -224,9 +225,7 @@ CREATE TABLE MLBSTATS (
     ip DOUBLE,
     teamResult VARCHAR(10),
     teamScore INT,
-    UNIQUE KEY (playerId, gameId),
-    FOREIGN KEY (playerId) REFERENCES PLAYER (playerId),
-    FOREIGN KEY (mlbPlayerId) REFERENCES PLAYER (mlbPlayerId),
+    FOREIGN KEY (playerToTeamId) REFERENCES PLAYERTOTEAM (playerToTeamId),
     FOREIGN KEY (gameId) REFERENCES MLBGAME (gameId)
 );
 

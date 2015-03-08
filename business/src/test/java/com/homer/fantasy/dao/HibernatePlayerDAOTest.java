@@ -46,7 +46,7 @@ public class HibernatePlayerDAOTest {
         DailyPlayerInfo info = new DailyPlayerInfo();
         info.setMlbStatus(PlayerStatus.ACTIVE);
         info.setDate(LocalDate.now());
-        info.getDailyPlayerInfoKey().setPlayer(p);
+        info.setPlayer(p);
         p.getDailyPlayerInfoList().add(info);
         PlayerHistory history = new PlayerHistory();
         history.setPlayer(p);

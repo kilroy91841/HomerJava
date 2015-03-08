@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by arigolub on 3/1/15.
- */
+* Created by arigolub on 3/1/15.
+*/
 public class StandingsTest {
 
     private Team team1 = new Team(1);
@@ -23,25 +23,32 @@ public class StandingsTest {
 
     @Test
     public void calculateStandings() {
+        TeamStandings teamStandings1 = new TeamStandings(team1);
+        TeamStandings teamStandings2 = new TeamStandings(team2);
+        TeamStandings teamStandings3 = new TeamStandings(team3);
+        TeamStandings teamStandings4 = new TeamStandings(team4);
+        TeamStandings teamStandings5 = new TeamStandings(team5);
+        TeamStandings teamStandings6 = new TeamStandings(team6);
+
         List<List<TeamStandingsCategory>> listOfTeamStandingsCategories = new ArrayList<List<TeamStandingsCategory>>();
 
         List<TeamStandingsCategory> wins = new ArrayList<TeamStandingsCategory>();
-        wins.add(new TeamStandingsCategory(team1, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(6.0));
-        wins.add(new TeamStandingsCategory(team2, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(5.0));
-        wins.add(new TeamStandingsCategory(team3, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(4.0));
-        wins.add(new TeamStandingsCategory(team4, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(3.0));
-        wins.add(new TeamStandingsCategory(team5, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(2.0));
-        wins.add(new TeamStandingsCategory(team6, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(1.0));
+        wins.add(new TeamStandingsCategory(StandingsCategory.WINS).withCategoryAmount(6.0).withTeamStandings(teamStandings1));
+        wins.add(new TeamStandingsCategory(StandingsCategory.WINS).withCategoryAmount(5.0).withTeamStandings(teamStandings2));
+        wins.add(new TeamStandingsCategory(StandingsCategory.WINS).withCategoryAmount(4.0).withTeamStandings(teamStandings3));
+        wins.add(new TeamStandingsCategory(StandingsCategory.WINS).withCategoryAmount(3.0).withTeamStandings(teamStandings4));
+        wins.add(new TeamStandingsCategory(StandingsCategory.WINS).withCategoryAmount(2.0).withTeamStandings(teamStandings5));
+        wins.add(new TeamStandingsCategory(StandingsCategory.WINS).withCategoryAmount(1.0).withTeamStandings(teamStandings6));
 
         listOfTeamStandingsCategories.add(wins);
 
         List<TeamStandingsCategory> runs = new ArrayList<TeamStandingsCategory>();
-        runs.add(new TeamStandingsCategory(team1, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
-        runs.add(new TeamStandingsCategory(team2, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
-        runs.add(new TeamStandingsCategory(team3, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
-        runs.add(new TeamStandingsCategory(team4, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
-        runs.add(new TeamStandingsCategory(team5, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
-        runs.add(new TeamStandingsCategory(team6, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
+        runs.add(new TeamStandingsCategory(StandingsCategory.RUNS).withCategoryAmount(3.0).withTeamStandings(teamStandings1));
+        runs.add(new TeamStandingsCategory(StandingsCategory.RUNS).withCategoryAmount(3.0).withTeamStandings(teamStandings2));
+        runs.add(new TeamStandingsCategory(StandingsCategory.RUNS).withCategoryAmount(3.0).withTeamStandings(teamStandings3));
+        runs.add(new TeamStandingsCategory(StandingsCategory.RUNS).withCategoryAmount(3.0).withTeamStandings(teamStandings4));
+        runs.add(new TeamStandingsCategory(StandingsCategory.RUNS).withCategoryAmount(3.0).withTeamStandings(teamStandings5));
+        runs.add(new TeamStandingsCategory(StandingsCategory.RUNS).withCategoryAmount(3.0).withTeamStandings(teamStandings6));
 
         listOfTeamStandingsCategories.add(runs);
 
@@ -64,22 +71,22 @@ public class StandingsTest {
         List<List<TeamStandingsCategory>> listOfTeamStandingsCategories2 = new ArrayList<List<TeamStandingsCategory>>();
 
         List<TeamStandingsCategory> wins2 = new ArrayList<TeamStandingsCategory>();
-        wins2.add(new TeamStandingsCategory(team1, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(6.0));
-        wins2.add(new TeamStandingsCategory(team2, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(5.0));
-        wins2.add(new TeamStandingsCategory(team3, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(4.0));
-        wins2.add(new TeamStandingsCategory(team4, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(3.0));
-        wins2.add(new TeamStandingsCategory(team5, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(2.0));
-        wins2.add(new TeamStandingsCategory(team6, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(1.0));
+        wins2.add(new TeamStandingsCategory(StandingsCategory.WINS).withCategoryAmount(6.0).withTeamStandings(teamStandings1));
+        wins2.add(new TeamStandingsCategory(StandingsCategory.WINS).withCategoryAmount(5.0).withTeamStandings(teamStandings2));
+        wins2.add(new TeamStandingsCategory(StandingsCategory.WINS).withCategoryAmount(4.0).withTeamStandings(teamStandings3));
+        wins2.add(new TeamStandingsCategory(StandingsCategory.WINS).withCategoryAmount(3.0).withTeamStandings(teamStandings4));
+        wins2.add(new TeamStandingsCategory(StandingsCategory.WINS).withCategoryAmount(2.0).withTeamStandings(teamStandings5));
+        wins2.add(new TeamStandingsCategory(StandingsCategory.WINS).withCategoryAmount(1.0).withTeamStandings(teamStandings6));
 
         listOfTeamStandingsCategories2.add(wins2);
 
         List<TeamStandingsCategory> runs2 = new ArrayList<TeamStandingsCategory>();
-        runs2.add(new TeamStandingsCategory(team1, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(4.0));
-        runs2.add(new TeamStandingsCategory(team2, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
-        runs2.add(new TeamStandingsCategory(team3, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
-        runs2.add(new TeamStandingsCategory(team4, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
-        runs2.add(new TeamStandingsCategory(team5, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
-        runs2.add(new TeamStandingsCategory(team6, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
+        runs2.add(new TeamStandingsCategory(StandingsCategory.RUNS).withCategoryAmount(4.0).withTeamStandings(teamStandings1));
+        runs2.add(new TeamStandingsCategory(StandingsCategory.RUNS).withCategoryAmount(3.0).withTeamStandings(teamStandings2));
+        runs2.add(new TeamStandingsCategory(StandingsCategory.RUNS).withCategoryAmount(3.0).withTeamStandings(teamStandings3));
+        runs2.add(new TeamStandingsCategory(StandingsCategory.RUNS).withCategoryAmount(3.0).withTeamStandings(teamStandings4));
+        runs2.add(new TeamStandingsCategory(StandingsCategory.RUNS).withCategoryAmount(3.0).withTeamStandings(teamStandings5));
+        runs2.add(new TeamStandingsCategory(StandingsCategory.RUNS).withCategoryAmount(3.0).withTeamStandings(teamStandings6));
 
         listOfTeamStandingsCategories2.add(runs2);
 
@@ -90,22 +97,22 @@ public class StandingsTest {
         listOfTeamStandingsCategories = new ArrayList<List<TeamStandingsCategory>>();
 
         wins = new ArrayList<TeamStandingsCategory>();
-        wins.add(new TeamStandingsCategory(team1, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(6.0));
-        wins.add(new TeamStandingsCategory(team2, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(6.0));
-        wins.add(new TeamStandingsCategory(team3, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(6.0));
-        wins.add(new TeamStandingsCategory(team4, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(3.0));
-        wins.add(new TeamStandingsCategory(team5, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(2.0));
-        wins.add(new TeamStandingsCategory(team6, LocalDate.now(), StandingsCategory.WINS).withCategoryAmount(1.0));
+        wins.add(new TeamStandingsCategory(StandingsCategory.WINS).withCategoryAmount(6.0).withTeamStandings(teamStandings1));
+        wins.add(new TeamStandingsCategory(StandingsCategory.WINS).withCategoryAmount(6.0).withTeamStandings(teamStandings2));
+        wins.add(new TeamStandingsCategory(StandingsCategory.WINS).withCategoryAmount(6.0).withTeamStandings(teamStandings3));
+        wins.add(new TeamStandingsCategory(StandingsCategory.WINS).withCategoryAmount(3.0).withTeamStandings(teamStandings4));
+        wins.add(new TeamStandingsCategory(StandingsCategory.WINS).withCategoryAmount(2.0).withTeamStandings(teamStandings5));
+        wins.add(new TeamStandingsCategory(StandingsCategory.WINS).withCategoryAmount(1.0).withTeamStandings(teamStandings6));
 
         listOfTeamStandingsCategories.add(wins);
 
         runs = new ArrayList<TeamStandingsCategory>();
-        runs.add(new TeamStandingsCategory(team1, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
-        runs.add(new TeamStandingsCategory(team2, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
-        runs.add(new TeamStandingsCategory(team3, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
-        runs.add(new TeamStandingsCategory(team4, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
-        runs.add(new TeamStandingsCategory(team5, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
-        runs.add(new TeamStandingsCategory(team6, LocalDate.now(), StandingsCategory.RUNS).withCategoryAmount(3.0));
+        runs.add(new TeamStandingsCategory(StandingsCategory.RUNS).withCategoryAmount(3.0).withTeamStandings(teamStandings1));
+        runs.add(new TeamStandingsCategory(StandingsCategory.RUNS).withCategoryAmount(3.0).withTeamStandings(teamStandings2));
+        runs.add(new TeamStandingsCategory(StandingsCategory.RUNS).withCategoryAmount(3.0).withTeamStandings(teamStandings3));
+        runs.add(new TeamStandingsCategory(StandingsCategory.RUNS).withCategoryAmount(3.0).withTeamStandings(teamStandings4));
+        runs.add(new TeamStandingsCategory(StandingsCategory.RUNS).withCategoryAmount(3.0).withTeamStandings(teamStandings5));
+        runs.add(new TeamStandingsCategory(StandingsCategory.RUNS).withCategoryAmount(3.0).withTeamStandings(teamStandings6));
 
         listOfTeamStandingsCategories.add(runs);
 

@@ -1,31 +1,75 @@
 package com.homer.bridge;
 
-import com.homer.exception.DisallowedTransactionException;
-import com.homer.exception.NoDailyPlayerInfoException;
-import com.homer.fantasy.Player;
-import com.homer.fantasy.Roster;
-import com.homer.fantasy.Team;
-import com.homer.fantasy.dao.impl.HibernatePlayerDAO;
-import com.homer.fantasy.facade.PlayerFacade;
-import com.homer.job.*;
-import org.quartz.JobExecutionException;
+import com.homer.bridge.job.DailyPlayerInfoJob;
+import com.homer.bridge.job.MLBGameFetch;
+import com.homer.bridge.job.PlayerUpdateFromESPNLeagueRosterPage;
+import com.homer.bridge.job.PlayerUpdateFromMLB40ManRoster;
+import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.text.ParseException;
 
 /**
- * Created by arigolub on 2/20/15.
- */
+* Created by arigolub on 2/8/15.
+*/
 public class Runner {
 
-    public static void main(String[] args) throws Exception {
-        //PlayerUpdateFromESPNLeagueRosterPage job = new PlayerUpdateFromESPNLeagueRosterPage();
-        //job.execute(null);
-//        HibernatePlayerDAO dao = new HibernatePlayerDAO();
-//        List<Player> players = dao.getPlayersOnTeamForDate(new Team(1), LocalDate.of(2015, 2, 22));
-//        Roster roster = new Roster(players);
-//        PlayerUpdateFromMLB40ManRoster job = new PlayerUpdateFromMLB40ManRoster();
-        DailyPlayerInfoJob job = new DailyPlayerInfoJob();
-        job.execute(null);
+    private static final Logger LOG = LoggerFactory.getLogger(Runner.class);
+
+    private static Scheduler scheduler;
+
+    public static Scheduler getScheduler() {
+        return scheduler;
+    }
+
+    private static Trigger mlbUpdatePlayersTrigger = TriggerBuilder.newTrigger()
+            .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(4).repeatForever()).build();
+    private static Trigger espnUpdatePositionsTrigger = TriggerBuilder.newTrigger()
+            .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(4).repeatForever()).build();
+    private static Trigger mlbGameFetchTrigger = TriggerBuilder.newTrigger()
+            .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(5).repeatForever()).build();
+    private static Trigger dailyPlayerInfoTrigger = TriggerBuilder.newTrigger()
+            .withIdentity("dailyPlayerInfoTrigger").build();
+
+    private static SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+
+    static {
+        try {
+            scheduler = schedulerFactory.getScheduler();
+            scheduler.start();
+        } catch (SchedulerException e) {
+            LOG.error("Unable to schedule", e);
+        }
+    }
+
+    public static void main(String[] args) throws ParseException, SchedulerException {
+
+        JobDetail mlbUpdatePlayersJob = JobBuilder.newJob(PlayerUpdateFromMLB40ManRoster.class)
+                .withIdentity("playerUpdateFromMLB40ManRoster")
+                .build();
+        JobDetail espnUpdatePositionsJob = JobBuilder.newJob(PlayerUpdateFromESPNLeagueRosterPage.class)
+                .withIdentity("playerUpdateFromESPNLeagueRosterPage")
+                .build();
+        JobDetail mlbGameFetchJob = JobBuilder.newJob(MLBGameFetch.class)
+                .withIdentity("mlbGameFetch")
+                .build();
+
+//        scheduler.scheduleJob(espnUpdatePositionsJob, espnUpdatePositionsTrigger);
+//        scheduler.scheduleJob(mlbUpdatePlayersJob, mlbUpdatePlayersTrigger);
+        scheduler.scheduleJob(mlbGameFetchJob, mlbGameFetchTrigger);
+    }
+
+    private static JobDetail dailyPlayerInfoJob = JobBuilder.newJob(DailyPlayerInfoJob.class)
+            .withIdentity("dailyPlayerInfoJob")
+            .build();
+
+    public static JobDetail getDailyPlayerInfoJob() {
+        return dailyPlayerInfoJob;
+    }
+
+    public static Trigger getDailyPlayerInfoTrigger() {
+        return dailyPlayerInfoTrigger;
     }
 }

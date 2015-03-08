@@ -3,7 +3,7 @@ html
   head
     link(rel='stylesheet', href='/bootstrap-3.3.2-dist/css/bootstrap.css')
     link(rel='stylesheet', href='/bootstrap-3.3.2-dist/css/dashboard.css')
-    link(rel='icon', href="homerFavicon.ico")
+    link(rel='icon', href="/homerFavicon.ico")
     title= title
 
     block scripts
@@ -22,9 +22,9 @@ html
         div(id="navbar", class="navbar-collapse collapse")
           ul(class="nav navbar-nav")
             li(class="active")
-              a(href="#") Home
+              a(href="/") Dashboard
             li
-              a(href="#about") About
+              a(href="#about") General Manager
             li
               a(href="#contact") Contact
             li(class="dropdown")
@@ -37,10 +37,10 @@ html
           ul(class="nav navbar-nav navbar-right")
             if (user != null)
               li
-                a(href="/login") Logout
+                //a(href="/login") Logout
             else
               li
-                a(href="/logout") Login
+                //a(href="/logout") Login
             li(class="active")
               a(href="#") Account
     block content

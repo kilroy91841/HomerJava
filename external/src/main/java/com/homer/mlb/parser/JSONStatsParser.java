@@ -24,7 +24,7 @@ public class JSONStatsParser {
     private static final String JSON_MLBINDIVIDUAL  = "mlb_individual_";
     private static final String JSON_GAMELOG        = "_game_log";
 
-    public static List<Stats> parseStats(long playerId, JsonNode json, boolean isBatter) throws Exception {
+    public static List<Stats> parseStats(long mlbPlayerId, JsonNode json, boolean isBatter) throws Exception {
         List<Stats> stats = null;
 
         String jsonProperty = isBatter ? JSON_HITTING : JSON_PITCHING;
@@ -37,7 +37,7 @@ public class JSONStatsParser {
                 .getJSONArray(JSON_ROW);
         if(array.length() > 0) {
             Player player = new Player();
-            player.setMlbPlayerId(playerId);
+            player.setMlbPlayerId(mlbPlayerId);
             stats = new ArrayList<Stats>();
             for(int i = 0; i < array.length(); i++) {
                 JSONObject obj = (JSONObject)array.get(i);

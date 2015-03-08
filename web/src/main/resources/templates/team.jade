@@ -1,17 +1,59 @@
 extends layout
 
 block content
-  div(class="container")
+  
+  mixin player(position, player)
+    td= position
+    td= player.playerName
+    td= player.playerHistoryList[0].salary
+    td= playerHelper.getNextYearSalary(player.playerHistoryList[0])
+
+  div(class="container-fluid")
     div(class="row")
-      div(class="com-sm-3 col-md-2 sidebar")
-        ul(class="nav nav-sidebar")
-          li
-            table(class="table table-hover")
-              tbody
-                for player in roster.catchers
-                  tr
-                    td= "C"
-                    td= player.playerName
-                tr
-                  td= "1B"
-                  td= roster.firstBase.playerName
+      div(class="col-sm-12 col-md-12")
+        h1(class="page-header")= roster.team.teamName
+        div(clas="row")
+          h3 Money
+          h4
+            strong 2015 Cash: 
+            = money.amount
+        div(clas="row")
+          table(class="table")
+            thead
+              th Position
+              th Name
+              th 2014 Salary
+              th 2015 Salary
+            for player in roster.catchers
+              tr
+                mixin player("C", player)
+            for player in roster.firstBase
+              tr
+                mixin player("1B", player)              
+            for player in roster.secondBase
+              tr
+                mixin player("2B", player)              
+            for player in roster.thirdBase
+              tr
+                mixin player("3B", player)              
+            for player in roster.shortstop
+              tr
+                mixin player("SS", player)            
+            for player in roster.middleInfield
+              tr
+                mixin player("2B/SS", player)            
+            for player in roster.cornerInfield
+              tr
+                mixin player("1B/3B", player)            
+            for player in roster.outfielders
+              tr
+                mixin player("OF", player)            
+            for player in roster.utility
+              tr
+                mixin player("U", player)            
+            for player in roster.pitchers
+              tr
+                mixin player("P", player)            
+            for player in roster.disabledList
+              tr
+                mixin player("DL", player)            

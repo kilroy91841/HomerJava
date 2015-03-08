@@ -22,13 +22,6 @@ public class TeamStandingsCategory implements Comparable {
     @ManyToOne
     @JoinColumn(name="teamStandingsId", referencedColumnName="teamStandingsId")
     private TeamStandings teamStandings;
-//    @OneToOne
-//    @JoinColumn(name="teamId", referencedColumnName="teamId")
-//    private Team team;
-//    @Convert(converter=LocalDatePersistenceConverter.class)
-//    @Column(name="date")
-//    @Transient
-//    private LocalDate date;
     @OneToOne
     @JoinColumn(name="standingsCategoryName", referencedColumnName="standingsCategoryName")
     private StandingsCategory standingsCategory;
@@ -41,14 +34,17 @@ public class TeamStandingsCategory implements Comparable {
 
     public TeamStandingsCategory() { }
 
-    public TeamStandingsCategory(Team team, LocalDate date, StandingsCategory standingsCategory) {
-//        this.team = team;
-//        this.date = date;
+    public TeamStandingsCategory(StandingsCategory standingsCategory) {
         this.standingsCategory = standingsCategory;
     }
 
     public TeamStandingsCategory withCategoryAmount(Double categoryAmount) {
         this.categoryAmount = categoryAmount;
+        return this;
+    }
+
+    public TeamStandingsCategory withTeamStandings(TeamStandings teamStandings) {
+        this.teamStandings = teamStandings;
         return this;
     }
 
@@ -67,22 +63,6 @@ public class TeamStandingsCategory implements Comparable {
     public void setTeamStandingsId(long teamStandingsId) {
         this.teamStandingsCategoryId = teamStandingsId;
     }
-
-//    public Team getTeam() {
-//        return team;
-//    }
-//
-//    public void setTeam(Team team) {
-//        this.team = team;
-//    }
-
-//    public LocalDate getDate() {
-//        return date;
-//    }
-//
-//    public void setDate(LocalDate date) {
-//        this.date = date;
-//    }
 
     public StandingsCategory getStandingsCategory() {
         return standingsCategory;
@@ -121,8 +101,6 @@ public class TeamStandingsCategory implements Comparable {
     public String toString() {
         return "TeamStandings{" +
                 "teamStandingsId=" + teamStandingsCategoryId +
-//                ", team=" + team +
-//                ", date=" + date +
                 ", standingsCategory=" + standingsCategory +
                 ", categoryAmount=" + categoryAmount +
                 ", categoryPoints=" + categoryPoints +

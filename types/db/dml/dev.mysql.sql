@@ -182,3 +182,28 @@ insert into STANDINGSCATEGORY (standingsCategoryName, isHitting, isDescending)
 values ("ERA", false, false);
 insert into STANDINGSCATEGORY (standingsCategoryName, isHitting, isDescending)
 values ("WHIP", false, false);
+
+insert into money (teamId, season, moneyType, amount)
+select 1, 2015, 'MAJORLEAGUEDRAFT', 257
+union all
+select 7, 2015, 'MAJORLEAGUEDRAFT', 260
+union all
+select 12, 2015, 'MAJORLEAGUEDRAFT', 337
+union all
+select 6, 2015, 'MAJORLEAGUEDRAFT', 186
+union all
+select 3, 2015, 'MAJORLEAGUEDRAFT', 265
+union all
+select 4, 2015, 'MAJORLEAGUEDRAFT', 267
+union all
+select 9, 2015, 'MAJORLEAGUEDRAFT', 260
+union all
+select 2, 2015, 'MAJORLEAGUEDRAFT', 332
+union all
+select 10, 2015, 'MAJORLEAGUEDRAFT', 264
+union all
+select 11, 2015, 'MAJORLEAGUEDRAFT', 178
+union all
+select 5, 2015, 'MAJORLEAGUEDRAFT', 287
+union all
+select 8, 2015, 'MAJORLEAGUEDRAFT', 264;

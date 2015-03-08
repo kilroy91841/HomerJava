@@ -36,7 +36,6 @@ public class TeamStandings implements Comparable, Serializable{
     @Convert(converter=LocalDatePersistenceConverter.class)
     @Column(name="date")
     private LocalDate date;
-//    @OneToMany( fetch=FetchType.EAGER, mappedBy = "owner", cascade = CascadeType.ALL)
     @OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     @JoinColumn(name="teamStandingsId", referencedColumnName="teamStandingsId")

@@ -1,16 +1,12 @@
-package com.homer.job;
+package com.homer.bridge.job;
 
 import com.homer.SportType;
-import com.homer.espn.Player;
 import com.homer.espn.Transaction;
 import com.homer.espn.client.ESPNClientREST;
 import com.homer.exception.DisallowedTransactionException;
 import com.homer.exception.NoDailyPlayerInfoException;
-import com.homer.exception.PlayerNotFoundException;
 import com.homer.fantasy.Team;
-import com.homer.fantasy.dao.HomerDAO;
 import com.homer.fantasy.dao.ITeamDAO;
-import com.homer.fantasy.facade.PlayerFacade;
 import com.homer.fantasy.facade.TransactionFacade;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -21,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
 import java.util.List;
 

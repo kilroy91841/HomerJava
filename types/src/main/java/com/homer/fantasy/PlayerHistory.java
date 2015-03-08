@@ -19,6 +19,8 @@ public class PlayerHistory {
 	private int keeperSeason;
 	@Column(name="minorLeaguer")
 	private Boolean minorLeaguer;
+	@Column(name="lockedUp")
+	private Boolean lockedUp;
 	@OneToOne
 	@JoinColumn(name="draftTeamId", referencedColumnName="teamId")
 	private Team draftTeam;
@@ -99,6 +101,14 @@ public class PlayerHistory {
 		return keeperTeam;
 	}
 
+	public Boolean getLockedUp() {
+		return lockedUp;
+	}
+
+	public void setLockedUp(Boolean lockedUp) {
+		this.lockedUp = lockedUp;
+	}
+
 	//Used to denote whether the player is still allowed to be a minor leaguer, i.e. has not passed
 	//ip or ab threshhold and/or has not been called up to fantasy majors yet
 	public Boolean hasRookieStatus() {
@@ -122,6 +132,7 @@ public class PlayerHistory {
                 ", draftTeam=" + draftTeam +
                 ", keeperTeam=" + keeperTeam +
 				", rookieStatus=" + rookieStatus +
+				", lockedUp=" + lockedUp +
                 '}';
     }
 

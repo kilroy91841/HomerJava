@@ -1,11 +1,10 @@
-package com.homer.job;
+package com.homer.bridge.job;
 
 import com.homer.espn.Player;
 import com.homer.espn.client.ESPNClientREST;
 import com.homer.exception.DisallowedTransactionException;
 import com.homer.exception.NoDailyPlayerInfoException;
 import com.homer.exception.PlayerNotFoundException;
-import com.homer.fantasy.dao.HomerDAO;
 import com.homer.fantasy.facade.PlayerFacade;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;

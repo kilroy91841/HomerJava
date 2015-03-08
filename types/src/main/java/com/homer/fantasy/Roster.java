@@ -14,26 +14,33 @@ public class Roster {
     private List<Player> players = new ArrayList<Player>();
 
     private List<Player> catchers = new ArrayList<Player>();
-    private Player firstBase;
-    private Player secondBase;
-    private Player thirdBase;
-    private Player shortstop;
-    private Player middleInfield;
-    private Player cornerInfield;
+    private List<Player> firstBase = new ArrayList<Player>();
+    private List<Player> secondBase = new ArrayList<Player>();
+    private List<Player> thirdBase = new ArrayList<Player>();
+    private List<Player> shortstop = new ArrayList<Player>();
+    private List<Player> middleInfield = new ArrayList<Player>();
+    private List<Player> cornerInfield = new ArrayList<Player>();
     private List<Player> outfielders = new ArrayList<Player>();
     private List<Player> pitchers = new ArrayList<Player>();
-    private Player utility;
+    private List<Player> utility = new ArrayList<Player>();
 
     private List<Player> disabledList = new ArrayList<Player>();
     private List<Player> minorLeaguers = new ArrayList<Player>();
     private List<Player> suspendedList = new ArrayList<Player>();
     private List<Player> bench = new ArrayList<Player>();
 
+    private Team team;
+
     public Roster() { }
 
     public Roster(List<Player> players) {
         this.players = players;
         init();
+    }
+
+    public Roster withTeam(Team team) {
+        this.team = team;
+        return this;
     }
 
     private void init() {
@@ -52,21 +59,21 @@ public class Roster {
             } else if (Position.FANTASYCATCHER.equals(fantasyPosition)) {
                 catchers.add(p);
             } else if (Position.FANTASYFIRSTBASE.equals(fantasyPosition)) {
-                firstBase = p;
+                firstBase.add(p);
             } else if (Position.FANTASYSECONDBASE.equals(fantasyPosition)) {
-                secondBase = p;
+                secondBase.add(p);
             } else if (Position.FANTASYTHIRDBASE.equals(fantasyPosition)) {
-                thirdBase = p;
+                thirdBase.add(p);
             } else if (Position.FANTASYSHORTSTOP.equals(fantasyPosition)) {
-                shortstop = p;
+                shortstop.add(p);
             } else if (Position.FANTASYMIDDLEINFIELD.equals(fantasyPosition)) {
-                middleInfield = p;
+                middleInfield.add(p);
             } else if (Position.FANTASYCORNERINFIELD.equals(fantasyPosition)) {
-                cornerInfield = p;
+                cornerInfield.add(p);
             } else if (Position.FANTASYOUTFIELD.equals(fantasyPosition)) {
                 outfielders.add(p);
             } else if (Position.FANTASYUTILITY.equals(fantasyPosition)) {
-                utility = p;
+                utility.add(p);
             } else if (Position.FANTASYPITCHER.equals(fantasyPosition)) {
                 pitchers.add(p);
             }
@@ -89,52 +96,60 @@ public class Roster {
         this.catchers = catchers;
     }
 
-    public Player getFirstBase() {
+    public List<Player> getFirstBase() {
         return firstBase;
     }
 
-    public void setFirstBase(Player firstBase) {
+    public void setFirstBase(List<Player> firstBase) {
         this.firstBase = firstBase;
     }
 
-    public Player getSecondBase() {
+    public List<Player> getSecondBase() {
         return secondBase;
     }
 
-    public void setSecondBase(Player secondBase) {
+    public void setSecondBase(List<Player> secondBase) {
         this.secondBase = secondBase;
     }
 
-    public Player getThirdBase() {
+    public List<Player> getThirdBase() {
         return thirdBase;
     }
 
-    public void setThirdBase(Player thirdBase) {
+    public void setThirdBase(List<Player> thirdBase) {
         this.thirdBase = thirdBase;
     }
 
-    public Player getShortstop() {
+    public List<Player> getShortstop() {
         return shortstop;
     }
 
-    public void setShortstop(Player shortstop) {
+    public void setShortstop(List<Player> shortstop) {
         this.shortstop = shortstop;
     }
 
-    public Player getMiddleInfield() {
+    public List<Player> getMiddleInfield() {
         return middleInfield;
     }
 
-    public void setMiddleInfield(Player middleInfield) {
+    public void setMiddleInfield(List<Player> middleInfield) {
         this.middleInfield = middleInfield;
     }
 
-    public Player getCornerInfield() {
+    public List<Player> getCornerInfield() {
         return cornerInfield;
     }
 
-    public void setCornerInfield(Player cornerInfield) {
+    public void setCornerInfield(List<Player> cornerInfield) {
         this.cornerInfield = cornerInfield;
+    }
+
+    public List<Player> getUtility() {
+        return utility;
+    }
+
+    public void setUtility(List<Player> utility) {
+        this.utility = utility;
     }
 
     public List<Player> getOutfielders() {
@@ -143,14 +158,6 @@ public class Roster {
 
     public void setOutfielders(List<Player> outfielders) {
         this.outfielders = outfielders;
-    }
-
-    public Player getUtility() {
-        return utility;
-    }
-
-    public void setUtility(Player utility) {
-        this.utility = utility;
     }
 
     public List<Player> getPitchers() {
@@ -191,5 +198,13 @@ public class Roster {
 
     public void setBench(List<Player> bench) {
         this.bench = bench;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }

@@ -1,10 +1,12 @@
 package com.homer.fantasy.dao.impl;
 
+import com.homer.fantasy.DailyPlayerInfo;
 import com.homer.fantasy.Player;
 import com.homer.fantasy.Position;
 import com.homer.fantasy.Team;
 import com.homer.fantasy.dao.HomerDAO;
 import com.homer.fantasy.dao.IPlayerDAO;
+import com.homer.fantasy.facade.PlayerFacade;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Example;
@@ -89,7 +91,7 @@ public class HibernatePlayerDAO extends HomerDAO implements IPlayerDAO {
                     "select p from Player p "
                     + "inner join p.dailyPlayerInfoList as dailyPlayerInfo "
                     + "where dailyPlayerInfo.fantasyTeam.id = :team "
-                    + "and dailyPlayerInfo.dailyPlayerInfoKey.date = :date"
+                    + "and dailyPlayerInfo.date = :date"
             );
             query.setParameter("team", team.getTeamId());
             query.setParameter("date", date);
@@ -104,5 +106,29 @@ public class HibernatePlayerDAO extends HomerDAO implements IPlayerDAO {
 
         LOG.debug("END: getPlayersOnTeamForDate  [players=" + players + "]");
         return players;
+    }
+
+    public static void main(String[] args) {
+        PlayerFacade facade = new PlayerFacade();
+        Player player = facade.getPlayer(1);
+        player.getDailyPlayerInfoList().forEach(dpi -> {
+            dpi.getStatsList().forEach(s ->
+                System.out.println(s)
+            );
+                });
+        DailyPlayerInfo newDailyPlayerInfo = new DailyPlayerInfo();
+        newDailyPlayerInfo.setDate(LocalDate.now().plusDays(5));
+        newDailyPlayerInfo.setPlayer(player);
+        player.getDailyPlayerInfoList().add(newDailyPlayerInfo);
+
+        player = facade.createOrUpdatePlayer(player);
+
+        player.getDailyPlayerInfoList().forEach(dpi -> {
+            dpi.getStatsList().forEach(s ->
+                            System.out.println(s)
+            );
+        });
+
+        System.exit(1);
     }
 }

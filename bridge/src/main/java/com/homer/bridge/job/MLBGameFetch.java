@@ -1,5 +1,6 @@
-package com.homer.job;
+package com.homer.bridge.job;
 
+import com.homer.bridge.Runner;
 import com.homer.fantasy.facade.GameFacade;
 import com.homer.mlb.Game;
 import com.homer.mlb.client.MLBClientREST;

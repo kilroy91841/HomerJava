@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Map;
 
+import com.homer.util.PropertyRetriever;
 import spark.ModelAndView;
 import spark.TemplateEngine;
 import de.neuland.jade4j.JadeConfiguration;
@@ -20,14 +21,15 @@ import de.neuland.jade4j.template.TemplateLoader;
 public class JadeEngine extends TemplateEngine {
 
     private JadeConfiguration configuration;
-    private String directory = new File(".").getCanonicalPath();
+    private static final String PROPERTY_FILE = "jade.properties";
+    private static final String PATH_PROPERTY = "path";
+    private static final String path = PropertyRetriever.getInstance().getProperty(PROPERTY_FILE, PATH_PROPERTY);
 
     public JadeEngine() throws IOException {
         this.configuration = new JadeConfiguration();
-        //TODO use resource instead of bogus new File
-        this.directory = this.directory + "/web/src/main/resources/templates/";
-        TemplateLoader loader = new FileTemplateLoader(directory, "UTF-8");
+        TemplateLoader loader = new FileTemplateLoader(path, "UTF-8");
         configuration.setTemplateLoader(loader);
+        configuration.setCaching(false);
     }
 
     @SuppressWarnings("unchecked")

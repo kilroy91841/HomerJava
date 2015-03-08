@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.homer.JsonIgnore;
 import com.homer.PlayerStatus;
 import com.homer.SportType;
 import com.homer.exception.NoDailyPlayerInfoException;
@@ -47,12 +48,14 @@ public class Player {
     @JoinColumn(name="playerId", referencedColumnName="playerId")
     @OrderBy(clause = "gameDate desc")
     @Fetch(FetchMode.SELECT)
+    @JsonIgnore
     private List<DailyPlayerInfo> dailyPlayerInfoList;
     @OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER)
     @Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name="playerId", referencedColumnName="playerId")
     @OrderBy(clause = "season desc")
     @Fetch(FetchMode.SELECT)
+    @JsonIgnore
     private List<PlayerHistory> playerHistoryList;
 
     public Player() { }

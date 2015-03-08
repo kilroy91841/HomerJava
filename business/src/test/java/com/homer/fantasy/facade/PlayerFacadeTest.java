@@ -1,7 +1,6 @@
 package com.homer.fantasy.facade;
 
 import com.homer.PlayerStatus;
-import com.homer.espn.*;
 import com.homer.exception.DisallowedTransactionException;
 import com.homer.exception.NoDailyPlayerInfoException;
 import com.homer.exception.PlayerNotFoundException;
@@ -9,7 +8,6 @@ import com.homer.fantasy.*;
 import com.homer.fantasy.Player;
 import com.homer.fantasy.dao.impl.MockPlayerDAO;
 import com.homer.fantasy.facade.PlayerFacade;
-import com.homer.fantasy.key.DailyPlayerInfoKey;
 import com.homer.mlb.MLBJSONObject;
 import junit.framework.Assert;
 import org.json.JSONObject;

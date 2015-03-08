@@ -1,4 +1,4 @@
-package com.homer.job;
+package com.homer.bridge.job;
 
 import com.homer.fantasy.DailyPlayerInfo;
 import com.homer.fantasy.facade.PlayerFacade;

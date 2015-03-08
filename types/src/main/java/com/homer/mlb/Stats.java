@@ -1,6 +1,7 @@
 package com.homer.mlb;
 
 import com.homer.JsonIgnore;
+import com.homer.fantasy.DailyPlayerInfo;
 import com.homer.util.LocalDatePersistenceConverter;
 
 import com.homer.fantasy.Player;
@@ -21,12 +22,15 @@ public class Stats {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="statsId")
     private Long statsId;
+//    @ManyToOne
+//    @JoinColumn(name="playerId", referencedColumnName="playerId")
+//    @JsonIgnore
+//    private Player player;
+//    @Column(name="mlbPlayerId")
+//    private Long mlbPlayerId;
     @ManyToOne
-    @JoinColumn(name="playerId", referencedColumnName="playerId")
-    @JsonIgnore
-    private Player player;
-    @Column(name="mlbPlayerId")
-    private Long mlbPlayerId;
+    @JoinColumn(name="playerToTeamId", referencedColumnName="playerToTeamId")
+    private DailyPlayerInfo dailyPlayerInfo;
     @ManyToOne
     @JoinColumn(name="gameId", referencedColumnName="gameId")
     private Game game;
@@ -117,8 +121,8 @@ public class Stats {
     public Stats() { }
 
     public Stats(Player player, MLBJSONObject jsonObject) throws Exception {
-        this.setPlayer(player);
-        this.mlbPlayerId = player.getMlbPlayerId();
+        dailyPlayerInfo = new DailyPlayerInfo();
+        dailyPlayerInfo.setPlayer(player);
         Game game = new Game();
         game.setGameId(jsonObject.getLongProtected("game_pk"));
         this.setGame(game);
@@ -163,6 +167,7 @@ public class Stats {
         this.ops = jsonObject.getDoubleProtected("ops");
         this.slg = jsonObject.getDoubleProtected("slg");
         this.game_date = jsonObject.getLocalDate("game_date");
+        dailyPlayerInfo.setDate(this.game_date);
         this.game_type = jsonObject.getString("game_type");
         this.home_away = jsonObject.getString("home_away");
         this.opp = jsonObject.getString("opp");
@@ -171,28 +176,20 @@ public class Stats {
         this.team_result = jsonObject.getString("team_result");
     }
 
+    public DailyPlayerInfo getDailyPlayerInfo() {
+        return dailyPlayerInfo;
+    }
+
+    public void setDailyPlayerInfo(DailyPlayerInfo dailyPlayerInfo) {
+        this.dailyPlayerInfo = dailyPlayerInfo;
+    }
+
     public Long getStatsId() {
         return statsId;
     }
 
     public void setStatsId(long statsId) {
         this.statsId = statsId;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    public Long getMlbPlayerId() {
-        return mlbPlayerId;
-    }
-
-    public void setMlbPlayerId(Long mlbPlayerId) {
-        this.mlbPlayerId = mlbPlayerId;
     }
 
     public Game getGame() {
@@ -494,8 +491,7 @@ public class Stats {
     @Override
     public String toString() {
         return "Stats{" +
-                " player=" + player.getPlayerId() +
-                ", mlbPlayerId=" + mlbPlayerId +
+                " dailyPlayerInfoId=" + dailyPlayerInfo.getDailyPlayerInfoId() +
                 ", game=" + game +
                 ", ab=" + ab +
                 ", ao=" + ao +
@@ -549,14 +545,14 @@ public class Stats {
         Stats stats = (Stats) o;
 
         if (!this.game.equals(stats.game)) return false;
-        if (!this.player.equals(stats.player)) return false;
+        if (!this.dailyPlayerInfo.equals(stats.dailyPlayerInfo)) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = player.hashCode();
+        int result = dailyPlayerInfo.hashCode();
         result = result * 31 * game.hashCode();
         return result;
     }

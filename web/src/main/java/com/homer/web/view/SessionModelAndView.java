@@ -2,6 +2,7 @@ package com.homer.web.view;
 
 import com.homer.web.HelloWorld;
 import com.homer.web.authentication.HomerAccount;
+import com.homer.web.helpers.PlayerHelper;
 import spark.ModelAndView;
 import spark.Session;
 
@@ -22,6 +23,7 @@ public class SessionModelAndView {
         HomerAccount account = session.attribute(SESSION_ACCOUNT);
         attributeMap.put(ATTRIBUTE_USER, account);
         attributeMap.put(ATTRIBUTE_TEAMS, HelloWorld.getTeams());
+        attributeMap.put("playerHelper", new PlayerHelper());
         return new ModelAndView(attributeMap, viewName);
     }
 }

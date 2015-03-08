@@ -1,5 +1,6 @@
 package com.homer.fantasy.dao.impl;
 
+import com.homer.fantasy.DailyPlayerInfo;
 import com.homer.fantasy.dao.HomerDAO;
 import com.homer.fantasy.dao.IStatsDAO;
 import com.homer.mlb.Stats;
@@ -36,8 +37,9 @@ public class HibernateStatsDAO extends HomerDAO implements IStatsDAO {
         try {
             session = openSession();
             stats = session.createCriteria(Stats.class)
-                    .add(Restrictions.like("mlbPlayerId", example.getMlbPlayerId()))
                     .add(Restrictions.like("game.gameId", example.getGame().getGameId()))
+                    .add(Restrictions.like("dailyPlayerInfo.dailyPlayerInfoId", example.getDailyPlayerInfo().getDailyPlayerInfoId()))
+                    .createCriteria("dailyPlayerInfo.player").add(Restrictions.like("mlbPlayerId", example.getDailyPlayerInfo().getPlayer().getMlbPlayerId()))
                     .list();
         } catch(Exception e) {
             LOG.error("Exception finding teams", e);

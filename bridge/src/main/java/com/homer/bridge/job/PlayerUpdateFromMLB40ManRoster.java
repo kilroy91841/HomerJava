@@ -1,8 +1,7 @@
-package com.homer.job;
+package com.homer.bridge.job;
 
 import com.homer.SportType;
 import com.homer.fantasy.Team;
-import com.homer.fantasy.dao.HomerDAO;
 import com.homer.fantasy.dao.ITeamDAO;
 import com.homer.fantasy.facade.PlayerFacade;
 import com.homer.mlb.Player;

@@ -12,10 +12,17 @@
     <artifactId>bridge</artifactId>
 
     <dependencies>
+        <!-- HomerAtTheBat -->
         <dependency>
             <groupId>HomerAtTheBat</groupId>
             <artifactId>business</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- Scheduling -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
         </dependency>
     </dependencies>
 
@@ -40,7 +47,7 @@
                                 <daemon>
                                     <id>bridge-dev</id>
                                     <wrapperMainClass>org.tanukisoftware.wrapper.WrapperSimpleApp</wrapperMainClass>
-                                    <mainClass>com.homer.job.Runner</mainClass>
+                                    <mainClass>com.homer.bridge.Runner</mainClass>
                                     <platforms>
                                         <platform>jsw</platform>
                                     </platforms>

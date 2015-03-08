@@ -4,6 +4,8 @@ import com.homer.fantasy.Money;
 import com.homer.fantasy.Team;
 import com.homer.fantasy.dao.HomerDAO;
 import com.homer.fantasy.dao.IMoneyDAO;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,12 +59,22 @@ public class HibernateMoneyDAO extends HomerDAO implements IMoneyDAO {
     public Money getMoney(int teamId, int season, Money.MoneyType moneyType) {
         LOG.debug("BEGIN: getMoney [teamId=" + teamId + ", season=" + season + ", moneyType=" + moneyType + "]");
 
-        Money example = new Money();
-        example.setTeam(new Team(teamId));
-        example.setMoneyType(moneyType);
-        example.setSeason(season);
-
-        Money money = findUniqueByExample(example, Money.class);
+        Session session = null;
+        Money money = null;
+        try {
+            session = openSession();
+            money = (Money)session.createCriteria(Money.class)
+                    .add(Restrictions.like("season", season))
+                    .add(Restrictions.like("team.teamId", teamId))
+                    .add(Restrictions.like("moneyType", moneyType))
+                    .uniqueResult();
+        } catch(Exception e) {
+            LOG.error("Exception getting money", e);
+        } finally {
+            if(session != null) {
+                session.close();
+            }
+        }
 
         LOG.debug("END: getMoney [money=" + money + "]");
         return money;

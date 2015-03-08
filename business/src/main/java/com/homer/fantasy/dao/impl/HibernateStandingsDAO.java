@@ -125,5 +125,6 @@ public class HibernateStandingsDAO extends HomerDAO {
 //        HibernatePlayerDAO playerDAO = new HibernatePlayerDAO();
 //        Player player = playerDAO.getPlayer(new Player(1));
 //        System.out.println(player);
+        System.exit(1);
     }
 }

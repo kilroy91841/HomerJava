@@ -19,11 +19,18 @@ import java.util.List;
 public class PlayerFacade {
 
     private static final Logger LOG = LoggerFactory.getLogger(PlayerFacade.class);
-    private static final int SEASON = 2015;
+    private static final int SEASON = 2014;
     private static IPlayerDAO dao;
 
     public PlayerFacade() {
         dao = IPlayerDAO.FACTORY.getInstance();
+    }
+
+    public List<Player> getPlayers() {
+        LOG.debug("BEGIN: getPlayers");
+        List<Player> players = dao.getPlayersByYear(SEASON);
+        LOG.debug("END: getPlayers");
+        return players;
     }
 
     public Player getPlayer(long playerId) {

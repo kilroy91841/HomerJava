@@ -36,9 +36,9 @@ public class Game {
     @Column(name="gameDate")
     private LocalDate gameDate;
     @Column(name="awayScore")
-    private int awayScore;
+    private Integer awayScore;
     @Column(name="homeScore")
-    private int homeScore;
+    private Integer homeScore;
     @ManyToOne
     @JoinColumn(name="awayProbablePitcherId", referencedColumnName="mlbPlayerId")
     @JsonIgnore
@@ -146,19 +146,19 @@ public class Game {
         this.gameId = gameId;
     }
 
-    public int getAwayScore() {
+    public Integer getAwayScore() {
         return awayScore;
     }
 
-    public void setAwayScore(int awayScore) {
+    public void setAwayScore(Integer awayScore) {
         this.awayScore = awayScore;
     }
 
-    public int getHomeScore() {
+    public Integer getHomeScore() {
         return homeScore;
     }
 
-    public void setHomeScore(int homeScore) {
+    public void setHomeScore(Integer homeScore) {
         this.homeScore = homeScore;
     }
 
