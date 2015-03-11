@@ -21,6 +21,7 @@ public class HelloWorld implements SparkApplication{
     public static void main(String[] args) throws IOException {
         staticFileLocation("/public");
 
+
         ITeamDAO teamDao = ITeamDAO.FACTORY.getInstance();
         teams = teamDao.getTeams(SportType.FANTASY);
 

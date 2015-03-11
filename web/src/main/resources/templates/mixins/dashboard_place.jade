@@ -1,11 +1,18 @@
 mixin dashboard_place
-	div(class="row")
-		h1(style="font-size:72px") 3
-			small(style="font-size: 25%") rd
-		div(class="row")
-			h5 place
-		div(class="col-md-12")
-			div(class="row")
-				h4 Points behind: 1.5
-			div(class="row")
-				h4 Points ahead: 2
+	div(class="panel panel-primary vertical-center")
+		div(class="panel-heading")
+			h3(class="panel-title") Standings
+		div(class="panel-body")
+			h1(style="font-size:100px") 3
+				small(style="font-size: 25%" ) rd
+			div(class="row-fluid")
+				h5 place
+			div(class="col-md-12")
+				div(class="row-fluid")
+					h4 Points behind: 1.5
+						small(style="padding-left:5px") 
+							a(style="cursor:pointer") (Bull Doziers)
+				div(class="row-fluid")
+					h4 Points ahead: 2
+						small(style="padding-left:5px")
+							a(style="cursor:pointer") (McGlade Plugins)

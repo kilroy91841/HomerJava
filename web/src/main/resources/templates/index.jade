@@ -1,13 +1,14 @@
-extends layout
+extends noSidebarLayout
 
 block content
-  div(class="container")
-    form(action="/login", method="post")
-      div
-        label Email:
-        input(type='text', name='email')
-      div
-        label Password:
-        input(type='password', name='password')
-      div
-        input(type='submit', value='Log In')
+  div(class="container-fluid")
+    div(class="row")
+      form(action="/login", method="post")
+        div
+          label Email:
+          input(type='text', name='email')
+        div
+          label Password:
+          input(type='password', name='password')
+        div
+          input(type='submit', value='Log In')

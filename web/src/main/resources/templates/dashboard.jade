@@ -2,54 +2,24 @@ extends layout
 
 block content
   
-  include mixins/player
   include mixins/dashboard_place
   include mixins/dashboard_trendingPlayers
   include mixins/dashboard_trendingPoints
+  include mixins/dashboard_playingToday
+  
+  h1(class="page-header") Dashboard
+  div(class="row",style="text-align: center")
+    div(class="col-md-4")
+      mixin dashboard_place
+    div(class="col-md-4")
+      mixin dashboard_trendingPoints
+    div(class="col-md-4")
+      mixin dashboard_trendingPlayers
+  div(class="row",style="text-align: center")
+    div(class="col-md-4")
+      mixin dashboard_playingToday
+    div(class="col-md-4")
+      mixin dashboard_trendingPoints
+    div(class="col-md-4")
+      mixin dashboard_trendingPlayers
 
-  div(class="container-fluid")
-    div(class="row")
-      div(class="col-sm-3 col-md-2 sidebar")
-        ul(class="nav nav-sidebar")
-          for player in roster.catchers
-            li
-              mixin player("C", player)
-          for player in roster.firstBase
-            li
-              mixin player("1B", player)              
-          for player in roster.secondBase
-            li
-              mixin player("2B", player)              
-          for player in roster.thirdBase
-            li
-              mixin player("3B", player)              
-          for player in roster.shortstop
-            li
-              mixin player("SS", player)            
-          for player in roster.middleInfield
-            li
-              mixin player("2B/SS", player)            
-          for player in roster.cornerInfield
-            li
-              mixin player("1B/3B", player)            
-          for player in roster.outfielders
-            li
-              mixin player("OF", player)            
-          for player in roster.utility
-            li
-              mixin player("U", player)            
-          for player in roster.pitchers
-            li
-              mixin player("P", player)            
-          for player in roster.disabledList
-            li
-              mixin player("DL", player)            
-      div(class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main")
-        h1(class="page-header")= roster.team.teamName
-        div(class="row placeholders")
-          div(class="col-md-3 placeholder")
-            mixin dashboard_place
-          div(class="col-md-4 placeholder")
-            mixin dashboard_trendingPoints
-          div(class="col-md-5 placeholder")
-            mixin dashboard_trendingPlayers

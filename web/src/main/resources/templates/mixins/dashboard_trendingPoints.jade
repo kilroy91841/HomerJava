@@ -1,5 +1,33 @@
 mixin dashboard_trendingPoints
-	div(class="row")
-		h2 Trending Points
-		div(class="row")
-			h4 This is a very very VERRRRY loasdfasdfng line of texttta
+
+	mixin singleRow(isUp, category, amount)
+		if (isUp)
+			div(class="row-fluid alert alert-success",style="padding:0px 0px 20px 0px;margin-bottom:10px")
+				div(class="col-md-4")
+					span= category
+				div(class="col-md-4")
+					span(class="glyphicon glyphicon-arrow-up") 
+				div(class="col-md-4")
+					span= amount
+		else
+			div(class="row-fluid alert alert-danger",style="padding:0px 0px 20px 0px;margin-bottom:10px")
+				div(class="col-md-4")
+					span= category
+				div(class="col-md-4")
+					span(class="glyphicon glyphicon-arrow-down") 
+				div(class="col-md-4")
+					span= amount
+	div(class="panel panel-primary vertical-center")
+		div(class="panel-heading")
+			h3(class="panel-title") Trending Points
+		div(class="panel-body")
+			div(class="row-fluid")
+				h4 Yesterday: 81.5
+			div(class="row-fluid")
+				h4 Today: 83
+			div(class="row-fluid")
+				div(class="col-sm-6 col-md-6")
+					mixin singleRow(true, "Wins", "1")
+					mixin singleRow(true, "HR", "2")
+				div(class="col-sm-6 col-md-6")
+					mixin singleRow(false, "Runs", ".5")

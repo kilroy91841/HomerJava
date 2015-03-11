@@ -1,0 +1,32 @@
+mixin sidebar
+  mixin player(position, player)
+    li(class="hoverme")
+      //a(href="/player/" + player.playerId, style="padding:0px")
+      a(onclick="showPlayerSidebar('" + player.playerId + "')", style="padding:0px")
+        div(class="row",style="margin-left:-5px")
+          div(class="col-md-3")= position
+          div(class="col-md-9")= player.playerName
+
+  ul(class="nav nav-sidebar")
+    for player in myRoster.catchers
+      mixin player("C", player)
+    for player in myRoster.firstBase
+      mixin player("1B", player)              
+    for player in myRoster.secondBase
+      mixin player("2B", player)              
+    for player in myRoster.thirdBase
+      mixin player("3B", player)              
+    for player in myRoster.shortstop
+      mixin player("SS", player)            
+    for player in myRoster.middleInfield
+      mixin player("2B/SS", player)            
+    for player in myRoster.cornerInfield
+      mixin player("1B/3B", player)            
+    for player in myRoster.outfielders
+      mixin player("OF", player)            
+    for player in myRoster.utility
+      mixin player("U", player)            
+    for player in myRoster.pitchers
+      mixin player("P", player)            
+    for player in myRoster.disabledList
+      mixin player("DL", player)

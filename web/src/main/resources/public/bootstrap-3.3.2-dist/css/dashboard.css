@@ -66,6 +66,25 @@ body {
   background-color: #428bca;
 }
 
+.nav-sidebar > .hoverme:hover {
+  background-color: #eee;
+}
+
+.nav-sidebar > li {
+  cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
+.nav-sidebar > .hoverme {
+  padding-top:10px;
+  padding-bottom:10px;
+}
+.nav-sidebar > li > a > div {
+  cursor: pointer;
+}
 
 /*
  * Main content
@@ -103,3 +122,18 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+/*
+ * Ari defined
+ */
+
+ .ariUp {
+    background-color: #5cb85c;
+    color:white;
+    border-radius: .25em;
+ }
+ .ariDown {
+  background-color: #d9534f;
+  color:white;
+
+ }

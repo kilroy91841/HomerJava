@@ -1,7 +1,0 @@
-mixin player(position, player)
-	div(class="")
-		div(class="col-md-3")= position
-		div(class="col-md-9")= player.playerName
-	div(class="")
-		for stat in playerHelper.getYesterdaysStats(player)
-			div(class="col-md-12")= stat.hr

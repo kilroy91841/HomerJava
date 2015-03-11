@@ -1,25 +1,24 @@
-mixin dashboard_trendingPlayers
+mixin dashboard_playingToday
 
 	mixin performer
 		div(class="col-md-6")
 			p Carlos Gomez
 		div(class="col-md-6")
-			p 5/8, 2 HR, 6 RBI
+			p 7:05, MIL @ TOR
 
 	div(class="panel panel-primary vertical-center")
 		div(class="panel-heading")
-			h3(class="panel-title") Trending Players
+			h3(class="panel-title") Playing Today
 		div(class="panel-body")
 			div(class="row-fluid")
-				h4(class="text-left") Top Performers
+				h4(class="text-left") Already Played
 				div(class="row-fluid")
 					mixin performer
 				div(class="row-fluid")
 					mixin performer
+				h4(class="text-left") Upcoming
 				div(class="row-fluid")
 					mixin performer
-			div(class="row-fluid")
-				h4(class="text-left") Worst Performers
 				div(class="row-fluid")
 					mixin performer
 				div(class="row-fluid")

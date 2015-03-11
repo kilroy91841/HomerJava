@@ -3,27 +3,30 @@ extends layout
 block content
   
   mixin player(position, player)
+    td
+      span(class="glyphicon glyphicon-circle-arrow-left",onclick="comparePlayer('" + player.playerId + "')")
     td= position
-    td= player.playerName
+    td
+      a(href="/player/" + player.playerId, style="padding:0px")= player.playerName
     td= player.playerHistoryList[0].salary
     td= playerHelper.getNextYearSalary(player.playerHistoryList[0])
+    td= player.playerHistoryList[0].keeperSeason
+    td= player.playerHistoryList[0].keeperSeason + 1
 
   div(class="container-fluid")
     div(class="row")
       div(class="col-sm-12 col-md-12")
         h1(class="page-header")= roster.team.teamName
         div(clas="row")
-          h3 Money
-          h4
-            strong 2015 Cash: 
-            = money.amount
-        div(clas="row")
-          table(class="table")
+          table(class="table table-hover")
             thead
+              th
               th Position
               th Name
               th 2014 Salary
               th 2015 Salary
+              th 2014 Keeper Season
+              th 2015 Keeper Season
             for player in roster.catchers
               tr
                 mixin player("C", player)
