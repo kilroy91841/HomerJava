@@ -129,8 +129,7 @@ public class PlayerHistory {
                                 keeperTeam.setTeamId(history.getKeeper_team());
                                 fantasyHistory.setKeeperTeam(keeperTeam);
                                 fantasyHistory.setRookieStatus(history.isMinor_leaguer());
-                                player.getPlayerHistoryList().add(fantasyHistory);
-                                if(history.getYear() == 2014) {
+                                if(history.getYear() == 2015) {
                                     Position fantasyPosition = Position.get(history.getFantasy_position());
                                     PlayerStatus status = PlayerStatus.ACTIVE;
                                     if(history.getFantasy_position().equals("Minors")) {
@@ -141,6 +140,14 @@ public class PlayerHistory {
                                     player.getDailyPlayerInfoList().get(0).setFantasyPosition(fantasyPosition);
                                     player.getDailyPlayerInfoList().get(0).setFantasyStatus(status);
 
+                                    player.getPlayerHistoryList().get(0).setSalary(fantasyHistory.getSalary());
+                                    player.getPlayerHistoryList().get(0).setSeason(fantasyHistory.getSeason());
+                                    player.getPlayerHistoryList().get(0).setMinorLeaguer(fantasyHistory.isMinorLeaguer());
+                                    player.getPlayerHistoryList().get(0).setKeeperSeason(fantasyHistory.getKeeperSeason());
+                                    player.getPlayerHistoryList().get(0).setKeeperTeam(fantasyHistory.getKeeperTeam());
+                                    player.getPlayerHistoryList().get(0).setRookieStatus(fantasyHistory.hasRookieStatus());
+                                } else {
+                                    player.getPlayerHistoryList().add(fantasyHistory);
                                 }
                             }
                             playerDao.createOrSave(player);

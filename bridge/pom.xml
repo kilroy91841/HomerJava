@@ -77,6 +77,37 @@
                                         </systemProperties>
                                     </jvmSettings>
                                 </daemon>
+                                <daemon>
+                                    <id>bridge-prod</id>
+                                    <wrapperMainClass>org.tanukisoftware.wrapper.WrapperSimpleApp</wrapperMainClass>
+                                    <mainClass>com.homer.bridge.Runner</mainClass>
+                                    <platforms>
+                                        <platform>jsw</platform>
+                                    </platforms>
+                                    <generatorConfigurations>
+                                        <generatorConfiguration>
+                                            <generator>jsw</generator>
+                                            <includes>
+                                                <include>linux-x86-64</include>
+                                            </includes>
+                                            <configuration>
+                                                <property>
+                                                    <name>wrapper.java.detect_debug_jvm</name>
+                                                    <value>TRUE</value>
+                                                </property>
+                                            </configuration>
+                                        </generatorConfiguration>
+                                    </generatorConfigurations>
+                                    <jvmSettings>
+                                        <!--  adjust these -->
+                                        <initialMemorySize>128M</initialMemorySize>
+                                        <maxMemorySize>256M</maxMemorySize>
+                                        <systemProperties>
+                                            <systemProperty>env=prod</systemProperty>
+                                            <systemProperty>log4j.configuration=log4j_properties_prod.properties</systemProperty>
+                                        </systemProperties>
+                                    </jvmSettings>
+                                </daemon>
                             </daemons>
                         </configuration>
                     </execution>

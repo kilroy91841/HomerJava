@@ -25,11 +25,11 @@ public class Runner {
     }
 
     private static Trigger mlbUpdatePlayersTrigger = TriggerBuilder.newTrigger()
-            .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(4).repeatForever()).build();
+            .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(30).repeatForever()).build();
     private static Trigger espnUpdatePositionsTrigger = TriggerBuilder.newTrigger()
-            .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(4).repeatForever()).build();
+            .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(30).repeatForever()).build();
     private static Trigger mlbGameFetchTrigger = TriggerBuilder.newTrigger()
-            .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(5).repeatForever()).build();
+            .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(30).repeatForever()).build();
     private static Trigger dailyPlayerInfoTrigger = TriggerBuilder.newTrigger()
             .withIdentity("dailyPlayerInfoTrigger").build();
 
@@ -56,8 +56,8 @@ public class Runner {
                 .withIdentity("mlbGameFetch")
                 .build();
 
-//        scheduler.scheduleJob(espnUpdatePositionsJob, espnUpdatePositionsTrigger);
-//        scheduler.scheduleJob(mlbUpdatePlayersJob, mlbUpdatePlayersTrigger);
+        scheduler.scheduleJob(espnUpdatePositionsJob, espnUpdatePositionsTrigger);
+        scheduler.scheduleJob(mlbUpdatePlayersJob, mlbUpdatePlayersTrigger);
         scheduler.scheduleJob(mlbGameFetchJob, mlbGameFetchTrigger);
     }
 

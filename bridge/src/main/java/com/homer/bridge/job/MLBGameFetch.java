@@ -51,7 +51,7 @@ public class MLBGameFetch implements Job {
                     LOG.debug("First game of today is in the future, scheduling for gametime" + gameTime);
                     schedule(gameTime);
                 } else {
-                    LOG.debug("First game fo today has already happened, job has already ran. Do nothing");
+                    LOG.debug("First game of today has already happened, job has already ran. Do nothing");
                 }
             } else {
                 LOG.debug("No games today, so create at 6 am");

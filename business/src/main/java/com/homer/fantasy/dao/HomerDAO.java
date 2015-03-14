@@ -6,10 +6,7 @@ import com.homer.fantasy.DailyPlayerInfo;
 import com.homer.fantasy.Player;
 import com.homer.fantasy.PlayerHistory;
 import com.homer.fantasy.Team;
-import org.hibernate.HibernateException;
-import org.hibernate.NonUniqueResultException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Restrictions;
@@ -39,7 +36,9 @@ public class HomerDAO {
     }
 
     public Session openSession() {
-        return sessionFactory.openSession();
+        Session session = sessionFactory.openSession();
+        session.setCacheMode(CacheMode.IGNORE);
+        return session;
     }
 
     protected boolean saveOrUpdate(Object o) {

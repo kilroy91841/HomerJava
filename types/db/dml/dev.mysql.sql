@@ -183,7 +183,7 @@ values ("ERA", false, false);
 insert into STANDINGSCATEGORY (standingsCategoryName, isHitting, isDescending)
 values ("WHIP", false, false);
 
-insert into money (teamId, season, moneyType, amount)
+insert into MONEY (teamId, season, moneyType, amount)
 select 1, 2015, 'MAJORLEAGUEDRAFT', 257
 union all
 select 7, 2015, 'MAJORLEAGUEDRAFT', 260
