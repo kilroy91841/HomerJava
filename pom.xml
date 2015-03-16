@@ -115,7 +115,7 @@
             </dependency>
             <dependency>
                 <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-core</artifactId>
+                <artifactId>hibernate-entitymanager</artifactId>
                 <version>4.3.8.Final</version>
             </dependency>
             <dependency>
