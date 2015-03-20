@@ -68,7 +68,12 @@ public class Team {
             attributes.put("money", money);
             return SessionModelAndView.create(request.session(), attributes, "team.jade");
         }, new JadeEngine());
-
+        get("/player/:playerId", (request, response) -> {
+            PlayerFacade facade = new PlayerFacade();
+            Player player = facade.getPlayer(Long.parseLong(request.params(":playerId")));
+            response.type("application/json;charset=ISO-8859-1");
+            return player;
+        }, new JsonTransformer());
         get("/player", (request, response) -> {
             PlayerFacade facade = new PlayerFacade();
             List<Player> players = facade.getPlayers();

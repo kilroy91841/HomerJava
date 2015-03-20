@@ -6,11 +6,20 @@ import com.homer.fantasy.DailyPlayerInfo;
 import com.homer.fantasy.Player;
 import com.homer.fantasy.PlayerHistory;
 import com.homer.fantasy.Team;
+<<<<<<< HEAD
 import org.hibernate.*;
+=======
+import org.hibernate.HibernateException;
+import org.hibernate.NonUniqueResultException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+>>>>>>> master
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.exception.ConstraintViolationException;
+import org.hibernate.service.ServiceRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,15 +39,19 @@ public class HomerDAO {
     private static final String HIBERNATE_CONFIG = "hibernate_" + System.getProperty("env") + ".cfg.xml";
 
     public HomerDAO() {
-        sessionFactory = new Configuration()
-                .configure(HIBERNATE_CONFIG) // configures settings from hibernate.cfg.xml
-                .buildSessionFactory();
+        Configuration configuration = new Configuration().configure(HIBERNATE_CONFIG);
+        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+                configuration.getProperties()).build();
+        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
     }
 
     public Session openSession() {
-        Session session = sessionFactory.openSession();
-        session.setCacheMode(CacheMode.IGNORE);
-        return session;
+        return sessionFactory.openSession();
+//        Configuration configuration = new Configuration().configure(HIBERNATE_CONFIG);
+//        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+//                configuration.getProperties()).build();
+//        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+//        return sessionFactory.openSession();
     }
 
     protected boolean saveOrUpdate(Object o) {
@@ -95,7 +108,6 @@ public class HomerDAO {
         Session session = null;
         try {
             session = openSession();
-            session.beginTransaction();
             Example example = Example.create(obj);
             retVal = (T) session.createCriteria(clazz).add(example).uniqueResult();
         } catch (RuntimeException re) {
@@ -115,6 +127,7 @@ public class HomerDAO {
             session = openSession();
             session.beginTransaction();
             retVal = (T) session.get(clazz, (Serializable) obj);
+            session.getTransaction().commit();
         } catch (RuntimeException re) {
             LOG.error("Error getting object, [clazz=" + clazz + ", obj=" + obj + "]", re);
         } finally {
@@ -133,6 +146,7 @@ public class HomerDAO {
             session.beginTransaction();
             Example example = Example.create(obj);
             retList = session.createCriteria(clazz).add(example).list();
+            session.getTransaction().commit();
         } catch (RuntimeException re) {
             LOG.error("Error getting object", re);
         } finally {
