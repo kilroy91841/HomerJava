@@ -32,13 +32,22 @@ public class PlayerUpdateFromESPNTransactions implements Job {
     private static final TransactionFacade transactionFacade = new TransactionFacade();
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
 
+    private static LocalDate theDate;
+
+    public PlayerUpdateFromESPNTransactions withDate(LocalDate date) {
+        this.theDate = date;
+        return this;
+    }
+
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         LOG.debug("BEGIN: execute");
 
-        LocalDateTime time = LocalDateTime.now().minusHours(5);
-        LocalDate date = time.toLocalDate();
-        String dateString = date.format(dateFormatter);
+        if(theDate == null) {
+            LocalDateTime time = LocalDateTime.now().minusHours(5);
+            theDate = time.toLocalDate();
+        }
+        String dateString = theDate.format(dateFormatter);
         LOG.debug("DateString: " + dateString);
 
         List<Team> teams = teamDao.getTeams(SportType.FANTASY);

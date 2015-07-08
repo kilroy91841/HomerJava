@@ -67,6 +67,7 @@ public class TransactionsParser {
 
             String playerNodeText = ((Element)playerNode).text();
             String playerName = ((Element)playerNode.childNode(1)).text();
+            playerName = playerName.replace("*", "");
 
             LocalDateTime dateTime = parseTimeFromNode(timeNode);
 
@@ -124,6 +125,7 @@ public class TransactionsParser {
                 Node tradedToTeamNode = tradeNodes.get(2);
                 String tradingTeamName = tradingTeamNode.toString().split(" ")[0];
                 String playerName = playerNode.toString();
+                playerName = playerName.replace("*", "");
                 String tradedToTeamName = tradedToTeamNode.toString().split("to ")[1];
                 Integer acquiringTeamId = null;
                 if(tradedToTeamName.equals(teamCode1)) {

@@ -1,6 +1,10 @@
 package com.homer.fantasy;
 
 import com.homer.SportType;
+import com.homer.espn.client.ESPNClientREST;
+import com.homer.exception.DisallowedTransactionException;
+import com.homer.exception.NoDailyPlayerInfoException;
+import com.homer.exception.PlayerNotFoundException;
 import com.homer.fantasy.dao.HomerDAO;
 import com.homer.fantasy.dao.ITeamDAO;
 import com.homer.fantasy.facade.GameFacade;
@@ -23,6 +27,7 @@ import com.homer.mlb.Player;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -46,7 +51,7 @@ public class PlayerGetter {
         com.homer.fantasy.Player p = new com.homer.fantasy.Player();
         playerCount = new AtomicInteger(0);
 
-        if(true) {
+        if(false) {
                 for (Team team : teams) {
                     client.get40ManRosterAsync(team.getTeamId(), callback);
             }
@@ -70,6 +75,36 @@ public class PlayerGetter {
             List<Stats> stats = client.getStats(player.getMlbPlayerId(), true);
             for(Stats s : stats) {
                 statsFacade.createOrUpdateStats(s);
+            }
+        }
+
+        if(false) {
+            ESPNClientREST espnClient = new ESPNClientREST();
+            List<com.homer.espn.Player> players = espnClient.getRosterPage();
+            for(com.homer.espn.Player player : players) {
+                try {
+                    facade.updateESPNAttributes(player);
+                } catch (NoDailyPlayerInfoException e) {
+                    LOG.error(e.getMessage(), e);
+                } catch (PlayerNotFoundException e) {
+                    LOG.error(e.getMessage(), e);
+                } catch (DisallowedTransactionException e) {
+                    LOG.error(e.getMessage(), e);
+                }
+            }
+        }
+
+        if(true) {
+            List<Long> playerIds = new ArrayList<Long>();
+            playerIds.add(444379L);
+            playerIds.add(506433L);
+            playerIds.add(456701L);
+            playerIds.add(607387L);
+            playerIds.add(608665L);
+            playerIds.add(519043L);
+            for(Long l : playerIds) {
+                Player player = client.getPlayer(l);
+                facade.createOrUpdatePlayer(player);
             }
         }
     }

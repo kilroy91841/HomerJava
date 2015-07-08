@@ -9,9 +9,7 @@ block content
     td
       a(href="/player/" + player.playerId, style="padding:0px")= player.playerName
     td= player.playerHistoryList[0].salary
-    td= playerHelper.getNextYearSalary(player.playerHistoryList[0])
     td= player.playerHistoryList[0].keeperSeason
-    td= player.playerHistoryList[0].keeperSeason + 1
 
   div(class="container-fluid")
     div(class="row")
@@ -23,9 +21,7 @@ block content
               th
               th Position
               th Name
-              th 2014 Salary
               th 2015 Salary
-              th 2014 Keeper Season
               th 2015 Keeper Season
             for player in roster.catchers
               tr
@@ -44,10 +40,10 @@ block content
                 mixin player("SS", player)            
             for player in roster.middleInfield
               tr
-                mixin player("2B/SS", player)            
+                mixin player("MI", player)
             for player in roster.cornerInfield
               tr
-                mixin player("1B/3B", player)            
+                mixin player("CI", player)
             for player in roster.outfielders
               tr
                 mixin player("OF", player)            

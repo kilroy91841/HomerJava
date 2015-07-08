@@ -19,7 +19,7 @@ import java.util.List;
 public class PlayerFacade {
 
     private static final Logger LOG = LoggerFactory.getLogger(PlayerFacade.class);
-    private static final int SEASON = 2014;
+    private static final int SEASON = 2015;
     private static IPlayerDAO dao;
 
     public PlayerFacade() {
@@ -65,7 +65,7 @@ public class PlayerFacade {
         Player returnPlayer = null;
         Player player = findESPNPlayer(espnPlayer.getPlayerId(), espnPlayer.getPlayerName());
         if(player != null) {
-            if(player.getCurrentFantasyTeam().getTeamId() == espnPlayer.getTeamId()) {
+            if (player.getCurrentFantasyTeam().getTeamId() == espnPlayer.getTeamId()) {
                 if (player.getDailyPlayerInfoList().size() > 0) {
                     DailyPlayerInfo dpi = player.getDailyPlayerInfoList().get(0);
                     dpi.setFantasyPosition(espnPlayer.getPosition());
@@ -73,7 +73,7 @@ public class PlayerFacade {
                         player.setEspnPlayerId(espnPlayer.getPlayerId());
                     }
                     LOG.debug("New DPI: " + dpi + ", ESPNPLAYERID: " + player.getEspnPlayerId());
-                    returnPlayer = createOrUpdatePlayer(player);
+                returnPlayer = createOrUpdatePlayer(player);
                 } else {
                     throw new NoDailyPlayerInfoException(player);
                 }
@@ -153,7 +153,9 @@ public class PlayerFacade {
 
             DailyPlayerInfo dailyPlayerInfo = new DailyPlayerInfo();
             dailyPlayerInfo.setPlayer(newPlayer);
+            dailyPlayerInfo.setFantasyTeam(new Team(0));
             dailyPlayerInfo.setDate(LocalDate.now());
+            dailyPlayerInfo.setFantasyStatus(PlayerStatus.ACTIVE);
             dailyPlayerInfo.setMlbTeam(new Team(mlbPlayer.getTeam_id()));
             try {
                 dailyPlayerInfo.setMlbStatus(PlayerStatus.get(mlbPlayer.getStatus_code()));

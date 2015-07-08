@@ -24,7 +24,6 @@ public class PlayerHistory {
     private static final Logger LOG = LoggerFactory.getLogger(PlayerHistory.class);
 
     public static void main(String[] args) {
-        HomerDAO dao = new HomerDAO();
         IPlayerDAO playerDao = new HibernatePlayerDAO();
         try {
             Mongo mongo = new Mongo("localhost", 27017);
@@ -37,6 +36,9 @@ public class PlayerHistory {
                 try {
                     o = cursor.next();
                     playerName = (String)o.get("name_display_first_last");
+//                    if(playerName == null || !playerName.equals("Jon Lester")) {
+//                        continue;
+//                    }
                     MongoPlayer mongoPlayer = new MongoPlayer();
 
                     try {
@@ -122,21 +124,31 @@ public class PlayerHistory {
                                 fantasyHistory.setPlayer(player);
                                 fantasyHistory.setMinorLeaguer(history.isMinor_leaguer());
                                 Team draftTeam = new Team();
-                                draftTeam.setTeamId(history.getDraft_team());
+                                if (history.getDraft_team() != 0) {
+                                    draftTeam.setTeamId(history.getDraft_team());
+                                } else {
+                                    draftTeam = null;
+                                }
                                 fantasyHistory.setDraftTeam(draftTeam);
                                 fantasyHistory.setKeeperSeason(history.getContract_year());
                                 Team keeperTeam = new Team();
-                                keeperTeam.setTeamId(history.getKeeper_team());
+                                if (history.getKeeper_team() != 0) {
+                                    keeperTeam.setTeamId(history.getKeeper_team());
+                                } else {
+                                    keeperTeam = null;
+                                }
                                 fantasyHistory.setKeeperTeam(keeperTeam);
                                 fantasyHistory.setRookieStatus(history.isMinor_leaguer());
                                 if(history.getYear() == 2015) {
                                     Position fantasyPosition = Position.get(history.getFantasy_position());
                                     PlayerStatus status = PlayerStatus.ACTIVE;
-                                    if(history.getFantasy_position().equals("Minors")) {
+                                    if(history.getFantasy_position() != null && history.getFantasy_position().equals("Minors")) {
                                         status = PlayerStatus.MINORS;
                                     }
 
-                                    player.getDailyPlayerInfoList().get(0).setFantasyTeam(new Team(history.getFantasy_team()));
+                                    if (history.getKeeper_team() != 0) {
+                                        player.getDailyPlayerInfoList().get(0).setFantasyTeam(new Team(history.getFantasy_team()));
+                                    }
                                     player.getDailyPlayerInfoList().get(0).setFantasyPosition(fantasyPosition);
                                     player.getDailyPlayerInfoList().get(0).setFantasyStatus(status);
 
@@ -144,7 +156,9 @@ public class PlayerHistory {
                                     player.getPlayerHistoryList().get(0).setSeason(fantasyHistory.getSeason());
                                     player.getPlayerHistoryList().get(0).setMinorLeaguer(fantasyHistory.isMinorLeaguer());
                                     player.getPlayerHistoryList().get(0).setKeeperSeason(fantasyHistory.getKeeperSeason());
-                                    player.getPlayerHistoryList().get(0).setKeeperTeam(fantasyHistory.getKeeperTeam());
+                                    if (history.getKeeper_team() != 0) {
+                                        player.getPlayerHistoryList().get(0).setKeeperTeam(fantasyHistory.getKeeperTeam());
+                                    }
                                     player.getPlayerHistoryList().get(0).setRookieStatus(fantasyHistory.hasRookieStatus());
                                 } else {
                                     player.getPlayerHistoryList().add(fantasyHistory);
@@ -160,5 +174,6 @@ public class PlayerHistory {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
+        System.exit(1);
     }
 }

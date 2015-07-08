@@ -3,6 +3,7 @@ package com.homer.web;
 import com.homer.SportType;
 import com.homer.fantasy.dao.ITeamDAO;
 import com.homer.fantasy.Team;
+import com.homer.web.route.Api;
 import com.homer.web.route.UserAuth;
 import spark.servlet.SparkApplication;
 
@@ -21,12 +22,12 @@ public class HelloWorld implements SparkApplication{
     public static void main(String[] args) throws IOException {
         staticFileLocation("/public");
 
-
         ITeamDAO teamDao = ITeamDAO.FACTORY.getInstance();
         teams = teamDao.getTeams(SportType.FANTASY);
 
         com.homer.web.route.Team.init();
         UserAuth.init();
+        Api.init();
     }
 
     public static List<Team> getTeams() { return teams; }
